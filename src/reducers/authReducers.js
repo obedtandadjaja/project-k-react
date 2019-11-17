@@ -45,8 +45,6 @@ export default function authReducer(state=initialState, action) {
   case SIGNUP_SUCCESS:
     return state.merge({
       loading: false,
-      accessToken: action.payload.jwt,
-      refreshToken: action.payload.session,
     })
 
   case SIGNUP_FAILURE:
