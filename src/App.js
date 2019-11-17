@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import RequiresAuth from './higherOrderComponents/requiresAuth'
 import HomePage from './pages/home'
+import LoginPage from './pages/login'
+import RequiresAuth from './higherOrderComponents/requiresAuth'
 import './App.css';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Route exact path='/' component={RequiresAuth(HomePage)} />
+        <Route exact path='/login' component={LoginPage} />
       </BrowserRouter>
     </div>
   );
