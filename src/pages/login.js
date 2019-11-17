@@ -8,7 +8,9 @@ function LoginPage(props) {
   }
 
   useEffect(() => {
-    props.history.push('/')
+    if (props.isAuthenticated) {
+      props.history.push('/')
+    }
   }, [props.history, props.isAuthenticated])
 
   return (

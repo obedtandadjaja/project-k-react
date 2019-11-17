@@ -15,3 +15,21 @@ export const loginFailure = error => ({
   type: LOGIN_FAILURE,
   payload: { error }
 })
+
+export const SIGNUP_BEGIN = 'SIGNUP_BEGIN'
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE'
+
+export const signupBegin = () => ({
+  type: SIGNUP_BEGIN
+})
+
+export const signupSuccess = payload => ({
+  type: SIGNUP_SUCCESS,
+  payload: { payload }
+})
+
+export const signupFailure = error => ({
+  type: SIGNUP_FAILURE,
+  payload: { error }
+})
