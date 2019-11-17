@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 function LoginPage(props) {
@@ -28,6 +29,14 @@ function LoginPage(props) {
               <button onClick={loginSubmit}>
                 Login
               </button>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <Link to={{ pathname: '/signup' }}>
+                New? Create user
+              </Link>
             </td>
           </tr>
         </tbody>
