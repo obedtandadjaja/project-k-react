@@ -8,7 +8,7 @@ export const loginBegin = () => ({
 
 export const loginSuccess = payload => ({
   type: LOGIN_SUCCESS,
-  payload: { payload }
+  payload: payload
 })
 
 export const loginFailure = error => ({
@@ -26,7 +26,7 @@ export const signupBegin = () => ({
 
 export const signupSuccess = payload => ({
   type: SIGNUP_SUCCESS,
-  payload: { payload }
+  payload: payload
 })
 
 export const signupFailure = error => ({

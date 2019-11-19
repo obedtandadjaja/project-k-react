@@ -1,11 +1,19 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import { login } from './../api/login'
 
 function LoginPage(props) {
   const loginSubmit = (event) => {
-    // dispatch the event here
+    props.login({
+      email: document.getElementById('loginEmail').value,
+      password: document.getElementById('loginPassword').value,
+    })
   }
+
+  console.log(props)
 
   useEffect(() => {
     if (props.isAuthenticated) {
@@ -14,7 +22,7 @@ function LoginPage(props) {
   }, [props.history, props.isAuthenticated])
 
   return (
-    <div class='loginPage'>
+    <div className='loginPage'>
       <table>
         <tbody>
           <tr>
@@ -28,7 +36,7 @@ function LoginPage(props) {
           <tr>
             <td></td>
             <td>
-              <button onClick={loginSubmit}>
+              <button onClick={loginSubmit} disabled={props.loading}>
                 Login
               </button>
             </td>
@@ -48,9 +56,13 @@ function LoginPage(props) {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.getIn(['isAuthenticated'])
+  loading: state.auth.getIn(['loading']),
+  isAuthenticated: state.auth.getIn(['isAuthenticated']),
+  error: state.auth.getIn(['error']),
 })
 
-const mapDispatchToProps = null
+const mapDispatchToProps = dispatch => bindActionCreators({
+  login: login
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

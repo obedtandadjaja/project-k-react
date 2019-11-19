@@ -25,16 +25,19 @@ export default function authReducer(state=initialState, action) {
     })
 
   case LOGIN_SUCCESS:
+    console.log(action)
     return state.merge({
       loading: false,
       accessToken: action.payload.jwt,
       refreshToken: action.payload.session,
+      isAuthenticated: Boolean(action.payload.session),
     })
 
   case LOGIN_FAILURE:
     return state.merge({
       loading: false,
-      error: action.payload.error
+      error: action.payload.error,
+      isAuthenticated: false,
     })
 
   case SIGNUP_BEGIN:
@@ -45,6 +48,9 @@ export default function authReducer(state=initialState, action) {
   case SIGNUP_SUCCESS:
     return state.merge({
       loading: false,
+      isAuthenticated: Boolean(action.payload.session),
+      accessToken: action.payload.jwt,
+      refreshToken: action.payload.session,
     })
 
   case SIGNUP_FAILURE:
