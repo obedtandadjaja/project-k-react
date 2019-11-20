@@ -13,37 +13,37 @@ function UserForm(props) {
   const renderEmergencyContacts = ({ fields, meta: { touched, error } }) => (
     <ul>
       <li>
-        <button type="button" onClick={() => fields.push({})}>Add Emergency Contact</button>
+        <button type='button' onClick={() => fields.push({})}>Add Emergency Contact</button>
         {touched && error && <span>{error}</span>}
       </li>
       {fields.map((emergencyContact, index) =>
         <li key={index}>
           <button
-            type="button"
+            type='button'
             onClick={() => fields.remove(index)} />
           <h4>Emergency contact #{index + 1}</h4>
           <Field
-            name={`${emergencyContact}.name`}
-            type="text"
+            name='name'
+            type='text'
             component={renderField}
             validate={[required]}
-            label="Name" />
+            label='Name' />
           <Field
-            name={`${emergencyContact}.address`}
-            type="text"
+            name='address'
+            type='text'
             component={renderField}
-            label="Address" />
+            label='Address' />
           <Field
-            name={`${emergencyContact}.phone`}
-            type="text"
+            name='phone'
+            type='text'
             component={renderField}
             validate={[required, phone]}
-            label="Phone" />
+            label='Phone' />
           <Field
-            name={`${emergencyContact}.email`}
-            type="text"
+            name='email'
+            type='text'
             component={renderField}
-            label="Email" />
+            label='Email' />
         </li>
       )}
     </ul>
@@ -52,25 +52,25 @@ function UserForm(props) {
   return (
     <form onSubmit={handleSubmit} >
       <Field
-        name="name"
-        label="Name"
+        name='name'
+        label='Name'
         component={renderField}
         validate={[required]}
-        type="text" />
+        type='text' />
 
       <Field
-        name="email"
-        label="Email"
+        name='email'
+        label='Email'
         component={renderField}
         validate={[required, email]}
-        type="text" />
+        type='text' />
 
       <Field
-        name="phone"
-        label="Phone"
+        name='phone'
+        label='Phone'
         component={renderField}
         validate={[required, phone]}
-        type="text" />
+        type='text' />
 
       <Field
         name='gender'
@@ -79,8 +79,8 @@ function UserForm(props) {
         validate={[required]}
         label='Gender'
         options={[
-          ["male", "Male"],
-          ["female", "Female"],
+          ['male', 'Male'],
+          ['female', 'Female'],
         ]} />
 
       <Field
@@ -90,8 +90,8 @@ function UserForm(props) {
         validate={[required]}
         label='Marriage status'
         options={[
-          ["notMarried", "Not Married/Others"],
-          ["married", "Married"],
+          ['notMarried', 'Not Married/Others'],
+          ['married', 'Married'],
         ]} />
 
       <Field
@@ -101,13 +101,13 @@ function UserForm(props) {
         validate={[required]}
         label='Religion'
         options={[
-          ["muslim", "Muslim"],
-          ["christianProtestant", "Christian Protestant"],
-          ["christianCatholic", "Christian Catholic"],
-          ["hindu", "Hindu"],
-          ["buddhist", "Buddhist"],
-          ["confucian", "Confucian"],
-          ["other", "Other"],
+          ['muslim', 'Muslim'],
+          ['christianProtestant', 'Christian Protestant'],
+          ['christianCatholic', 'Christian Catholic'],
+          ['hindu', 'Hindu'],
+          ['buddhist', 'Buddhist'],
+          ['confucian', 'Confucian'],
+          ['other', 'Other'],
         ]} />
 
       <div>
@@ -118,9 +118,9 @@ function UserForm(props) {
           defaultEmpty
           validate={[required]}
           options={[
-            ["KTP ID/NIK", "KTP ID/NIK"],
-            ["KITAS ID", "KITAS ID"],
-            ["Passport Number", "Passport Number"],
+            ['KTP ID/NIK', 'KTP ID/NIK'],
+            ['KITAS ID', 'KITAS ID'],
+            ['Passport Number', 'Passport Number'],
           ]} />
         <Field
           name='identificationValue'
@@ -137,9 +137,9 @@ function UserForm(props) {
         validate={[required]}
         label='Occupation'
         options={[
-          ["student", "Student"],
-          ["professional", "Professional"],
-          ["unemployed", "Unemployed"],
+          ['student', 'Student'],
+          ['professional', 'Professional'],
+          ['unemployed', 'Unemployed'],
         ]} />
 
       {
@@ -147,27 +147,27 @@ function UserForm(props) {
         <div>
           <h2>Company information</h2>
           <Field
-            name="companyName"
-            label="Company Name"
+            name='companyName'
+            label='Company Name'
             component={renderField}
-            type="text" />
+            type='text' />
 
           <Field
-            name="companyAddress"
-            label="Company Address"
+            name='companyAddress'
+            label='Company Address'
             component={renderField}
-            type="text" />
+            type='text' />
 
           <Field
-            name="companyPhone"
-            label="Company Phone"
+            name='companyPhone'
+            label='Company Phone'
             component={renderField}
             validate={[phone]}
-            type="text" />
+            type='text' />
         </div>
       }
 
-      <FieldArray name="emergencyContacts" component={renderEmergencyContacts}/>
+      <FieldArray name='emergencyContacts' component={renderEmergencyContacts}/>
       <button type='submit'>
         Submit
       </button>
