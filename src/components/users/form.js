@@ -7,47 +7,47 @@ import { required, email, phone } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 import renderSelectField from './../../formHelpers/renderSelectField'
 
-function UserForm(props) {
-  const { handleSubmit, occupation  } = props
-
-  const renderEmergencyContacts = ({ fields, meta: { touched, error } }) => (
-    <ul>
-      <li>
-        <button type='button' onClick={() => fields.push({})}>Add Emergency Contact</button>
-        {touched && error && <span>{error}</span>}
+const renderEmergencyContacts = ({ fields, meta: { touched, error } }) => (
+  <ul>
+    <li>
+      <button type='button' onClick={() => fields.push({})}>Add Emergency Contact</button>
+      {touched && error && <span>{error}</span>}
+    </li>
+    {fields.map((emergencyContact, index) =>
+      <li key={index}>
+        <button
+          type='button'
+          onClick={() => fields.remove(index)} />
+        <h4>Emergency contact #{index + 1}</h4>
+        <Field
+          name={`${emergencyContact}.name`}
+          type='text'
+          component={renderField}
+          validate={[required]}
+          label='Name' />
+        <Field
+          name={`${emergencyContact}.address`}
+          type='text'
+          component={renderField}
+          label='Address' />
+        <Field
+          name={`${emergencyContact}.phone`}
+          type='text'
+          component={renderField}
+          validate={[required, phone]}
+          label='Phone' />
+        <Field
+          name={`${emergencyContact}.email`}
+          type='text'
+          component={renderField}
+          label='Email' />
       </li>
-      {fields.map((emergencyContact, index) =>
-        <li key={index}>
-          <button
-            type='button'
-            onClick={() => fields.remove(index)} />
-          <h4>Emergency contact #{index + 1}</h4>
-          <Field
-            name='name'
-            type='text'
-            component={renderField}
-            validate={[required]}
-            label='Name' />
-          <Field
-            name='address'
-            type='text'
-            component={renderField}
-            label='Address' />
-          <Field
-            name='phone'
-            type='text'
-            component={renderField}
-            validate={[required, phone]}
-            label='Phone' />
-          <Field
-            name='email'
-            type='text'
-            component={renderField}
-            label='Email' />
-        </li>
-      )}
-    </ul>
-  )
+    )}
+  </ul>
+)
+
+function UserForm(props) {
+  const { handleSubmit, occupation } = props
 
   return (
     <form onSubmit={handleSubmit} >
@@ -174,7 +174,6 @@ function UserForm(props) {
     </form>
   )
 }
-
 
 let userForm = reduxForm({
   form: 'user'
