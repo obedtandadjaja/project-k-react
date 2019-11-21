@@ -7,10 +7,10 @@ const renderRepeatedFields = ({
   childComponent,
   meta: { touched, error }
 }) => (
-  <div class='fieldGroup'>
+  <div>
     <ul class='undecorated'>
       {fields.map((field, index) =>
-        <li key={index}>
+        <li key={index} class='fieldGroup'>
           <button
             class='repeatedFieldsRemove'
             type='button'
@@ -22,7 +22,7 @@ const renderRepeatedFields = ({
         </li>
       )}
       <li>
-        <button class='formAdd' type='button' onClick={() => fields.push({})}>{buttonText}</button>
+        <button type='button' onClick={() => fields.push({})}>{buttonText}</button>
         {touched && error && <span>{error}</span>}
       </li>
     </ul>
