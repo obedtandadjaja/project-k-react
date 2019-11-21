@@ -8,29 +8,12 @@ import RoomFields from './../rooms/fields'
 import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
 
-const renderRooms = ({ fields, meta: { touched, error } }) => (
-  <ul>
-    <li>
-      <button type='button' onClick={() => fields.push({})}>Add Room</button>
-      {touched && error && <span>{error}</span>}
-    </li>
-    {fields.map((room, index) =>
-      <li key={index}>
-        <button
-          type='button'
-          onClick={() => fields.remove(index)} />
-        <h4>Room #{index + 1}</h4>
-        <RoomFields prefix={room} />
-      </li>
-    )}
-  </ul>
-)
-
 function PropertyForm(props) {
   const { handleSubmit } = props
 
   return (
     <form onSubmit={handleSubmit} >
+      <h1>Add property</h1>
       <Field
         name='name'
         label='Name'
@@ -48,15 +31,19 @@ function PropertyForm(props) {
       <Field
         name='type'
         component={renderSelectField}
-        defaultEmpty
         validate={[required]}
-        label='type'
+        label='Type'
         options={[
           ['apartment', 'Apartment'],
           ['house', 'House'],
         ]} />
 
-      <FieldArray name='rooms' component={renderRooms} />
+      <FieldArray
+        name='rooms'
+        buttonText='Add room'
+        entityText='Room'
+        childComponent={RoomFields}
+        component={RepeatedFields} />
       <FieldArray
         name='sharedFacilities'
         buttonText='Add shared facility'

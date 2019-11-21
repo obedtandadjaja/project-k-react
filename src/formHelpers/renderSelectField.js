@@ -7,7 +7,7 @@ const renderSelectField = ({
   defaultEmpty,
   meta: { touched, error, warning },
 }) => (
-  <div>
+  <div class='formFieldWrapper'>
     { label && <label htmlFor={input.name}>{label}</label> }
     <div>
       <select {...input}>
@@ -19,8 +19,8 @@ const renderSelectField = ({
         }
       </select>
       {touched &&
-         ((error && <span>{error}</span>) ||
-         (warning && <span>{warning}</span>))}
+         ((error && <p class='error'>{error}</p>) ||
+         (warning && <p class='warn'>{warning}</p>))}
     </div>
   </div>
 )

@@ -6,13 +6,16 @@ const renderField = ({
   type,
   meta: { touched, error, warning }
 }) => (
-  <div>
-    { label && <label htmlFor={input.name}>{label}</label> }
+  <div class='formFieldWrapper'>
+    {
+      label &&
+      <label htmlFor={input.name}>{label}</label>
+    }
     <div>
       <input {...input} placeholder={label} type={type} />
       {touched &&
-        ((error && <span>{error}</span>) ||
-        (warning && <span>{warning}</span>))}
+        ((error && <p class='error'>{error}</p>) ||
+        (warning && <p class='warn'>{warning}</p>))}
     </div>
   </div>
 )

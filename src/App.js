@@ -10,6 +10,7 @@ import PropertyEditPage from './pages/properties/edit'
 // reenable this when backend is ready to do auth client calls
 /* import RequiresAuth from './higherOrderComponents/requiresAuth' */
 import './App.css'
+import './common.css'
 
 function App() {
   return (
