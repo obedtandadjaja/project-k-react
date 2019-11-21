@@ -25,7 +25,6 @@ export default function authReducer(state=initialState, action) {
     })
 
   case LOGIN_SUCCESS:
-    console.log(action)
     return state.merge({
       loading: false,
       accessToken: action.payload.jwt,
