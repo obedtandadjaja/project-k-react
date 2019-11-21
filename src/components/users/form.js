@@ -107,7 +107,7 @@ function UserForm(props) {
       {
         occupation === 'professional' &&
         <div>
-          <h2>Company information</h2>
+          <h4>Company information</h4>
           <Field
             name='data.companyName'
             label='Company Name'
