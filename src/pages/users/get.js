@@ -8,8 +8,6 @@ import { get } from './../../api/users'
 function UserGetPage(props) {
   const { loading, error, user, get } = props
 
-  console.log(user)
-
   useEffect(() => {
     get(props.match.params.userID)
   }, [])

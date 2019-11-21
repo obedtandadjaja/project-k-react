@@ -31,7 +31,7 @@ export function edit(data) {
   return dispatch => {
     dispatch(editBegin())
 
-    return axios.put(`http://${API_HOST}${BACKEND_PROXY_PREFIX}/api/v1/users`, data).then(
+    return axios.put(`http://${API_HOST}${BACKEND_PROXY_PREFIX}/api/v1/users/${data.id}`, data).then(
       res => dispatch(editSuccess(res.data)),
       err => dispatch(editFailure(err))
     )
