@@ -80,10 +80,24 @@ form button[type=submit]:hover {
     border-radius: 5px;
 }
 
+.formFieldWrapper input[disabled] {
+    background-color: white;
+    border: none;
+    cursor: default;
+}
+
 .formFieldWrapper select {
     height: 25px;
     width: 322px;
     border: solid 1px #c3c3c3;
     border-radius: 5px;
     background-color: white;
+}
+
+p {
+    margin: 2px 0px;
+}
+
+p.error {
+    color: red;
 }

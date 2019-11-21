@@ -4,18 +4,19 @@ const renderField = ({
   input,
   label,
   type,
+  readonly,
   meta: { touched, error, warning }
 }) => (
-  <div class='formFieldWrapper'>
+  <div className='formFieldWrapper'>
     {
       label &&
       <label htmlFor={input.name}>{label}</label>
     }
     <div>
-      <input {...input} placeholder={label} type={type} />
+      <input {...input} placeholder={label} type={type} disabled={readonly} />
       {touched &&
-        ((error && <p class='error'>{error}</p>) ||
-        (warning && <p class='warn'>{warning}</p>))}
+        ((error && <p className='error'>{error}</p>) ||
+        (warning && <p className='warn'>{warning}</p>))}
     </div>
   </div>
 )

@@ -7,9 +7,7 @@ import renderSelectField from './../../formHelpers/renderSelectField'
 import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
 
-function RoomFields(props) {
-  const { prefix } = props
-
+function RoomFields(prefix, readonly) {
   return (
     <>
       <Field
@@ -17,6 +15,7 @@ function RoomFields(props) {
         type='text'
         component={renderField}
         validate={[required]}
+        readonly={readonly}
         label='Name' />
       <Field
         name={prefix ? `${prefix}.paymentSchedule` : 'paymentSchedule'}
@@ -24,6 +23,7 @@ function RoomFields(props) {
         defaultEmpty
         validate={[required]}
         label='Payment schedule'
+        readonly={readonly}
         options={[
           ['daily', 'Daily'],
           ['monthly', 'Monthly'],
@@ -33,15 +33,16 @@ function RoomFields(props) {
         name={prefix ? `${prefix}.priceAmount` : 'priceAmount'}
         type='number'
         component={renderField}
+        readonly={readonly}
         label='Price' />
 
       <FieldArray
         name={prefix ? `${prefix}.facilities` : 'facilities'}
         buttonText='Add facility'
         entityText='Facility'
+        readonly={readonly}
         childComponent={FacilityFields}
-        component={RepeatedFields}>
-      </FieldArray>
+        component={RepeatedFields} />
     </>
   )
 }

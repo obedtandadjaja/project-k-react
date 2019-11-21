@@ -11,9 +11,9 @@ import {
   getBegin,
   getSuccess,
   getFailure,
-  deleteBegin,
-  deleteSuccess,
-  deleteFailure,
+  removeBegin,
+  removeSuccess,
+  removeFailure,
 } from './../actions/userActions'
 
 export function create(data) {
@@ -42,20 +42,20 @@ export function get(data) {
   return dispatch => {
     dispatch(getBegin())
 
-    return axios.get(`http://${API_HOST}${BACKEND_PROXY_PREFIX}/api/v1/users`, data).then(
+    return axios.get(`http://${API_HOST}${BACKEND_PROXY_PREFIX}/api/v1/users/${data}`).then(
       res => dispatch(getSuccess(res.data)),
       err => dispatch(getFailure(err))
     )
   }
 }
 
-export function delete(data) {
+export function remove(data) {
   return dispatch => {
-    dispatch(deleteBegin())
+    dispatch(removeBegin())
 
     return axios.post(`http://${API_HOST}${BACKEND_PROXY_PREFIX}/api/v1/users`, data).then(
-      res => dispatch(deleteSuccess(res.data)),
-      err => dispatch(deleteFailure(err))
+      res => dispatch(removeSuccess(res.data)),
+      err => dispatch(removeFailure(err))
     )
   }
 }

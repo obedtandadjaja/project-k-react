@@ -52,20 +52,20 @@ export const getFailure = error => ({
   payload: { error }
 })
 
-export const DELETE_BEGIN = 'DELETE_BEGIN'
-export const DELETE_SUCCESS = 'DELETE_SUCCESS'
-export const DELETE_FAILURE = 'DELETE_FAILURE'
+export const REMOVE_BEGIN = 'REMOVE_BEGIN'
+export const REMOVE_SUCCESS = 'REMOVE_SUCCESS'
+export const REMOVE_FAILURE = 'REMOVE_FAILURE'
 
-export const deleteBegin = () => ({
-  type: DELETE_BEGIN
+export const removeBegin = () => ({
+  type: REMOVE_BEGIN
 })
 
-export const deleteSuccess = payload => ({
-  type: DELETE_SUCCESS,
+export const removeSuccess = payload => ({
+  type: REMOVE_SUCCESS,
   payload: payload
 })
 
-export const deleteFailure = error => ({
-  type: DELETE_FAILURE,
+export const removeFailure = error => ({
+  type: REMOVE_FAILURE,
   payload: { error }
 })

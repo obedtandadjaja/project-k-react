@@ -62,7 +62,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  login: login
+  login
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

@@ -9,7 +9,7 @@ import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
 
 function PropertyForm(props) {
-  const { handleSubmit } = props
+  const { handleSubmit, readonly } = props
 
   return (
     <form onSubmit={handleSubmit} >
@@ -19,6 +19,7 @@ function PropertyForm(props) {
         label='Name'
         component={renderField}
         validate={[required]}
+        readonly={readonly}
         type='text' />
 
       <Field
@@ -26,6 +27,7 @@ function PropertyForm(props) {
         label='Address'
         component={renderField}
         validate={[required]}
+        readonly={readonly}
         type='text' />
 
       <Field
@@ -33,6 +35,7 @@ function PropertyForm(props) {
         component={renderSelectField}
         validate={[required]}
         label='Type'
+        readonly={readonly}
         options={[
           ['apartment', 'Apartment'],
           ['house', 'House'],
@@ -42,18 +45,23 @@ function PropertyForm(props) {
         name='rooms'
         buttonText='Add room'
         entityText='Room'
+        readonly={readonly}
         childComponent={RoomFields}
         component={RepeatedFields} />
       <FieldArray
         name='sharedFacilities'
         buttonText='Add shared facility'
         entityText='Shared facility'
+        readonly={readonly}
         childComponent={FacilityFields}
         component={RepeatedFields} />
 
-      <button type='submit'>
-        Submit
-      </button>
+      {
+        !readonly &&
+        <button type='submit'>
+          Submit
+        </button>
+      }
     </form>
   )
 }

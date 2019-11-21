@@ -9,21 +9,21 @@ import {
   GET_BEGIN,
   GET_SUCCESS,
   GET_FAILURE,
-  DELETE_BEGIN,
-  DELETE_SUCCESS,
-  DELETE_FAILURE,
+  REMOVE_BEGIN,
+  REMOVE_SUCCESS,
+  REMOVE_FAILURE,
 } from './../actions/userActions'
 
 const initialState = Map({
-  user: {},
+  user: null,
   createLoading: false,
   createError: false,
   editLoading: false,
   editError: false,
   getLoading: false,
   getError: false,
-  deleteLoading: false,
-  deleteError: false,
+  removeLoading: false,
+  removeError: false,
 })
 
 export default function userReducer(state=initialState, action) {
@@ -76,20 +76,20 @@ export default function userReducer(state=initialState, action) {
       getLoading: false
     })
 
-  case DELETE_BEGIN:
+  case REMOVE_BEGIN:
     return state.merge({
-      deleteLoading: true
+      removeLoading: true
     })
 
-  case DELETE_SUCCESS:
+  case REMOVE_SUCCESS:
     return state.merge({
-      deleteLoading: false,
+      removeLoading: false,
       user: action.payload
     })
 
-  case DELETE_FAILURE:
+  case REMOVE_FAILURE:
     return state.merge({
-      deleteLoading: false
+      removeLoading: false
     })
 
   default:

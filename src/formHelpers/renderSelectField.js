@@ -4,23 +4,26 @@ const renderSelectField = ({
   input,
   label,
   options,
+  readonly,
   defaultEmpty,
   meta: { touched, error, warning },
 }) => (
-  <div class='formFieldWrapper'>
+  <div className='formFieldWrapper'>
     { label && <label htmlFor={input.name}>{label}</label> }
     <div>
-      <select {...input}>
+      <select {...input} disabled={readonly} defaultValue={!defaultEmpty && options[0][0]}>
         { defaultEmpty && <option /> }
         {
           options.map((option, i) => (
-            <option key={i} value={option[0]}>{option[1]}</option>
+            <option key={i} value={option[0]}>
+              {option[1]}
+            </option>
           ))
         }
       </select>
       {touched &&
-         ((error && <p class='error'>{error}</p>) ||
-         (warning && <p class='warn'>{warning}</p>))}
+         ((error && <p className='error'>{error}</p>) ||
+         (warning && <p className='warn'>{warning}</p>))}
     </div>
   </div>
 )

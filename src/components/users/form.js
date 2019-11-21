@@ -6,56 +6,20 @@ import { formValueSelector } from 'redux-form'
 import { required, email, phone } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 import renderSelectField from './../../formHelpers/renderSelectField'
-
-const renderEmergencyContacts = ({ fields, meta: { touched, error } }) => (
-  <ul>
-    <li>
-      <button type='button' onClick={() => fields.push({})}>Add Emergency Contact</button>
-      {touched && error && <span>{error}</span>}
-    </li>
-    {fields.map((emergencyContact, index) =>
-      <li key={index}>
-        <button
-          type='button'
-          onClick={() => fields.remove(index)} />
-        <h4>Emergency contact #{index + 1}</h4>
-        <Field
-          name={`${emergencyContact}.name`}
-          type='text'
-          component={renderField}
-          validate={[required]}
-          label='Name' />
-        <Field
-          name={`${emergencyContact}.address`}
-          type='text'
-          component={renderField}
-          label='Address' />
-        <Field
-          name={`${emergencyContact}.phone`}
-          type='text'
-          component={renderField}
-          validate={[required, phone]}
-          label='Phone' />
-        <Field
-          name={`${emergencyContact}.email`}
-          type='text'
-          component={renderField}
-          label='Email' />
-      </li>
-    )}
-  </ul>
-)
+import RepeatedFields from './../../formHelpers/repeatedFields'
+import EmergencyContactFields from './emergencyContactFields'
 
 function UserForm(props) {
-  const { handleSubmit, occupation } = props
+  const { handleSubmit, occupation, submitting, error, readonly } = props
 
   return (
-    <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit}>
       <Field
         name='name'
         label='Name'
         component={renderField}
         validate={[required]}
+        readonly={readonly}
         type='text' />
 
       <Field
@@ -63,6 +27,7 @@ function UserForm(props) {
         label='Email'
         component={renderField}
         validate={[required, email]}
+        readonly={readonly}
         type='text' />
 
       <Field
@@ -70,36 +35,34 @@ function UserForm(props) {
         label='Phone'
         component={renderField}
         validate={[required, phone]}
+        readonly={readonly}
         type='text' />
 
       <Field
-        name='gender'
+        name='data.gender'
         component={renderSelectField}
-        defaultEmpty
-        validate={[required]}
         label='Gender'
+        readonly={readonly}
         options={[
           ['male', 'Male'],
           ['female', 'Female'],
         ]} />
 
       <Field
-        name='marriageStatus'
+        name='data.marriageStatus'
         component={renderSelectField}
-        defaultEmpty
-        validate={[required]}
         label='Marriage status'
+        readonly={readonly}
         options={[
-          ['notMarried', 'Not Married/Others'],
+          ['notMarried', 'Not Married'],
           ['married', 'Married'],
         ]} />
 
       <Field
-        name='religion'
+        name='data.religion'
         component={renderSelectField}
-        defaultEmpty
-        validate={[required]}
         label='Religion'
+        readonly={readonly}
         options={[
           ['muslim', 'Muslim'],
           ['christianProtestant', 'Christian Protestant'],
@@ -113,29 +76,28 @@ function UserForm(props) {
       <div>
         <label htmlFor='identification'>Identification:</label>
         <Field
-          name='identificationType'
+          name='data.identificationType'
           component={renderSelectField}
-          defaultEmpty
-          validate={[required]}
+          readonly={readonly}
           options={[
             ['KTP ID/NIK', 'KTP ID/NIK'],
             ['KITAS ID', 'KITAS ID'],
             ['Passport Number', 'Passport Number'],
           ]} />
         <Field
-          name='identificationValue'
+          name='data.identificationValue'
           component={renderField}
+          readonly={readonly}
           type='text'
           validate={[required]}
         />
       </div>
 
       <Field
-        name='occupation'
+        name='data.occupation'
         component={renderSelectField}
-        defaultEmpty
-        validate={[required]}
         label='Occupation'
+        readonly={readonly}
         options={[
           ['student', 'Student'],
           ['professional', 'Professional'],
@@ -147,30 +109,48 @@ function UserForm(props) {
         <div>
           <h2>Company information</h2>
           <Field
-            name='companyName'
+            name='data.companyName'
             label='Company Name'
             component={renderField}
+            readonly={readonly}
             type='text' />
 
           <Field
-            name='companyAddress'
+            name='data.companyAddress'
             label='Company Address'
             component={renderField}
+            readonly={readonly}
             type='text' />
 
           <Field
-            name='companyPhone'
+            name='data.companyPhone'
             label='Company Phone'
             component={renderField}
+            readonly={readonly}
             validate={[phone]}
             type='text' />
         </div>
       }
 
-      <FieldArray name='emergencyContacts' component={renderEmergencyContacts}/>
-      <button type='submit'>
-        Submit
-      </button>
+      <FieldArray
+        name='data.emergencyContacts'
+        buttonText='Add emergency contact'
+        entityText='Emergency contact'
+        readonly={readonly}
+        childComponent={EmergencyContactFields}
+        component={RepeatedFields} />
+
+      {
+        !readonly &&
+        <button type='submit' disabled={submitting}>
+          Create user
+        </button>
+      }
+
+      <div className='errorResponse'>
+        { JSON.stringify(error) }
+      </div>
+
     </form>
   )
 }
@@ -181,6 +161,7 @@ let userForm = reduxForm({
 
 const selector = formValueSelector('user')
 userForm = connect(state => ({
-  occupation: selector(state, 'occupation') }))(userForm)
+  occupation: selector(state, 'data.occupation'),
+}))(userForm)
 
 export default userForm

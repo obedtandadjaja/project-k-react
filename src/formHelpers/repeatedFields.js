@@ -4,27 +4,34 @@ const renderRepeatedFields = ({
   fields,
   buttonText,
   entityText,
+  readonly,
   childComponent,
   meta: { touched, error }
 }) => (
   <div>
-    <ul class='undecorated'>
+    <ul className='undecorated'>
       {fields.map((field, index) =>
-        <li key={index} class='fieldGroup'>
-          <button
-            class='repeatedFieldsRemove'
-            type='button'
-            onClick={() => fields.remove(index)}>
-            Remove
-          </button>
+        <li key={index} className='fieldGroup'>
+          {
+            !readonly &&
+            <button
+              className='repeatedFieldsRemove'
+              type='button'
+              onClick={() => fields.remove(index)}>
+              Remove
+            </button>
+          }
           <h4>{entityText} #{index + 1}</h4>
-          { childComponent(field) }
+          { childComponent(field, readonly) }
         </li>
       )}
-      <li>
-        <button type='button' onClick={() => fields.push({})}>{buttonText}</button>
-        {touched && error && <span>{error}</span>}
-      </li>
+      {
+        !readonly &&
+        <li>
+          <button type='button' onClick={() => fields.push({})}>{buttonText}</button>
+          {touched && error && <span>{error}</span>}
+        </li>
+      }
     </ul>
   </div>
 )

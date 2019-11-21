@@ -4,7 +4,7 @@ import { Field } from 'redux-form'
 import { required } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 
-function FacilityFields(prefix) {
+function FacilityFields(prefix, readonly) {
   return (
     <>
       <Field
@@ -12,6 +12,7 @@ function FacilityFields(prefix) {
         type='text'
         component={renderField}
         validate={[required]}
+        readonly={readonly}
         label='Name' />
     </>
   )
