@@ -18,7 +18,7 @@ function LoginPage(props) {
   }, [props.history, isAuthenticated])
 
   return (
-    <div className='loginPage'>
+    <div className='loginPage page'>
       <Form onSubmit={loginSubmit} loading={loading} submitError={error} />
     </div>
   )

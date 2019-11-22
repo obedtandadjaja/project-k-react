@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    position: static;
+    z-index: 1000;
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    border: none;
+    overflow: visible;
+    height: 70px;
+}
+
+h1.temporaryTitle {
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1.temporaryTitle > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header .linksContainer {
+    width: 100%;
+}

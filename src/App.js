@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import Header from './components/header'
 import HomePage from './pages/home'
 import LoginPage from './pages/login'
 import SignupPage from './pages/signup'
@@ -16,7 +17,7 @@ import './App.css'
 import './common.css'
 
 function App(props) {
-  const { userID } = props
+  const { userID, currentUser } = props
   useEffect(() => {
     userID && getCurrentUser(userID)
   }, [userID])
@@ -24,15 +25,18 @@ function App(props) {
   return (
     <div className="App">
       <BrowserRouter>
-        <Switch>
-          <Route exact path='/login' component={LoginPage} />
-          <Route exact path='/signup' component={SignupPage} />
-          <Route exact path='/' component={RequiresAuth(HomePage)} />
-          <Route exact path='/users/create' component={RequiresAuth(UserCreatePage)} />
-          <Route exact path='/users/:userID' component={RequiresAuth(UserGetPage)} />
-          <Route exact path='/users/:userID/edit' component={RequiresAuth(UserEditPage)} />
-          <Route exact path='/properties/:propertyID/edit' component={RequiresAuth(PropertyEditPage)} />
-        </Switch>
+        <Header currentUser={currentUser} />
+        <div className='AppBody'>
+          <Switch>
+            <Route exact path='/login' component={LoginPage} />
+            <Route exact path='/signup' component={SignupPage} />
+            <Route exact path='/' component={RequiresAuth(HomePage)} />
+            <Route exact path='/users/create' component={RequiresAuth(UserCreatePage)} />
+            <Route exact path='/users/:userID' component={RequiresAuth(UserGetPage)} />
+            <Route exact path='/users/:userID/edit' component={RequiresAuth(UserEditPage)} />
+            <Route exact path='/properties/:propertyID/edit' component={RequiresAuth(PropertyEditPage)} />
+          </Switch>
+        </div>
       </BrowserRouter>
     </div>
   )
@@ -40,6 +44,7 @@ function App(props) {
 
 const mapStateToProps = state => ({
   userID: state.auth.getIn(['userID']),
+  currentUser: state.auth.getIn(['currentUser']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   getCurrentUser
