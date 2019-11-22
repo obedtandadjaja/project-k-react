@@ -25,7 +25,7 @@ function UserEditPage(props) {
 
   return (
     <div className='userEditPage'>
-      <Form initialValues={user} onSubmit={editSubmit} />
+      <Form initialValues={user} onSubmit={editSubmit} loading={loading} submitError={error} />
     </div>
   )
 }

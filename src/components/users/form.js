@@ -10,7 +10,7 @@ import RepeatedFields from './../../formHelpers/repeatedFields'
 import EmergencyContactFields from './emergencyContactFields'
 
 function UserForm(props) {
-  const { handleSubmit, occupation, submitting, error, readonly } = props
+  const { handleSubmit, occupation, submitting, submitError, readonly } = props
 
   return (
     <form onSubmit={handleSubmit}>
@@ -148,7 +148,7 @@ function UserForm(props) {
       }
 
       <div className='errorResponse'>
-        { JSON.stringify(error) }
+        { JSON.stringify(submitError) }
       </div>
 
     </form>

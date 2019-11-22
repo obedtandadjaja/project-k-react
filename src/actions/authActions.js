@@ -46,3 +46,9 @@ export const getCurrentUserFailure = error => ({
   type: GET_CURRENT_USER_FAILURE,
   payload: { error }
 })
+
+export const LOGOUT = 'LOGOUT'
+
+export const logout = () => ({
+  type: LOGOUT,
+})

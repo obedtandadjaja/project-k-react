@@ -9,7 +9,7 @@ import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
 
 function PropertyForm(props) {
-  const { handleSubmit, readonly } = props
+  const { handleSubmit, readonly, submitError } = props
 
   return (
     <form onSubmit={handleSubmit} >
@@ -62,6 +62,10 @@ function PropertyForm(props) {
           Submit
         </button>
       }
+
+      <div className='errorResponse'>
+        { JSON.stringify(submitError) }
+      </div>
     </form>
   )
 }

@@ -21,7 +21,7 @@ function UserCreatePage(props) {
 
   return (
     <div className='userCreatePage'>
-      <Form onSubmit={createSubmit} submitting={loading} error={error} />
+      <Form onSubmit={createSubmit} submitting={loading} submitError={error} />
     </div>
   )
 }

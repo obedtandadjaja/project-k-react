@@ -7,12 +7,9 @@ import Form from './../components/login/form'
 
 function LoginPage(props) {
   const { login, loading, error, isAuthenticated } = props
-
   const loginSubmit = (values) => {
     login(values)
   }
-
-  console.log(isAuthenticated)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -22,7 +19,7 @@ function LoginPage(props) {
 
   return (
     <div className='loginPage'>
-      <Form onSubmit={loginSubmit} loading={loading} error={error} />
+      <Form onSubmit={loginSubmit} loading={loading} submitError={error} />
     </div>
   )
 }

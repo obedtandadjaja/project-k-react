@@ -19,15 +19,15 @@ function App(props) {
   const { userID } = props
   useEffect(() => {
     userID && getCurrentUser(userID)
-  })
+  }, [userID])
 
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route exact path='/' component={RequiresAuth(HomePage)} />
           <Route exact path='/login' component={LoginPage} />
           <Route exact path='/signup' component={SignupPage} />
+          <Route exact path='/' component={RequiresAuth(HomePage)} />
           <Route exact path='/users/create' component={RequiresAuth(UserCreatePage)} />
           <Route exact path='/users/:userID' component={RequiresAuth(UserGetPage)} />
           <Route exact path='/users/:userID/edit' component={RequiresAuth(UserEditPage)} />

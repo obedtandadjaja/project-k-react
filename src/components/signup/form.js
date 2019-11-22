@@ -21,7 +21,7 @@ function SignupForm(props) {
         name='password'
         label='Password'
         component={renderField}
-        validate={[required, minLength10]}
+        validate={[required]}
         type='password' />
 
       <button type='submit'>

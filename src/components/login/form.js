@@ -1,11 +1,11 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-import { required, email, minLength10 } from './../../formHelpers/validators'
+import { required, email } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 
 function LoginForm(props) {
-  const { handleSubmit } = props
+  const { handleSubmit, submitError, loading } = props
 
   return (
     <form onSubmit={handleSubmit} >
@@ -21,10 +21,14 @@ function LoginForm(props) {
         name='password'
         label='Password'
         component={renderField}
-        validate={[required, minLength10]}
+        validate={[required]}
         type='password' />
 
-      <button type='submit'>
+      <div className='errorResponse'>
+        { submitError && submitError.status === 401 && 'Invalid credentials' }
+      </div>
+
+      <button type='submit' disabled={loading}>
         Login
       </button>
     </form>

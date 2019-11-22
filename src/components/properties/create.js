@@ -20,9 +20,9 @@ function PropertyCreatePage(props) {
   }, [props.history, loading, error, property])
 
   return (
-      <div className='propertyCreatePage'>
-      <Form onSubmit={createSubmit} submitting={loading} error={error} />
-      </div>
+    <div className='propertyCreatePage'>
+      <Form onSubmit={createSubmit} loading={loading} submitError={error} />
+    </div>
   )
 }
 

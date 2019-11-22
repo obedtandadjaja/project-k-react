@@ -14,7 +14,7 @@ function UserGetPage(props) {
 
   return (
     <div className='userGetPage'>
-      <Form initialValues={user} loading={loading} readonly />
+      <Form initialValues={user} loading={loading} submitError={error} readonly />
     </div>
   )
 }

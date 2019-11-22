@@ -17,9 +17,9 @@ function SignupPage(props) {
   useEffect(() => {
     if (!loading && !error) {
       submitted &&
-        props.history.push('/')
+        props.history.push('/login')
     }
-  }, [props.history, isAuthenticated, submitted])
+  }, [props.history, isAuthenticated, loading, error, submitted])
 
   return (
     <div className='signupPage'>
