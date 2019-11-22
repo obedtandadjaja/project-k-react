@@ -33,3 +33,16 @@ export const signupFailure = error => ({
   type: SIGNUP_FAILURE,
   payload: { error }
 })
+
+export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS'
+export const GET_CURRENT_USER_FAILURE = 'GET_CURRENT_USER_FAILURE'
+
+export const getCurrentUserSuccess = payload => ({
+  type: GET_CURRENT_USER_SUCCESS,
+  payload: payload
+})
+
+export const getCurrentUserFailure = error => ({
+  type: GET_CURRENT_USER_FAILURE,
+  payload: { error }
+})

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import HomePage from './pages/home'
 import LoginPage from './pages/login'
@@ -8,12 +10,17 @@ import UserGetPage from './pages/users/get'
 import UserEditPage from './pages/users/edit'
 import UserCreatePage from './pages/users/create'
 import PropertyEditPage from './pages/properties/edit'
-
 import RequiresAuth from './higherOrderComponents/requiresAuth'
+import { getCurrentUser } from './api/users'
 import './App.css'
 import './common.css'
 
-function App() {
+function App(props) {
+  const { userID } = props
+  useEffect(() => {
+    userID && getCurrentUser(userID)
+  })
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -28,7 +35,14 @@ function App() {
         </Switch>
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+const mapStateToProps = state => ({
+  userID: state.auth.getIn(['userID']),
+})
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getCurrentUser
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -15,6 +15,10 @@ import {
   removeSuccess,
   removeFailure,
 } from './../actions/userActions'
+import {
+  getCurrentUserSuccess,
+  getCurrentUserFailure,
+} from './../actions/authActions'
 
 export function create(data) {
   return dispatch => {
@@ -45,6 +49,17 @@ export function get(data) {
     return axios.get(`${BASE_URL}/api/v1/users/${data}`).then(
       res => dispatch(getSuccess(res.data)),
       err => dispatch(getFailure(err))
+    )
+  }
+}
+
+export function getCurrentUser(userID) {
+  return dispatch => {
+    dispatch(getBegin())
+
+    return axios.get(`${BASE_URL}/api/v1/users/${userID}`).then(
+      res => dispatch(getCurrentUserSuccess(res.data)),
+      err => dispatch(getCurrentUserFailure(err))
     )
   }
 }
