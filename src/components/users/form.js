@@ -10,147 +10,151 @@ import RepeatedFields from './../../formHelpers/repeatedFields'
 import EmergencyContactFields from './emergencyContactFields'
 
 function UserForm(props) {
-  const { handleSubmit, occupation, submitting, submitError, readonly } = props
+  const { handleSubmit, occupation, submitting, submitError, readonly, title } = props
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field
-        name='name'
-        label='Name'
-        component={renderField}
-        validate={[required]}
-        readonly={readonly}
-        type='text' />
-
-      <Field
-        name='email'
-        label='Email'
-        component={renderField}
-        validate={[required, email]}
-        readonly={readonly}
-        type='text' />
-
-      <Field
-        name='phone'
-        label='Phone'
-        component={renderField}
-        validate={[required, phone]}
-        readonly={readonly}
-        type='text' />
-
-      <Field
-        name='data.gender'
-        component={renderSelectField}
-        label='Gender'
-        readonly={readonly}
-        options={[
-          ['male', 'Male'],
-          ['female', 'Female'],
-        ]} />
-
-      <Field
-        name='data.marriageStatus'
-        component={renderSelectField}
-        label='Marriage status'
-        readonly={readonly}
-        options={[
-          ['notMarried', 'Not Married'],
-          ['married', 'Married'],
-        ]} />
-
-      <Field
-        name='data.religion'
-        component={renderSelectField}
-        label='Religion'
-        readonly={readonly}
-        options={[
-          ['muslim', 'Muslim'],
-          ['christianProtestant', 'Christian Protestant'],
-          ['christianCatholic', 'Christian Catholic'],
-          ['hindu', 'Hindu'],
-          ['buddhist', 'Buddhist'],
-          ['confucian', 'Confucian'],
-          ['other', 'Other'],
-        ]} />
-
-      <div>
-        <label htmlFor='identification'>Identification:</label>
+      <div class='blockHeader'>
+        { title }
+      </div>
+      <div className="blockBody">
         <Field
-          name='data.identificationType'
+          name='name'
+          label='Name'
+          component={renderField}
+          validate={[required]}
+          readonly={readonly}
+          type='text' />
+
+        <Field
+          name='email'
+          label='Email'
+          component={renderField}
+          validate={[required, email]}
+          readonly={readonly}
+          type='text' />
+
+        <Field
+          name='phone'
+          label='Phone'
+          component={renderField}
+          validate={[required, phone]}
+          readonly={readonly}
+          type='text' />
+
+        <Field
+          name='data.gender'
           component={renderSelectField}
+          label='Gender'
           readonly={readonly}
           options={[
-            ['KTP ID/NIK', 'KTP ID/NIK'],
-            ['KITAS ID', 'KITAS ID'],
-            ['Passport Number', 'Passport Number'],
+            ['male', 'Male'],
+            ['female', 'Female'],
           ]} />
+
         <Field
-          name='data.identificationValue'
-          component={renderField}
+          name='data.marriageStatus'
+          component={renderSelectField}
+          label='Marriage status'
           readonly={readonly}
-          type='text'
-          validate={[required]}
-        />
-      </div>
+          options={[
+            ['notMarried', 'Not Married'],
+            ['married', 'Married'],
+          ]} />
 
-      <Field
-        name='data.occupation'
-        component={renderSelectField}
-        label='Occupation'
-        readonly={readonly}
-        options={[
-          ['student', 'Student'],
-          ['professional', 'Professional'],
-          ['unemployed', 'Unemployed'],
-        ]} />
+        <Field
+          name='data.religion'
+          component={renderSelectField}
+          label='Religion'
+          readonly={readonly}
+          options={[
+            ['muslim', 'Muslim'],
+            ['christianProtestant', 'Christian Protestant'],
+            ['christianCatholic', 'Christian Catholic'],
+            ['hindu', 'Hindu'],
+            ['buddhist', 'Buddhist'],
+            ['confucian', 'Confucian'],
+            ['other', 'Other'],
+          ]} />
 
-      {
-        occupation === 'professional' &&
         <div>
-          <h4>Company information</h4>
+          <label htmlFor='identification'>Identification:</label>
           <Field
-            name='data.companyName'
-            label='Company Name'
+            name='data.identificationType'
+            component={renderSelectField}
+            readonly={readonly}
+            options={[
+              ['KTP ID/NIK', 'KTP ID/NIK'],
+              ['KITAS ID', 'KITAS ID'],
+              ['Passport Number', 'Passport Number'],
+            ]} />
+          <Field
+            name='data.identificationValue'
             component={renderField}
             readonly={readonly}
-            type='text' />
-
-          <Field
-            name='data.companyAddress'
-            label='Company Address'
-            component={renderField}
-            readonly={readonly}
-            type='text' />
-
-          <Field
-            name='data.companyPhone'
-            label='Company Phone'
-            component={renderField}
-            readonly={readonly}
-            validate={[phone]}
-            type='text' />
+            type='text'
+            validate={[required]}
+          />
         </div>
-      }
 
-      <FieldArray
-        name='data.emergencyContacts'
-        buttonText='Add emergency contact'
-        entityText='Emergency contact'
-        readonly={readonly}
-        childComponent={EmergencyContactFields}
-        component={RepeatedFields} />
+        <Field
+          name='data.occupation'
+          component={renderSelectField}
+          label='Occupation'
+          readonly={readonly}
+          options={[
+            ['student', 'Student'],
+            ['professional', 'Professional'],
+            ['unemployed', 'Unemployed'],
+          ]} />
 
-      {
-        !readonly &&
-        <button type='submit' disabled={submitting}>
-          Create user
-        </button>
-      }
+        {
+          occupation === 'professional' &&
+          <div>
+            <h4>Company information</h4>
+            <Field
+              name='data.companyName'
+              label='Company Name'
+              component={renderField}
+              readonly={readonly}
+              type='text' />
 
-      <div className='errorResponse'>
-        { JSON.stringify(submitError) }
+            <Field
+              name='data.companyAddress'
+              label='Company Address'
+              component={renderField}
+              readonly={readonly}
+              type='text' />
+
+            <Field
+              name='data.companyPhone'
+              label='Company Phone'
+              component={renderField}
+              readonly={readonly}
+              validate={[phone]}
+              type='text' />
+          </div>
+        }
+
+        <FieldArray
+          name='data.emergencyContacts'
+          buttonText='Add emergency contact'
+          entityText='Emergency contact'
+          readonly={readonly}
+          childComponent={EmergencyContactFields}
+          component={RepeatedFields} />
+
+        {
+          !readonly &&
+          <button type='submit' disabled={submitting}>
+            Create user
+          </button>
+        }
+
+        <div className='errorResponse'>
+          { submitError && JSON.stringify(submitError) }
+        </div>
       </div>
-
     </form>
   )
 }
