@@ -1,56 +1,26 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { login } from './../api/login'
+import Form from './../components/login/form'
 
 function LoginPage(props) {
-  const loginSubmit = (event) => {
-    props.login({
-      email: document.getElementById('loginEmail').value,
-      password: document.getElementById('loginPassword').value,
-    })
+  const { login, loading, error, isAuthenticated } = props
+
+  const loginSubmit = (values) => {
+    login(values)
   }
 
-  console.log(props)
-
   useEffect(() => {
-    if (props.isAuthenticated) {
+    if (isAuthenticated) {
       props.history.push('/')
     }
-  }, [props.history, props.isAuthenticated])
+  }, [props.history, isAuthenticated])
 
   return (
-    <div className='loginPage'>
-      <table>
-        <tbody>
-          <tr>
-            <td>Email:</td>
-            <td><input id='loginEmail' type='text' placeholder='email' /></td>
-          </tr>
-          <tr>
-            <td>Password:</td>
-            <td><input id='loginPassword' type='password' /></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <button onClick={loginSubmit} disabled={props.loading}>
-                Login
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <Link to={{ pathname: '/signup' }}>
-                New? Create user
-              </Link>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class='loginPage'>
+      <Form onSubmit={loginSubmit} loading={loading} error={error} />
     </div>
   )
 }
@@ -62,7 +32,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  login
+  login: login
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

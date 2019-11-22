@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { API_HOST, AUTH_PROXY_PREFIX } from './../constants'
+import { AUTH_BASE_URL } from './../constants'
 import {
   loginBegin,
   loginSuccess,
@@ -11,7 +11,7 @@ export function login({ email, password }) {
   return dispatch => {
     dispatch(loginBegin())
 
-    return axios.post(`http://${API_HOST}/api/v1/users/login`, { email, password}).then(
+    return axios.post(`${AUTH_BASE_URL}/api/v1/login`, { email, password }).then(
       res => dispatch(loginSuccess(res.data)),
       err => dispatch(loginFailure(err))
     )

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { API_HOST, BACKEND_PROXY_PREFIX } from './../constants'
+import { BACKEND_BASE_URL as BASE_URL } from './../constants'
 import {
   signupBegin,
   signupSuccess,
@@ -12,7 +12,7 @@ export function signup({ email, password }) {
     dispatch(signupBegin)
 
     return axios.post(
-      `http://${API_HOST}${BACKEND_PROXY_PREFIX}/api/v1/users/signup`,
+      `${BASE_URL}/api/v1/users/signup`,
       { email, password}
     ).then(
       res => dispatch(signupSuccess(res.data)),

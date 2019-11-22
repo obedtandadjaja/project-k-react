@@ -11,7 +11,6 @@ function RequiresAuth(Component) {
           window.location = '/login'
         }
       }
-
       checkAndRedirect()
     }, [isAuthenticated])
 

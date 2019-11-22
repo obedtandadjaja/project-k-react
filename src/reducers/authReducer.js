@@ -9,6 +9,7 @@ import {
 } from './../actions/authActions'
 
 const initialState = Map({
+  currentUser: null,
   isAuthenticated: false,
   accessToken: null,
   refreshToken: null,

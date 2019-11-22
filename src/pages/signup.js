@@ -1,45 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { signup } from './../api/signup'
+import Form from './../components/signup/form'
 
 function SignupPage(props) {
-  const signupSubmit = (event) => {
-    props.signup({
-      email: document.getElementById('signupEmail').value,
-      password: document.getElementById('signupPassword').value,
-    })
+  const { signup, loading, error, isAuthenticated } = props
+  const [submitted, setSubmitted] = useState(false)
+
+  const signupSubmit = (values) => {
+    setSubmitted(true)
+    signup(values)
   }
 
   useEffect(() => {
-    if (props.isAuthenticated) {
-      props.history.push('/')
+    if (!loading && !error) {
+      submitted &&
+        props.history.push('/')
     }
-  }, [props.history, props.isAuthenticated])
+  }, [props.history, isAuthenticated, submitted])
 
   return (
     <div class='signupPage'>
-      <table>
-        <tbody>
-          <tr>
-            <td>Email:</td>
-            <td><input id='signupEmail' type='text' placeholder='' /></td>
-          </tr>
-          <tr>
-            <td>Password:</td>
-            <td><input id='signupPassword' type='password' /></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <button onClick={signupSubmit} disabled={props.loading}>
-                Create User
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <Form onSubmit={signupSubmit} loading={loading} error={error} />
     </div>
   )
 }

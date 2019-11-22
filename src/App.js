@@ -9,8 +9,7 @@ import UserEditPage from './pages/users/edit'
 import UserCreatePage from './pages/users/create'
 import PropertyEditPage from './pages/properties/edit'
 
-// reenable this when backend is ready to do auth client calls
-/* import RequiresAuth from './higherOrderComponents/requiresAuth' */
+import RequiresAuth from './higherOrderComponents/requiresAuth'
 import './App.css'
 import './common.css'
 
@@ -19,13 +18,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route exact path='/' component={HomePage} />
+          <Route exact path='/' component={RequiresAuth(HomePage)} />
           <Route exact path='/login' component={LoginPage} />
           <Route exact path='/signup' component={SignupPage} />
-          <Route exact path='/users/create' component={UserCreatePage} />
-          <Route exact path='/users/:userID' component={UserGetPage} />
-          <Route exact path='/users/:userID/edit' component={UserEditPage} />
-          <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />
+          <Route exact path='/users/create' component={RequiresAuth(UserCreatePage)} />
+          <Route exact path='/users/:userID' component={RequiresAuth(UserGetPage)} />
+          <Route exact path='/users/:userID/edit' component={RequiresAuth(UserEditPage)} />
+          <Route exact path='/properties/:propertyID/edit' component={RequiresAuth(PropertyEditPage)} />
         </Switch>
       </BrowserRouter>
     </div>
