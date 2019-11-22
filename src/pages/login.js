@@ -12,6 +12,8 @@ function LoginPage(props) {
     login(values)
   }
 
+  console.log(isAuthenticated)
+
   useEffect(() => {
     if (isAuthenticated) {
       props.history.push('/')
@@ -19,7 +21,7 @@ function LoginPage(props) {
   }, [props.history, isAuthenticated])
 
   return (
-    <div class='loginPage'>
+    <div className='loginPage'>
       <Form onSubmit={loginSubmit} loading={loading} error={error} />
     </div>
   )

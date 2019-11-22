@@ -22,7 +22,7 @@ function SignupPage(props) {
   }, [props.history, isAuthenticated, submitted])
 
   return (
-    <div class='signupPage'>
+    <div className='signupPage'>
       <Form onSubmit={signupSubmit} loading={loading} error={error} />
     </div>
   )

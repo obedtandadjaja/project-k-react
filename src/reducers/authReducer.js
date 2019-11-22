@@ -9,11 +9,10 @@ import {
 } from './../actions/authActions'
 
 const initialState = Map({
-  currentUser: null,
-  isAuthenticated: false,
-  accessToken: null,
-  refreshToken: null,
-  credentialUuid: null, // need to pull this out of jwt
+  isAuthenticated: Boolean(localStorage.getItem('refreshToken')),
+  accessToken: localStorage.getItem('accessToken'),
+  refreshToken: localStorage.getItem('refreshToken'),
+  credentialUUID: localStorage.getItem('credentialUUID'),
   loading: false,
   error: null,
 })
@@ -26,10 +25,15 @@ export default function authReducer(state=initialState, action) {
     })
 
   case LOGIN_SUCCESS:
+    localStorage.setItem('accessToken', action.payload.jwt)
+    localStorage.setItem('refreshToken', action.payload.session)
+    localStorage.setItem('credentialUUID', action.payload.credential_uuid)
+
     return state.merge({
       loading: false,
       accessToken: action.payload.jwt,
       refreshToken: action.payload.session,
+      credentialUUID: action.payload.session,
       isAuthenticated: Boolean(action.payload.session),
     })
 
