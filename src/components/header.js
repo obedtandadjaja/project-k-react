@@ -5,11 +5,11 @@ import { logout } from './../actions/authActions'
 import './header.css'
 
 function Header(props) {
-  const { currentUser } = props
-  const userLinks = currentUser ?
+  const { currentUserID } = props
+  const userLinks = currentUserID ?
     [
       {
-        url: `/users/${currentUser.id}`,
+        url: `/users/${currentUserID}`,
         text: 'Account'
       },
     ] :
@@ -45,9 +45,12 @@ function Header(props) {
               </Link>
             ))
           }
-          <a key='logout' onClick={submitLogout} href='#'>
-            Logout
-          </a>
+          {
+            !currentUserID &&
+            <a key='logout' onClick={submitLogout} href='#'>
+              Logout
+            </a>
+          }
         </div>
       </div>
     </header>

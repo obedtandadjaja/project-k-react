@@ -24,7 +24,14 @@ function PropertyEditPage(props) {
 
   return (
     <div className='propertyEditPage'>
-      <Form initialValues={property} onSubmit={editSubmit} loading={loading} submitError={error} />
+      {
+        property &&
+        <Form
+          initialValues={property}
+          onSubmit={editSubmit}
+          loading={loading}
+          submitError={error} />
+      }
     </div>
   )
 }
