@@ -1,6 +1,6 @@
-export const CREATE_BEGIN = 'CREATE_BEGIN'
-export const CREATE_SUCCESS = 'CREATE_SUCCESS'
-export const CREATE_FAILURE = 'CREATE_FAILURE'
+export const CREATE_BEGIN = 'PROPERTY_CREATE_BEGIN'
+export const CREATE_SUCCESS = 'PROPERTY_CREATE_SUCCESS'
+export const CREATE_FAILURE = 'PROPERTY_CREATE_FAILURE'
 
 export const createBegin = () => ({
   type: CREATE_BEGIN
@@ -16,9 +16,9 @@ export const createFailure = error => ({
   payload: { error }
 })
 
-export const EDIT_BEGIN = 'EDIT_BEGIN'
-export const EDIT_SUCCESS = 'EDIT_SUCCESS'
-export const EDIT_FAILURE = 'EDIT_FAILURE'
+export const EDIT_BEGIN = 'PROPERTY_EDIT_BEGIN'
+export const EDIT_SUCCESS = 'PROPERTY_EDIT_SUCCESS'
+export const EDIT_FAILURE = 'PROPERTY_EDIT_FAILURE'
 
 export const editBegin = () => ({
   type: EDIT_BEGIN
@@ -34,9 +34,9 @@ export const editFailure = error => ({
   payload: { error }
 })
 
-export const GET_BEGIN = 'GET_BEGIN'
-export const GET_SUCCESS = 'GET_SUCCESS'
-export const GET_FAILURE = 'GET_FAILURE'
+export const GET_BEGIN = 'PROPERTY_GET_BEGIN'
+export const GET_SUCCESS = 'PROPERTY_GET_SUCCESS'
+export const GET_FAILURE = 'PROPERTY_GET_FAILURE'
 
 export const getBegin = () => ({
   type: GET_BEGIN
@@ -52,9 +52,9 @@ export const getFailure = error => ({
   payload: { error }
 })
 
-export const REMOVE_BEGIN = 'REMOVE_BEGIN'
-export const REMOVE_SUCCESS = 'REMOVE_SUCCESS'
-export const REMOVE_FAILURE = 'REMOVE_FAILURE'
+export const REMOVE_BEGIN = 'PROPERTY_REMOVE_BEGIN'
+export const REMOVE_SUCCESS = 'PROPERTY_REMOVE_SUCCESS'
+export const REMOVE_FAILURE = 'PROPERTY_REMOVE_FAILURE'
 
 export const removeBegin = () => ({
   type: REMOVE_BEGIN

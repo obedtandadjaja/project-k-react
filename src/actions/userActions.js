@@ -1,6 +1,6 @@
-export const CREATE_BEGIN = 'CREATE_BEGIN'
-export const CREATE_SUCCESS = 'CREATE_SUCCESS'
-export const CREATE_FAILURE = 'CREATE_FAILURE'
+export const CREATE_BEGIN = 'USER_CREATE_BEGIN'
+export const CREATE_SUCCESS = 'USER_CREATE_SUCCESS'
+export const CREATE_FAILURE = 'USER_CREATE_FAILURE'
 
 export const createBegin = () => ({
   type: CREATE_BEGIN
@@ -16,9 +16,9 @@ export const createFailure = error => ({
   payload: { error }
 })
 
-export const EDIT_BEGIN = 'EDIT_BEGIN'
-export const EDIT_SUCCESS = 'EDIT_SUCCESS'
-export const EDIT_FAILURE = 'EDIT_FAILURE'
+export const EDIT_BEGIN = 'USER_EDIT_BEGIN'
+export const EDIT_SUCCESS = 'USER_EDIT_SUCCESS'
+export const EDIT_FAILURE = 'USER_EDIT_FAILURE'
 
 export const editBegin = () => ({
   type: EDIT_BEGIN
@@ -34,9 +34,9 @@ export const editFailure = error => ({
   payload: { error }
 })
 
-export const GET_BEGIN = 'GET_BEGIN'
-export const GET_SUCCESS = 'GET_SUCCESS'
-export const GET_FAILURE = 'GET_FAILURE'
+export const GET_BEGIN = 'USER_GET_BEGIN'
+export const GET_SUCCESS = 'USER_GET_SUCCESS'
+export const GET_FAILURE = 'USER_GET_FAILURE'
 
 export const getBegin = () => ({
   type: GET_BEGIN
@@ -52,9 +52,9 @@ export const getFailure = error => ({
   payload: { error }
 })
 
-export const REMOVE_BEGIN = 'REMOVE_BEGIN'
-export const REMOVE_SUCCESS = 'REMOVE_SUCCESS'
-export const REMOVE_FAILURE = 'REMOVE_FAILURE'
+export const REMOVE_BEGIN = 'USER_REMOVE_BEGIN'
+export const REMOVE_SUCCESS = 'USER_REMOVE_SUCCESS'
+export const REMOVE_FAILURE = 'USER_REMOVE_FAILURE'
 
 export const removeBegin = () => ({
   type: REMOVE_BEGIN
