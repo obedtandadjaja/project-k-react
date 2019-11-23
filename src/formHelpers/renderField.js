@@ -15,7 +15,7 @@ const renderField = ({
     <div>
       <input
         {...input}
-        placeholder={ !readonly && label }
+        placeholder={ !readonly ? label : '' }
         type={type}
         disabled={readonly} />
       {touched &&

@@ -11,7 +11,10 @@ const renderSelectField = ({
   <div className='formFieldWrapper'>
     { label && <label htmlFor={input.name}>{label}</label> }
     <div>
-      <select {...input} disabled={readonly} value={!defaultEmpty && options[0][0]}>
+      <select
+        {...input}
+        disabled={readonly}
+        defaultValue={!defaultEmpty && options[0][0]}>
         { defaultEmpty && <option /> }
         {
           options.map((option, i) => (
