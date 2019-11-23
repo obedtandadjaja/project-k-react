@@ -6,9 +6,10 @@ import Form from './../../components/properties/form'
 import { create } from './../../api/properties'
 
 function PropertyCreatePage(props) {
-  const { loading, error, property, create } = props
+  const { loading, error, property, create, currentUserID } = props
 
   const createSubmit = (values) => {
+    values = { ...values, users: [{ id: currentUserID }]}
     console.log(values)
     create(values)
   }
@@ -36,6 +37,7 @@ const mapStateToProps = state => ({
   loading: state.property.getIn(['createLoading']),
   error: state.property.getIn(['createError']),
   property: state.property.getIn(['property']),
+  currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   create

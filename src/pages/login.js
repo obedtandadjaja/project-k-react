@@ -1,11 +1,16 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { useHistory, useLocation } from 'react-router'
 
 import { login } from './../api/login'
 import Form from './../components/login/form'
 
 function LoginPage(props) {
+  let history = useHistory();
+  let location = useLocation();
+  let { from } = location.state || { from: { pathname: '/' } }
+
   const { login, loading, error, currentUserID } = props
   const loginSubmit = (values) => {
     login(values)
@@ -13,9 +18,9 @@ function LoginPage(props) {
 
   useEffect(() => {
     if (currentUserID) {
-      props.history.push('/')
+      history.replace({ pathname: '/' })
     }
-  }, [props.history, currentUserID])
+  }, [history, currentUserID, from])
 
   return (
     <div className='loginPage page'>

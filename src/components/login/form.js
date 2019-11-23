@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
 
 import { required, email } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
@@ -33,6 +34,12 @@ function LoginForm(props) {
           <button type='submit' disabled={loading}>
             Login
           </button>
+
+          <Link className='link' to={{ pathname: '/signup' }}>
+            <button>
+              New to Project K? Create an account
+            </button>
+          </Link>
         </div>
       </div>
     </form>

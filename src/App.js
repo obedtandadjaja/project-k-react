@@ -6,6 +6,7 @@ import Header from './components/header'
 import HomePage from './pages/home'
 import LoginPage from './pages/login'
 import SignupPage from './pages/signup'
+import MissingPage from './pages/missing'
 import UserGetPage from './pages/users/get'
 import UserEditPage from './pages/users/edit'
 import UserCreatePage from './pages/users/create'
@@ -24,9 +25,11 @@ function App(props) {
         <Header currentUserID={currentUserID} />
         <div className='AppBody'>
           <Switch>
+            <Route exact path='/signup' component={SignupPage} />
+            <Route exact path='/login' component={LoginPage} />
             {
               currentUserID &&
-              <>
+              <Switch>
                 <Route exact path='/' component={HomePage} />
                 <Route exact path='/users/create' component={UserCreatePage} />
                 <Route exact path='/users/:userID' component={UserGetPage} />
@@ -34,10 +37,9 @@ function App(props) {
                 <Route exact path='/properties/create' component={PropertyCreatePage} />
                 <Route exact path='/properties/:propertyID' component={PropertyGetPage} />
                 <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />
-              </>
+                <Route component={MissingPage} />
+              </Switch>
             }
-            <Route exact path='/signup' component={SignupPage} />
-            <Route path='/' component={LoginPage} />
           </Switch>
         </div>
       </BrowserRouter>

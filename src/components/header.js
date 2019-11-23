@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import { logout } from './../actions/authActions'
 import './header.css'
@@ -26,7 +27,7 @@ function Header(props) {
 
   const submitLogout = () => {
     props.dispatch(logout())
-    props.history.push('/login')
+    window.location = '/login'
   }
 
   return (
@@ -57,4 +58,4 @@ function Header(props) {
   )
 }
 
-export default Header
+export default connect(null, null)(Header)

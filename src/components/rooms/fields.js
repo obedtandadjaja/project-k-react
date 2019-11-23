@@ -38,7 +38,7 @@ function RoomFields(prefix, readonly) {
         label='Price' />
 
       <FieldArray
-        name={prefix ? `${prefix}.facilities` : 'facilities'}
+        name={prefix ? `${prefix}.data.facilities` : 'data.facilities'}
         buttonText='Add facility'
         entityText='Facility'
         readonly={readonly}

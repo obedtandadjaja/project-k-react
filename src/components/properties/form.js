@@ -79,7 +79,7 @@ function PropertyForm(props) {
         </div>
         <div className="blockBody">
           <FieldArray
-            name='sharedFacilities'
+            name='data.sharedFacilities'
             buttonText='Add shared facility'
             entityText='Shared facility'
             readonly={readonly}

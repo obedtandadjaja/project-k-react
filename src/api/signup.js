@@ -12,7 +12,7 @@ export function signup({ email, password }) {
     dispatch(signupBegin)
 
     return axios.post(
-      `${BASE_URL}/api/v1/users/signup`,
+      `${BASE_URL}/api/v1/signup`,
       { email, password}
     ).then(
       res => dispatch(signupSuccess(res.data)),
