@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { logout } from './../actions/authActions'
 import './header.css'
 
 function Header(props) {
@@ -10,7 +11,7 @@ function Header(props) {
       {
         url: `/users/${currentUser.id}`,
         text: 'Account'
-      }
+      },
     ] :
     [
       {
@@ -23,6 +24,11 @@ function Header(props) {
       }
     ]
 
+  const submitLogout = () => {
+    props.dispatch(logout())
+    props.history.push('/login')
+  }
+
   return (
     <header>
       <div className='header'>
@@ -34,11 +40,14 @@ function Header(props) {
         <div className='linksContainer'>
           {
             userLinks.map((link, i) => (
-              <Link key={i} to={{ path: link.url }}>
+              <Link key={i} to={{ pathname: link.url }}>
                 { link.text }
               </Link>
             ))
           }
+          <a key='logout' onClick={submitLogout} href='#'>
+            Logout
+          </a>
         </div>
       </div>
     </header>

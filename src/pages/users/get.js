@@ -8,12 +8,19 @@ import { get } from './../../api/users'
 function UserGetPage(props) {
   const { loading, error, user, get } = props
 
+  const redirectEditPage = () => {
+    props.history.push(`/users/${user.id}/edit`)
+  }
+
   useEffect(() => {
     get(props.match.params.userID)
   }, [])
 
   return (
     <div className='userGetPage'>
+      <button className='link' onClick={redirectEditPage}>
+        Edit user
+      </button>
       <Form
         initialValues={user}
         loading={loading}

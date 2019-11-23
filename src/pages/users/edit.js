@@ -7,7 +7,6 @@ import { edit, get } from './../../api/users'
 
 function UserEditPage(props) {
   const { loading, error, edit, get, user } = props
-
   const [submitted, setSubmitted] = useState(false)
   const editSubmit = (values) => {
     setSubmitted(true)
@@ -23,6 +22,8 @@ function UserEditPage(props) {
     }
   })
 
+  console.log(user)
+
   return (
     <div className='userEditPage'>
       <Form
@@ -30,7 +31,8 @@ function UserEditPage(props) {
         onSubmit={editSubmit}
         loading={loading}
         submitError={error}
-        title='Edit user' />
+        title='Edit user'
+        submitText='Edit user' />
     </div>
   )
 }

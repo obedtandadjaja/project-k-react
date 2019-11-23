@@ -55,8 +55,6 @@ export function get(data) {
 
 export function getCurrentUser(userID) {
   return dispatch => {
-    dispatch(getBegin())
-
     return axios.get(`${BASE_URL}/api/v1/users/${userID}`).then(
       res => dispatch(getCurrentUserSuccess(res.data)),
       err => dispatch(getCurrentUserFailure(err))

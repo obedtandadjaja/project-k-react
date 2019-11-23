@@ -1,8 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
 
-import { requiredInputSelect } from './../formHelpers/validators'
-
 const renderField = ({
   input,
   label,

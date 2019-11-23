@@ -17,10 +17,11 @@ import './App.css'
 import './common.css'
 
 function App(props) {
-  const { userID, currentUser } = props
+  const { userID, currentUser, getCurrentUser } = props
+
   useEffect(() => {
-    userID && getCurrentUser(userID)
-  }, [userID])
+    getCurrentUser(userID)
+  }, [userID, getCurrentUser])
 
   return (
     <div className="App">
