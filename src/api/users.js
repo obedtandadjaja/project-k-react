@@ -42,11 +42,11 @@ export function edit(data) {
   }
 }
 
-export function get(data) {
+export function get(userID) {
   return dispatch => {
     dispatch(getBegin())
 
-    return axios.get(`${BASE_URL}/api/v1/users/${data}`).then(
+    return axios.get(`${BASE_URL}/api/v1/users/${userID}`).then(
       res => dispatch(getSuccess(res.data)),
       err => dispatch(getFailure(err))
     )

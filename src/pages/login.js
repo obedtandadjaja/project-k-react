@@ -6,16 +6,16 @@ import { login } from './../api/login'
 import Form from './../components/login/form'
 
 function LoginPage(props) {
-  const { login, loading, error, isAuthenticated } = props
+  const { login, loading, error, currentUserID } = props
   const loginSubmit = (values) => {
     login(values)
   }
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (currentUserID) {
       props.history.push('/')
     }
-  }, [props.history, isAuthenticated])
+  }, [props.history, currentUserID])
 
   return (
     <div className='loginPage page'>
@@ -26,7 +26,7 @@ function LoginPage(props) {
 
 const mapStateToProps = state => ({
   loading: state.auth.getIn(['loading']),
-  isAuthenticated: state.auth.getIn(['isAuthenticated']),
+  currentUserID: state.auth.getIn(['currentUserID']),
   error: state.auth.getIn(['error']),
 })
 

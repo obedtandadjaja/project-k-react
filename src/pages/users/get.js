@@ -14,19 +14,22 @@ function UserGetPage(props) {
 
   useEffect(() => {
     get(props.match.params.userID)
-  }, [])
+  }, [get, props.match.params.userID])
 
   return (
     <div className='userGetPage'>
       <button className='link' onClick={redirectEditPage}>
         Edit user
       </button>
-      <Form
-        initialValues={user}
-        loading={loading}
-        submitError={error}
-        title='User information'
-        readonly />
+      {
+        user &&
+        <Form
+          initialValues={user}
+          loading={loading}
+          submitError={error}
+          title='User information'
+          readonly />
+      }
     </div>
   )
 }
@@ -37,7 +40,7 @@ const mapStateToProps = state => ({
   user: state.user.getIn(['user']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  get
+  get,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserGetPage)

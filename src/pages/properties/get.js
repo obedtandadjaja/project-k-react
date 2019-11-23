@@ -10,11 +10,11 @@ function PropertyGetPage(props) {
 
   useEffect(() => {
     get(props.match.params.propertyID)
-  }, [])
+  }, [get, props.match.params.propertyID])
 
   return (
     <div className='propertyGetPage'>
-      <Form initialValues={property} loading={loading} readonly />
+      <Form initialValues={property} loading={loading} error={error} readonly />
     </div>
   )
 }

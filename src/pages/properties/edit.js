@@ -6,15 +6,14 @@ import Form from './../../components/properties/form'
 import { edit, get } from './../../api/properties'
 
 function PropertyEditPage(props) {
-  const { loading, error, property, edit } = props
-
+  const { loading, error, property, edit, get } = props
   const [submitted, setSubmitted] = useState(false)
   const editSubmit = (values) => {
     setSubmitted(true)
     edit(values)
   }
 
-  useEffect(() => { get(props.match.params.propertyID) }, [])
+  useEffect(() => { get(props.match.params.propertyID) }, [get, props.match.params.propertyID])
 
   useEffect(() => {
     if (!loading || !error) {
@@ -36,7 +35,8 @@ const mapStateToProps = state => ({
   property: state.property.getIn(['property']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  edit
+  edit,
+  get,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(PropertyEditPage)

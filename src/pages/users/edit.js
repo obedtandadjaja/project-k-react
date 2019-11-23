@@ -13,7 +13,7 @@ function UserEditPage(props) {
     edit(values)
   }
 
-  useEffect(() => { get(props.match.params.userID) }, [])
+  useEffect(() => { get(props.match.params.userID) }, [get, props.match.params.userID])
 
   useEffect(() => {
     if (!loading || !error) {
@@ -22,17 +22,18 @@ function UserEditPage(props) {
     }
   })
 
-  console.log(user)
-
   return (
     <div className='userEditPage'>
-      <Form
-        initialValues={user}
-        onSubmit={editSubmit}
-        loading={loading}
-        submitError={error}
-        title='Edit user'
-        submitText='Edit user' />
+      {
+        user &&
+        <Form
+          initialValues={user}
+          onSubmit={editSubmit}
+          loading={loading}
+          submitError={error}
+          title='Edit user'
+          submitText='Edit user' />
+      }
     </div>
   )
 }

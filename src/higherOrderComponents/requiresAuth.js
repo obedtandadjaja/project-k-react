@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 const RequiresAuth = (Component) => (props) => {
-  const { isAuthenticated, ...rest } = props
+  const { currentUserID, ...rest } = props
 
   function checkAndRedirect() {
-    if (!isAuthenticated) {
+    if (!currentUserID) {
       window.location = '/login'
     }
   }
@@ -16,7 +16,7 @@ const RequiresAuth = (Component) => (props) => {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.getIn(['isAuthenticated'])
+  currentUserID: state.auth.getIn(['currentUserID'])
 })
 
 export default compose(connect(mapStateToProps, null), RequiresAuth)

@@ -12,10 +12,9 @@ import {
 } from './../actions/authActions'
 
 const initialState = Map({
-  isAuthenticated: Boolean(localStorage.getItem('refreshToken')),
   accessToken: localStorage.getItem('accessToken'),
   refreshToken: localStorage.getItem('refreshToken'),
-  userID: localStorage.getItem('userID'),
+  getCurrentUserID: localStorage.getItem('userID'),
   currentUser: null,
   loading: false,
   error: null,
@@ -37,16 +36,13 @@ export default function authReducer(state=initialState, action) {
       loading: false,
       accessToken: action.payload.jwt,
       refreshToken: action.payload.session,
-      userID: action.payload.user.id,
-      currentUser: action.payload.user,
-      isAuthenticated: Boolean(action.payload.session),
+      currentUserID: action.payload.user.id,
     })
 
   case LOGIN_FAILURE:
     return state.merge({
       loading: false,
       error: action.payload.error.response,
-      isAuthenticated: false,
     })
 
   case SIGNUP_BEGIN:
@@ -57,7 +53,6 @@ export default function authReducer(state=initialState, action) {
   case SIGNUP_SUCCESS:
     return state.merge({
       loading: false,
-      isAuthenticated: Boolean(action.payload.session),
       accessToken: action.payload.jwt,
       refreshToken: action.payload.session,
     })
@@ -88,9 +83,7 @@ export default function authReducer(state=initialState, action) {
       loading: false,
       accessToken: null,
       refreshToken: null,
-      userID: null,
-      currentUser: null,
-      isAuthenticated: false,
+      currentUserID: null,
     })
 
   default:

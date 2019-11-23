@@ -6,7 +6,7 @@ import { signup } from './../api/signup'
 import Form from './../components/signup/form'
 
 function SignupPage(props) {
-  const { signup, loading, error, isAuthenticated } = props
+  const { signup, loading, error } = props
   const [submitted, setSubmitted] = useState(false)
 
   const signupSubmit = (values) => {
@@ -19,7 +19,7 @@ function SignupPage(props) {
       submitted &&
         props.history.push('/login')
     }
-  }, [props.history, isAuthenticated, loading, error, submitted])
+  }, [props.history, loading, error, submitted])
 
   return (
     <div className='signupPage'>
@@ -30,7 +30,6 @@ function SignupPage(props) {
 
 const mapStateToProps = state => ({
   loading: state.auth.getIn(['loading']),
-  isAuthenticated: state.auth.getIn(['isAuthenticated']),
   error: state.auth.getIn(['error']),
 })
 
