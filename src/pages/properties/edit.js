@@ -6,7 +6,7 @@ import Form from './../../components/properties/form'
 import { edit, get } from './../../api/properties'
 
 function PropertyEditPage(props) {
-  const { loading, error, property, edit, get } = props
+  const { getLoading, loading, error, property, edit, get } = props
   const [submitted, setSubmitted] = useState(false)
   const editSubmit = (values) => {
     setSubmitted(true)
@@ -25,6 +25,7 @@ function PropertyEditPage(props) {
   return (
     <div className='propertyEditPage'>
       {
+        !getLoading &&
         property &&
         <Form
           initialValues={property}
@@ -40,6 +41,7 @@ function PropertyEditPage(props) {
 
 const mapStateToProps = state => ({
   loading: state.property.getIn(['editLoading']),
+  getLoading: state.property.getIn(['getLoading']),
   error: state.property.getIn(['editError']),
   property: state.property.getIn(['property']),
 })

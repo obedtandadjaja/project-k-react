@@ -22,6 +22,7 @@ function UserGetPage(props) {
         Edit user
       </button>
       {
+        !loading &&
         user &&
         <Form
           initialValues={user}

@@ -13,6 +13,8 @@ import EmergencyContactFields from './emergencyContactFields'
 function UserForm(props) {
   const { handleSubmit, occupation, loading, submitError, readonly, title } = props
 
+  console.log('called')
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="blockCard">
@@ -167,12 +169,14 @@ function UserForm(props) {
 }
 
 let userForm = reduxForm({
-  form: 'user'
+  form: 'user',
+  enabledReinitialize: true,
 })(UserForm)
 
 const selector = formValueSelector('user')
-userForm = connect(state => ({
+userForm = connect((state, ownProps) => ({
   occupation: selector(state, 'data.occupation'),
+  initialValues: ownProps.initialValues,
 }))(userForm)
 
 export default userForm

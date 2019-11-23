@@ -15,6 +15,7 @@ function PropertyGetPage(props) {
   return (
     <div className='propertyGetPage'>
       {
+        !loading &&
         property &&
         <Form
           initialValues={property}

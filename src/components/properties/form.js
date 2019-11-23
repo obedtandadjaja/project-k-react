@@ -92,7 +92,8 @@ function PropertyForm(props) {
 }
 
 let propertyForm = reduxForm({
-  form: 'property'
+  form: 'property',
+  enabledReinitialize: true,
 })(PropertyForm)
 
 export default propertyForm

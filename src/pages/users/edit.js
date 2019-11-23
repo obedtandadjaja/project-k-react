@@ -6,7 +6,7 @@ import Form from './../../components/users/form'
 import { edit, get } from './../../api/users'
 
 function UserEditPage(props) {
-  const { loading, error, edit, get, user } = props
+  const { getLoading, loading, error, edit, get, user } = props
   const [submitted, setSubmitted] = useState(false)
   const editSubmit = (values) => {
     setSubmitted(true)
@@ -25,6 +25,7 @@ function UserEditPage(props) {
   return (
     <div className='userEditPage'>
       {
+        !getLoading &&
         user &&
         <Form
           initialValues={user}
@@ -40,6 +41,7 @@ function UserEditPage(props) {
 
 const mapStateToProps = state => ({
   loading: state.user.getIn(['createLoading']),
+  getLoading: state.user.getIn(['getLoading']),
   error: state.user.getIn(['createError']),
   user: state.user.getIn(['user']),
 })
