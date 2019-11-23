@@ -23,7 +23,7 @@ function UserCreatePage(props) {
     <div className='userCreatePage'>
       <Form
         onSubmit={createSubmit}
-        submitting={loading}
+        loading={loading}
         submitError={error}
         title='Create user' />
     </div>

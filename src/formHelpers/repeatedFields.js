@@ -9,13 +9,18 @@ const renderRepeatedFields = ({
   meta: { touched, error }
 }) => (
   <div>
+    {
+      readonly &&
+      fields.length === 0 &&
+      `No ${entityText}`
+    }
     <ul className='undecorated'>
       {fields.map((field, index) =>
         <li key={index} className='fieldGroup'>
           {
             !readonly &&
             <button
-              className='repeatedFieldsRemove'
+              className='repeatedFieldsRemove link error'
               type='button'
               onClick={() => fields.remove(index)}>
               Remove
@@ -28,7 +33,12 @@ const renderRepeatedFields = ({
       {
         !readonly &&
         <li>
-          <button type='button' onClick={() => fields.push({})}>{buttonText}</button>
+          <button
+            className='link'
+            type='button'
+            onClick={() => fields.push({})}>
+            { buttonText }
+          </button>
           {touched && error && <span>{error}</span>}
         </li>
       }

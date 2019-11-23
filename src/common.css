@@ -2,6 +2,14 @@
     visibility: hidden;
 }
 
+.error {
+    color: red;
+}
+
+p {
+    margin: 2px 0px;
+}
+
 a {
     color: rgb(0,0,0);
     text-decoration: none;
@@ -14,8 +22,8 @@ ul {
 
 button.repeatedFieldsRemove {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0px;
+    right: 0px;
 }
 
 ul.undecorated {
@@ -32,25 +40,37 @@ li.fieldGroup {
 }
 
 form {
-    display: inline-block;
-    background-color: white;
+    display: flex;
+    justify-content: center;
 }
 
 form h1, h4 {
     margin: 0 0 15px 0;
 }
 
+form .blockCard {
+    min-width: 400px;
+    margin-left: 20px;
+}
+
+form .blockCard:first-child {
+    margin-left: 0;
+}
+
 form .blockHeader {
     background-color: #f6f7f9;
     padding: 14px 20px;
     transition: opacity .2s ease-out;
+    font-weight: 700;
+    font-size: 16px;
 }
 
 form .blockBody {
     padding: 14px 20px 20px 20px;
+    background-color: white;
 }
 
-form button {
+button {
     display: inline-block;
     font-weight: 600;
     color: #575757;
@@ -62,11 +82,17 @@ form button {
     user-select: none;
     background-color: transparent;
     border: 1px solid transparent;
-    padding: .571429rem 1rem;
+    padding: 10px 20px;
     font-size: 1rem;
     line-height: 16px;
     border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    cursor: pointer;
+}
+
+button.link {
+    padding: 0;
+    color: #3498db;
 }
 
 form button[type=submit] {
@@ -108,7 +134,7 @@ form button[type=submit]:hover {
 }
 
 .formFieldWrapper input[disabled] {
-    background-color: white;
+    background-color: #f3f3f3;
     border: none;
     cursor: default;
 }
@@ -120,12 +146,4 @@ form button[type=submit]:hover {
     border-radius: 5px;
     background-color: white;
     margin-bottom: 5px;
-}
-
-p {
-    margin: 2px 0px;
-}
-
-p.error {
-    color: red;
 }

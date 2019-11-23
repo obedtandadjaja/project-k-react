@@ -16,7 +16,6 @@ html, body, #root {
     flex-flow: column;
 
     min-width: 1000px;
-    max-width: 1000px;
 }
 
 header {
