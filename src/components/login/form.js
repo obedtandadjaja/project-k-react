@@ -9,8 +9,8 @@ function LoginForm(props) {
 
   return (
     <form onSubmit={handleSubmit} >
-      <div className="blockCard">
-        <div class='blockBody'>
+      <div className='blockCard'>
+        <div className='blockBody'>
           <h1>Login</h1>
           <Field
             name='email'

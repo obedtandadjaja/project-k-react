@@ -14,7 +14,7 @@ import {
 const initialState = Map({
   accessToken: localStorage.getItem('accessToken'),
   refreshToken: localStorage.getItem('refreshToken'),
-  getCurrentUserID: localStorage.getItem('userID'),
+  currentUserID: localStorage.getItem('userID'),
   currentUser: null,
   loading: false,
   error: null,
