@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { formValueSelector } from 'redux-form'
 
-import { required, email, phone } from './../../formHelpers/validators'
+import { required, requiredInputSelect, email, phone } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 import renderSelectField from './../../formHelpers/renderSelectField'
 import renderInputSelectField from './../../formHelpers/renderInputSelectField'
@@ -85,7 +85,7 @@ function UserForm(props) {
             component={renderInputSelectField}
             readonly={readonly}
             inputType='text'
-            validate={[required]}
+            validate={[requiredInputSelect]}
             options={[
               ['KTP ID/NIK', 'KTP ID/NIK'],
               ['KITAS ID', 'KITAS ID'],

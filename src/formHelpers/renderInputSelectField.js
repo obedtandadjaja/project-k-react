@@ -1,4 +1,7 @@
 import React from 'react'
+import { Field } from 'redux-form'
+
+import { requiredInputSelect } from './../formHelpers/validators'
 
 const renderField = ({
   input,
@@ -15,9 +18,10 @@ const renderField = ({
       <label htmlFor={input.name}>{label}</label>
     }
     <div>
-      <select
-        name={input.name + 'Type'}
+      <Field
+        name={input.name + '.type'}
         disabled={readonly}
+        component='select'
         defaultValue={!defaultEmpty && options[0][0]}>
         { defaultEmpty && <option /> }
         {
@@ -27,11 +31,12 @@ const renderField = ({
             </option>
           ))
         }
-      </select>
-      <input
-        name={input.name + 'Value'}
+      </Field>
+      <Field
+        name={input.name + '.value'}
         type={inputType}
-        disabled={readonly} />
+        disabled={readonly}
+        component='input' />
       {touched &&
        ((error && <p className='error'>{error}</p>) ||
         (warning && <p className='warn'>{warning}</p>))}
