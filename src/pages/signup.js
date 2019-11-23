@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { useHistory, useLocation } from 'react-router'
 
 import { signup } from './../api/signup'
 import Form from './../components/signup/form'
 
 function SignupPage(props) {
-  const { signup, loading, error } = props
-  const [submitted, setSubmitted] = useState(false)
+  let history = useHistory();
+  let location = useLocation();
+  let { from } = location.state || { from: { pathname: '/' } }
 
+  const { signup, loading, error, currentUserID } = props
   const signupSubmit = (values) => {
-    setSubmitted(true)
     signup(values)
   }
 
   useEffect(() => {
-    if (!loading && !error) {
-      submitted &&
-        props.history.push('/login')
+    if (currentUserID) {
+      history.replace({ pathname: '/' })
     }
-  }, [props.history, loading, error, submitted])
+  }, [history, currentUserID, from])
 
   return (
     <div className='signupPage'>
@@ -30,6 +31,7 @@ function SignupPage(props) {
 
 const mapStateToProps = state => ({
   loading: state.auth.getIn(['loading']),
+  currentUserID: state.auth.getIn(['currentUserID']),
   error: state.auth.getIn(['error']),
 })
 
