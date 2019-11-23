@@ -13,8 +13,6 @@ import EmergencyContactFields from './emergencyContactFields'
 function UserForm(props) {
   const { handleSubmit, occupation, loading, submitError, readonly, title } = props
 
-  console.log('called')
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="blockCard">

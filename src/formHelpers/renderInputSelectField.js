@@ -20,7 +20,7 @@ const renderField = ({
         name={input.name + '.type'}
         disabled={readonly}
         component='select'
-        defaultValue={!defaultEmpty && options[0][0]}>
+        value={input.value ? input.value : (!defaultEmpty ? options[0][0] : '')}>
         { defaultEmpty && <option /> }
         {
           options.map((option, i) => (
