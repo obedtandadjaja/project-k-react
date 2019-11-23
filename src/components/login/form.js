@@ -9,28 +9,32 @@ function LoginForm(props) {
 
   return (
     <form onSubmit={handleSubmit} >
-      <h1>Login</h1>
-      <Field
-        name='email'
-        label='Email'
-        component={renderField}
-        validate={[required, email]}
-        type='text' />
+      <div className="blockCard">
+        <div class='blockBody'>
+          <h1>Login</h1>
+          <Field
+            name='email'
+            label='Email'
+            component={renderField}
+            validate={[required, email]}
+            type='text' />
 
-      <Field
-        name='password'
-        label='Password'
-        component={renderField}
-        validate={[required]}
-        type='password' />
+          <Field
+            name='password'
+            label='Password'
+            component={renderField}
+            validate={[required]}
+            type='password' />
 
-      <div className='errorResponse'>
-        { submitError && submitError.status === 401 && 'Invalid credentials' }
+          <div className='errorResponse'>
+            { submitError && submitError.status === 401 && 'Invalid credentials' }
+          </div>
+
+          <button type='submit' disabled={loading}>
+            Login
+          </button>
+        </div>
       </div>
-
-      <button type='submit' disabled={loading}>
-        Login
-      </button>
     </form>
   )
 }

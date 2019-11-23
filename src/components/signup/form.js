@@ -9,24 +9,28 @@ function SignupForm(props) {
 
   return (
     <form onSubmit={handleSubmit} >
-      <h1>Signup</h1>
-      <Field
-        name='email'
-        label='Email'
-        component={renderField}
-        validate={[required, email]}
-        type='text' />
+      <div className="blockCard">
+        <div className="blockBody">
+          <h1>Signup</h1>
+          <Field
+            name='email'
+            label='Email'
+            component={renderField}
+            validate={[required, email]}
+            type='text' />
 
-      <Field
-        name='password'
-        label='Password'
-        component={renderField}
-        validate={[required]}
-        type='password' />
+          <Field
+            name='password'
+            label='Password'
+            component={renderField}
+            validate={[required]}
+            type='password' />
 
-      <button type='submit'>
-        Signup
-      </button>
+          <button type='submit'>
+            Signup
+          </button>
+        </div>
+      </div>
     </form>
   )
 }
