@@ -13,7 +13,11 @@ const renderField = ({
       <label htmlFor={input.name}>{label}</label>
     }
     <div>
-      <input {...input} placeholder={label} type={type} disabled={readonly} />
+      <input
+        {...input}
+        placeholder={ !readonly && label }
+        type={type}
+        disabled={readonly} />
       {touched &&
         ((error && <p className='error'>{error}</p>) ||
         (warning && <p className='warn'>{warning}</p>))}

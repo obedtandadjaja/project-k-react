@@ -49,6 +49,7 @@ function UserForm(props) {
             component={renderSelectField}
             label='Gender'
             readonly={readonly}
+            defaultEmpty
             options={[
               ['male', 'Male'],
               ['female', 'Female'],
@@ -59,6 +60,7 @@ function UserForm(props) {
             component={renderSelectField}
             label='Marriage status'
             readonly={readonly}
+            defaultEmpty
             options={[
               ['notMarried', 'Not Married'],
               ['married', 'Married'],
@@ -86,6 +88,7 @@ function UserForm(props) {
             readonly={readonly}
             inputType='text'
             validate={[requiredInputSelect]}
+            defaultEmpty
             options={[
               ['KTP ID/NIK', 'KTP ID/NIK'],
               ['KITAS ID', 'KITAS ID'],
@@ -97,6 +100,7 @@ function UserForm(props) {
             component={renderSelectField}
             label='Occupation'
             readonly={readonly}
+            defaultEmpty
             options={[
               ['student', 'Student'],
               ['professional', 'Professional'],
