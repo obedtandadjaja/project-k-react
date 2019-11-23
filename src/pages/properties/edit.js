@@ -18,7 +18,7 @@ function PropertyEditPage(props) {
   useEffect(() => {
     if (!loading || !error) {
       submitted &&
-        props.history.push(`/users/${props.match.params.userID}`)
+        props.history.push(`/properties/${props.match.params.propertyID}`)
     }
   })
 
@@ -30,7 +30,9 @@ function PropertyEditPage(props) {
           initialValues={property}
           onSubmit={editSubmit}
           loading={loading}
-          submitError={error} />
+          submitError={error}
+          title='Edit property'
+          buttonText='Edit property' />
       }
     </div>
   )

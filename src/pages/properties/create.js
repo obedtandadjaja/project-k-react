@@ -9,6 +9,7 @@ function PropertyCreatePage(props) {
   const { loading, error, property, create } = props
 
   const createSubmit = (values) => {
+    console.log(values)
     create(values)
   }
 
@@ -21,7 +22,12 @@ function PropertyCreatePage(props) {
 
   return (
     <div className='propertyCreatePage'>
-      <Form onSubmit={createSubmit} loading={loading} submitError={error} />
+      <Form
+        onSubmit={createSubmit}
+        loading={loading}
+        submitError={error}
+        title='Create property'
+        buttonText='Create property' />
     </div>
   )
 }

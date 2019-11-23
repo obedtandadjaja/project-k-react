@@ -16,7 +16,12 @@ function PropertyGetPage(props) {
     <div className='propertyGetPage'>
       {
         property &&
-        <Form initialValues={property} loading={loading} error={error} readonly />
+        <Form
+          initialValues={property}
+          loading={loading}
+          error={error}
+          title='Property'
+          readonly />
       }
     </div>
   )

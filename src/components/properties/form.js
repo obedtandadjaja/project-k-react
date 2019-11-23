@@ -9,13 +9,13 @@ import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
 
 function PropertyForm(props) {
-  const { handleSubmit, readonly, submitError, loading, buttonText } = props
+  const { handleSubmit, readonly, submitError, loading, title, buttonText } = props
 
   return (
     <form onSubmit={handleSubmit} >
       <div className="blockCard">
         <div className="blockHeader">
-          Add property
+          { title }
         </div>
         <div className="blockBody">
           <Field
@@ -53,7 +53,7 @@ function PropertyForm(props) {
           }
 
           <div className='errorResponse'>
-            { JSON.stringify(submitError) }
+            { submitError && JSON.stringify(submitError) }
           </div>
         </div>
       </div>

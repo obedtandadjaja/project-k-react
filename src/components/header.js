@@ -46,7 +46,7 @@ function Header(props) {
             ))
           }
           {
-            !currentUserID &&
+            currentUserID &&
             <a key='logout' onClick={submitLogout} href='#'>
               Logout
             </a>

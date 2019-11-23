@@ -31,6 +31,7 @@ function RoomFields(prefix, readonly) {
         ]} />
       <Field
         name={prefix ? `${prefix}.priceAmount` : 'priceAmount'}
+        parse={value => Number(value)}
         type='number'
         component={renderField}
         readonly={readonly}

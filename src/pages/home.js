@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom'
 function HomePage(props) {
   return (
     <div className='homePage'>
-      Content here
-
-      <br />
-      <Link to={{ pathname: '/' }}>
+      <Link to={{ pathname: '/properties/create' }}>
         Add a property
       </Link>
     </div>
