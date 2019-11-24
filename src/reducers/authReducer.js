@@ -1,4 +1,5 @@
 import { Map } from 'immutable'
+import API from './../api/client'
 import {
   LOGIN_BEGIN,
   LOGIN_SUCCESS,
@@ -6,21 +7,20 @@ import {
   SIGNUP_BEGIN,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  GET_CURRENT_USER_SUCCESS,
-  GET_CURRENT_USER_FAILURE,
   LOGOUT,
 } from './../actions/authActions'
 
 const initialState = Map({
   accessToken: localStorage.getItem('accessToken'),
-  refreshToken: localStorage.getItem('refreshToken'),
+  sessionToken: localStorage.getItem('sessionToken'),
   currentUserID: localStorage.getItem('userID'),
-  currentUser: null,
   loading: false,
   error: null,
 })
 
 export default function authReducer(state=initialState, action) {
+  console.log(action)
+
   switch (action.type) {
   case LOGIN_BEGIN:
     return state.merge({
@@ -28,21 +28,24 @@ export default function authReducer(state=initialState, action) {
     })
 
   case LOGIN_SUCCESS:
+    API.updateAccessToken(action.payload.jwt)
+    API.updateSessionToken(action.payload.session)
+
     localStorage.setItem('accessToken', action.payload.jwt)
-    localStorage.setItem('refreshToken', action.payload.session)
-    localStorage.setItem('userID', action.payload.user.id)
+    localStorage.setItem('sessionToken', action.payload.session)
+    localStorage.setItem('userID', action.payload.user_id)
 
     return state.merge({
       loading: false,
       accessToken: action.payload.jwt,
-      refreshToken: action.payload.session,
-      currentUserID: action.payload.user.id,
+      sessionToken: action.payload.session,
+      currentUserID: action.payload.user_id,
     })
 
   case LOGIN_FAILURE:
     return state.merge({
       loading: false,
-      error: action.payload.error.response,
+      error: action.payload.error,
     })
 
   case SIGNUP_BEGIN:
@@ -54,7 +57,7 @@ export default function authReducer(state=initialState, action) {
     return state.merge({
       loading: false,
       accessToken: action.payload.jwt,
-      refreshToken: action.payload.session,
+      sessionToken: action.payload.session,
     })
 
   case SIGNUP_FAILURE:
@@ -63,26 +66,18 @@ export default function authReducer(state=initialState, action) {
       error: action.payload.error.response
     })
 
-  case GET_CURRENT_USER_SUCCESS:
-    return state.merge({
-      currentUser: action.payload
-    })
-
-  case GET_CURRENT_USER_FAILURE:
-    return state.merge({
-      error: action.payload.error.response,
-      currentUser: null,
-    })
-
   case LOGOUT:
+    API.updateAccessToken(null)
+    API.updateSessionToken(null)
+
     localStorage.removeItem('accessToken')
-    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('sessionToken')
     localStorage.removeItem('userID')
 
     return state.merge({
       loading: false,
       accessToken: null,
-      refreshToken: null,
+      sessionToken: null,
       currentUserID: null,
     })
 

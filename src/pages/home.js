@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { all } from './../api/properties'
+import API from './../api/client'
 
 function HomePage(props) {
   const { currentUserID, properties, all } = props
