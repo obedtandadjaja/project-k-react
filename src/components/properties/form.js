@@ -88,11 +88,17 @@ function PropertyForm(props) {
                   <div className="card bordered">
                     <h4>{ room.name }</h4>
                     <p>Payment schedule: { room.paymentSchedule }</p>
-                    <p>Price: { room.price }</p>
+                    <p>Price: { room.priceAmount }</p>
                   </div>
                 </Link>
               ))
             }
+
+            <Link to={{ pathname: `/properties/${initialValues.id}/rooms/create` }}>
+              <button className='link'>
+                Add a room
+              </button>
+            </Link>
           </div>
         </div>
       }

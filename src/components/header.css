@@ -13,6 +13,11 @@
     background-color: #f0f2f5;
 }
 
+a.header {
+    color: rgb(0,0,0);
+    text-decoration: none;
+}
+
 h1.temporaryTitle {
     display: flex;
     white-space: nowrap;

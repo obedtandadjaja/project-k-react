@@ -5,10 +5,10 @@ import { bindActionCreators } from 'redux'
 import Form from './../../components/users/form'
 import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
-import { create } from './../../api/users'
+import { create } from './../../api/tenants'
 
-function UserCreatePage(props) {
-  const { loading, error, user, create, getProperty, getRoom, property, room, currentUserID } = props
+function TenantCreatePage(props) {
+  const { loading, error, tenant, create, getProperty, getRoom, property, room, currentUserID } = props
   const { propertyID, roomID } = props.match.params
 
   const createSubmit = (values) => {
@@ -22,13 +22,13 @@ function UserCreatePage(props) {
 
   useEffect(() => {
     if (!loading && !error) {
-      user &&
-        props.history.push(`/users/${user.id}`)
+      tenant &&
+        props.history.push(`/properties/${propertyID}/rooms/${roomID}/tenants/${tenant.id}`)
     }
-  }, [props.history, loading, error, user])
+  }, [props.history, loading, error, propertyID, roomID, tenant])
 
   return (
-    <div className='userCreatePage'>
+    <div className='tenantCreatePage'>
       {
         property &&
         <div className='card'>
@@ -58,11 +58,11 @@ function UserCreatePage(props) {
 }
 
 const mapStateToProps = state => ({
-  loading: state.user.getIn(['createLoading']),
-  error: state.user.getIn(['createError']),
+  loading: state.tenant.getIn(['createLoading']),
+  error: state.tenant.getIn(['createError']),
   property: state.property.getIn(['property']),
   room: state.room.getIn(['room']),
-  user: state.user.getIn(['user']),
+  tenant: state.tenant.getIn(['tenant']),
   currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -71,4 +71,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getRoom,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserCreatePage)
+export default connect(mapStateToProps, mapDispatchToProps)(TenantCreatePage)

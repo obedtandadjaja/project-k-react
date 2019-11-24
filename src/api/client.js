@@ -20,10 +20,12 @@ class APIClient {
     if (this.accessToken) {
       this.client.defaults.headers['Authorization'] = this.accessToken
     }
+
+    this.createRequestInterceptor()
   }
 
   createRequestInterceptor() {
-    const interceptor = axios.interceptors.request.use(
+    const interceptor = this.client.interceptors.request.use(
       config => {
         // if have access token but it has expired
         if (this.accessToken) {
@@ -33,28 +35,27 @@ class APIClient {
           }
         }
 
-        console.log('1')
-
         // if no access token and no session token then logout
         if (!this.sessionToken) {
           dispatch(logout())
           return false
         }
 
-        console.log('2')
-
         // eject the current interceptor, else it will go on infinite loop
-        axios.interceptors.response.eject(interceptor)
+        this.client.interceptors.request.eject(interceptor)
 
         // fetch access token
-        return axios.post('/api/v1/token', {
-          'session': this.sessionToken
+        return this.client.post('/api/v1/token', {
+          session: this.sessionToken
         }).then(res => {
-          this.accessToken = res.data.jwt
-          return config
+          this.updateAccessToken(res.data.jwt)
+          config.headers['Authorization'] = res.data.jwt
+          return Promise.resolve(config)
         }).catch(error => {
           dispatch(logout())
-        }).finally(APIClient.createRequestInterceptor)
+        }).finally(() => {
+          this.createRequestInterceptor()
+        })
       },
       error => {
         return Promise.reject(error)
@@ -64,15 +65,16 @@ class APIClient {
 
   updateSessionToken(sessionToken) {
     this.sessionToken = sessionToken
+    localStorage.setItem('sessionToken', sessionToken)
   }
 
   updateAccessToken(accessToken) {
     this.accessToken = accessToken
+    localStorage.setItem('accessToken', accessToken)
+
     if (this.accessToken) {
-      console.log('hello')
       this.client.defaults.headers['Authorization'] = accessToken
     } else {
-      console.log('deleted')
       delete this.client.defaults.headers['Authorization']
     }
   }

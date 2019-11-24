@@ -22,7 +22,7 @@ function RoomEditPage(props) {
   useEffect(() => {
     if (!loading && !error) {
       submitted &&
-        props.history.push(`properties/${props.match.params.propertyID}`)
+        props.history.push(`/properties/${props.match.params.propertyID}`)
     }
   })
 
