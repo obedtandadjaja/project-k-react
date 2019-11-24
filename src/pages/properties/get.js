@@ -6,11 +6,11 @@ import Form from './../../components/properties/form'
 import { get } from './../../api/properties'
 
 function PropertyGetPage(props) {
-  const { loading, error, property, get } = props
+  const { loading, error, property, get, currentUserID } = props
 
   useEffect(() => {
-    get(props.match.params.propertyID)
-  }, [get, props.match.params.propertyID])
+    get(currentUserID, props.match.params.propertyID)
+  }, [get, props.match.params.propertyID, currentUserID])
 
   return (
     <div className='propertyGetPage'>
@@ -32,6 +32,7 @@ const mapStateToProps = state => ({
   loading: state.property.getIn(['getLoading']),
   error: state.property.getIn(['getError']),
   property: state.property.getIn(['property']),
+  currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   get

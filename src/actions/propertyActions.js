@@ -52,6 +52,24 @@ export const getFailure = error => ({
   payload: { error }
 })
 
+export const ALL_BEGIN = 'PROPERTY_ALL_BEGIN'
+export const ALL_SUCCESS = 'PROPERTY_ALL_SUCCESS'
+export const ALL_FAILURE = 'PROPERTY_ALL_FAILURE'
+
+export const allBegin = () => ({
+  type: ALL_BEGIN
+})
+
+export const allSuccess = payload => ({
+  type: ALL_SUCCESS,
+  payload: payload
+})
+
+export const allFailure = error => ({
+  type: ALL_FAILURE,
+  payload: { error }
+})
+
 export const REMOVE_BEGIN = 'PROPERTY_REMOVE_BEGIN'
 export const REMOVE_SUCCESS = 'PROPERTY_REMOVE_SUCCESS'
 export const REMOVE_FAILURE = 'PROPERTY_REMOVE_FAILURE'

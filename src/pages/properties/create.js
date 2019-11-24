@@ -9,11 +9,8 @@ function PropertyCreatePage(props) {
   const { loading, error, property, create, currentUserID } = props
 
   const createSubmit = (values) => {
-    values = { ...values, users: [{ id: currentUserID }]}
-    create(values)
+    create(currentUserID, values)
   }
-
-  console.log(property)
 
   useEffect(() => {
     if (!loading || !error) {

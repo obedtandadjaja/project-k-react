@@ -9,6 +9,9 @@ import {
   GET_BEGIN,
   GET_SUCCESS,
   GET_FAILURE,
+  ALL_BEGIN,
+  ALL_SUCCESS,
+  ALL_FAILURE,
   REMOVE_BEGIN,
   REMOVE_SUCCESS,
   REMOVE_FAILURE,
@@ -16,6 +19,7 @@ import {
 
 const initialState = Map({
   property: null,
+  properties: [],
   createLoading: false,
   createError: false,
   editLoading: false,
@@ -74,6 +78,22 @@ export default function propertyReducer(state=initialState, action) {
   case GET_FAILURE:
     return state.merge({
       getLoading: false
+    })
+
+  case ALL_BEGIN:
+    return state.merge({
+      allLoading: true
+    })
+
+  case ALL_SUCCESS:
+    return state.merge({
+      allLoading: false,
+      properties: action.payload
+    })
+
+  case ALL_FAILURE:
+    return state.merge({
+      allLoading: false
     })
 
   case REMOVE_BEGIN:

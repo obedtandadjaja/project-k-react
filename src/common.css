@@ -147,3 +147,9 @@ form button[type=submit]:hover {
     background-color: white;
     margin-bottom: 5px;
 }
+
+.card {
+    padding: 20px;
+    background-color: white;
+    margin: 10px 0;
+}
