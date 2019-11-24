@@ -9,8 +9,9 @@ import SignupPage from './pages/signup'
 import MissingPage from './pages/missing'
 import UserGetPage from './pages/users/get'
 import UserEditPage from './pages/users/edit'
-import UserCreatePage from './pages/users/create'
+/* import UserCreatePage from './pages/users/create' */
 import RoomGetPage from './pages/rooms/get'
+import RoomEditPage from './pages/rooms/edit'
 import RoomCreatePage from './pages/rooms/create'
 import PropertyGetPage from './pages/properties/get'
 import PropertyEditPage from './pages/properties/edit'
@@ -33,7 +34,6 @@ function App(props) {
               currentUserID &&
               <Switch>
                 <Route exact path='/' component={HomePage} />
-                <Route exact path='/users/create' component={UserCreatePage} />
                 <Route exact path='/users/:userID' component={UserGetPage} />
                 <Route exact path='/users/:userID/edit' component={UserEditPage} />
                 <Route exact path='/properties/create' component={PropertyCreatePage} />
@@ -41,6 +41,7 @@ function App(props) {
                 <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />
                 <Route exact path='/properties/:propertyID/rooms/create' component={RoomCreatePage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID' component={RoomGetPage} />
+                <Route exact path='/properties/:propertyID/rooms/:roomID/edit' component={RoomEditPage} />
                 <Route component={MissingPage} />
               </Switch>
             }
