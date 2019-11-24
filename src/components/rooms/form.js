@@ -5,7 +5,7 @@ import RoomFields from './../rooms/fields'
 import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
 
-function PropertyForm(props) {
+function RoomForm(props) {
   const { handleSubmit, readonly, submitError, loading, title, buttonText } = props
 
   return (
@@ -48,9 +48,9 @@ function PropertyForm(props) {
   )
 }
 
-let propertyForm = reduxForm({
+let roomForm = reduxForm({
   form: 'room',
   enabledReinitialize: true,
-})(PropertyForm)
+})(RoomForm)
 
-export default propertyForm
+export default roomForm
