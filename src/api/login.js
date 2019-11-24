@@ -13,6 +13,6 @@ export function login({ email, password }) {
 
     return axios.post(`${BACKEND_BASE_URL}/api/v1/login`, { email, password })
       .then(res => dispatch(loginSuccess(res.data)))
-      .catch(err => dispatch(loginFailure(err)))
+      .catch(err => dispatch(loginFailure(err.response)))
   }
 }

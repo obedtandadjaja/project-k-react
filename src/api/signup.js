@@ -16,7 +16,7 @@ export function signup({ email, password }) {
       { email, password}
     ).then(
       res => dispatch(signupSuccess(res.data)),
-      err => dispatch(signupFailure(err))
+      err => dispatch(signupFailure(err.response))
     )
   }
 }

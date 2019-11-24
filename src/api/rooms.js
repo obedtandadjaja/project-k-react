@@ -25,7 +25,7 @@ export function create(userID, propertyID, data) {
 
     return axios.post(`${BASE_URL}/api/v1/users/${userID}/properties/${propertyID}/rooms`, data).then(
       res => dispatch(createSuccess(res.data)),
-      err => dispatch(createFailure(err))
+      err => dispatch(createFailure(err.response))
     )
   }
 }
@@ -36,7 +36,7 @@ export function edit(userID, propertyID, data) {
 
     return axios.put(`${BASE_URL}/api/v1/users/${userID}/properties/${propertyID}/rooms/${data.id}`, data).then(
       res => dispatch(editSuccess(res.data)),
-      err => dispatch(editFailure(err))
+      err => dispatch(editFailure(err.response))
     )
   }
 }
@@ -47,7 +47,7 @@ export function all(userID, propertyID, eager) {
 
     return axios.get(`${BASE_URL}/api/v1/users/${userID}/properties/${propertyID}/rooms${ eager ? '?eager=true' : ''}`).then(
       res => dispatch(allSuccess(res.data)),
-      err => dispatch(allFailure(err))
+      err => dispatch(allFailure(err.response))
     )
   }
 }
@@ -58,7 +58,7 @@ export function get(userID, propertyID, roomID) {
 
     return axios.get(`${BASE_URL}/api/v1/users/${userID}/properties/${propertyID}/rooms/${roomID}`).then(
       res => dispatch(getSuccess(res.data)),
-      err => dispatch(getFailure(err))
+      err => dispatch(getFailure(err.response))
     )
   }
 }
@@ -69,7 +69,7 @@ export function remove(userID, propertyID, roomID) {
 
     return axios.delete(`${BASE_URL}/api/v1/users/${userID}/properties/${propertyID}/rooms/${roomID}`).then(
       res => dispatch(removeSuccess(res.data)),
-      err => dispatch(removeFailure(err))
+      err => dispatch(removeFailure(err.response))
     )
   }
 }

@@ -12,8 +12,6 @@ function HomePage(props) {
     all(currentUserID, true)
   }, [all, currentUserID])
 
-  console.log(properties)
-
   return (
     <div className='homePage'>
       <div>
