@@ -3,16 +3,14 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { get } from './../api/users'
 import { all } from './../api/properties'
 
 function HomePage(props) {
-  const { loading, error, user, currentUserID, properties, get, all } = props
+  const { currentUserID, properties, all } = props
 
   useEffect(() => {
-    get(currentUserID)
-    all(currentUserID)
-  }, [get, all, currentUserID])
+    all(currentUserID, true)
+  }, [all, currentUserID])
 
   console.log(properties)
 
@@ -28,6 +26,7 @@ function HomePage(props) {
                 <h4>{ property.name }</h4>
                 <p>Type: { property.type }</p>
                 <p>Address: { property.address }</p>
+                <p>Number of rooms: { property.rooms.length }</p>
               </div>
             </Link>
           ))
@@ -41,14 +40,10 @@ function HomePage(props) {
 }
 
 const mapStateToProps = state => ({
-  loading: state.user.getIn(['getLoading']),
-  error: state.user.getIn(['getError']),
-  user: state.user.getIn(['user']),
   properties: state.property.getIn(['properties']),
   currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  get,
   all,
 }, dispatch)
 
