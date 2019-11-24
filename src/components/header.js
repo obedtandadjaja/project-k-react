@@ -10,7 +10,7 @@ function Header(props) {
   const userLinks = currentUserID ?
     [
       {
-        url: `/users/${currentUserID}`,
+        url: `/account`,
         text: 'Account'
       },
     ] :

@@ -7,8 +7,8 @@ import HomePage from './pages/home'
 import LoginPage from './pages/login'
 import SignupPage from './pages/signup'
 import MissingPage from './pages/missing'
-import UserGetPage from './pages/users/get'
-import UserEditPage from './pages/users/edit'
+import AccountGetPage from './pages/users/get'
+import AccountEditPage from './pages/users/edit'
 /* import UserCreatePage from './pages/users/create' */
 import RoomGetPage from './pages/rooms/get'
 import RoomEditPage from './pages/rooms/edit'
@@ -34,8 +34,8 @@ function App(props) {
               currentUserID &&
               <Switch>
                 <Route exact path='/' component={HomePage} />
-                <Route exact path='/users/:userID' component={UserGetPage} />
-                <Route exact path='/users/:userID/edit' component={UserEditPage} />
+                <Route exact path='/account' component={AccountGetPage} />
+                <Route exact path='/account/edit' component={AccountEditPage} />
                 <Route exact path='/properties/create' component={PropertyCreatePage} />
                 <Route exact path='/properties/:propertyID' component={PropertyGetPage} />
                 <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />

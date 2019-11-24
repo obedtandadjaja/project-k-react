@@ -5,15 +5,15 @@ import { bindActionCreators } from 'redux'
 import Form from './../../components/users/form'
 import { edit, get } from './../../api/users'
 
-function UserEditPage(props) {
-  const { getLoading, loading, error, edit, get, user } = props
+function AccountEditPage(props) {
+  const { getLoading, loading, error, edit, get, user, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)
   const editSubmit = (values) => {
     setSubmitted(true)
     edit(values)
   }
 
-  useEffect(() => { get(props.match.params.userID) }, [get, props.match.params.userID])
+  useEffect(() => { get(currentUserID) }, [get, currentUserID])
 
   useEffect(() => {
     if (!loading && !error) {
@@ -44,10 +44,11 @@ const mapStateToProps = state => ({
   getLoading: state.user.getIn(['getLoading']),
   error: state.user.getIn(['createError']),
   user: state.user.getIn(['user']),
+  currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   edit,
   get,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserEditPage)
+export default connect(mapStateToProps, mapDispatchToProps)(AccountEditPage)
