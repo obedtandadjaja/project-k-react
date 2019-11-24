@@ -1,15 +1,15 @@
 import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
 
 import { required } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 import renderSelectField from './../../formHelpers/renderSelectField'
-import RoomFields from './../rooms/fields'
 import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
 
 function PropertyForm(props) {
-  const { handleSubmit, readonly, submitError, loading, title, buttonText } = props
+  const { handleSubmit, readonly, submitError, loading, title, buttonText, initialValues } = props
 
   return (
     <form onSubmit={handleSubmit} >
@@ -60,21 +60,6 @@ function PropertyForm(props) {
 
       <div className="blockCard">
         <div className="blockHeader">
-          Rooms
-        </div>
-        <div className="blockBody">
-          <FieldArray
-            name='rooms'
-            buttonText='Add room'
-            entityText='Room'
-            readonly={readonly}
-            childComponent={RoomFields}
-            component={RepeatedFields} />
-        </div>
-      </div>
-
-      <div className="blockCard">
-        <div className="blockHeader">
           Shared facilities
         </div>
         <div className="blockBody">
@@ -83,10 +68,34 @@ function PropertyForm(props) {
             buttonText='Add shared facility'
             entityText='Shared facility'
             readonly={readonly}
-            childComponent={FacilityFields}
+            ChildComponent={FacilityFields}
             component={RepeatedFields} />
         </div>
       </div>
+
+      {
+        readonly &&
+        <div className="blockCard">
+          <div className="blockHeader">
+            Rooms
+          </div>
+          <div className="blockBody">
+            {
+              initialValues.rooms &&
+              initialValues.rooms.map(room => (
+                <Link key={room.id}
+                  to={{ pathname: `/properties/${initialValues.id}/rooms/${room.id}` }}>
+                  <div className="card bordered">
+                    <h4>{ room.name }</h4>
+                    <p>Payment schedule: { room.paymentSchedule }</p>
+                    <p>Price: { room.price }</p>
+                  </div>
+                </Link>
+              ))
+            }
+          </div>
+        </div>
+      }
     </form>
   )
 }

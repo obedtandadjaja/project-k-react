@@ -9,7 +9,7 @@ function PropertyGetPage(props) {
   const { loading, error, property, get, currentUserID } = props
 
   useEffect(() => {
-    get(currentUserID, props.match.params.propertyID)
+    get(currentUserID, props.match.params.propertyID, true)
   }, [get, props.match.params.propertyID, currentUserID])
 
   return (

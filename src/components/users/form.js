@@ -158,7 +158,7 @@ function UserForm(props) {
             buttonText='Add emergency contact'
             entityText='Emergency contact'
             readonly={readonly}
-            childComponent={EmergencyContactFields}
+            ChildComponent={EmergencyContactFields}
             component={RepeatedFields} />
         </div>
       </div>

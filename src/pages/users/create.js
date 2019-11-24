@@ -13,7 +13,7 @@ function UserCreatePage(props) {
   }
 
   useEffect(() => {
-    if (!loading || !error) {
+    if (!loading && !error) {
       user &&
         props.history.push(`/users/${user.id}`)
     }
@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
   user: state.user.getIn(['user']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  create
+  create,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserCreatePage)

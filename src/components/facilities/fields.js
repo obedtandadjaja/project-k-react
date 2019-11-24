@@ -4,7 +4,9 @@ import { Field } from 'redux-form'
 import { required } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 
-function FacilityFields(prefix, readonly) {
+function FacilityFields(props) {
+  const { prefix, readonly} = props
+
   return (
     <>
       <Field

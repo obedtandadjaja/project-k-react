@@ -13,7 +13,7 @@ function PropertyCreatePage(props) {
   }
 
   useEffect(() => {
-    if (!loading || !error) {
+    if (!loading && !error) {
       property &&
         props.history.push(`/properties/${property.id}`)
     }

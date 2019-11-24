@@ -10,7 +10,7 @@ function RoomCreatePage(props) {
   const { loading, error, property, room, get, create, currentUserID } = props
 
   const createSubmit = (values) => {
-    create(currentUserID, values)
+    create(currentUserID, props.match.params.propertyID, values)
   }
 
   useEffect(() => {
@@ -26,19 +26,21 @@ function RoomCreatePage(props) {
 
   return (
     <div className='propertyCreatePage'>
-      <div className='card'>
-        <h4>{ property.name }</h4>
-        <p>Type: { property.type }</p>
-        <p>Address: { property.address }</p>
-        <p>Number of rooms: { property.rooms.length }</p>
-      </div>
+      {
+        property &&
+        <div className='card'>
+          <h4>{ property.name }</h4>
+          <p>Type: { property.type }</p>
+          <p>Address: { property.address }</p>
+        </div>
+      }
 
       <Form
         onSubmit={createSubmit}
         loading={loading}
         submitError={error}
-        title='Create property'
-        buttonText='Create property' />
+        title='Add a room'
+        buttonText='Create room' />
     </div>
   )
 }
@@ -47,11 +49,12 @@ const mapStateToProps = state => ({
   loading: state.room.getIn(['createLoading']),
   error: state.room.getIn(['createError']),
   property: state.property.getIn(['property']),
-  room: state.room.getIn(['property']),
+  room: state.room.getIn(['room']),
   currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  create
+  create,
+  get,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomCreatePage)

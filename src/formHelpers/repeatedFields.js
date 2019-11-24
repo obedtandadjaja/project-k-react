@@ -5,7 +5,7 @@ const renderRepeatedFields = ({
   buttonText,
   entityText,
   readonly,
-  childComponent,
+  ChildComponent,
   meta: { touched, error }
 }) => (
   <div>
@@ -27,7 +27,7 @@ const renderRepeatedFields = ({
             </button>
           }
           <h4>{entityText} #{index + 1}</h4>
-          { childComponent(field, readonly) }
+          <ChildComponent prefix={field} readonly={readonly} />
         </li>
       )}
       {

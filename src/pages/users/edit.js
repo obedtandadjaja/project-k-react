@@ -16,7 +16,7 @@ function UserEditPage(props) {
   useEffect(() => { get(props.match.params.userID) }, [get, props.match.params.userID])
 
   useEffect(() => {
-    if (!loading || !error) {
+    if (!loading && !error) {
       submitted &&
         props.history.push(`/users/${props.match.params.userID}`)
     }

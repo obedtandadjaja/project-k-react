@@ -13,10 +13,12 @@ function PropertyEditPage(props) {
     edit(currentUserID, values)
   }
 
-  useEffect(() => { get(props.match.params.propertyID) }, [get, props.match.params.propertyID])
+  useEffect(() => {
+    get(currentUserID, props.match.params.propertyID)
+  }, [get, currentUserID, props.match.params.propertyID])
 
   useEffect(() => {
-    if (!loading || !error) {
+    if (!loading && !error) {
       submitted &&
         props.history.push(`/properties/${props.match.params.propertyID}`)
     }

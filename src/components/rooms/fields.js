@@ -1,13 +1,13 @@
 import React from 'react'
-import { Field, FieldArray } from 'redux-form'
+import { Field } from 'redux-form'
 
 import { required } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 import renderSelectField from './../../formHelpers/renderSelectField'
-import FacilityFields from './../facilities/fields'
-import RepeatedFields from './../../formHelpers/repeatedFields'
 
-function RoomFields(prefix, readonly) {
+function RoomFields(props) {
+  const { prefix, readonly } = props
+
   return (
     <>
       <Field
@@ -20,7 +20,6 @@ function RoomFields(prefix, readonly) {
       <Field
         name={prefix ? `${prefix}.paymentSchedule` : 'paymentSchedule'}
         component={renderSelectField}
-        defaultEmpty
         validate={[required]}
         label='Payment schedule'
         readonly={readonly}
@@ -36,14 +35,6 @@ function RoomFields(prefix, readonly) {
         component={renderField}
         readonly={readonly}
         label='Price' />
-
-      <FieldArray
-        name={prefix ? `${prefix}.data.facilities` : 'data.facilities'}
-        buttonText='Add facility'
-        entityText='Facility'
-        readonly={readonly}
-        childComponent={FacilityFields}
-        component={RepeatedFields} />
     </>
   )
 }

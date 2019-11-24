@@ -66,7 +66,8 @@ export default function propertyReducer(state=initialState, action) {
 
   case GET_BEGIN:
     return state.merge({
-      getLoading: true
+      getLoading: true,
+      property: null,
     })
 
   case GET_SUCCESS:
@@ -77,23 +78,26 @@ export default function propertyReducer(state=initialState, action) {
 
   case GET_FAILURE:
     return state.merge({
-      getLoading: false
+      getLoading: false,
+      property: null,
     })
 
   case ALL_BEGIN:
     return state.merge({
-      allLoading: true
+      allLoading: true,
+      properties: [],
     })
 
   case ALL_SUCCESS:
     return state.merge({
       allLoading: false,
-      properties: action.payload
+      properties: action.payload,
     })
 
   case ALL_FAILURE:
     return state.merge({
-      allLoading: false
+      allLoading: false,
+      properties: [],
     })
 
   case REMOVE_BEGIN:

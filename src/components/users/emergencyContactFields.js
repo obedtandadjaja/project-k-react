@@ -4,7 +4,9 @@ import { Field } from 'redux-form'
 import { required, email, phone } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 
-function EmergencyContactFields(prefix, readonly) {
+function EmergencyContactFields(props) {
+  const { prefix, readonly } = props
+
   return (
     <>
     <Field

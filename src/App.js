@@ -10,6 +10,7 @@ import MissingPage from './pages/missing'
 import UserGetPage from './pages/users/get'
 import UserEditPage from './pages/users/edit'
 import UserCreatePage from './pages/users/create'
+import RoomCreatePage from './pages/rooms/create'
 import PropertyGetPage from './pages/properties/get'
 import PropertyEditPage from './pages/properties/edit'
 import PropertyCreatePage from './pages/properties/create'
@@ -37,6 +38,7 @@ function App(props) {
                 <Route exact path='/properties/create' component={PropertyCreatePage} />
                 <Route exact path='/properties/:propertyID' component={PropertyGetPage} />
                 <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />
+                <Route exact path='/properties/:propertyID/rooms/create' component={RoomCreatePage} />
                 <Route component={MissingPage} />
               </Switch>
             }

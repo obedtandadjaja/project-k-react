@@ -20,6 +20,10 @@ ul {
     padding: 0;
 }
 
+.bordered {
+    border: solid 1px #d4dae3;
+}
+
 button.repeatedFieldsRemove {
     position: absolute;
     top: 0px;

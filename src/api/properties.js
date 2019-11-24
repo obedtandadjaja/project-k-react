@@ -52,11 +52,11 @@ export function all(userID, eager) {
   }
 }
 
-export function get(userID, propertyID) {
+export function get(userID, propertyID, eager) {
   return dispatch => {
     dispatch(getBegin())
 
-    return axios.get(`${BASE_URL}/api/v1/users/${userID}/properties/${propertyID}`).then(
+    return axios.get(`${BASE_URL}/api/v1/users/${userID}/properties/${propertyID}${ eager ? '?eager=true' : ''}`).then(
       res => dispatch(getSuccess(res.data)),
       err => dispatch(getFailure(err))
     )
