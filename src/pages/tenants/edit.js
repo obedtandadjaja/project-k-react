@@ -9,7 +9,7 @@ import { get as getRoom } from './../../api/rooms'
 import { edit, get } from './../../api/tenants'
 
 function TenantEditPage(props) {
-  const { loading, error, edit, getProperty, getRoom, get, property, room, tenant, currentUserID } = props
+  const { loading, getLoading, error, edit, getProperty, getRoom, get, property, room, tenant, currentUserID } = props
   const { propertyID, roomID, tenantID } = props.match.params
   const [submitted, setSubmitted] = useState(false)
 
@@ -55,6 +55,7 @@ function TenantEditPage(props) {
       }
 
       {
+        !getLoading &&
         tenant &&
         <Form
           initialValues={tenant}
@@ -70,6 +71,7 @@ function TenantEditPage(props) {
 
 const mapStateToProps = state => ({
   loading: state.tenant.getIn(['editLoading']),
+  getLoading: state.tenant.getIn(['getLoading']),
   error: state.tenant.getIn(['editError']),
   property: state.property.getIn(['property']),
   room: state.room.getIn(['room']),

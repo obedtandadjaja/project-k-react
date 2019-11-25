@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
@@ -20,6 +20,12 @@ function TenantGetPage(props) {
 
   return (
     <div className='tenantGetPage'>
+      <Link to={{ pathname: `/properties/${propertyID}/rooms/${roomID}/tenants/${tenantID}/edit` }}>
+        <button>
+          Edit tenant
+        </button>
+      </Link>
+
       {
         property &&
         <Link to={{ pathname: `/properties/${propertyID}` }}>

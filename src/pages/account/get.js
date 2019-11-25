@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 
 import Form from './../../components/users/form'
 import { get } from './../../api/users'
@@ -8,19 +9,18 @@ import { get } from './../../api/users'
 function AccountGetPage(props) {
   const { loading, error, user, get, currentUserID } = props
 
-  const redirectEditPage = () => {
-    props.history.push(`/account/edit`)
-  }
-
   useEffect(() => {
     get(currentUserID)
   }, [get, currentUserID])
 
   return (
     <div className='userGetPage'>
-      <button className='link' onClick={redirectEditPage}>
-        Edit user
-      </button>
+      <Link to={{ pathname: '/account/edit' }}>
+        <button>
+          Edit account
+        </button>
+      </Link>
+
       {
         !loading &&
         user &&

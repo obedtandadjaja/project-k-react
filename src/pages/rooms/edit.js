@@ -8,7 +8,7 @@ import { get as getProperty } from './../../api/properties'
 import { edit, get } from './../../api/rooms'
 
 function RoomEditPage(props) {
-  const { loading, error, property, room, edit, getProperty, get, currentUserID } = props
+  const { loading, getLoading, error, property, room, edit, getProperty, get, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)
   const { propertyID, roomID } = props.match.params
 
@@ -42,6 +42,7 @@ function RoomEditPage(props) {
       }
 
       {
+        !getLoading &&
         room &&
         <Form
           initialValues={room}
@@ -57,6 +58,7 @@ function RoomEditPage(props) {
 
 const mapStateToProps = state => ({
   loading: state.room.getIn(['editLoading']),
+  getLoading: state.room.getIn(['getLoading']),
   error: state.room.getIn(['editError']),
   room: state.room.getIn(['room']),
   property: state.property.getIn(['property']),

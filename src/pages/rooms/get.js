@@ -18,6 +18,12 @@ function RoomGetPage(props) {
 
   return (
     <div className='roomGetPage'>
+      <Link to={{ pathname: `/properties/${propertyID}/rooms/${roomID}/edit` }}>
+        <button>
+          Edit room
+        </button>
+      </Link>
+
       {
         property &&
         <Link to={{ pathname: `/properties/${propertyID}` }}>

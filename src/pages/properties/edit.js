@@ -7,15 +7,17 @@ import { edit, get } from './../../api/properties'
 
 function PropertyEditPage(props) {
   const { getLoading, loading, error, property, edit, get, currentUserID } = props
+  const { propertyID } = props.match.params
   const [submitted, setSubmitted] = useState(false)
+
   const editSubmit = (values) => {
     setSubmitted(true)
     edit(currentUserID, values)
   }
 
   useEffect(() => {
-    get(currentUserID, props.match.params.propertyID)
-  }, [get, currentUserID, props.match.params.propertyID])
+    get(currentUserID, propertyID)
+  }, [get, currentUserID, propertyID])
 
   useEffect(() => {
     if (!loading && !error) {
