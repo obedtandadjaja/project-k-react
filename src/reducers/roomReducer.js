@@ -109,7 +109,7 @@ export default function roomReducer(state=initialState, action) {
 
   case REMOVE_FAILURE:
     return state.merge({
-      removeLoading: false
+      removeLoading: false,
     })
 
   default:

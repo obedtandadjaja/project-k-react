@@ -22,7 +22,10 @@ export function create(userID, propertyID, data) {
     dispatch(createBegin())
 
     return API.client.post(`/api/v1/properties/${propertyID}/rooms`, data).then(
-      res => dispatch(createSuccess(res.data)),
+      res => {
+        dispatch(createSuccess(res.data))
+        return res.data
+      },
       err => dispatch(createFailure(err.response))
     )
   }

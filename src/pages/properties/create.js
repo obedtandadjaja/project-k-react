@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -7,17 +7,18 @@ import { create } from './../../api/properties'
 
 function PropertyCreatePage(props) {
   const { loading, error, property, create, currentUserID } = props
+  const [submitted, setSubmitted] = useState(false)
 
   const createSubmit = (values) => {
+    setSubmitted(true)
     create(currentUserID, values)
   }
 
   useEffect(() => {
-    if (!loading && !error) {
-      property &&
-        props.history.push(`/properties/${property.id}`)
+    if (!loading && !error && submitted && property) {
+      props.history.push(`/properties/${property.id}`)
     }
-  }, [props.history, loading, error, property])
+  }, [props.history, loading, error, submitted, property])
 
   return (
     <div className='propertyCreatePage'>

@@ -8,11 +8,12 @@ import { get } from './../../api/rooms'
 
 function RoomGetPage(props) {
   const { loading, error, property, room, getProperty, get, currentUserID } = props
+  const { propertyID, roomID } = props.match.params
 
   useEffect(() => {
-    getProperty(currentUserID, props.match.params.propertyID)
-    get(currentUserID, props.match.params.propertyID, props.match.params.roomID, true)
-  }, [getProperty, get, currentUserID, props.match.params.propertyID, props.match.params.roomID])
+    getProperty(currentUserID, propertyID)
+    get(currentUserID, propertyID, roomID, true)
+  }, [getProperty, get, currentUserID, propertyID, roomID])
 
   return (
     <div className='roomGetPage'>

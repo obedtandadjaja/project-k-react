@@ -9,6 +9,8 @@ import SignupPage from './pages/signup'
 import MissingPage from './pages/missing'
 import AccountGetPage from './pages/account/get'
 import AccountEditPage from './pages/account/edit'
+import TenantGetPage from './pages/tenants/get'
+import TenantEditPage from './pages/tenants/edit'
 import TenantCreatePage from './pages/tenants/create'
 import RoomGetPage from './pages/rooms/get'
 import RoomEditPage from './pages/rooms/edit'
@@ -43,6 +45,8 @@ function App(props) {
                 <Route exact path='/properties/:propertyID/rooms/:roomID' component={RoomGetPage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID/edit' component={RoomEditPage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/create' component={TenantCreatePage} />
+                <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID' component={TenantGetPage} />
+                <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID/edit' component={TenantEditPage} />
                 <Route component={MissingPage} />
               </Switch>
             }

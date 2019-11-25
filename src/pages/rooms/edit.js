@@ -9,20 +9,22 @@ import { edit, get } from './../../api/rooms'
 function RoomEditPage(props) {
   const { getLoading, loading, error, property, room, edit, getProperty, get, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)
+  const { propertyID, roomID } = props.match.params
+
   const editSubmit = (values) => {
     setSubmitted(true)
-    edit(currentUserID, props.match.params.propertyID, values)
+    edit(currentUserID, propertyID, values)
   }
 
   useEffect(() => {
-    getProperty(currentUserID, props.match.params.propertyID)
-    get(currentUserID, props.match.params.propertyID, props.match.params.roomID)
-  }, [getProperty, get, currentUserID, props.match.params.propertyID, props.match.params.roomID])
+    getProperty(currentUserID, propertyID)
+    get(currentUserID, propertyID, roomID)
+  }, [getProperty, get, currentUserID, propertyID, roomID])
 
   useEffect(() => {
     if (!loading && !error) {
       submitted &&
-        props.history.push(`/properties/${props.match.params.propertyID}`)
+        props.history.push(`/properties/${propertyID}`)
     }
   })
 

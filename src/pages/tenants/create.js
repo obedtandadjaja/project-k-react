@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -10,8 +10,10 @@ import { create } from './../../api/tenants'
 function TenantCreatePage(props) {
   const { loading, error, tenant, create, getProperty, getRoom, property, room, currentUserID } = props
   const { propertyID, roomID } = props.match.params
+  const [submitted, setSubmitted] = useState(false)
 
   const createSubmit = (values) => {
+    setSubmitted(true)
     create(currentUserID, propertyID, roomID, values)
   }
 
@@ -21,11 +23,10 @@ function TenantCreatePage(props) {
   }, [currentUserID, getProperty, propertyID, getRoom, roomID])
 
   useEffect(() => {
-    if (!loading && !error) {
-      tenant &&
-        props.history.push(`/properties/${propertyID}/rooms/${roomID}/tenants/${tenant.id}`)
+    if (!loading && !error && submitted && tenant) {
+      props.history.push(`/properties/${propertyID}/rooms/${roomID}/tenants/${tenant.id}`)
     }
-  }, [props.history, loading, error, propertyID, roomID, tenant])
+  }, [props.history, loading, error, submitted, propertyID, roomID, tenant])
 
   return (
     <div className='tenantCreatePage'>

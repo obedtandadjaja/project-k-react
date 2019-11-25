@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -8,21 +8,23 @@ import { create } from './../../api/rooms'
 
 function RoomCreatePage(props) {
   const { loading, error, property, room, get, create, currentUserID } = props
+  const [submitted, setSubmitted] = useState(false)
+  const { propertyID } = props.match.params
 
   const createSubmit = (values) => {
-    create(currentUserID, props.match.params.propertyID, values)
+    setSubmitted(true)
+    create(currentUserID, propertyID, values)
   }
 
   useEffect(() => {
-    get(currentUserID, props.match.params.propertyID)
-  }, [get, currentUserID, props.match.params.propertyID])
+    get(currentUserID, propertyID)
+  }, [get, currentUserID, propertyID])
 
   useEffect(() => {
-    if (!loading && !error) {
-      room &&
-        props.history.push(`/properties/${property.id}`)
+    if (!loading && !error && submitted && room) {
+      props.history.push(`/properties/${property.id}/rooms/${room.id}`)
     }
-  }, [props.history, loading, error, property, room])
+  }, [props.history, loading, error, submitted, property, room])
 
   return (
     <div className='propertyCreatePage'>

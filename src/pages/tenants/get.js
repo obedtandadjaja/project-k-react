@@ -5,17 +5,11 @@ import { bindActionCreators } from 'redux'
 import Form from './../../components/users/form'
 import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
-import { edit, get } from './../../api/tenants'
+import { get } from './../../api/tenants'
 
-function TenantEditPage(props) {
-  const { loading, error, edit, getProperty, getRoom, get, property, room, tenant, currentUserID } = props
+function TenantGetPage(props) {
+  const { loading, get, getProperty, getRoom, property, room, tenant, currentUserID } = props
   const { propertyID, roomID, tenantID } = props.match.params
-  const [submitted, setSubmitted] = useState(false)
-
-  const editSubmit = (values) => {
-    setSubmitted(true)
-    edit(currentUserID, propertyID, roomID, values)
-  }
 
   useEffect(() => {
     getProperty(currentUserID, propertyID)
@@ -23,14 +17,8 @@ function TenantEditPage(props) {
     get(currentUserID, propertyID, roomID, tenantID)
   }, [currentUserID, getProperty, propertyID, getRoom, roomID, get, tenantID])
 
-  useEffect(() => {
-    if (!loading && !error && submitted && tenant) {
-      props.history.push(`/properties/${propertyID}/rooms/${roomID}/tenants/${tenant.id}`)
-    }
-  }, [props.history, loading, error, submitted, propertyID, roomID, tenant])
-
   return (
-    <div className='tenantEditPage'>
+    <div className='tenantGetPage'>
       {
         property &&
         <div className='card'>
@@ -51,28 +39,24 @@ function TenantEditPage(props) {
 
       <Form
         initialValues={tenant}
-        onSubmit={editSubmit}
         loading={loading}
-        submitError={error}
-        title='Edit tenant'
-        submitText='Edit tenant' />
+        title='Tenant information'
+        readonly />
     </div>
   )
 }
 
 const mapStateToProps = state => ({
-  loading: state.tenant.getIn(['editLoading']),
-  error: state.tenant.getIn(['editError']),
+  loading: state.tenant.getIn(['getLoading']),
   property: state.property.getIn(['property']),
   room: state.room.getIn(['room']),
   tenant: state.tenant.getIn(['tenant']),
   currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  edit,
   getProperty,
   getRoom,
   get,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(TenantEditPage)
+export default connect(mapStateToProps, mapDispatchToProps)(TenantGetPage)
