@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 
 import Form from './../../components/rooms/form'
 import { get as getProperty } from './../../api/properties'
@@ -12,18 +13,20 @@ function RoomGetPage(props) {
 
   useEffect(() => {
     getProperty(currentUserID, propertyID)
-    get(currentUserID, propertyID, roomID, true)
+    get(currentUserID, propertyID, roomID, { eager: true })
   }, [getProperty, get, currentUserID, propertyID, roomID])
 
   return (
     <div className='roomGetPage'>
       {
         property &&
-        <div className='card'>
-          <h4>{ property.name }</h4>
-          <p>Type: { property.type }</p>
-          <p>Address: { property.address }</p>
-        </div>
+        <Link to={{ pathname: `/properties/${propertyID}` }}>
+          <div className='card'>
+            <h4>{ property.name }</h4>
+            <p>Type: { property.type }</p>
+            <p>Address: { property.address }</p>
+          </div>
+        </Link>
       }
 
       {

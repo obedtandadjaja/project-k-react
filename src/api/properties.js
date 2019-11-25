@@ -39,22 +39,22 @@ export function edit(userID, data) {
   }
 }
 
-export function all(userID, eager) {
+export function all(userID, queryParams) {
   return dispatch => {
     dispatch(allBegin())
 
-    return API.client.get(`/api/v1/properties${ eager ? '?eager=true' : ''}`).then(
+    return API.client.get(`/api/v1/properties`, { params: queryParams }).then(
       res => dispatch(allSuccess(res.data)),
       err => dispatch(allFailure(err.response))
     )
   }
 }
 
-export function get(userID, propertyID, eager) {
+export function get(userID, propertyID, queryParams) {
   return dispatch => {
     dispatch(getBegin())
 
-    return API.client.get(`/api/v1/properties/${propertyID}${ eager ? '?eager=true' : ''}`).then(
+    return API.client.get(`/api/v1/properties/${propertyID}`, { params: queryParams }).then(
       res => dispatch(getSuccess(res.data)),
       err => dispatch(getFailure(err.response))
     )

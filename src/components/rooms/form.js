@@ -1,12 +1,13 @@
 import React from 'react'
 import { FieldArray, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
 
 import RoomFields from './../rooms/fields'
 import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
 
 function RoomForm(props) {
-  const { handleSubmit, readonly, submitError, loading, title, buttonText } = props
+  const { initialValues, handleSubmit, readonly, submitError, loading, title, buttonText } = props
 
   return (
     <form onSubmit={handleSubmit} >
@@ -44,6 +45,38 @@ function RoomForm(props) {
             component={RepeatedFields} />
         </div>
       </div>
+
+      {
+        readonly &&
+        <div className="blockCard">
+          <div className="blockHeader">
+            Tenants
+          </div>
+          <div className="blockBody">
+            {
+              initialValues.tenants &&
+              initialValues.tenants.map(tenant => (
+                <Link
+                  key={tenant.id}
+                  to={{ pathname: `/properties/${initialValues.propertyId}/rooms/${initialValues.id}/tenants/${tenant.id}` }}>
+                  <div className="card bordered">
+                    <h4>{ tenant.name }</h4>
+                    <p>Email: { tenant.email }</p>
+                    <p>Phone: { tenant.phone }</p>
+                    <p>Identification: { tenant.data.identification.type } {tenant.data.identification.value}</p>
+                  </div>
+                </Link>
+              ))
+            }
+
+            <Link to={{ pathname: `/properties/${initialValues.id}/rooms/create` }}>
+              <button className='link'>
+                Add a tenant
+              </button>
+            </Link>
+          </div>
+        </div>
+      }
     </form>
   )
 }

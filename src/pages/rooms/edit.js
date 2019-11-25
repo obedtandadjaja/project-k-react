@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 
 import Form from './../../components/rooms/form'
 import { get as getProperty } from './../../api/properties'
 import { edit, get } from './../../api/rooms'
 
 function RoomEditPage(props) {
-  const { getLoading, loading, error, property, room, edit, getProperty, get, currentUserID } = props
+  const { loading, error, property, room, edit, getProperty, get, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)
   const { propertyID, roomID } = props.match.params
 
@@ -22,9 +23,8 @@ function RoomEditPage(props) {
   }, [getProperty, get, currentUserID, propertyID, roomID])
 
   useEffect(() => {
-    if (!loading && !error) {
-      submitted &&
-        props.history.push(`/properties/${propertyID}`)
+    if (!loading && !error && submitted && room) {
+      props.history.push(`/properties/${propertyID}`)
     }
   })
 
@@ -32,15 +32,16 @@ function RoomEditPage(props) {
     <div className='roomEditPage'>
       {
         property &&
+        <Link to={{ pathname: `/properties/${propertyID}` }}>
           <div className='card'>
-          <h4>{ property.name }</h4>
-          <p>Type: { property.type }</p>
-          <p>Address: { property.address }</p>
+            <h4>{ property.name }</h4>
+            <p>Type: { property.type }</p>
+            <p>Address: { property.address }</p>
           </div>
+        </Link>
       }
 
       {
-        !getLoading &&
         room &&
         <Form
           initialValues={room}
@@ -56,7 +57,6 @@ function RoomEditPage(props) {
 
 const mapStateToProps = state => ({
   loading: state.room.getIn(['editLoading']),
-  getLoading: state.room.getIn(['getLoading']),
   error: state.room.getIn(['editError']),
   room: state.room.getIn(['room']),
   property: state.property.getIn(['property']),

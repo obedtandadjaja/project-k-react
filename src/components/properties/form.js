@@ -83,7 +83,8 @@ function PropertyForm(props) {
             {
               initialValues.rooms &&
               initialValues.rooms.map(room => (
-                <Link key={room.id}
+                <Link
+                  key={room.id}
                   to={{ pathname: `/properties/${initialValues.id}/rooms/${room.id}` }}>
                   <div className="card bordered">
                     <h4>{ room.name }</h4>

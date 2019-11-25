@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 
 import Form from './../../components/users/form'
 import { get as getProperty } from './../../api/properties'
@@ -32,20 +33,24 @@ function TenantCreatePage(props) {
     <div className='tenantCreatePage'>
       {
         property &&
-        <div className='card'>
-          <h4>{ property.name }</h4>
-          <p>Type: { property.type }</p>
-          <p>Address: { property.address }</p>
-        </div>
+        <Link to={{ pathname: `/properties/${propertyID}` }}>
+          <div className='card'>
+            <h4>{ property.name }</h4>
+            <p>Type: { property.type }</p>
+            <p>Address: { property.address }</p>
+          </div>
+        </Link>
       }
 
       {
         room &&
-        <div className='card'>
-          <h4>{ room.name }</h4>
-          <p>Payment schedule: { room.paymentSchedule }</p>
-          <p>Payment amount: { room.paymentAmount }</p>
-        </div>
+        <Link to={{ pathname: `/properties/${propertyID}/rooms/${roomID}` }}>
+          <div className='card'>
+            <h4>{ room.name }</h4>
+            <p>Payment schedule: { room.paymentSchedule }</p>
+            <p>Payment amount: { room.paymentAmount }</p>
+          </div>
+        </Link>
       }
 
       <Form

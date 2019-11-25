@@ -9,7 +9,7 @@ function HomePage(props) {
   const { currentUserID, properties, all } = props
 
   useEffect(() => {
-    all(currentUserID, true)
+    all(currentUserID, true, { eager: true })
   }, [all, currentUserID])
 
   return (

@@ -42,22 +42,22 @@ export function edit(userID, propertyID, data) {
   }
 }
 
-export function all(userID, propertyID, eager) {
+export function all(userID, propertyID, queryParams) {
   return dispatch => {
     dispatch(allBegin())
 
-    return API.client.get(`/api/v1/properties/${propertyID}/rooms${ eager ? '?eager=true' : ''}`).then(
+    return API.client.get(`/api/v1/properties/${propertyID}/rooms`, { params: queryParams }).then(
       res => dispatch(allSuccess(res.data)),
       err => dispatch(allFailure(err.response))
     )
   }
 }
 
-export function get(userID, propertyID, roomID) {
+export function get(userID, propertyID, roomID, queryParams) {
   return dispatch => {
     dispatch(getBegin())
 
-    return API.client.get(`/api/v1/properties/${propertyID}/rooms/${roomID}`).then(
+    return API.client.get(`/api/v1/properties/${propertyID}/rooms/${roomID}`, { params: queryParams }).then(
       res => dispatch(getSuccess(res.data)),
       err => dispatch(getFailure(err.response))
     )
