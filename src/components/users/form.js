@@ -71,6 +71,7 @@ function UserForm(props) {
             component={renderSelectField}
             label='Religion'
             readonly={readonly}
+            defaultEmpty
             options={[
               ['muslim', 'Muslim'],
               ['christianProtestant', 'Christian Protestant'],
