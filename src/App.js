@@ -50,7 +50,7 @@ function App(props) {
                 <Route component={MissingPage} />
               </Switch>
             }
-            <Route path='/' component={MissingPage} />
+            <Route path='/' component={LoginPage} />
           </Switch>
         </div>
       </BrowserRouter>
