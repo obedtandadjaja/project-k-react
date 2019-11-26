@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-k-react{{ENV}}-deployment
+  labels:
+    app: project-k-react
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project-k-react
+  template:
+    metadata:
+      labels:
+        app: project-k-react
+    spec:
+      containers:
+        - name: project-k-react{{ENV}}
+          image: gcr.io/obedt-dev/project-k-react:{{IMAGE_TAG}}
+          envFrom:
+            - configMapRef:
+                name: project-k-react{{ENV}}-env
+          resources:
+            requests:
+              cpu: 150m
+              memory: 200Mi
+            limits:
+              cpu: 200m
+              memory: 220Mi
+          ports:
+            - containerPort: 3000

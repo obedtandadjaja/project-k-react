@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: api-gateway-env
+  namespace: default
+data:
+  NODE_ENV: 'production'
+  REACT_APP_API_HOST: 'api-gateway'
+  

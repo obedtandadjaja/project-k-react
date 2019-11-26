@@ -1,0 +1,8 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: project-k-react-stg-env
+  namespace: default
+data:
+  NODE_ENV: 'stage'
+  REACT_APP_API_HOST: 'api-gateway'
