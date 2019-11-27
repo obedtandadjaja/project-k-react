@@ -52,10 +52,18 @@ export default function authReducer(state=initialState, action) {
     })
 
   case SIGNUP_SUCCESS:
+    API.updateAccessToken(action.payload.jwt)
+    API.updateSessionToken(action.payload.session)
+
+    localStorage.setItem('accessToken', action.payload.jwt)
+    localStorage.setItem('sessionToken', action.payload.session)
+    localStorage.setItem('userID', action.payload.userID)
+
     return state.merge({
       loading: false,
       accessToken: action.payload.jwt,
       sessionToken: action.payload.session,
+      currentUserID: action.payload.userID,
     })
 
   case SIGNUP_FAILURE:
