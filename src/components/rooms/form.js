@@ -69,7 +69,7 @@ function RoomForm(props) {
               ))
             }
 
-            <Link to={{ pathname: `/properties/${initialValues.property_id}/rooms/${initialValues.id}/tenants/create` }}>
+            <Link to={{ pathname: `/properties/${initialValues.propertyId}/rooms/${initialValues.id}/tenants/create` }}>
               <button className='link'>
                 Add a tenant
               </button>
