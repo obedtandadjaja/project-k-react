@@ -31,15 +31,15 @@ function LoginForm(props) {
             { submitError && submitError.status === 401 && 'Invalid credentials' }
           </div>
 
-          <button type='submit' disabled={loading}>
-            Login
-          </button>
-
-          <Link className='link' to={{ pathname: '/signup' }}>
-            <button>
-              New to Project K? Create an account
+          <div className="vertical-wrapper">
+            <button type='submit' disabled={loading}>
+              Login
             </button>
-          </Link>
+
+            <Link className='link top-padding' to={{ pathname: '/signup' }}>
+              New to Project K? Create an account
+            </Link>
+          </div>
         </div>
       </div>
     </form>

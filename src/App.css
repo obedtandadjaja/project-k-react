@@ -14,7 +14,6 @@ html, body, #root {
     height: 100%;
     display: flex;
     flex-flow: column;
-
     min-width: 1000px;
 }
 
@@ -36,4 +35,11 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 1000px) {
+    .App {
+        width: 100%;
+        min-width: 0;
+    }
 }
