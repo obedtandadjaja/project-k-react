@@ -40,6 +40,7 @@ function PropertyForm(props) {
             validate={[required]}
             label='Type'
             readonly={readonly}
+            defaultEmpty
             options={[
               ['apartment', 'Apartment'],
               ['house', 'House'],
