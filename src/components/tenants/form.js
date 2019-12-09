@@ -8,9 +8,9 @@ import renderField from './../../formHelpers/renderField'
 import renderSelectField from './../../formHelpers/renderSelectField'
 import renderInputSelectField from './../../formHelpers/renderInputSelectField'
 import RepeatedFields from './../../formHelpers/repeatedFields'
-import EmergencyContactFields from './emergencyContactFields'
+import EmergencyContactFields from './../users/emergencyContactFields'
 
-function UserForm(props) {
+function TenantForm(props) {
   const { handleSubmit, occupation, loading, submitError, readonly, title } = props
 
   return (
@@ -166,15 +166,15 @@ function UserForm(props) {
   )
 }
 
-let userForm = reduxForm({
-  form: 'user',
+let tenantForm = reduxForm({
+  form: 'tenant',
   enabledReinitialize: true,
-})(UserForm)
+})(TenantForm)
 
-const selector = formValueSelector('user')
-userForm = connect((state, ownProps) => ({
+const selector = formValueSelector('tenant')
+tenantForm = connect((state, ownProps) => ({
   occupation: selector(state, 'data.occupation'),
   initialValues: ownProps.initialValues,
-}))(userForm)
+}))(tenantForm)
 
-export default userForm
+export default tenantForm
