@@ -24,7 +24,7 @@ function LoginPage(props) {
 
   return (
     <div className='loginPage page'>
-      <Form onSubmit={loginSubmit} loading={loading} submitError={error} />
+      <Form onSubmit={loginSubmit} loading={loading} submitError={error} submitText='Login' />
     </div>
   )
 }

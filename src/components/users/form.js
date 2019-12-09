@@ -11,7 +11,7 @@ import RepeatedFields from './../../formHelpers/repeatedFields'
 import EmergencyContactFields from './emergencyContactFields'
 
 function UserForm(props) {
-  const { handleSubmit, occupation, loading, submitError, readonly, title } = props
+  const { handleSubmit, occupation, loading, submitError, readonly, title, submitText } = props
 
   return (
     <form onSubmit={handleSubmit}>
@@ -138,7 +138,7 @@ function UserForm(props) {
           {
             !readonly &&
             <button type='submit' disabled={loading}>
-              Submit
+              { submitText }
             </button>
           }
 

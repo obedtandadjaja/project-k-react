@@ -19,7 +19,7 @@ function SignupPage(props) {
 
   return (
     <div className='signupPage page'>
-      <Form onSubmit={signupSubmit} loading={loading} error={error} />
+      <Form onSubmit={signupSubmit} loading={loading} error={error} submitText='Register user' />
     </div>
   )
 }
