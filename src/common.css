@@ -24,6 +24,11 @@ a {
     flex-direction: column;
 }
 
+.horizontal-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
 ul {
     margin: 0;
     padding: 0;

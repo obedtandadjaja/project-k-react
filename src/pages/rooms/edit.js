@@ -24,7 +24,7 @@ function RoomEditPage(props) {
 
   useEffect(() => {
     if (!loading && !error && submitted && room) {
-      props.history.push(`/properties/${propertyID}`)
+      props.history.push(`/properties/${propertyID}/rooms/${roomID}`)
     }
   })
 
