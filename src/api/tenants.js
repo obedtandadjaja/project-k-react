@@ -36,11 +36,11 @@ export function edit(userID, propertyID, roomID, data) {
   }
 }
 
-export function get(userID, propertyID, roomID, tenantID) {
+export function get(userID, propertyID, roomID, tenantID, queryParams) {
   return dispatch => {
     dispatch(getBegin())
 
-    return API.client.get(`/api/v1/properties/${propertyID}/rooms/${roomID}/tenants/${tenantID}`).then(
+    return API.client.get(`/api/v1/properties/${propertyID}/rooms/${roomID}/tenants/${tenantID}`, { params: queryParams }).then(
       res => dispatch(getSuccess(res.data)),
       err => dispatch(getFailure(err.response))
     )

@@ -63,7 +63,10 @@ function RoomForm(props) {
                     <h4>{ tenant.name }</h4>
                     <p>Email: { tenant.email }</p>
                     <p>Phone: { tenant.phone }</p>
-                    <p>Identification: { tenant.data.identification.type } {tenant.data.identification.value}</p>
+                    {
+                      tenant.data.identification &&
+                      <p>Identification: { tenant.data.identification.type } {tenant.data.identification.value}</p>
+                    }
                   </div>
                 </Link>
               ))

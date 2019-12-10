@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/tenants/form'
+import PaymentForm from './../../components/payments/form'
 import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
 import { get } from './../../api/tenants'
@@ -15,7 +16,7 @@ function TenantGetPage(props) {
   useEffect(() => {
     getProperty(currentUserID, propertyID)
     getRoom(currentUserID, propertyID, roomID)
-    get(currentUserID, propertyID, roomID, tenantID)
+    get(currentUserID, propertyID, roomID, tenantID, { eager: true })
   }, [currentUserID, getProperty, propertyID, getRoom, roomID, get, tenantID])
 
   return (
@@ -57,8 +58,49 @@ function TenantGetPage(props) {
           title='Tenant information'
           readonly />
       }
+
+      {
+        !loading &&
+        tenant &&
+        <div className='card'>
+          <h4>Payments</h4>
+          <table>
+            <theader>
+              <tr>
+                <th>Payment Date</th>
+                <th>Amount</th>
+                <th>Description</th>
+              </tr>
+            </theader>
+            <tbody>
+              {
+                tenant.payments &&
+                tenant.payments.map(payment => (
+                  <tr>
+                    <td>{ payment.created_at }</td>
+                    <td>{ payment.amount }</td>
+                    <td>{ payment.description }</td>
+                  </tr>
+                ))
+              }
+              {
+                (!tenant.payments || tenant.payments.length === 0) &&
+                <tr>
+                  <td colspan='3'>No payments</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
     </div>
   )
+  /* <PaymentForm
+      initialValues={tenant.payments}
+      loading={loading}
+      title='Tenant payments'
+      buttonText='Register payment'
+      readonly /> */
 }
 
 const mapStateToProps = state => ({
