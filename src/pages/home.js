@@ -13,26 +13,28 @@ function HomePage(props) {
   }, [all, currentUserID])
 
   return (
-    <div className='homePage'>
-      <div>
-        <h1>Your properties</h1>
-        {
-          properties &&
-          properties.map(property => (
-            <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
-              <div className='card'>
-                <h4>{ property.name }</h4>
-                <p>Type: { property.type }</p>
-                <p>Address: { property.address }</p>
-                <p>Number of rooms: { property.rooms.length }</p>
-              </div>
-            </Link>
-          ))
-        }
+    <div className='container'>
+      <div className='row'>
+        <div className="col">
+          <h1>Your properties</h1>
+          {
+            properties &&
+            properties.map(property => (
+              <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
+                <div className='card'>
+                  <h4>{ property.name }</h4>
+                  <p>Type: { property.type }</p>
+                  <p>Address: { property.address }</p>
+                  <p>Number of rooms: { property.rooms.length }</p>
+                </div>
+              </Link>
+              ))
+            }
+          <Link to={{ pathname: '/properties/create' }}>
+            Add a property
+          </Link>
+        </div>
       </div>
-      <Link to={{ pathname: '/properties/create' }}>
-        Add a property
-      </Link>
     </div>
   )
 }

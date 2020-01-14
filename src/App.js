@@ -21,6 +21,8 @@ import PropertyCreatePage from './pages/properties/create'
 import './App.css'
 import './common.css'
 
+import Ticket from './pages/tickets'
+
 function App(props) {
   const { currentUserID } = props
 
@@ -35,7 +37,7 @@ function App(props) {
             {
               currentUserID &&
               <Switch>
-                <Route exact path='/' component={HomePage} />
+                <Route exact path='/' component={Ticket} />
                 <Route exact path='/account' component={AccountGetPage} />
                 <Route exact path='/account/edit' component={AccountEditPage} />
                 <Route exact path='/properties/create' component={PropertyCreatePage} />

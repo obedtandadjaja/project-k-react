@@ -1,62 +1,24 @@
-.header {
-    padding: 32px 24px 2px 24px;
-    display: flex;
-    flex: 0 1 auto;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 100%;
-    position: static;
-    z-index: 1000;
-    border: none;
-    overflow: visible;
-    height: 50px;
-    background-color: #f0f2f5;
+/* Bootstrap overrides */
+.navbar-light .navbar-toggler-icon {
+    background-image: url("/src/assets/burger.svg");
 }
 
-a.header {
-    color: rgb(0,0,0);
-    text-decoration: none;
+.navbar-nav{
+    font-family: 'Montserrat';
+    color: #E3E6E4;
+    font-size: 1.3rem;
+    margin-right: 1.5rem;
 }
 
-h1.temporaryTitle {
-    display: flex;
-    white-space: nowrap;
-    justify-content: center;
-    align-items: center;
+@media (min-width: 992px){
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
-h1.temporaryTitle > a {
-    text-decoration: none;
-    color: inherit;
 }
 
-.header .linksContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.header .linksContainer a {
-    min-height: 53px;
-    display: inline-block;
-    line-height: 70px;
-    padding: 10px 14px 12px 14px;
-    border: none;
-    margin: auto;
-    font-size: 14px;
-    position: relative;
-    color: #2a2a33;
-    line-height: 28px;
-    cursor: pointer;
-    font-weight: 300;
-    text-decoration: none;
-}
-
-.header .linksContainer a:last-child {
-    padding-right: 0px;
-}
-
-.header .linksContainer a:hover {
-    color: #006AFF;
+.navbar-expand .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
 }

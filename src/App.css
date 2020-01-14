@@ -10,36 +10,14 @@ html, body, #root {
     font-size: 14px;
 }
 
-.App {
-    height: 100%;
-    display: flex;
-    flex-flow: column;
-    min-width: 1000px;
-}
-
-header {
-    flex: 0 1 auto;
-}
-
-.AppBody {
-    flex: 1 1 auto;
-    justify-content: center;
-    align-items: center;
-    color: #575757;
-    background-color: #f0f2f5;
-    padding: 24px 24px;
-}
-
-.page {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 @media (max-width: 1000px) {
     .App {
         width: 100%;
         min-width: 0;
     }
 }
+
+.App {
+        width: 100%;
+        min-width: 0;
+    }

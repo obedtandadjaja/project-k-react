@@ -8,10 +8,6 @@ const renderField = ({
   meta: { touched, error, warning }
 }) => (
   <div className='formFieldWrapper'>
-    {
-      label &&
-      <label htmlFor={input.name}>{label}</label>
-    }
     <div>
       <input
         {...input}

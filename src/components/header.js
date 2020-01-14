@@ -30,31 +30,45 @@ function Header(props) {
     window.location = '/login'
   }
 
+  const style = { 
+    title: {
+      fontFamily: 'Montserrat',
+      fontSize: '3rem',
+    },
+  }
+
   return (
-    <header>
-      <div className='header'>
-        <h1 className='temporaryTitle'>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <p className='navbar-brand' style={style.title}>
           <Link to={{ pathname: '/' }}>
-            Project K
+            PROJECT K
           </Link>
-        </h1>
-        <div className='linksContainer'>
+        </p>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+        <div className='collapse navbar-collapse' id="navbarToggler">
+        <ul className='navbar-nav ml-auto'>
           {
             userLinks.map((link, i) => (
-              <Link key={i} to={{ pathname: link.url }}>
-                { link.text }
-              </Link>
+              <li className="nav-item">
+                <Link key={i} to={{ pathname: link.url }} className="nav-link">
+                  {link.text}
+                </Link>
+              </li>
             ))
           }
           {
             currentUserID &&
-            <a key='logout' onClick={submitLogout} href='#'>
-              Logout
+            <li className="nav-item">
+              <a className="nav-link" key='logout' onClick={submitLogout} href='#'>
+                Logout
             </a>
+            </li>
           }
+        </ul>
         </div>
-      </div>
-    </header>
+    </nav>
   )
 }
 

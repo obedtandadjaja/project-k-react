@@ -11,8 +11,14 @@ import RepeatedFields from './../../formHelpers/repeatedFields'
 function PropertyForm(props) {
   const { handleSubmit, readonly, submitError, loading, title, buttonText, initialValues } = props
 
+  const style = {
+    width: '400px',
+    margin: 'auto',
+  }
+
   return (
-    <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit}  style={style}>
+      { /** property card */}
       <div className="blockCard">
         <div className="blockHeader">
           { title }
@@ -46,13 +52,6 @@ function PropertyForm(props) {
               ['house', 'House'],
             ]} />
 
-          {
-            !readonly &&
-            <button type='submit' disabled={loading}>
-              { buttonText }
-            </button>
-          }
-
           <div className='errorResponse'>
             { submitError && JSON.stringify(submitError) }
           </div>
@@ -66,14 +65,15 @@ function PropertyForm(props) {
         <div className="blockBody">
           <FieldArray
             name='data.sharedFacilities'
-            buttonText='Add shared facility'
+            buttonText='+ shared facility'
             entityText='Shared facility'
             readonly={readonly}
             ChildComponent={FacilityFields}
             component={RepeatedFields} />
         </div>
       </div>
-
+      
+      { /** room card */}
       {
         readonly &&
         <div className="blockCard">
@@ -103,6 +103,14 @@ function PropertyForm(props) {
             </Link>
           </div>
         </div>
+      }
+
+      { /** button card */}
+      {
+        !readonly &&
+        <button type='submit' disabled={loading}>
+          {buttonText}
+        </button>
       }
     </form>
   )

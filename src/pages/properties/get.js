@@ -14,24 +14,42 @@ function PropertyGetPage(props) {
     get(currentUserID, propertyID, { eager: true })
   }, [get, propertyID, currentUserID])
 
-  return (
-    <div className='propertyGetPage'>
-      <Link to={{ pathname: `/properties/${propertyID}/edit` }}>
-        <button>
-          Edit property
-        </button>
-      </Link>
+  const style = {
+    width: '400px',
+    margin: 'auto'
 
-      {
-        !loading &&
-        property &&
-        <Form
-          initialValues={property}
-          loading={loading}
-          error={error}
-          title='Property'
-          readonly />
-      }
+  }
+
+  const align = {
+    color: 'blue',
+    float: 'right',
+
+  }
+
+  const blue = {
+    color: '#18A0FB',
+  }
+
+  return (
+    <div className='propertyGetPage' style={style}>
+      <div style={align}>
+        <Link to={{ pathname: `/properties/${propertyID}/edit` }} >
+          <button style={blue}>
+            Edit property
+          </button>
+        </Link>
+      </div>
+        {
+          !loading &&
+          property &&
+          <Form
+            initialValues={property}
+            loading={loading}
+            error={error}
+            title='Property'
+            readonly />
+        }
+      
     </div>
   )
 }
