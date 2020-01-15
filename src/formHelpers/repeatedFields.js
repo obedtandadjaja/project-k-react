@@ -1,6 +1,6 @@
 import React from 'react'
 
-import HoverButton from '../style/styleHelpers';
+import {HoverButton} from '../style/styleHelpers';
 
 const renderRepeatedFields = ({
   fields,

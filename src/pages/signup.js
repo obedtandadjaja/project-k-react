@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 import { signup } from './../api/signup'
 import Form from './../components/signup/form'
 
+import {Login} from './../style/styleHelpers'
+
 function SignupPage(props) {
   const { signup, loading, error, currentUserID } = props
   const signupSubmit = (values) => {
@@ -18,9 +20,14 @@ function SignupPage(props) {
   }, [props.history, currentUserID])
 
   return (
-    <div className='signupPage page'>
-      <Form onSubmit={signupSubmit} loading={loading} error={error} submitText='Register user' />
-    </div>
+    <Login>
+      <Form 
+        onSubmit={signupSubmit} 
+        loading={loading} 
+        error={error} 
+        submitText='Register user' 
+        />
+    </Login>
   )
 }
 

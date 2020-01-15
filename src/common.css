@@ -111,6 +111,10 @@ button {
     cursor: pointer;
 }
 
+button[type=submit]:hover {
+    background-color: #f39c12;
+}
+
 button.link {
     padding: 0;
     color: #3498db;

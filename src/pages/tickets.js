@@ -6,6 +6,8 @@ import { all } from './../api/properties'
 
 import Donut from '../components/charts/donut'
 
+import {closedTicket, closedTicketLabel, openTicket, openTicketLabel, bgColor} from '../components/charts/mockdata'
+
 function Ticket(props) {
   const { currentUserID, all } = props
 
@@ -40,7 +42,11 @@ function Ticket(props) {
       <div className='row'>
         <div className='col'>
           <div style={style.card}>
-            <Donut />
+            <Donut 
+              data={openTicket}
+              labels={openTicketLabel}
+              color={bgColor}
+              />
             <button type='button' className="btn btn-primary" style={style.button}>
               OPEN TICKET
             </button>
@@ -48,7 +54,11 @@ function Ticket(props) {
         </div>
         <div className='col'>
           <div style={style.card}>
-            <Donut />
+            <Donut 
+              data={closedTicket}
+              labels={closedTicketLabel}
+              color={bgColor}
+              />
             <button type='button' className="btn btn-primary" style={style.button}>
               CLOSED TICKET
             </button>

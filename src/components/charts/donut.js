@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 
+
+// donut has to be reuseable component, 
+/* 
+  Need to add this.props.data, this.props.type
+*/
 class Donut extends Component {
   constructor(props) {
     super(props);
@@ -57,13 +62,12 @@ class Donut extends Component {
       new Chart(myChartRef, {
         type: 'doughnut',
         data: {
-          // put datat here
-          labels: ['AC', 'Power', 'WC'],
+          labels: this.props.labels,
           datasets: [{
-            label: 'Tickets',
-            backgroundColor: ['#18A0FB', '#D95A6E', '#8644A2'],
-            borderWidth: 0,
-            data: [4, 5, 9],
+              label: 'Tickets',
+              backgroundColor: this.props.color,
+              borderWidth: 0,
+              data: this.props.data,
           }]
         },
         options: { 
@@ -78,7 +82,7 @@ class Donut extends Component {
             center: { 
               text: '18',
               color: '#36A2EB', //Default black
-              fontStyle: 'Open Sans', //Default Arial
+              fontStyle: 'Montserrat', //Default Arial
               sidePadding: 40 //Default 20 (as a percentage)
             }
           }

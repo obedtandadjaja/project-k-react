@@ -5,6 +5,7 @@ import { useHistory, useLocation } from 'react-router'
 
 import { login } from './../api/login'
 import Form from './../components/login/form'
+import { Login } from '../style/styleHelpers'
 
 function LoginPage(props) {
   let history = useHistory();
@@ -23,9 +24,14 @@ function LoginPage(props) {
   }, [history, currentUserID, from])
 
   return (
-    <div className='loginPage page'>
-      <Form onSubmit={loginSubmit} loading={loading} submitError={error} submitText='Login' />
-    </div>
+    <Login>
+      <Form 
+      onSubmit={loginSubmit} 
+      loading={loading} 
+      submitError={error} 
+      submitText='Login' 
+      />
+    </Login>
   )
 }
 

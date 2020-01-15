@@ -37,7 +37,7 @@ function App(props) {
             {
               currentUserID &&
               <Switch>
-                <Route exact path='/' component={Ticket} />
+                <Route exact path='/' component={HomePage} />
                 <Route exact path='/account' component={AccountGetPage} />
                 <Route exact path='/account/edit' component={AccountEditPage} />
                 <Route exact path='/properties/create' component={PropertyCreatePage} />

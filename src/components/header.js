@@ -38,35 +38,33 @@ function Header(props) {
   }
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <p className='navbar-brand' style={style.title}>
-          <Link to={{ pathname: '/' }}>
-            PROJECT K
-          </Link>
-        </p>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <Link to={{ pathname: '/' }} className='navbar-brand' style={style.title}>
+          PROJECT K
+        </Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
         <div className='collapse navbar-collapse' id="navbarToggler">
-        <ul className='navbar-nav ml-auto'>
-          {
-            userLinks.map((link, i) => (
+          <ul className='navbar-nav ml-auto'>
+            {
+              userLinks.map((link, i) => (
+                <li className="nav-item">
+                  <Link key={i} to={{ pathname: link.url }} className="nav-link">
+                    {link.text}
+                  </Link>
+                </li>
+              ))
+            }
+            {
+              currentUserID &&
               <li className="nav-item">
-                <Link key={i} to={{ pathname: link.url }} className="nav-link">
-                  {link.text}
-                </Link>
+                <a className="nav-link" key='logout' onClick={submitLogout} href='#'>
+                  Logout
+              </a>
               </li>
-            ))
-          }
-          {
-            currentUserID &&
-            <li className="nav-item">
-              <a className="nav-link" key='logout' onClick={submitLogout} href='#'>
-                Logout
-            </a>
-            </li>
-          }
-        </ul>
+            }
+          </ul>
         </div>
     </nav>
   )

@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 
-const HoverButton = styled.button`
+export const HoverButton = styled.button`
   :hover{
     color: red;
   }
 `
 
-export default HoverButton;
+export const Login = styled.div`
+    width: 400px;
+    margin: auto;
+    margin-top: 8rem;
+    input{
+      width: 100%;
+    }
+`
