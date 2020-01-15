@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 
 import { all } from './../api/properties'
 
+import { CardStyle } from '../style/styleHelpers'
+
 function HomePage(props) {
   const { currentUserID, properties, all } = props
 
@@ -12,26 +14,46 @@ function HomePage(props) {
     all(currentUserID, { eager: true })
   }, [all, currentUserID])
 
+  const style = {
+    margin: '40px 0 0 2rem',
+  }
+
   return (
-    <div className='container'>
-      <div className='row'>
-        <div className="col">
-          <h1>Your properties</h1>
-          {
-            properties &&
-            properties.map(property => (
-              <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
-                <div className='card'>
+    <div className='container' style={style}>
+      <h1>Your Properties</h1>
+        <div className='row'>
+        {
+          properties &&
+          properties.map(property => (
+            <div className='col'>
+              
+              <CardStyle>
+                <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
                   <h4>{ property.name }</h4>
                   <p>Type: { property.type }</p>
                   <p>Address: { property.address }</p>
                   <p>Number of rooms: { property.rooms.length }</p>
-                </div>
-              </Link>
-              ))
-            }
-          <Link to={{ pathname: '/properties/create' }}>
-            Add a property
+                </Link>
+              </CardStyle>
+              
+            </div>
+            ))
+          }
+        <div className='col'>
+          
+          <CardStyle>
+            <Link to={{ pathname: '/properties/create' }}>
+              Add Property
+            </Link>
+          </CardStyle>
+          
+        </div>
+      </div>
+      <h1>Your Tickets</h1>
+      <div className='row'>
+        <div className='col'>
+          <Link >
+            My Tickets
           </Link>
         </div>
       </div>

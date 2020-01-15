@@ -70,7 +70,6 @@ form h1, h4 {
 
 form .blockCard {
     width: 100%;
-    /*margin-left: 20px;*/
     margin-bottom: 10px;
 }
 
@@ -87,8 +86,7 @@ form .blockHeader {
 }
 
 form .blockBody {
-    padding: 14px 20px 20px 20px;
-    background-color: white;
+    
 }
 
 button {
