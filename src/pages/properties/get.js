@@ -15,8 +15,7 @@ function PropertyGetPage(props) {
   }, [get, propertyID, currentUserID])
 
   const style = {
-    width: '400px',
-    margin: 'auto'
+    margin: 'auto',
 
   }
 

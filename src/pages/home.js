@@ -16,12 +16,22 @@ function HomePage(props) {
 
   const style = {
     margin: '40px 0 0 2rem',
+    
+    title: {
+      fontFamily: 'Open Sans',
+      fontWeight: 'bold',
+      color: '#18A0FB',
+    },
+
+    mb: {
+      marginBottom: '10em',
+    }
   }
 
   return (
     <div className='container' style={style}>
-      <h1>Your Properties</h1>
-        <div className='row'>
+      <h1 style={style.title}>Your Properties</h1>
+        <div className='row' style={style.mb}>
         {
           properties &&
           properties.map(property => (
@@ -49,12 +59,14 @@ function HomePage(props) {
           
         </div>
       </div>
-      <h1>Your Tickets</h1>
-      <div className='row'>
+      <h1 style={style.title}>Your Maintenance Ticket</h1>
+      <div className='row' style={style.mb}>
         <div className='col'>
-          <Link >
-            My Tickets
-          </Link>
+          <CardStyle>
+            <Link >
+              COOMING SOON!
+            </Link>
+          </CardStyle>
         </div>
       </div>
     </div>
