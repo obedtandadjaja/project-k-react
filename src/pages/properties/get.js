@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import Form from './../../components/properties/form'
 import { get } from './../../api/properties'
 
+import { FormStyle } from './../../style/styleHelpers'
+
 function PropertyGetPage(props) {
   const { loading, error, property, get, currentUserID } = props
   const { propertyID } = props.match.params
@@ -14,9 +16,11 @@ function PropertyGetPage(props) {
     get(currentUserID, propertyID, { eager: true })
   }, [get, propertyID, currentUserID])
 
-  const style = {
-    margin: 'auto',
 
+  // custom inline styling... need to make this neat
+  const style = {
+    display: 'flex',
+    flexDirection: 'column',
   }
 
   const align = {
@@ -41,12 +45,15 @@ function PropertyGetPage(props) {
         {
           !loading &&
           property &&
-          <Form
-            initialValues={property}
-            loading={loading}
-            error={error}
-            title='Property'
-            readonly />
+          <FormStyle>
+            <Form
+              initialValues={property}
+              loading={loading}
+              error={error}
+              title='Property'
+              readonly 
+              />
+          </FormStyle>
         }
       
     </div>

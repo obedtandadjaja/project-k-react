@@ -4,6 +4,7 @@ export const HoverButton = styled.button`
   :hover{
     color: red;
   }
+  margin-top: 1em;
 `
 
 // size: 400x400
@@ -62,12 +63,12 @@ export const FormStyle = styled.div`
 
   display: contents;
   align-items: center;
-  
+
   .blockCard{
     display: block;
     background: #FFFFFF;
     width: 400px;
-    margin-top: 10%;
+    margin-top: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
@@ -89,7 +90,7 @@ export const FormStyle = styled.div`
 
   .button{
     margin-top: 28px;
-    width: 165px;
+    width: 200px;
     height: 60px;
     border-radius: 30px;
     background: #18A0FB;
@@ -103,6 +104,19 @@ export const FormStyle = styled.div`
     cursor: pointer;
     :hover{
       background-color: #f39c12;
+    }
+  }
+
+  @media (max-width: 725px){
+    display: block;
+    .blockCard{
+      display: block;
+      background: #FFFFFF;
+      width: 400px;
+      margin-top: 10%;
+      margin-left: 0em;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
   }
 

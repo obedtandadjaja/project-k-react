@@ -8,19 +8,11 @@ import renderSelectField from './../../formHelpers/renderSelectField'
 import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
 
-import { FormStyle } from './../../style/styleHelpers'
-
 function PropertyForm(props) {
   const { handleSubmit, readonly, submitError, loading, title, buttonText, initialValues } = props
 
-  const style = {
-    width: '500px',
-    margin: '0 auto',
-  }
-
   return (
-    <form onSubmit={handleSubmit} style={style}>
-      <FormStyle>
+    <form onSubmit={handleSubmit}>
         { /** property card */}
         <div className="blockCard">
           <div className="blockHeader">
@@ -115,7 +107,6 @@ function PropertyForm(props) {
             {buttonText}
           </button>
         }
-      </FormStyle>
     </form>
   )
 }

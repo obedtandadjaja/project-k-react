@@ -7,6 +7,8 @@ import Form from './../../components/rooms/form'
 import { get } from './../../api/properties'
 import { create } from './../../api/rooms'
 
+import { FormStyle } from './../../style/styleHelpers'
+
 function RoomCreatePage(props) {
   const { loading, error, property, room, get, create, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)
@@ -39,13 +41,15 @@ function RoomCreatePage(props) {
           </div>
         </Link>
       }
-
-      <Form
-        onSubmit={createSubmit}
-        loading={loading}
-        submitError={error}
-        title='Add a room'
-        buttonText='Create room' />
+      <FormStyle>
+        <Form
+          onSubmit={createSubmit}
+          loading={loading}
+          submitError={error}
+          title='Add a room'
+          buttonText='Create room' 
+          />
+      </FormStyle>
     </div>
   )
 }

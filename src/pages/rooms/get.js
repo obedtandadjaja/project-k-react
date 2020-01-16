@@ -7,6 +7,8 @@ import Form from './../../components/rooms/form'
 import { get as getProperty } from './../../api/properties'
 import { get } from './../../api/rooms'
 
+import { FormStyle } from './../../style/styleHelpers'
+
 function RoomGetPage(props) {
   const { loading, error, property, room, getProperty, get, currentUserID } = props
   const { propertyID, roomID } = props.match.params
@@ -16,8 +18,14 @@ function RoomGetPage(props) {
     get(currentUserID, propertyID, roomID, { eager: true })
   }, [getProperty, get, currentUserID, propertyID, roomID])
 
+
+  const style = {
+    display: 'flex',
+    flexDirection: 'column',
+  }
+
   return (
-    <div className='roomGetPage'>
+    <div className='roomGetPage' style={style}>
       <Link to={{ pathname: `/properties/${propertyID}/rooms/${roomID}/edit` }}>
         <button>
           Edit room
@@ -38,12 +46,15 @@ function RoomGetPage(props) {
       {
         !loading &&
         room &&
-        <Form
-          initialValues={room}
-          loading={loading}
-          error={error}
-          title='Room'
-          readonly={true} />
+        <FormStyle>
+          <Form
+            initialValues={room}
+            loading={loading}
+            error={error}
+            title='Room'
+            readonly={true} 
+            />
+        </FormStyle>
       }
     </div>
   )

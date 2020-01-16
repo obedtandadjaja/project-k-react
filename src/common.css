@@ -62,6 +62,7 @@ form {
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 10%;
 }
 
 form h1, h4 {
@@ -73,9 +74,6 @@ form .blockCard {
     margin-bottom: 10px;
 }
 
-form .blockCard:first-child {
-    margin-left: 0;
-}
 
 form .blockHeader {
     background-color: #f6f7f9;
@@ -83,10 +81,6 @@ form .blockHeader {
     transition: opacity .2s ease-out;
     font-weight: 700;
     font-size: 16px;
-}
-
-form .blockBody {
-    
 }
 
 button {
@@ -184,6 +178,52 @@ form button[type=submit]:hover {
     background-color: white;
     margin: 10px 0;
     color: #575757;
+    border-radius: 10px;
+}
+/* custom css for .propertyCreatePage */
+.propertyCreatePage{
+    width: 500px;
+    margin: auto;
+}
+
+.propertyCreatePage .blockBody{
+    padding: 12px 24px;
+}
+
+.propertyCreatePage .formFieldWrapper input{
+    width: 100%;
+}
+
+.propertyCreatePage .formFieldWrapper select{
+    width: 100%;
+}
+
+/* custom css for .propertyEditPage */
+.propertyEditPage{
+    width: 500px;
+    margin: auto;
+}
+
+/* custom css for propertyEditPage > form > blockCard:first-child*/
+.propertyEditPage form .blockCard:first-child {
+    margin-top: 10%;
+}
+
+.propertyGetPage .blockCard{
+    margin-left: 2em;
+    min-height: 290px;
+}
+
+/* custom css for roomGetPage */
+.roomGetPage .blockCard{
+    margin-left: 2em;
+    min-height: 290px;
+}
+
+@media (max-width: 900px) {
+    .propertyGetPage .blockCard{
+        margin-left: 0em;
+    }
 }
 
 @media (max-width: 600px) {
