@@ -1,84 +1,38 @@
-import React, { useEffect } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
-import { all } from './../api/properties'
+import CardLarge from '../style/cardLarge'
 
-import { CardStyle } from '../style/styleHelpers'
-
-function HomePage(props) {
-  const { currentUserID, properties, all } = props
-
-  useEffect(() => {
-    all(currentUserID, { eager: true })
-  }, [all, currentUserID])
-
-  const style = {
-    margin: '40px 0 0 2rem',
-    
-    title: {
-      fontFamily: 'Open Sans',
-      fontWeight: 'bold',
-      color: '#18A0FB',
-    },
-
-    mb: {
-      marginBottom: '10em',
-    }
+class HomePage extends Component {
+  constructor(props) {
+    super(props);
   }
 
-  return (
-    <div className='container' style={style}>
-      <h1 style={style.title}>Your Properties</h1>
-        <div className='row' style={style.mb}>
-        {
-          properties &&
-          properties.map(property => (
+  render(){
+    return (
+      <div className='home container' style={{margin: 'auto'}}> 
+        <div className='row'>
             <div className='col'>
-              
-              <CardStyle>
-                <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
-                  <h4>{ property.name }</h4>
-                  <p>Type: { property.type }</p>
-                  <p>Address: { property.address }</p>
-                  <p>Number of rooms: { property.rooms.length }</p>
-                </Link>
-              </CardStyle>
-              
+              <CardLarge 
+                header="Properties"
+                body="Create and Manage Properties"
+                color="#F89319"
+                to='/properties'
+              />
             </div>
-            ))
-          }
-        <div className='col'>
-          
-          <CardStyle>
-            <Link to={{ pathname: '/properties/create' }}>
-              Add Property
-            </Link>
-          </CardStyle>
-          
+            <div className='col'> 
+              <CardLarge 
+                header="Maintenance"
+                body="Check Maintenance Progress"
+                color="#5B61DE"
+                to='/ticket'
+              />
+            </div>
         </div>
       </div>
-      <h1 style={style.title}>Your Maintenance Ticket</h1>
-      <div className='row' style={style.mb}>
-        <div className='col'>
-          <CardStyle>
-            <Link >
-              COOMING SOON!
-            </Link>
-          </CardStyle>
-        </div>
-      </div>
-    </div>
-  )
+    )
+  }
+  
 }
 
-const mapStateToProps = state => ({
-  properties: state.property.getIn(['properties']),
-  currentUserID: state.auth.getIn(['currentUserID']),
-})
-const mapDispatchToProps = dispatch => bindActionCreators({
-  all,
-}, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default HomePage

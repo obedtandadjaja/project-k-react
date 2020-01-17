@@ -15,13 +15,15 @@ import TenantCreatePage from './pages/tenants/create'
 import RoomGetPage from './pages/rooms/get'
 import RoomEditPage from './pages/rooms/edit'
 import RoomCreatePage from './pages/rooms/create'
+import PropertyPage from './pages/properties'
 import PropertyGetPage from './pages/properties/get'
 import PropertyEditPage from './pages/properties/edit'
 import PropertyCreatePage from './pages/properties/create'
+import Ticket from './pages/tickets'
+
 import './App.css'
 import './common.css'
 
-import Ticket from './pages/tickets'
 
 function App(props) {
   const { currentUserID } = props
@@ -40,6 +42,7 @@ function App(props) {
                 <Route exact path='/' component={HomePage} />
                 <Route exact path='/account' component={AccountGetPage} />
                 <Route exact path='/account/edit' component={AccountEditPage} />
+                <Route exact path='/properties' component={PropertyPage} />
                 <Route exact path='/properties/create' component={PropertyCreatePage} />
                 <Route exact path='/properties/:propertyID' component={PropertyGetPage} />
                 <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />
@@ -49,6 +52,7 @@ function App(props) {
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/create' component={TenantCreatePage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID' component={TenantGetPage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID/edit' component={TenantEditPage} />
+                <Route exact path='/ticket' component={Ticket} />
                 <Route component={MissingPage} />
               </Switch>
             }
