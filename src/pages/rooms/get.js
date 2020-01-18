@@ -13,7 +13,7 @@ function RoomGetPage(props) {
 
   useEffect(() => {
     getProperty(currentUserID, propertyID)
-    get(currentUserID, propertyID, roomID, { eager: true })
+    get(currentUserID, propertyID, roomID, { eager: 'Tenants' })
   }, [getProperty, get, currentUserID, propertyID, roomID])
 
   return (

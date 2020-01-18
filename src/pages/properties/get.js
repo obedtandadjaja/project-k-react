@@ -11,7 +11,7 @@ function PropertyGetPage(props) {
   const { propertyID } = props.match.params
 
   useEffect(() => {
-    get(currentUserID, propertyID, { eager: true })
+    get(currentUserID, propertyID, { eager: 'Rooms' })
   }, [get, propertyID, currentUserID])
 
   const style = {

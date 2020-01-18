@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/tenants/form'
-import PaymentForm from './../../components/payments/form'
 import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
 import { get } from './../../api/tenants'
@@ -16,7 +15,7 @@ function TenantGetPage(props) {
   useEffect(() => {
     getProperty(currentUserID, propertyID)
     getRoom(currentUserID, propertyID, roomID)
-    get(currentUserID, propertyID, roomID, tenantID, { eager: true })
+    get(currentUserID, propertyID, roomID, tenantID)
   }, [currentUserID, getProperty, propertyID, getRoom, roomID, get, tenantID])
 
   return (
