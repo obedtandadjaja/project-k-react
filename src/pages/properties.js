@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import { all } from './../api/properties'
 
-import { CardStyle } from '../style/styleHelpers'
+import { CardStyle } from '../components/com/cardStyle'
 
 function PropertyPage(props) {
   const { currentUserID, properties, all } = props

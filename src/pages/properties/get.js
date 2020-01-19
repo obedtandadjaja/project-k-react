@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Form from './../../components/properties/form'
 import { get } from './../../api/properties'
 
-import { FormStyle } from './../../style/styleHelpers'
+import { FormStyle } from '../../components/com/formStyle'
 
 function PropertyGetPage(props) {
   const { loading, error, property, get, currentUserID } = props

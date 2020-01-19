@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 import Form from './../../components/properties/form'
 import { edit, get } from './../../api/properties'
 
+import { FormStyle } from '../../components/com/formStyle'
+
 function PropertyEditPage(props) {
   const { getLoading, loading, error, property, edit, get, currentUserID } = props
   const { propertyID } = props.match.params
@@ -31,13 +33,15 @@ function PropertyEditPage(props) {
       {
         !getLoading &&
         property &&
-        <Form
-          initialValues={property}
-          onSubmit={editSubmit}
-          loading={loading}
-          submitError={error}
-          title='Edit property'
-          buttonText='Edit property' />
+        <FormStyle>
+          <Form
+            initialValues={property}
+            onSubmit={editSubmit}
+            loading={loading}
+            submitError={error}
+            title='Edit property'
+            buttonText='Edit property' />
+        </FormStyle>
       }
     </div>
   )

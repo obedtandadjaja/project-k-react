@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
-import { all } from './../api/properties'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 import Donut from '../components/charts/donut'
 
 import {closedTicket, closedTicketLabel, openTicket, openTicketLabel, bgColor} from '../components/charts/mockdata'
 
-function Ticket(props) {
-  const { currentUserID, all } = props
-
-  useEffect(() => {
-    all(currentUserID, { eager: true })
-  }, [all, currentUserID])
+function Maintenance() {
 
   const style = {
     card: {
@@ -23,12 +15,12 @@ function Ticket(props) {
       textAlign: 'center',
     },
     button: {
-      width: '100%',
-      height: '70px',
+      width: '225px',
+      height: '100px',
       marginTop: '2rem',
-      borderRadius: '40px',
       fontFamily: 'Open Sans',
       fontSize: '20px',
+      boxShadow: '0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19' 
     },
     margin: {
       marginTop: '10rem',
@@ -42,23 +34,25 @@ function Ticket(props) {
       <div className='row'>
         <div className='col'>
           <div style={style.card}>
-            <Donut 
+            <Donut
               data={openTicket}
               labels={openTicketLabel}
               color={bgColor}
-              />
-            <button type='button' className="btn btn-primary" style={style.button}>
-              OPEN TICKET
-            </button>
+            />
+            <Link to={{pathname: "/maintenance/open"}}>
+              <button type='button' className="btn btn-primary" style={style.button}>
+                OPEN TICKET
+              </button>
+            </Link>
           </div>
         </div>
         <div className='col'>
           <div style={style.card}>
-            <Donut 
+            <Donut
               data={closedTicket}
               labels={closedTicketLabel}
               color={bgColor}
-              />
+            />
             <button type='button' className="btn btn-primary" style={style.button}>
               CLOSED TICKET
             </button>
@@ -67,14 +61,7 @@ function Ticket(props) {
       </div>
     </div>
   )
+  
 }
 
-const mapStateToProps = state => ({
-  properties: state.property.getIn(['properties']),
-  currentUserID: state.auth.getIn(['currentUserID']),
-})
-const mapDispatchToProps = dispatch => bindActionCreators({
-  all,
-}, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(Ticket)
+export default Maintenance;

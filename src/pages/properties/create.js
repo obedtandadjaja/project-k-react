@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 import Form from './../../components/properties/form'
 import { create } from './../../api/properties'
 
+import { FormStyle } from '../../components/com/formStyle'
+
 function PropertyCreatePage(props) {
   const { loading, error, property, create, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)
@@ -22,12 +24,14 @@ function PropertyCreatePage(props) {
 
   return (
     <div className='propertyCreatePage'>
-      <Form
-        onSubmit={createSubmit}
-        loading={loading}
-        submitError={error}
-        title='Create property'
-        buttonText='Create property' />
+      <FormStyle >
+        <Form
+          onSubmit={createSubmit}
+          loading={loading}
+          submitError={error}
+          title='Create property'
+          buttonText='Create property' />
+      </FormStyle>
     </div>
   )
 }

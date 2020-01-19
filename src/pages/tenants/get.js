@@ -9,6 +9,8 @@ import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
 import { get } from './../../api/tenants'
 
+import { FormStyle } from './../../components/com/formStyle'
+
 function TenantGetPage(props) {
   const { loading, get, getProperty, getRoom, property, room, tenant, currentUserID } = props
   const { propertyID, roomID, tenantID } = props.match.params
@@ -52,11 +54,13 @@ function TenantGetPage(props) {
       {
         !loading &&
         tenant &&
-        <Form
-          initialValues={tenant}
-          loading={loading}
-          title='Tenant information'
-          readonly />
+        <FormStyle>
+          <Form
+            initialValues={tenant}
+            loading={loading}
+            title='Tenant information'
+            readonly />
+        </FormStyle>
       }
 
       {

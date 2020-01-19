@@ -185,35 +185,35 @@ form button[type=submit]:hover {
     text-decoration: none;
 }
 
-/* custom css for dashMenuCard */
-.dashCardMenu{
-    margin: 50px;
-    width: 400px;
-    height: 500px;
-    border-radius: 3%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 
-.dashCardMenu .case{
-    padding: 3em;
+
+/* ripple css, check ripple.js */
+.ripple {
+    position: relative;
+    overflow: hidden;
     height: 100%;
 }
-
-
-.dashCardMenu .header h1{
-    margin-top: 40%;
-    font-family: "Open Sans";
-    font-weight: bold;
-    color: white;
-    font-size: 40px;
+.ripple .rippleContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.ripple .rippleContainer span {
+    transform: scale(0);
+    border-radius: 100%;
+    position: absolute;
+    opacity: 0.75;
+    background-color: #ffffff;
+    animation: ripple 850ms;
 }
 
-.dashCardMenu .body p{
-    margin-top: 3em;
-    font-family: Montserrat;
-    font-size: 30px;
-    color: white;
-    font-weight: 700;
+@keyframes ripple {
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
 }
 
 .gc-orange{
@@ -267,8 +267,9 @@ form button[type=submit]:hover {
     margin-top: 10%;
 }
 
+/* custom css for propertyGetPage*/
 .propertyGetPage .blockCard{
-    margin-left: 2em;
+    margin: 2em;
     min-height: 290px;
 }
 
@@ -277,6 +278,62 @@ form button[type=submit]:hover {
     margin-left: 2em;
     min-height: 290px;
 }
+
+
+/* custom css for tenantsCreatePage */
+.tenantCreatePage form{
+    width: 500px;
+    margin: auto;
+}
+
+.tenantCreatePage form .button{
+    margin-bottom: 4em;
+}
+
+/* custom css for tenantsGetPage */
+.tenantGetPage form .blockCard{
+    margin: 2em;
+}
+
+.tenantGetPage form {
+    margin: auto;
+}
+
+.tenantCreatePage form .button{
+    margin-bottom: 4em;
+}
+
+/* custom styling openTicketPage */
+.openTicketPage .tableWrapper{
+    font-size: 20px;
+    font-family: 'Open Sans';
+    width: 1340px;
+    height: 500px;
+    background: white;
+    border: 3px solid #5AA5FE
+}
+
+.openTicketPage .tableWrapper table{
+    width: 100%;
+    padding: 2px;
+}
+
+.openTicketPage .tableWrapper table button{
+    width: 100px;
+    height: 60px;
+    background: #5B61DE;
+    border: none;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #FFFFFF;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    cursor: pointer;
+}
+
+.openTicketPage .tableWrapper table th{
+    font-weight: 700;
+}
+
 
 @media (max-width: 900px) {
     .propertyGetPage .blockCard{

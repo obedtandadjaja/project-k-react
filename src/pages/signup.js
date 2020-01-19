@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { signup } from './../api/signup'
 import Form from './../components/signup/form'
 
-import {LoginStyle} from './../style/styleHelpers'
+import { LoginStyle } from '../components/com/loginStyle'
 
 function SignupPage(props) {
   const { signup, loading, error, currentUserID } = props

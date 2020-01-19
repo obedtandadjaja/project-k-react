@@ -8,6 +8,8 @@ import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
 import { edit, get } from './../../api/tenants'
 
+import { FormStyle } from './../../components/com/formStyle'
+
 function TenantEditPage(props) {
   const { loading, getLoading, error, edit, getProperty, getRoom, get, property, room, tenant, currentUserID } = props
   const { propertyID, roomID, tenantID } = props.match.params
@@ -57,13 +59,15 @@ function TenantEditPage(props) {
       {
         !getLoading &&
         tenant &&
-        <Form
-          initialValues={tenant}
-          onSubmit={editSubmit}
-          loading={loading}
-          submitError={error}
-          title='Edit tenant'
-          submitText='Edit tenant' />
+        <FormStyle>
+          <Form
+            initialValues={tenant}
+            onSubmit={editSubmit}
+            loading={loading}
+            submitError={error}
+            title='Edit tenant'
+            submitText='Edit tenant' />
+        </FormStyle>
       }
     </div>
   )

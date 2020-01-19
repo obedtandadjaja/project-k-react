@@ -134,14 +134,6 @@ function TenantForm(props) {
                 type='text' />
             </div>
           }
-
-          {
-            !readonly &&
-            <button type='submit' disabled={loading}>
-              { submitText }
-            </button>
-          }
-
           <div className='errorResponse'>
             { submitError && JSON.stringify(submitError) }
           </div>
@@ -162,6 +154,12 @@ function TenantForm(props) {
             component={RepeatedFields} />
         </div>
       </div>
+      {
+        !readonly &&
+        <button className='button' type='submit' disabled={loading}>
+          {submitText}
+        </button>
+      }
     </form>
   )
 }

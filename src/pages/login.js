@@ -5,7 +5,7 @@ import { useHistory, useLocation } from 'react-router'
 
 import { login } from './../api/login'
 import Form from './../components/login/form'
-import { LoginStyle } from '../style/styleHelpers'
+import { LoginStyle } from '../components/com/loginStyle'
 
 function LoginPage(props) {
   let history = useHistory();

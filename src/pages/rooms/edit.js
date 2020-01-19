@@ -7,6 +7,10 @@ import Form from './../../components/rooms/form'
 import { get as getProperty } from './../../api/properties'
 import { edit, get } from './../../api/rooms'
 
+
+import { FormStyle } from '../../components/com/formStyle'
+
+
 function RoomEditPage(props) {
   const { loading, getLoading, error, property, room, edit, getProperty, get, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)
@@ -44,13 +48,15 @@ function RoomEditPage(props) {
       {
         !getLoading &&
         room &&
-        <Form
-          initialValues={room}
-          onSubmit={editSubmit}
-          loading={loading}
-          submitError={error}
-          title='Edit room'
-          buttonText='Edit room' />
+        <FormStyle>
+          <Form
+            initialValues={room}
+            onSubmit={editSubmit}
+            loading={loading}
+            submitError={error}
+            title='Edit room'
+            buttonText='Edit room' />
+        </FormStyle>
       }
     </div>
   )

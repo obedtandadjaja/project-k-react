@@ -7,7 +7,7 @@ import Form from './../../components/rooms/form'
 import { get as getProperty } from './../../api/properties'
 import { get } from './../../api/rooms'
 
-import { FormStyle } from './../../style/styleHelpers'
+import { FormStyle } from '../../components/com/formStyle'
 
 function RoomGetPage(props) {
   const { loading, error, property, room, getProperty, get, currentUserID } = props
