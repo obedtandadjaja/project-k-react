@@ -11,6 +11,10 @@ const Styles = styled.div`
     border: 3px solid #5AA5FE;
     text-align: center;
 
+    #ticket-id{
+      position: sticky;
+    }
+
     tr {
       :last-child {
         td {

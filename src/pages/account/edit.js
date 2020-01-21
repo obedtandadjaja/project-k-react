@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux'
 import Form from './../../components/users/form'
 import { edit, get } from './../../api/users'
 
+import {FormStyle} from './../../components/com/formStyle'
+
 function AccountEditPage(props) {
   const { getLoading, loading, error, edit, get, user, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)
@@ -27,13 +29,15 @@ function AccountEditPage(props) {
       {
         !getLoading &&
         user &&
-        <Form
-          initialValues={user}
-          onSubmit={editSubmit}
-          loading={loading}
-          submitError={error}
-          title='Edit user'
-          submitText='Edit user' />
+        <FormStyle>
+          <Form
+            initialValues={user}
+            onSubmit={editSubmit}
+            loading={loading}
+            submitError={error}
+            title='Edit user'
+            submitText='Edit user' />
+        </FormStyle>
       }
     </div>
   )

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 import Form from './../../components/users/form'
 import { get } from './../../api/users'
+import { FormStyle } from '../../components/com/formStyle'
 
 function AccountGetPage(props) {
   const { loading, error, user, get, currentUserID } = props
@@ -24,12 +25,15 @@ function AccountGetPage(props) {
       {
         !loading &&
         user &&
-        <Form
-          initialValues={user}
-          loading={loading}
-          submitError={error}
-          title='User information'
-          readonly />
+        <FormStyle>
+          <Form
+            initialValues={user}
+            loading={loading}
+            submitError={error}
+            title='User information'
+            readonly />
+        </FormStyle>
+        
       }
     </div>
   )
