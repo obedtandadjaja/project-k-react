@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 import { logout } from './../actions/authActions'
 import './header.css'
 
+import{ Navbar, Nav } from 'react-bootstrap';
+import styled from 'styled-components';
+
 function Header(props) {
   const { currentUserID } = props
   const userLinks = currentUserID ?
@@ -37,36 +40,37 @@ function Header(props) {
     },
   }
 
+  const Hover = styled.div`
+    color: white;
+    :hover {
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  `
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <Link to={{ pathname: '/' }} className='navbar-brand' style={style.title}>
-          PROJECT K
-        </Link>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-        <div className='collapse navbar-collapse' id="navbarToggler">
-          <ul className='navbar-nav ml-auto'>
-            {
-              userLinks.map((link, i) => (
-                <li className="nav-item">
-                  <Link key={i} to={{ pathname: link.url }} className="nav-link">
-                    {link.text}
-                  </Link>
-                </li>
-              ))
-            }
-            {
-              currentUserID &&
-              <li className="nav-item">
-                <a className="nav-link" key='logout' onClick={submitLogout} href='#'>
-                  Logout
-              </a>
-              </li>
-            }
-          </ul>
-        </div>
-    </nav>
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Brand href="/" style={style.title}>PROJECT K</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="ml-auto">
+          {
+            userLinks.map((link, i) => (
+              <Nav.Link key={i} href={link.url}>
+                {link.text}
+              </Nav.Link>
+            ))
+          }
+          {
+            currentUserID &&
+            <Nav.Link key='logout' onClick={submitLogout} href='#'>
+              Logout
+            </Nav.Link>
+          }
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   )
 }
 

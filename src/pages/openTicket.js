@@ -8,10 +8,11 @@ import styled from 'styled-components'
 
 
 import OpenTable from '../components/table/openTable'
+import MaterialTableOpen from './../components/table/materialtable'
 
 const Style = styled.div`
   /* custom styling openTicketPage */
-  .tableWrapper{
+  ${'' /* .tableWrapper{
       font-size: 20px;
       font-family: 'Open Sans';
       width: 1340px;
@@ -43,7 +44,7 @@ const Style = styled.div`
 
   .tableWrapper table th{
       font-weight: 700;
-  }
+  } */}
 
   .searchWrapper{
       display: flex;
@@ -88,7 +89,12 @@ function OpenTicket() {
             </div>
           </div>
           <div className='row'>
-            <OpenTable data={data}/>
+            <MaterialTableOpen />
+          </div>
+          <div className='row'>
+            <OpenTable 
+              data={data}
+            />
           </div>
         </div>
       </div>

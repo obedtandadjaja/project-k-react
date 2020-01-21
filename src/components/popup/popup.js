@@ -5,8 +5,8 @@ import styled from 'styled-components'
 const Styled = styled.div`
   .popup-content{
     max-width: 400px;
-    height: 400px;
-    border-radius: 5%;
+    min-height: 200px;
+    border-radius: 10px;
     border: 10px;
     border-color: #0069D9;
   }
@@ -38,6 +38,27 @@ const Styled = styled.div`
     border-radius: 18px;
     border: 1px solid #cfcece;
   }
+
+  .popupCard .body p{ 
+    text-align: center;
+  }
+
+  .popupCard .body .btn-wrapper{
+    margin: auto;
+    text-align: center;
+  }
+
+  .popupCard .body .btn-wrapper {
+    margin-top: 60px;
+  }
+
+  .popupCard .body .btn-wrapper .btn-cancel{
+    background: #FE5A5A;
+  }
+
+  .popupCard .body .btn-wrapper button{
+    margin: 10px;
+  }
 `
 
 function PopupClose(props) {
@@ -53,10 +74,14 @@ function PopupClose(props) {
             <div className="popupCard">
               <label className='close' onClick={close}>&times;</label>
               <div className='header'>
-                <h1>{header}</h1>
+                <h3>{header}</h3>
               </div>
               <div className='body'>
                 <p>{body}</p>
+                <div className='btn-wrapper'>
+                  <button className='btn-confirm'>Confirm</button>
+                  <button className='btn-cancel' onClick={close}>Cancel</button>
+                </div>
               </div>
             </div>
           )

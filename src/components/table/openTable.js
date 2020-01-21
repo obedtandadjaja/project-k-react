@@ -1,3 +1,5 @@
+// https://material-ui.com/components/tables/#sorting-amp-selecting
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -73,8 +75,11 @@ function OpenTable(props) {
                   <TableCell>
                     <Popup 
                       button='Close'
-                      header='Notice'
-                      body='This is the notice'
+                      header='Close Ticket?'
+                      body='
+                      Closed tickets will be moved to the
+                      "Closed Ticket" section,  
+                      and can be reopened at a later date'
                     />
                   </TableCell>
                 </TableRow>
