@@ -34,7 +34,7 @@ maintenance request buat satu room:
 GET /api/v1/properties/{property_id}/rooms/{room_id}/maintenance_requests - POST, PUT, DELETE options are available too
 
 create room with types:
-/api/v1/properties/{property_id}/rooms/batch
+POST /api/v1/properties/{property_id}/rooms/batch
 
 type BatchCreateRooms struct {
 	PriceAmount     int        `json:"priceAmount"`

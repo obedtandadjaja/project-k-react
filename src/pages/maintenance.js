@@ -5,7 +5,7 @@ import Donut from '../components/charts/donut'
 
 import {closedTicket, closedTicketLabel, openTicket, openTicketLabel, bgColor} from '../components/charts/mockdata'
 
-function Maintenance() {
+function MaintenancePage() {
 
   const style = {
     card: {
@@ -64,4 +64,4 @@ function Maintenance() {
   
 }
 
-export default Maintenance;
+export default MaintenancePage;
