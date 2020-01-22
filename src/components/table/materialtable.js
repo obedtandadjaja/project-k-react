@@ -50,12 +50,12 @@ function MaterialTableOpen(props) {
           {
             icon: 'edit',
             tooltip: 'edit ticket',
-            onClick: (event) => (window.location.href = "/"),
+            onClick: () => (window.location.href = "/"),
           },
           {
             icon: 'delete',
             tooltip: 'close ticket',
-            onClick: (event) => (window.location.href = "/"),
+            onClick: () => (window.location.href = "/"),
           },
         ]}
       />

@@ -20,7 +20,8 @@ import PropertyGetPage from './pages/properties/get'
 import PropertyEditPage from './pages/properties/edit'
 import PropertyCreatePage from './pages/properties/create'
 import MaintenancePage from './pages/maintenance'
-import OpenTicketPage from './pages/maintenance/openTicket'
+import OpenTicketPage from './pages/maintenances/openTicket'
+import MaintenanceCreatePage from './pages/maintenances/create'
 
 import './App.css'
 import './common.css'
@@ -55,6 +56,7 @@ function App(props) {
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID/edit' component={TenantEditPage} />
                 <Route exact path='/maintenance' component={MaintenancePage} />
                 <Route exact path='/maintenance/open' component={OpenTicketPage} />
+                <Route exact path='/maintenance/open/create' component={MaintenanceCreatePage} />
                 <Route component={MissingPage} />
               </Switch>
             }

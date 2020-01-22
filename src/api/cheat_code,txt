@@ -22,10 +22,6 @@ type MaintenanceRequest struct {
 }
 
 variasi:
-liat maintenance request buat satu property:
-
-liat maintenance request buat satu room:
-
 
 maintenance request buat satu property:
 GET /api/v1/properties/{property_id}/maintenance_requests - POST, PUT, DELETE options are available too

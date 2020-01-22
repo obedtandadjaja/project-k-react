@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { data } from './../../components/charts/mockdata'
-import { all } from './../../api/maintenance'
+import { all } from '../../api/maintenance'
 
 import MaterialTableOpen from '../../components/table/materialTable'
 
@@ -26,7 +26,7 @@ function OpenTicketPage(props) {
     all(currentUserID, { eager: 'MaintenanceRequest' })
   }, [all, currentUserID])
 
-  console.log([maintenances]);
+  // console.log([maintenances]);
 
   return(
     <Style>
@@ -34,7 +34,9 @@ function OpenTicketPage(props) {
         <div className='container'>
           <div className='row'>
             <div className='col'>
-              <button className="btn btn-primary">Add Ticket</button>
+              <Link className="btn btn-primary" to={{ pathname: '/maintenance/open/create' }}>
+                Add Ticket
+              </Link>
             </div>
           </div>
           <div className='row'>
@@ -49,7 +51,7 @@ function OpenTicketPage(props) {
 }
 
 const mapStateToProps = state => ({
-  maintenances: state.property.getIn(['maintenances']),
+  maintenances: state.maintenance.getIn(['maintenances']),
   currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
