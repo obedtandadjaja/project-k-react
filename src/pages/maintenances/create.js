@@ -13,8 +13,6 @@ function MaintenanceCreatePage(props) {
 
   const createSubmit = (values) => {
     setSubmitted(true)
-    // console.log(values)
-    // console.log(currentUserID)
     create(currentUserID, values)
     
   }
@@ -22,7 +20,6 @@ function MaintenanceCreatePage(props) {
   useEffect(() => {
     if (!loading && !error && submitted && maintenance) {
       props.history.push(`/maintenance/open`)
-      // console.log(maintenance)
     }
   }, [props.history, loading, error, submitted, maintenance])
 

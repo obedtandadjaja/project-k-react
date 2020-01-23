@@ -39,11 +39,11 @@ export function edit(userID, data) {
   }
 }
 
-export function all(userID, queryParams) {
+export function all(userID) {
   return dispatch => {
     dispatch(allBegin())
 
-    return API.client.get(`/api/v1/user/maintenance_requests`, { params: queryParams }).then(
+    return API.client.get(`/api/v1/user/maintenance_requests`).then(
       res => dispatch(allSuccess(res.data)),
       err => dispatch(allFailure(err.response))
     )
@@ -60,6 +60,31 @@ export function get(userID, maintenanceID, queryParams) {
     )
   }
 }
+
+// from /api/properties
+export function getAllProperties(userID, queryParams) {
+  return dispatch => {
+    dispatch(allBegin())
+
+    return API.client.get(`/api/v1/properties`, { params: queryParams }).then(
+      res => dispatch(allSuccess(res.data)),
+      err => dispatch(allFailure(err.response))
+    )
+  }
+}
+
+// from /api/rooms
+export function getAllRoomsFromProperty(userID, propertyID, queryParams) {
+  return dispatch => {
+    dispatch(allBegin())
+
+    return API.client.get(`/api/v1/properties/${propertyID}/rooms`, { params: queryParams }).then(
+      res => dispatch(allSuccess(res.data)),
+      err => dispatch(allFailure(err.response))
+    )
+  }
+}
+
 
 export function remove(userID, maintenanceID) {
   return dispatch => {

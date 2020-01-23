@@ -14,6 +14,9 @@ function PropertyPage(props) {
     all(currentUserID, { eager: 'Rooms, Users' })
   }, [all, currentUserID])
 
+  console.log(currentUserID)
+  console.log(properties)
+
   const style = {
 
     title: {

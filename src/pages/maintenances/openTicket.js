@@ -23,7 +23,7 @@ function OpenTicketPage(props) {
   const { currentUserID, maintenances, all } = props;
 
   useEffect(() => {
-    all(currentUserID, { eager: 'MaintenanceRequest' })
+    all(currentUserID)
   }, [all, currentUserID])
 
   // console.log([maintenances]);

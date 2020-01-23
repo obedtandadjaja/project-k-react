@@ -1,9 +1,14 @@
-import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import React, {useEffect, useState} from 'react'
+import { Field, reduxForm, formValueSelector  } from 'redux-form'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import { required } from '../../formHelpers/validators'
 import renderField from '../../formHelpers/renderField'
 import renderSelectField from '../../formHelpers/renderSelectField'
+
+import { all as fetchProperties } from './../../api/properties'
+import { all as fetchRooms } from './../../api/rooms'
 
 import styled from 'styled-components'
 
@@ -13,9 +18,32 @@ const Style = styled.div`
   }
 `
 
-function MaintenanceForm(props) {
-  const { handleSubmit, readonly, submitError, loading, title, buttonText } = props
 
+
+function MaintenanceForm(props) {
+  const { currentUserID, fetchProperties, hasPropertyValue, handleSubmit, readonly, submitError, loading, title, buttonText} = props
+  const [ properties, setProperties ] = useState( null )
+  const [ rooms, setRooms ] = useState( null )
+
+  useEffect( () => {
+    fetchAllProperties()
+    if(properties != null){
+      fetchAllRoomsFromProperty()
+    }
+  }, [ fetchProperties, currentUserID, hasPropertyValue ] )
+
+  async function fetchAllProperties() {
+    const dispatch = await fetchProperties(currentUserID, { eager: 'Rooms, Users' })
+    setProperties(dispatch.payload)
+  }
+
+  async function fetchAllRoomsFromProperty() {
+    const dispatch = await fetchRooms(currentUserID, hasPropertyValue, { eager: 'Tenants' })
+    setRooms(dispatch.payload)
+  }
+
+  
+  
   return (
     <Style>
       <form onSubmit={handleSubmit}>
@@ -26,53 +54,16 @@ function MaintenanceForm(props) {
               <div className="blockHeader">
                 {title}
               </div>
+
               <div className="blockBody">
-                <Field
-                  name='date'
-                  label='Date'
+              <Field
+                  name='title'
+                  label='Title'
                   component={renderField}
                   validate={[required]}
                   readonly={readonly}
-                  type='text' />
-
-                <Field
-                  name='property'
-                  label='Property'
-                  component={renderSelectField}
-                  validate={[required]}
-                  readonly={readonly}
                   defaultEmpty
-                  options={[
-                    //static data, should retrieve form sql join
-                    ['propertyA', 'Property A'],
-                    ['propertyB', 'Property B'],
-                  ]} />
-
-                <Field
-                  name='room'
-                  label='Room'
-                  component={renderSelectField}
-                  validate={[required]}
-                  readonly={readonly}
-                  defaultEmpty
-                  options={[
-                    //static data, should retrieve form sql join
-                    ['room1', 'Room 101'],
-                    ['room2', 'Room 102'],
-                  ]} />
-
-                <Field
-                  name='category'
-                  label='Category'
-                  component={renderSelectField}
-                  validate={[required]}
-                  readonly={readonly}
-                  defaultEmpty
-                  options={[
-                    //static data, should retrieve form sql join
-                    ['lights', 'Lighting'],
-                    ['water', 'Water Faucet'],
-                  ]} />
+                    />
 
                 <Field
                   name='description'
@@ -82,6 +73,33 @@ function MaintenanceForm(props) {
                   readonly={readonly}
                   type='text' />
 
+                { 
+                  properties &&
+                  <Field
+                  name='propertyID'
+                  label='Property'
+                  component={renderSelectField}
+                  validate={[required]}
+                  readonly={readonly}
+                  defaultEmpty
+                  options={properties.map(property => {
+                    return(
+                      [property.id, property.name]
+                    )
+                  })} />
+                }
+
+                {
+                  hasPropertyValue && rooms &&
+                  <Field
+                    name='roomID'
+                    label='Room'
+                    component={renderSelectField}
+                    validate={[required]}
+                    readonly={readonly}
+                    defaultEmpty
+                    options={['test', 'Test']} />
+                }
                 <div className='errorResponse'>
                   {submitError && JSON.stringify(submitError)}
                 </div>
@@ -108,4 +126,18 @@ let maintenanceForm = reduxForm({
   enabledReinitialize: true,
 })(MaintenanceForm)
 
-export default maintenanceForm
+const mapStateToProps = state => {
+  const selector = formValueSelector('maintenance')
+  const hasPropertyValue = selector(state, 'propertyID')
+  return{
+    hasPropertyValue,
+    currentUserID: state.auth.getIn(['currentUserID']),
+  }
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchProperties,
+  fetchRooms,
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(maintenanceForm)
