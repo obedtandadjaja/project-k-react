@@ -21,13 +21,14 @@ const Style = styled.div`
 
 
 function MaintenanceForm(props) {
-  const { currentUserID, fetchProperties, hasPropertyValue, handleSubmit, readonly, submitError, loading, title, buttonText} = props
+  const { currentUserID, fetchProperties, fetchRooms, hasPropertyValue, handleSubmit, readonly, submitError, loading, title, buttonText} = props
   const [ properties, setProperties ] = useState( null )
   const [ rooms, setRooms ] = useState( null )
 
   useEffect( () => {
     fetchAllProperties()
     if(properties != null){
+      console.log('ada')
       fetchAllRoomsFromProperty()
     }
   }, [ fetchProperties, currentUserID, hasPropertyValue ] )
@@ -54,24 +55,7 @@ function MaintenanceForm(props) {
               <div className="blockHeader">
                 {title}
               </div>
-
               <div className="blockBody">
-              <Field
-                  name='title'
-                  label='Title'
-                  component={renderField}
-                  validate={[required]}
-                  readonly={readonly}
-                  defaultEmpty
-                    />
-
-                <Field
-                  name='description'
-                  label='Description'
-                  component={renderField}
-                  validate={[required]}
-                  readonly={readonly}
-                  type='text' />
 
                 { 
                   properties &&
@@ -98,8 +82,30 @@ function MaintenanceForm(props) {
                     validate={[required]}
                     readonly={readonly}
                     defaultEmpty
-                    options={['test', 'Test']} />
+                    options={rooms.map(room => {
+                      return (
+                        [room.id, room.name]
+                      )
+                    })} />
                 }
+
+                <Field
+                  name='title'
+                  label='Title'
+                  component={renderField}
+                  validate={[required]}
+                  readonly={readonly}
+                  defaultEmpty
+                />
+
+                <Field
+                  name='description'
+                  label='Description'
+                  component={renderField}
+                  validate={[required]}
+                  readonly={readonly}
+                  type='text' />
+
                 <div className='errorResponse'>
                   {submitError && JSON.stringify(submitError)}
                 </div>

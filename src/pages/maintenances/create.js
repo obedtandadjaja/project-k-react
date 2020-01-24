@@ -13,6 +13,7 @@ function MaintenanceCreatePage(props) {
 
   const createSubmit = (values) => {
     setSubmitted(true)
+    console.log(values)
     create(currentUserID, values)
     
   }
