@@ -10,10 +10,8 @@ import Donut from '../components/charts/donut'
 import {closedTicket, closedTicketLabel, openTicket, bgColor} from '../components/charts/mockdata'
 
 function MaintenancePage(props) {
-  const { all, currentUserID,} = props;
-  const [pendingLabel, setPendingLabel] = useState([]);
-  const [pendingData, setPendingData] = useState([]);
-
+  const { all, currentUserID, pendingData, closedData} = props;
+  const [pending, setPending] = useState( );
   const [closed, setClosed] = useState([]);
 
   // var d = [pendingLabel];
@@ -36,11 +34,13 @@ function MaintenancePage(props) {
     var label_o = []
     var labelOpen = []
     var dataOpen = []
+    var countOpen = 0
     
     //close
     var label_c = []
     var labelClose = []
     var dataClose = []
+    var countClose = 0
 
     // get label
     value.map(ticket => {
@@ -92,10 +92,8 @@ function MaintenancePage(props) {
 
 
     // set state according ly
-    setPendingLabel(labelOpen)
-    setPendingData(dataOpen)
-
-    setClosed({ labels: labelClose, data: dataClose })
+    setPending({ labels: labelOpen, data: dataOpen, count: label_o.length })
+    setClosed({ labels: labelClose, data: dataClose, count: label_c.length })
   }
 
   const style = {
@@ -125,11 +123,12 @@ function MaintenancePage(props) {
       <div className='row'>
         <div className='col'>
           <div style={style.card}>
-            <Donut
-              data={pendingData}
-              label={pendingLabel}
-              color={bgColor}
-            />
+            {pending &&
+              <Donut
+                datasets={pending}
+                color={bgColor}
+              />
+            }
             <Link to={{pathname: "/maintenance/open"}}>
               <button type='button' className="btn btn-primary" style={style.button}>
                 OPEN TICKET
@@ -139,11 +138,12 @@ function MaintenancePage(props) {
         </div>
         <div className='col'>
           <div style={style.card}>
-            <Donut
-              data={closedTicket}
-              labels={closedTicketLabel}
-              color={bgColor}
-            />
+
+              <Donut
+                datasets={{labels: [], data: [], count: 0}}
+                color={bgColor}
+              />
+
             <button type='button' className="btn btn-primary" style={style.button}>
               CLOSED TICKET
             </button>
@@ -157,6 +157,7 @@ function MaintenancePage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
+  maintenances: state.maintenance.getIn(['maintenances'])
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

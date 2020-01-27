@@ -8,7 +8,7 @@ import renderField from '../../formHelpers/renderField'
 import renderSelectField from '../../formHelpers/renderSelectField'
 
 import { all as fetchProperties } from './../../api/properties'
-import { all as fetchRooms } from './../../api/rooms'
+import { all as fetchRooms, get } from './../../api/rooms'
 
 import styled from 'styled-components'
 
@@ -27,22 +27,24 @@ function MaintenanceForm(props) {
     hasPropertyValue, 
     handleSubmit, 
     readonly, 
+    edit,
     submitError, 
     loading, 
     title, 
-    buttonText, 
+    buttonText,
+    roomName, 
     initialValues} = props
 
   const [ properties, setProperties ] = useState( null )
   const [ rooms, setRooms ] = useState( null )
 
-  useEffect( () => {
+  useEffect(() => {
     fetchAllProperties()
-    if(properties != null){
+    if (properties != null) {
       console.log('ada')
       fetchAllRoomsFromProperty()
     }
-  }, [ fetchProperties, currentUserID, hasPropertyValue ] )
+  }, [fetchProperties, currentUserID, hasPropertyValue])
 
   async function fetchAllProperties() {
     const dispatch = await fetchProperties(currentUserID, { eager: 'Rooms, Users' })
@@ -54,7 +56,6 @@ function MaintenanceForm(props) {
     setRooms(dispatch.payload)
   }
 
-  console.log(initialValues)
   
   return (
     <Style>
@@ -75,15 +76,15 @@ function MaintenanceForm(props) {
                   label='Property'
                   component={renderSelectField}
                   validate={[required]}
-                  readonly={readonly}
+                  readonly={edit}
                   defaultEmpty
                   options={properties.map(property => {
                     return(
                       [property.id, property.name]
                     )
                   })} />
+                  
                 }
-
                 {
                   hasPropertyValue && rooms &&
                   <Field
@@ -99,7 +100,6 @@ function MaintenanceForm(props) {
                       )
                     })} />
                 }
-
                 <Field
                   name='title'
                   label='Title'

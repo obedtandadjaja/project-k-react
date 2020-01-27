@@ -10,12 +10,13 @@ class Donut extends Component {
   constructor(props) {
     super(props);
     this.chartRef = React.createRef();
-    console.log(this.props.data)
-    console.log(this.props.data)
   }
 
 
   componentDidMount() {
+
+
+
       const myChartRef = this.chartRef.current.getContext("2d");
       
       // this is a chart plugin, will move this in the future
@@ -66,11 +67,11 @@ class Donut extends Component {
       new Chart(myChartRef, {
         type: 'doughnut',
         data: {
-          labels: this.props.data.labels,
+          labels: this.props.datasets.labels,
           datasets: [{
               backgroundColor: this.props.color,
               borderWidth: 0,
-              data: this.props.data.data,
+            data: this.props.datasets.data,
           }]
         },
         options: { 
@@ -83,10 +84,11 @@ class Donut extends Component {
           responsive: false,
           elements: { 
             center: { 
-              text: '18',
+              // need to fix this when data is undefined
+              text: this.props.datasets.count,
               color: '#36A2EB', //Default black
               fontStyle: 'Montserrat', //Default Arial
-              sidePadding: 40 //Default 20 (as a percentage)
+              sidePadding: 50 //Default 20 (as a percentage)
             }
           }
         }

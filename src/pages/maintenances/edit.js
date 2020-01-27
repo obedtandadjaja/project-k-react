@@ -4,11 +4,12 @@ import { bindActionCreators } from 'redux'
 
 import Form from '../../components/maintenances/form'
 import { get, edit } from '../../api/maintenance'
+import { get as getRoom } from '../../api/rooms'
 
 import { FormStyle } from '../../components/com/formStyle'
 
 function MaintenanceEditPage(props) {
-  const { getLoading, loading, error, maintenance, edit, currentUserID } = props
+  const { getLoading, loading, error, maintenance, edit, get, getRoom, currentUserID, room } = props
   const { maintenanceID } = props.match.params
   const [submitted, setSubmitted] = useState(false)
 
@@ -19,10 +20,18 @@ function MaintenanceEditPage(props) {
 
   // component did mount fetch maintenance by id
   useEffect(() => {
-    get(currentUserID,  maintenanceID)
-    console.log(maintenanceID)
+    get(currentUserID, maintenanceID)
   }, [get, currentUserID, maintenanceID])
 
+
+  // component did update
+  useEffect(() => {
+    if (maintenance != null) {
+      getRoom(currentUserID, maintenance.propertyID, maintenance.roomID, { eager: 'Tenants' })
+    }
+  }, [maintenance])
+
+  // componnet did unmount
   useEffect(() => {
     if (!loading && !error ) {
       submitted &&
@@ -37,9 +46,12 @@ function MaintenanceEditPage(props) {
     {
       !getLoading &&
       maintenance &&
+      room && 
       <FormStyle >
         <Form
+          edit={true}
           initialValues={maintenance}
+          roomName={room.name}
           onSubmit={editSubmit}
           loading={loading}
           submitError={error}
@@ -57,10 +69,13 @@ const mapStateToProps = state => ({
   error: state.maintenance.getIn(['createError']),
   maintenance: state.maintenance.getIn(['maintenance']),
   currentUserID: state.auth.getIn(['currentUserID']),
+  room: state.room.getIn(['room'])
+
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   edit,
   get,
+  getRoom,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceEditPage)

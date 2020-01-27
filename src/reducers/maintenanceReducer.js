@@ -18,7 +18,8 @@ import {
 } from '../actions/maintenanceActions'
 
 const initialState = Map({
-    maintenance: [],
+    maintenances: [],
+    maintenance: null,
     pending: [],
     close: [],
     createLoading: false,
@@ -91,7 +92,7 @@ const initialState = Map({
     case ALL_SUCCESS:
       return state.merge({
         allLoading: false,
-        maintenance: action.payload,
+        maintenances: action.payload,
       })
   
     case ALL_FAILURE:

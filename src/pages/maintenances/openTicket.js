@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { all } from '../../api/maintenance'
+import { all, remove } from '../../api/maintenance'
 import { get as getProperty } from '../../api/properties'
 import { get as getRoom } from '../../api/rooms'
 import { get as getUser } from '../../api/users'
@@ -23,12 +23,17 @@ const Style = styled.div`
 `
 
 function OpenTicketPage(props) {
-  const { currentUserID, all, getProperty, getRoom, getUser } = props;
+  const { currentUserID, all, getProperty, getRoom, getUser, remove } = props;
   const [maintenances, setMaintenances] = useState([]);
+  const [del, setDel] = useState(null)
 
   useEffect(() => {
-    fetchOpenTicket()
-  }, [currentUserID, all])
+    if(del == null){
+      setMaintenances([])
+      fetchOpenTicket()
+    }
+    setDel(null)
+  }, [currentUserID, all, del])
 
   async function fetchOpenTicket() {
     const dispatch = await all(currentUserID)
@@ -46,6 +51,7 @@ function OpenTicketPage(props) {
 
       // format the date with momentjs  
       // further date details can be put here
+      // still need to fix hours ago ... .fromNow()
       var hour = moment(maintenance.createdAt, 'h').fromNow()
       var date = moment(maintenance.createdAt).format("MMM Do [, ] dddd")
 
@@ -61,6 +67,15 @@ function OpenTicketPage(props) {
 
       setMaintenances(prevState => [...prevState, dataObj]);
     })
+  }
+
+  async function deleteRow(rowData){
+    const dispatch = await remove(currentUserID, rowData.id)
+    var res = dispatch.payload
+    if(res != null) {
+      alert("successfully delete user")
+      setDel(true)
+    }
   }
 
   return(
@@ -86,7 +101,7 @@ function OpenTicketPage(props) {
                 {
                   icon: 'delete',
                   tooltip: 'close ticket',
-                  onClick: () => (window.location.href = "/maintenance/open/delete"),
+                  onClick: (event, rowData) => (deleteRow(rowData)),
                 },
               ]}
             />
@@ -99,6 +114,7 @@ function OpenTicketPage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
+  maintenances: state.maintenance.getIn(['maintenances'])
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -106,6 +122,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getProperty,
   getRoom,
   getUser,
+  remove,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(OpenTicketPage)
