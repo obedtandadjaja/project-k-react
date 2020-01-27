@@ -8,21 +8,20 @@ import { create } from '../../api/maintenance'
 import { FormStyle } from '../../components/com/formStyle'
 
 function MaintenanceCreatePage(props) {
-  const { loading, error, maintenance, create, currentUserID } = props
+  const { loading, error, create, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)
 
   const createSubmit = (values) => {
     setSubmitted(true)
-    console.log(values)
     create(currentUserID, values)
     
   }
 
   useEffect(() => {
-    if (!loading && !error && submitted && maintenance) {
+    if (!loading && !error && submitted) {
       props.history.push(`/maintenance/open`)
     }
-  }, [props.history, loading, error, submitted, maintenance])
+  }, [props.history, loading, error, submitted])
 
   return (
     <div className='propertyCreatePage'>
@@ -32,7 +31,7 @@ function MaintenanceCreatePage(props) {
           loading={loading}
           submitError={error}
           title='Create  Maintenance Request'
-          buttonText='Create Request' />
+          buttonText='Create' />
       </FormStyle>
     </div>
   )
@@ -41,7 +40,6 @@ function MaintenanceCreatePage(props) {
 const mapStateToProps = state => ({
   loading: state.maintenance.getIn(['createLoading']),
   error: state.maintenance.getIn(['createError']),
-  maintenance: state.maintenance.getIn(['maintenance']),
   currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({

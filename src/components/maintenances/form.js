@@ -18,10 +18,21 @@ const Style = styled.div`
   }
 `
 
-
-
 function MaintenanceForm(props) {
-  const { currentUserID, fetchProperties, fetchRooms, hasPropertyValue, handleSubmit, readonly, submitError, loading, title, buttonText} = props
+
+  const { 
+    currentUserID, 
+    fetchProperties, 
+    fetchRooms, 
+    hasPropertyValue, 
+    handleSubmit, 
+    readonly, 
+    submitError, 
+    loading, 
+    title, 
+    buttonText, 
+    initialValues} = props
+
   const [ properties, setProperties ] = useState( null )
   const [ rooms, setRooms ] = useState( null )
 
@@ -43,7 +54,7 @@ function MaintenanceForm(props) {
     setRooms(dispatch.payload)
   }
 
-  
+  console.log(initialValues)
   
   return (
     <Style>

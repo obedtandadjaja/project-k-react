@@ -18,8 +18,9 @@ import {
 } from '../actions/maintenanceActions'
 
 const initialState = Map({
-    maintenance: null,
-    maintenances: [],
+    maintenance: [],
+    pending: [],
+    close: [],
     createLoading: false,
     createError: false,
     editLoading: false,
@@ -40,7 +41,8 @@ const initialState = Map({
     case CREATE_SUCCESS:
       return state.merge({
         createLoading: false,
-        maintenance: action.payload
+        maintenance: action.payload,
+        pending: action.payload
       })
   
     case CREATE_FAILURE:
@@ -56,7 +58,8 @@ const initialState = Map({
     case EDIT_SUCCESS:
       return state.merge({
         editLoading: false,
-        maintenance: action.payload
+        maintenance: action.payload,
+        pending: action.payload
       })
   
     case EDIT_FAILURE:
@@ -100,7 +103,9 @@ const initialState = Map({
       return state.merge({
         removeLoading: true
       })
-  
+    
+    // the posibility of adding a CLOSE reducers
+
     case REMOVE_SUCCESS:
       return state.merge({
         removeLoading: false,

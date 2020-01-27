@@ -10,6 +10,8 @@ class Donut extends Component {
   constructor(props) {
     super(props);
     this.chartRef = React.createRef();
+    console.log(this.props.data)
+    console.log(this.props.data)
   }
 
 
@@ -59,15 +61,16 @@ class Donut extends Component {
         }
       });
 
+    
+
       new Chart(myChartRef, {
         type: 'doughnut',
         data: {
-          labels: this.props.labels,
+          labels: this.props.data.labels,
           datasets: [{
-              label: 'Tickets',
               backgroundColor: this.props.color,
               borderWidth: 0,
-              data: this.props.data,
+              data: this.props.data.data,
           }]
         },
         options: { 

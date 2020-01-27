@@ -178,7 +178,7 @@ form button[type=submit]:hover {
     background-color: white;
     margin: 10px 0;
     color: #575757;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .home .col a:hover{

@@ -70,6 +70,43 @@ export const allFailure = error => ({
   payload: { error }
 })
 
+// the CLOSE action
+export const CLOSE_BEGIN = 'CLOSE_BEGIN'
+export const CLOSE_SUCCESS = 'CLOSE_SUCCESS'
+export const CLOSE_FAILURE = 'CLOSE_FAILURE'
+
+export const closeBegin = () => ({
+  type: CLOSE_BEGIN
+})
+
+export const closeSuccess = payload => ({
+  type: CLOSE_SUCCESS,
+  payload: payload
+})
+
+export const closeFailure = error => ({
+  type: CLOSE_FAILURE,
+  payload: { error }
+})
+
+export const OPEN_BEGIN = 'OPEN_BEGIN'
+export const OPEN_SUCCESS = 'OPEN_SUCCESS'
+export const OPEN_FAILURE = 'OPEN_FAILURE'
+
+export const openBegin = () => ({
+  type: OPEN_BEGIN
+})
+
+export const openSuccess = payload => ({
+  type: OPEN_SUCCESS,
+  payload: payload
+})
+
+export const openFailure = error => ({
+  type: OPEN_FAILURE,
+  payload: { error }
+})
+
 export const REMOVE_BEGIN = 'MAINTENANCE_REMOVE_BEGIN'
 export const REMOVE_SUCCESS = 'MAINTENANCE_REMOVE_SUCCESS'
 export const REMOVE_FAILURE = 'MAINTENANCE_REMOVE_FAILURE'
