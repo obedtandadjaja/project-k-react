@@ -20,8 +20,6 @@ import {
 const initialState = Map({
     maintenances: [],
     maintenance: null,
-    pending: [],
-    close: [],
     createLoading: false,
     createError: false,
     editLoading: false,
@@ -43,7 +41,6 @@ const initialState = Map({
       return state.merge({
         createLoading: false,
         maintenance: action.payload,
-        pending: action.payload
       })
   
     case CREATE_FAILURE:
@@ -60,7 +57,6 @@ const initialState = Map({
       return state.merge({
         editLoading: false,
         maintenance: action.payload,
-        pending: action.payload
       })
   
     case EDIT_FAILURE:

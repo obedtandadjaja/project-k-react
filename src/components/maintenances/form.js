@@ -7,8 +7,9 @@ import { required } from '../../formHelpers/validators'
 import renderField from '../../formHelpers/renderField'
 import renderSelectField from '../../formHelpers/renderSelectField'
 
+
+import { all as fetchRooms } from './../../api/rooms'
 import { all as fetchProperties } from './../../api/properties'
-import { all as fetchRooms, get } from './../../api/rooms'
 
 import styled from 'styled-components'
 
@@ -22,7 +23,6 @@ function MaintenanceForm(props) {
 
   const { 
     currentUserID, 
-    fetchProperties, 
     fetchRooms, 
     hasPropertyValue, 
     handleSubmit, 
@@ -32,30 +32,25 @@ function MaintenanceForm(props) {
     loading, 
     title, 
     buttonText,
-    roomName, 
+    properties,
     initialValues} = props
 
-  const [ properties, setProperties ] = useState( null )
   const [ rooms, setRooms ] = useState( null )
 
   useEffect(() => {
-    fetchAllProperties()
-    if (properties != null) {
-      console.log('ada')
+    if(hasPropertyValue != null) {
       fetchAllRoomsFromProperty()
     }
-  }, [fetchProperties, currentUserID, hasPropertyValue])
+    if(initialValues != null){
+      fetchProperties(currentUserID, {})
+    }
 
-  async function fetchAllProperties() {
-    const dispatch = await fetchProperties(currentUserID, { eager: 'Rooms, Users' })
-    setProperties(dispatch.payload)
-  }
+  }, [ currentUserID, hasPropertyValue ])
 
   async function fetchAllRoomsFromProperty() {
     const dispatch = await fetchRooms(currentUserID, hasPropertyValue, { eager: 'Tenants' })
     setRooms(dispatch.payload)
   }
-
   
   return (
     <Style>
@@ -68,7 +63,6 @@ function MaintenanceForm(props) {
                 {title}
               </div>
               <div className="blockBody">
-
                 { 
                   properties &&
                   <Field
@@ -92,7 +86,7 @@ function MaintenanceForm(props) {
                     label='Room'
                     component={renderSelectField}
                     validate={[required]}
-                    readonly={readonly}
+                    readonly={edit}
                     defaultEmpty
                     options={rooms.map(room => {
                       return (
@@ -100,12 +94,14 @@ function MaintenanceForm(props) {
                       )
                     })} />
                 }
+
                 <Field
                   name='title'
                   label='Title'
                   component={renderField}
                   validate={[required]}
                   readonly={readonly}
+                  type='text'
                   defaultEmpty
                 />
 
@@ -115,7 +111,8 @@ function MaintenanceForm(props) {
                   component={renderField}
                   validate={[required]}
                   readonly={readonly}
-                  type='text' />
+                  type='text'
+                  defaultEmpty />
 
                 <div className='errorResponse'>
                   {submitError && JSON.stringify(submitError)}
@@ -153,8 +150,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchProperties,
   fetchRooms,
+  fetchProperties,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(maintenanceForm)

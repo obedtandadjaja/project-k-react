@@ -12,11 +12,7 @@ class Donut extends Component {
     this.chartRef = React.createRef();
   }
 
-
   componentDidMount() {
-
-
-
       const myChartRef = this.chartRef.current.getContext("2d");
       
       // this is a chart plugin, will move this in the future

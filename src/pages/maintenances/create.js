@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from '../../components/maintenances/form'
+
 import { create } from '../../api/maintenance'
+import { all as fetchAllProperties } from './../../api/properties'
 
 import { FormStyle } from '../../components/com/formStyle'
 
 function MaintenanceCreatePage(props) {
-  const { loading, error, create, currentUserID } = props
+  const { loading, error, create, currentUserID, fetchAllProperties, properties } = props
   const [submitted, setSubmitted] = useState(false)
 
   const createSubmit = (values) => {
@@ -18,6 +20,10 @@ function MaintenanceCreatePage(props) {
   }
 
   useEffect(() => {
+    fetchAllProperties(currentUserID)
+  }, [currentUserID,])
+
+  useEffect(() => {
     if (!loading && !error && submitted) {
       props.history.push(`/maintenance/open`)
     }
@@ -25,14 +31,18 @@ function MaintenanceCreatePage(props) {
 
   return (
     <div className='propertyCreatePage'>
-      <FormStyle >
+      {
+        properties &&
+        <FormStyle >
         <Form
+          properties={properties}
           onSubmit={createSubmit}
           loading={loading}
           submitError={error}
           title='Create  Maintenance Request'
           buttonText='Create' />
-      </FormStyle>
+        </FormStyle>
+      }
     </div>
   )
 }
@@ -41,9 +51,11 @@ const mapStateToProps = state => ({
   loading: state.maintenance.getIn(['createLoading']),
   error: state.maintenance.getIn(['createError']),
   currentUserID: state.auth.getIn(['currentUserID']),
+  properties: state.property.getIn(['properties']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  create
+  create,
+  fetchAllProperties,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceCreatePage)

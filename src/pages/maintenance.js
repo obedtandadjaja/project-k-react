@@ -7,15 +7,12 @@ import { all } from '../api/maintenance'
 
 import Donut from '../components/charts/donut'
 
-import {closedTicket, closedTicketLabel, openTicket, bgColor} from '../components/charts/mockdata'
+import {bgColor} from '../components/charts/mockdata'
 
 function MaintenancePage(props) {
-  const { all, currentUserID, pendingData, closedData} = props;
+  const { all, currentUserID, } = props;
   const [pending, setPending] = useState( );
   const [closed, setClosed] = useState([]);
-
-  // var d = [pendingLabel];
-  // var l = [pendingData]
 
   useEffect(() => {
     fetchTicket()
