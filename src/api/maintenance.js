@@ -61,30 +61,6 @@ export function get(userID, maintenanceID) {
   }
 }
 
-// from /api/properties
-export function getAllProperties(userID, queryParams) {
-  return dispatch => {
-    dispatch(allBegin())
-
-    return API.client.get(`/api/v1/properties`, { params: queryParams }).then(
-      res => dispatch(allSuccess(res.data)),
-      err => dispatch(allFailure(err.response))
-    )
-  }
-}
-
-// from /api/rooms
-export function getAllRoomsFromProperty(userID, propertyID, queryParams) {
-  return dispatch => {
-    dispatch(allBegin())
-
-    return API.client.get(`/api/v1/properties/${propertyID}/rooms`, { params: queryParams }).then(
-      res => dispatch(allSuccess(res.data)),
-      err => dispatch(allFailure(err.response))
-    )
-  }
-}
-
 
 export function remove(userID, maintenanceID) {
   return dispatch => {

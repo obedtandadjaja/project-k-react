@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { all, remove } from '../../api/maintenance'
+import { all, edit } from '../../api/maintenance'
 import { get as getProperty } from '../../api/properties'
 import { get as getRoom } from '../../api/rooms'
 import { get as getUser } from '../../api/users'
@@ -23,7 +23,7 @@ const Style = styled.div`
 `
 
 function OpenTicketPage(props) {
-  const { currentUserID, all, getProperty, getRoom, getUser, remove } = props;
+  const { currentUserID, all, getProperty, getRoom, getUser, edit } = props;
   const [maintenances, setMaintenances] = useState([]);
   const [del, setDel] = useState(null)
 
@@ -44,33 +44,36 @@ function OpenTicketPage(props) {
     var moment = require('moment')
 
     value.map( async maintenance => {
-      // fetch property room and reporter name
-      const property = await getProperty(currentUserID, maintenance.propertyID)
-      const room = await getRoom(currentUserID, maintenance.propertyID, maintenance.roomID)
-      const reporter = await getUser(currentUserID)
+      if(maintenance.status === 'pending'){
+        // fetch property room and reporter name
+        const property = await getProperty(currentUserID, maintenance.propertyID)
+        const room = await getRoom(currentUserID, maintenance.propertyID, maintenance.roomID)
+        const reporter = await getUser(currentUserID)
 
-      // format the date with momentjs  
-      // further date details can be put here
-      // still need to fix hours ago ... .fromNow()
-      var hour = moment(maintenance.createdAt, 'h').fromNow()
-      var date = moment(maintenance.createdAt).format("MMM Do [, ] dddd")
+        // format the date with momentjs  
+        // further date details can be put here
+        // still need to fix hours ago ... .fromNow()
+        var hour = moment(maintenance.createdAt, 'h').fromNow()
+        var date = moment(maintenance.createdAt).format("MMM Do [, ] dddd")
 
-      // push to maintenances
-      var dataObj = {
-        'id': maintenance.id,
-        'createdDate': date + ' (' + hour + ')',
-        'location': property.payload.name + ', ' + room.payload.name,
-        'category': maintenance.title,
-        'description': maintenance.description,
-        'reporterName': reporter.payload.name,
+        // push to maintenances
+        var dataObj = {
+          'id': maintenance.id,
+          'createdDate': date + ' (' + hour + ')',
+          'location': property.payload.name + ', ' + room.payload.name,
+          'category': maintenance.title,
+          'description': maintenance.description,
+          'reporterName': reporter.payload.name,
+        }
+
+        setMaintenances(prevState => [...prevState, dataObj]);
       }
-
-      setMaintenances(prevState => [...prevState, dataObj]);
     })
   }
 
-  async function deleteRow(rowData){
-    const dispatch = await remove(currentUserID, rowData.id)
+  async function closeTicket(rowData){
+    var data = {id: rowData.id, status: "closed"}
+    const dispatch = await edit(currentUserID, data)
     var res = dispatch.payload
     if(res != null) {
       alert("successfully delete user")
@@ -101,7 +104,7 @@ function OpenTicketPage(props) {
                 {
                   icon: 'delete',
                   tooltip: 'close ticket',
-                  onClick: (event, rowData) => (deleteRow(rowData)),
+                  onClick: (event, rowData) => (closeTicket(rowData)),
                 },
               ]}
             />
@@ -122,7 +125,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getProperty,
   getRoom,
   getUser,
-  remove,
+  edit,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(OpenTicketPage)
