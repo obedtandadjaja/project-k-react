@@ -21,19 +21,19 @@ function MaintenancePage(props) {
   
   async function fetchTicket() {
     const dispatch = await all(currentUserID)
-    getPending(dispatch.payload)
-    getClosed(dispatch.payload)
+    setPending(splitByStatus(dispatch.payload, 'pending'))
+    setClosed(splitByStatus(dispatch.payload, 'closed' ))
   }
 
 
-  function getPending(maintenances) {
+  function splitByStatus(maintenances, status) {
     var arr = []
     var label = []
     var data = []
 
     // get ticket by status
     maintenances.map(ticket => {
-      if (ticket.status === 'pending') {
+      if (ticket.status === status) {
         arr.push(ticket.title)
       }
     })
@@ -56,40 +56,7 @@ function MaintenancePage(props) {
       data.push(count)
     }
 
-    setPending({ labels: label, data: data, count: arr.length })
-  }
-
-  function getClosed(maintenances) {
-    var arr = []
-    var label = []
-    var data = []
-
-    maintenances.map(ticket => {
-      if (ticket.status === 'closed') {
-        arr.push(ticket.title)
-      }
-    })
-
-    arr.sort()
-
-    if (arr.length > 0) {
-      var tmp = arr[0]
-      label.push(tmp)
-      var count = 0
-      // if label match add 
-      for (var i = 0; i < arr.length; i++) {
-        if (arr[i] !== tmp) {
-          tmp = arr[i]
-          label.push(tmp)
-          data.push(count)
-          count = 0
-        }
-        count = count + 1;
-      }
-      data.push(count)
-    }
-
-    setClosed({ labels: label, data: data, count: arr.length })
+    return({ labels: label, data: data, count: arr.length })
   }
 
   const style = {
@@ -108,7 +75,7 @@ function MaintenancePage(props) {
       boxShadow: '0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19' 
     },
     margin: {
-      marginTop: '10rem',
+      marginTop: '40px',
       marginLeft: 'auto',
       marginRight: 'auto',
     }
@@ -139,14 +106,18 @@ function MaintenancePage(props) {
           <div style={style.card}>
             {
               closed &&
+              <>
               <Donut
                 datasets={closed}
                 color={bgColor}
               />
+              <Link to={{ pathname: "/maintenance/close" }}>
+                <button type='button' className="btn btn-primary" style={style.button}>
+                  CLOSE TICKET
+                </button>
+              </Link>
+              </>
             }
-            <button type='button' className="btn btn-primary" style={style.button}>
-              CLOSED TICKET
-            </button>
           </div>
         </div>
       </div>
