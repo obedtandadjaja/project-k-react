@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { useHistory, useLocation } from 'react-router'
 
-import { login } from './../api/login'
 import Form from './../components/login/form'
-import { LoginStyle } from '../components/com/loginStyle'
+import { LoginStyle } from '../components/commons/loginStyle'
+import { login } from './../api/login'
 
 function LoginPage(props) {
   let history = useHistory();

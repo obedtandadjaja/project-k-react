@@ -15,21 +15,18 @@ import TenantCreatePage from './pages/tenants/create'
 import RoomGetPage from './pages/rooms/get'
 import RoomEditPage from './pages/rooms/edit'
 import RoomCreatePage from './pages/rooms/create'
-import PropertyPage from './pages/properties'
+import PropertyListPage from './pages/properties/list'
 import PropertyGetPage from './pages/properties/get'
 import PropertyEditPage from './pages/properties/edit'
 import PropertyCreatePage from './pages/properties/create'
-import MaintenancePage from './pages/maintenance'
-import OpenTicketPage from './pages/maintenances/openTicket'
-import CloseTicketPage from './pages/maintenances/closeTicket'
-import MaintenanceCreatePage from './pages/maintenances/create'
-import MaintenanceEditPage from './pages/maintenances/edit'
-
-
+import MaintenanceRequestsListPage from './pages/maintenance_requests/list'
+import MaintenanceRequestsOpenTicketPage from './pages/maintenance_requests/openTicket'
+import MaintenanceRequestsClosedTicketPage from './pages/maintenance_requests/closedTicket'
+import MaintenanceRequestsCreatePage from './pages/maintenance_requests/create'
+import MaintenanceRequestsEditPage from './pages/maintenance_requests/edit'
 
 import './App.css'
 import './common.css'
-
 
 function App(props) {
   const { currentUserID } = props
@@ -48,7 +45,7 @@ function App(props) {
                 <Route exact path='/' component={HomePage} />
                 <Route exact path='/account' component={AccountGetPage} />
                 <Route exact path='/account/edit' component={AccountEditPage} />
-                <Route exact path='/properties' component={PropertyPage} />
+                <Route exact path='/properties/list' component={PropertyListPage} />
                 <Route exact path='/properties/create' component={PropertyCreatePage} />
                 <Route exact path='/properties/:propertyID' component={PropertyGetPage} />
                 <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />
@@ -58,11 +55,11 @@ function App(props) {
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/create' component={TenantCreatePage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID' component={TenantGetPage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID/edit' component={TenantEditPage} />
-                <Route exact path='/maintenance' component={MaintenancePage} />
-                <Route exact path='/maintenance/open' component={OpenTicketPage} />
-                <Route exact path='/maintenance/close' component={CloseTicketPage} />
-                <Route exact path='/maintenance/open/create' component={MaintenanceCreatePage} />
-                <Route exact path='/maintenance/:maintenanceID/edit' component={MaintenanceEditPage} />
+                <Route exact path='/maintenance_requests/list' component={MaintenanceRequestsListPage} />
+                <Route exact path='/maintenance_requests/open' component={MaintenanceRequestsOpenTicketPage} />
+                <Route exact path='/maintenance_requests/closed' component={MaintenanceRequestsClosedTicketPage} />
+                <Route exact path='/maintenance_requests/create' component={MaintenanceRequestsCreatePage} />
+                <Route exact path='/maintenance_requests/:maintenanceID/edit' component={MaintenanceRequestsEditPage} />
                 <Route component={MissingPage} />
               </Switch>
             }

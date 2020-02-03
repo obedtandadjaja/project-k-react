@@ -3,14 +3,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from '../../components/maintenances/form'
-import { get, edit } from '../../api/maintenance'
+import { FormStyle } from '../../components/commons/formStyle'
+
+import { get, edit } from '../../api/maintenances'
 import { get as getRoom } from '../../api/rooms'
 import { get as getProperty, all as fetchAllProperties } from '../../api/properties' 
 
-
-import { FormStyle } from '../../components/com/formStyle'
-
-function MaintenanceEditPage(props) {
+function MaintenanceRequestsEditPage(props) {
   const { getLoading, loading, error, maintenance, edit, get, currentUserID, properties, fetchAllProperties } = props
   const { maintenanceID } = props.match.params
   const [submitted, setSubmitted] = useState(false)
@@ -71,4 +70,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchAllProperties,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceEditPage)
+export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsEditPage)

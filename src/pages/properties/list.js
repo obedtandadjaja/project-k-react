@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { all } from './../api/properties'
+import { CardStyle } from '../../components/commons/cardStyle'
+import { all } from '../../api/properties'
 
-import { CardStyle } from '../components/com/cardStyle'
-
-function PropertyPage(props) {
+function PropertyListPage(props) {
   const { currentUserID, properties, all } = props
 
   useEffect(() => {
@@ -75,4 +74,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   all,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(PropertyPage)
+export default connect(mapStateToProps, mapDispatchToProps)(PropertyListPage)

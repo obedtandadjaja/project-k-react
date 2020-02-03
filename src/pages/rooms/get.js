@@ -3,11 +3,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
+import { FormStyle } from '../../components/commons/formStyle'
 import Form from './../../components/rooms/form'
 import { get as getProperty } from './../../api/properties'
 import { get } from './../../api/rooms'
-
-import { FormStyle } from '../../components/com/formStyle'
 
 function RoomGetPage(props) {
   const { loading, error, property, room, getProperty, get, currentUserID } = props

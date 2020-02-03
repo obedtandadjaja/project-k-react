@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
+import { FormStyle } from '../../components/commons/formStyle'
 import Form from './../../components/users/form'
 import { get } from './../../api/users'
-import { FormStyle } from '../../components/com/formStyle'
 
 function AccountGetPage(props) {
   const { loading, error, user, get, currentUserID } = props

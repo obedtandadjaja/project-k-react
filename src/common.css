@@ -185,37 +185,6 @@ form button[type=submit]:hover {
     text-decoration: none;
 }
 
-
-
-/* ripple css, check ripple.js */
-.ripple {
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-}
-.ripple .rippleContainer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
-.ripple .rippleContainer span {
-    transform: scale(0);
-    border-radius: 100%;
-    position: absolute;
-    opacity: 0.75;
-    background-color: #ffffff;
-    animation: ripple 850ms;
-}
-
-@keyframes ripple {
-    to {
-        opacity: 0;
-        transform: scale(2);
-    }
-}
-
 .gc-orange{
     background: #ffae97;
     background: -moz-linear-gradient(-45deg, #ffae97 0%, #f02f17 75%, #f02f17 100%);
@@ -239,7 +208,6 @@ form button[type=submit]:hover {
 }
 
 /* user get page */
-
 .userGetPage form .row{
     margin-left: 10px;
     margin-right: 10px;
@@ -250,13 +218,12 @@ form button[type=submit]:hover {
     width: 500px;
     margin: 40px auto;
 }
+
 .userEditPage form .row{
     display: block;
 }
 
-
 /* propertyPage css */
-
 .propertyPage .container{
     margin: 40px auto;
 }
@@ -266,7 +233,6 @@ form button[type=submit]:hover {
     flex-grow: 0;
     padding: 0;
 }
-
 
 /* custom css for .propertyCreatePage */
 .propertyCreatePage{
@@ -309,7 +275,6 @@ form button[type=submit]:hover {
     min-height: 290px;
 }
 
-
 /* custom css for tenantsCreatePage */
 .tenantCreatePage form{
     width: 500px;
@@ -332,7 +297,6 @@ form button[type=submit]:hover {
 .tenantCreatePage form .button{
     margin-bottom: 4em;
 }
-
 
 @media (max-width: 900px) {
     .propertyGetPage .blockCard{

@@ -1,8 +1,7 @@
 // https://material-table.com/#/docs/features/actions
-
-import React from 'react';
-import MaterialTable from 'material-table';
-import styled from 'styled-components';
+import React from 'react'
+import MaterialTable from 'material-table'
+import styled from 'styled-components'
 
 const Style = styled.div`
   overflow: auto;
@@ -43,4 +42,4 @@ function MaterialTableOpen(props) {
   );
 }
 
-export default MaterialTableOpen;
+export default MaterialTableOpen

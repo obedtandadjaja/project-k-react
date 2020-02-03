@@ -1,11 +1,7 @@
+// TODO(@kenaszogara): Add props.data, props.type to make class a reusable component
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 
-
-// donut has to be reuseable component, 
-/* 
-  Need to add this.props.data, this.props.type
-*/
 class Donut extends Component {
   constructor(props) {
     super(props);
@@ -58,8 +54,6 @@ class Donut extends Component {
         }
       });
 
-    
-
       new Chart(myChartRef, {
         type: 'doughnut',
         data: {
@@ -80,7 +74,6 @@ class Donut extends Component {
           responsive: false,
           elements: { 
             center: { 
-              // need to fix this when data is undefined
               text: this.props.datasets.count,
               color: '#36A2EB', //Default black
               fontStyle: 'Montserrat', //Default Arial

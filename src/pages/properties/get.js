@@ -4,9 +4,8 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/properties/form'
+import { FormStyle } from '../../components/commons/formStyle'
 import { get } from './../../api/properties'
-
-import { FormStyle } from '../../components/com/formStyle'
 
 function PropertyGetPage(props) {
   const { loading, error, property, get, currentUserID } = props

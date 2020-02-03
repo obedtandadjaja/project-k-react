@@ -102,7 +102,6 @@ const initialState = Map({
       })
     
     // the posibility of adding a CLOSE reducers
-
     case REMOVE_SUCCESS:
       return state.merge({
         removeLoading: false,
@@ -117,4 +116,4 @@ const initialState = Map({
     default:
       return state
     }
-  }  
+  }

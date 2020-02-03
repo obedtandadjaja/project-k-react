@@ -3,12 +3,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
+import { FormStyle } from '../../components/commons/formStyle'
 import Form from './../../components/tenants/form'
 import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
 import { edit, get } from './../../api/tenants'
-
-import { FormStyle } from './../../components/com/formStyle'
 
 function TenantEditPage(props) {
   const { loading, getLoading, error, edit, getProperty, getRoom, get, property, room, tenant, currentUserID } = props

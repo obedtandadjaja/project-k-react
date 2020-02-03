@@ -9,11 +9,6 @@ import RepeatedFields from './../../formHelpers/repeatedFields'
 function RoomForm(props) {
   const { initialValues, handleSubmit, readonly, submitError, loading, title, buttonText } = props
 
-
-  const margin = {
-    padding: '0',
-  }
-
   return (
     <form onSubmit={handleSubmit} >
       <div className="blockCard">
@@ -79,7 +74,7 @@ function RoomForm(props) {
       }
       {
         !readonly &&
-        <button type='submit' className='button' style={margin} disabled={loading}>
+        <button type='submit' disabled={loading}>
           { buttonText }
         </button>
       }

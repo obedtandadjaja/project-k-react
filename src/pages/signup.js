@@ -2,10 +2,9 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { signup } from './../api/signup'
 import Form from './../components/signup/form'
-
-import { LoginStyle } from '../components/com/loginStyle'
+import { LoginStyle } from '../components/commons/loginStyle'
+import { signup } from './../api/signup'
 
 function SignupPage(props) {
   const { signup, loading, error, currentUserID } = props

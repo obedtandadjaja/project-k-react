@@ -1,12 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import{ Navbar, Nav } from 'react-bootstrap'
 
 import { logout } from './../actions/authActions'
-import './header.css'
 
-import{ Navbar, Nav } from 'react-bootstrap';
-import styled from 'styled-components';
+import './header.css'
 
 function Header(props) {
   const { currentUserID } = props
@@ -39,15 +37,6 @@ function Header(props) {
       fontSize: '3rem',
     },
   }
-
-  const Hover = styled.div`
-    color: white;
-    :hover {
-      color: white;
-      cursor: pointer;
-      text-decoration: none;
-    }
-  `
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">

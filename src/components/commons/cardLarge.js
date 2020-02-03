@@ -1,6 +1,5 @@
 import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import styled from 'styled-components';
 
 /* custom css for cardLarge */
@@ -38,7 +37,7 @@ const StyleWrapper = styled.div`
 
 /** CardLarge */
 function CardLarge(props){
-  const { to, header, body, color, revertColor } = props;
+  const { clickUrl, header, body, color, revertColor } = props;
   const [hover, setHover] = useState(false);
 
   var hoverStyle;
@@ -59,7 +58,7 @@ function CardLarge(props){
   return (
     <StyleWrapper>
       <div className='dashCardMenu' style={hoverStyle} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-        <Link to={{ pathname: to }} >
+        <Link to={{ pathname: clickUrl }} >
           <div className='case'>
             <div className='header'>
               <h1 style={textStyle}>{header}</h1>

@@ -8,7 +8,7 @@ import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
 import { get } from './../../api/tenants'
 
-import { FormStyle } from './../../components/com/formStyle'
+import { FormStyle } from '../../components/commons/formStyle'
 
 function TenantGetPage(props) {
   const { loading, get, getProperty, getRoom, property, room, tenant, currentUserID } = props

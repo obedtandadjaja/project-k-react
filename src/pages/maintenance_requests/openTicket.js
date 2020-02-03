@@ -4,13 +4,12 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { all, edit } from '../../api/maintenance'
+import MaterialTableOpen from '../../components/table/materialTable'
+
+import { all, edit } from '../../api/maintenances'
 import { get as getProperty } from '../../api/properties'
 import { get as getRoom } from '../../api/rooms'
 import { get as getUser } from '../../api/users'
-
-import MaterialTableOpen from '../../components/table/materialTable'
-
 
 const Style = styled.div`
   /* custom styling openTicketPage */
@@ -18,12 +17,11 @@ const Style = styled.div`
       padding: 0;
   }
   .row{
-    margin-top: 4em;
     margin-bottom: 2em;
   }
 `
 
-function CloseTicketPage(props) {
+function MaintenanceRequestsOpenTicketPage(props) {
   const { currentUserID, all, getProperty, getRoom, getUser, edit } = props;
   const [maintenances, setMaintenances] = useState([]);
   const [del, setDel] = useState(null)
@@ -45,7 +43,7 @@ function CloseTicketPage(props) {
     var moment = require('moment')
 
     value.map( async maintenance => {
-      if(maintenance.status === 'closed'){
+      if(maintenance.status === 'pending'){
         // fetch property room and reporter name
         const property = await getProperty(currentUserID, maintenance.propertyID)
         const room = await getRoom(currentUserID, maintenance.propertyID, maintenance.roomID)
@@ -73,20 +71,27 @@ function CloseTicketPage(props) {
   }
 
   // update status to "closed" then reload table
-  async function openTicket(rowData){
-    var data = {id: rowData.id, status: "pending"}
+  async function closeTicket(rowData){
+    var data = {id: rowData.id, status: "closed"}
     const dispatch = await edit(currentUserID, data)
     var res = dispatch.payload
     if(res != null) {
-      alert("successfully open ticket")
+      alert("successfully close ticket")
       setDel(true)
     }
   }
 
   return(
     <Style>
-      <div className="closeTicketPage">
+      <div className="openTicketPage">
         <div className='container'>
+          <div className='row'>
+            <div className='col'>
+              <Link className="btn btn-primary" to={{ pathname: '/maintenance/open/create' }}>
+                Add Ticket
+              </Link>
+            </div>
+          </div>
           <div className='row'>
             <MaterialTableOpen 
               data={maintenances}
@@ -97,9 +102,9 @@ function CloseTicketPage(props) {
                   onClick: (event, rowData) => (props.history.push(`/maintenance/${rowData.id}/edit`)),
                 },
                 {
-                  icon: 'add_box',
-                  tooltip: 'open ticket',
-                  onClick: (event, rowData) => (openTicket(rowData)),
+                  icon: 'delete',
+                  tooltip: 'close ticket',
+                  onClick: (event, rowData) => (closeTicket(rowData)),
                 },
               ]}
             />
@@ -123,4 +128,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   edit,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(CloseTicketPage)
+export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsOpenTicketPage)

@@ -1,14 +1,13 @@
 import React from 'react'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { required } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
 import renderSelectField from './../../formHelpers/renderSelectField'
 import FacilityFields from './../facilities/fields'
 import RepeatedFields from './../../formHelpers/repeatedFields'
-
-import styled from 'styled-components'
 
 const Style = styled.div`
   .row{
@@ -22,7 +21,6 @@ function PropertyForm(props) {
   return (
     <Style>
       <form onSubmit={handleSubmit}>
-        { /** property card */}
         <div className='row'>
           <div className='col'>
             <div className="blockCard">
@@ -83,7 +81,6 @@ function PropertyForm(props) {
           </div>
         </div>
         <div className='row'>
-          { /** room card */}
           {
             readonly &&
             <div className="blockCard">
@@ -105,7 +102,6 @@ function PropertyForm(props) {
                     </Link>
                   ))
                 }
-
                 <Link to={{ pathname: `/properties/${initialValues.id}/rooms/create` }}>
                   <button className='link'>
                     Add a room
@@ -115,8 +111,6 @@ function PropertyForm(props) {
             </div>
           }
         </div>
-
-        { /** button card */}
         {
           !readonly &&
           <button className='button' type='submit' disabled={loading}>

@@ -15,7 +15,7 @@ import {
   removeBegin,
   removeSuccess,
   removeFailure,
-} from './../actions/maintenanceActions'
+} from '../actions/maintenanceActions'
 
 export function create(userID, data) {
   return dispatch => {
@@ -60,7 +60,6 @@ export function get(userID, maintenanceID) {
     )
   }
 }
-
 
 export function remove(userID, maintenanceID) {
   return dispatch => {

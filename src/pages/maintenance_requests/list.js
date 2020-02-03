@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { all } from '../api/maintenance'
+import Donut from './../../components/charts/donut'
+import {bgColor} from './../../components/charts/mockdata'
 
-import Donut from '../components/charts/donut'
+import { all } from '../../api/maintenances'
 
-import {bgColor} from '../components/charts/mockdata'
-
-function MaintenancePage(props) {
+function MaintenanceRequestsListPage(props) {
   const { all, currentUserID,} = props;
   const [pending, setPending] = useState( );
   const [closed, setClosed] = useState( );
@@ -17,14 +16,12 @@ function MaintenancePage(props) {
   useEffect(() => {
     fetchTicket()
   }, [currentUserID, all])
-
   
   async function fetchTicket() {
     const dispatch = await all(currentUserID)
     setPending(splitByStatus(dispatch.payload, 'pending'))
     setClosed(splitByStatus(dispatch.payload, 'closed' ))
   }
-
 
   function splitByStatus(maintenances, status) {
     var arr = []
@@ -134,5 +131,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   all,
 }, dispatch)
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(MaintenancePage);
+export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsListPage);

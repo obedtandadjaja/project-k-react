@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/properties/form'
+import { FormStyle } from '../../components/commons/formStyle'
 import { create } from './../../api/properties'
 
-import { FormStyle } from '../../components/com/formStyle'
 
 function PropertyCreatePage(props) {
   const { loading, error, property, create, currentUserID } = props

@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/users/form'
+import {FormStyle} from '../../components/commons/formStyle'
 import { edit, get } from './../../api/users'
 
-import {FormStyle} from './../../components/com/formStyle'
+
 
 function AccountEditPage(props) {
   const { getLoading, loading, error, edit, get, user, currentUserID } = props

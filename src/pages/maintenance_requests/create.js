@@ -3,13 +3,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from '../../components/maintenances/form'
+import { FormStyle } from '../../components/commons/formStyle'
 
-import { create } from '../../api/maintenance'
+import { create } from '../../api/maintenances'
 import { all as fetchAllProperties } from './../../api/properties'
 
-import { FormStyle } from '../../components/com/formStyle'
-
-function MaintenanceCreatePage(props) {
+function MaintenanceRequestsCreatePage(props) {
   const { loading, error, create, currentUserID, fetchAllProperties, properties } = props
   const [submitted, setSubmitted] = useState(false)
 
@@ -58,4 +57,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchAllProperties,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceCreatePage)
+export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsCreatePage)

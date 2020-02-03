@@ -4,10 +4,9 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/rooms/form'
+import { FormStyle } from '../../components/commons/formStyle'
 import { get } from './../../api/properties'
 import { create } from './../../api/rooms'
-
-import { FormStyle } from '../../components/com/formStyle'
 
 function RoomCreatePage(props) {
   const { loading, error, property, room, get, create, currentUserID } = props
