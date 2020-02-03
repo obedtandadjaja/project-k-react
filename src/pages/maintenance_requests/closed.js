@@ -71,7 +71,6 @@ function MaintenanceRequestsClosedPage(props) {
     const dispatch = await edit(currentUserID, data)
     var res = dispatch.payload
     if(res != null) {
-      alert("successfully open ticket")
       setDel(true)
     }
   }
@@ -92,7 +91,10 @@ function MaintenanceRequestsClosedPage(props) {
                 {
                   icon: 'add_box',
                   tooltip: 'open ticket',
-                  onClick: (event, rowData) => (openTicket(rowData)),
+                  onClick: (event, rowData) => {
+                    if (window.confirm('Are you sure you wish to re-open this item?'))
+                      openTicket(rowData)
+                  },
                 },
               ]}
             />

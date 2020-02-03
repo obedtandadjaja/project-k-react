@@ -70,7 +70,6 @@ function MaintenanceRequestsOpenPage(props) {
     const dispatch = await edit(currentUserID, data)
     var res = dispatch.payload
     if(res != null) {
-      alert("successfully close ticket")
       setDel(true)
     }
   }
@@ -98,7 +97,9 @@ function MaintenanceRequestsOpenPage(props) {
                 {
                   icon: 'delete',
                   tooltip: 'close ticket',
-                  onClick: (event, rowData) => (closeTicket(rowData)),
+                  onClick: (event, rowData) => { 
+                    if (window.confirm('Are you sure you wish to close this item?')) 
+                      closeTicket(rowData) },
                 },
               ]}
             />
