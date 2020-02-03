@@ -89,7 +89,7 @@ function MaintenanceRequestsClosedPage(props) {
                   onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`)),
                 },
                 {
-                  icon: 'event_note',
+                  icon: 'description',
                   tooltip: 'view ticket',
                   onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
                 },
