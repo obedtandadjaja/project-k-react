@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Donut from './../../components/charts/donut'
-import {bgColor} from './../../components/charts/mockdata'
 import { all } from '../../api/maintenances'
 
 function MaintenanceRequestsListPage(props) {
@@ -86,7 +85,6 @@ function MaintenanceRequestsListPage(props) {
               <>
               <Donut
                 datasets={pending}
-                color={bgColor}
               />
                 <Link to={{ pathname: "/maintenance_requests/open" }}>
                 <button type='button' className="btn btn-primary" style={style.button}>
@@ -104,7 +102,6 @@ function MaintenanceRequestsListPage(props) {
               <>
               <Donut
                 datasets={closed}
-                color={bgColor}
               />
                 <Link to={{ pathname: "/maintenance_requests/closed" }}>
                 <button type='button' className="btn btn-primary" style={style.button}>

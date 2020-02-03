@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 
+import { MAINTENANCE_REQUEST_CATEGORY_LIST_COLOR } from './../../constants'
+
 class Donut extends Component {
   constructor(props) {
     super(props);
@@ -60,8 +62,8 @@ class Donut extends Component {
         data: {
           labels: this.props.datasets.labels,
           datasets: [{
-              backgroundColor: this.props.color,
-              borderWidth: 0,
+            backgroundColor: MAINTENANCE_REQUEST_CATEGORY_LIST_COLOR,
+            borderWidth: 0,
             data: this.props.datasets.data,
           }]
         },

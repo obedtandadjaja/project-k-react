@@ -9,6 +9,7 @@ import renderField from '../../formHelpers/renderField'
 import renderSelectField from '../../formHelpers/renderSelectField'
 import { all as fetchRooms } from './../../api/rooms'
 import { all as fetchProperties } from './../../api/properties'
+import { MAINTENANCE_REQUEST_CATEGORY_LIST } from './../../constants'
 
 const Style = styled.div`
   .row{
@@ -86,12 +87,14 @@ function MaintenanceForm(props) {
                 }
                 <Field
                   name='title'
-                  label='Title'
-                  component={renderField}
+                  label='Category'
+                  component={renderSelectField}
                   validate={[required]}
                   readonly={readonly}
-                  type='text'
                   defaultEmpty
+                  options={MAINTENANCE_REQUEST_CATEGORY_LIST.map(category =>
+                    [category.id, category.name]
+                  )}
                 />
 
                 <Field
