@@ -53,7 +53,7 @@ function MaintenanceRequestsClosedPage(props) {
 
         var dataObj = {
           'id': maintenance.id,
-          'createdDate': date + ' (' + hour + ')',
+          'createdDate': date,
           'location': property.payload.name + ', ' + room.payload.name,
           'category': maintenance.title,
           'description': maintenance.description,
