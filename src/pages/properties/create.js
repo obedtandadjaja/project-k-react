@@ -6,7 +6,6 @@ import Form from './../../components/properties/form'
 import { FormStyle } from '../../components/commons/formStyle'
 import { create } from './../../api/properties'
 
-
 function PropertyCreatePage(props) {
   const { loading, error, property, create, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// size: 200x200
 export const CardStyle = styled.div`
   width: 200px;
   height: 200px;

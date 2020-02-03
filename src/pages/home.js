@@ -12,7 +12,7 @@ function HomePage() {
             header="Properties"
             body="Create and Manage Properties"
             color="#F89319"
-            to='/properties'
+            clickUrl='/properties/list'
           />
         </div>
         <div className='col'>
@@ -21,7 +21,7 @@ function HomePage() {
             header="Maintenance"
             body="Check Maintenance Progress"
             color="#5B61DE"
-            to='/maintenance'
+            clickUrl='/maintenance_requests/list'
           />
         </div>
       </div>

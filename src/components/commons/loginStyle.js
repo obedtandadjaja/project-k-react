@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// size: 400x400
 export const LoginStyle = styled.div`
   width: 400px;
   height: 400px;

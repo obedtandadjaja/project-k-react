@@ -6,8 +6,6 @@ import Form from './../../components/users/form'
 import {FormStyle} from '../../components/commons/formStyle'
 import { edit, get } from './../../api/users'
 
-
-
 function AccountEditPage(props) {
   const { getLoading, loading, error, edit, get, user, currentUserID } = props
   const [submitted, setSubmitted] = useState(false)

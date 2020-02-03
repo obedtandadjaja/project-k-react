@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 
 import Form from '../../components/maintenances/form'
 import { FormStyle } from '../../components/commons/formStyle'
-
 import { create } from '../../api/maintenances'
 import { all as fetchAllProperties } from './../../api/properties'
 
@@ -24,7 +23,7 @@ function MaintenanceRequestsCreatePage(props) {
 
   useEffect(() => {
     if (!loading && !error && submitted) {
-      props.history.push(`/maintenance/open`)
+      props.history.push(`/maintenance_requests/open`)
     }
   }, [props.history, loading, error, submitted])
 
@@ -33,13 +32,13 @@ function MaintenanceRequestsCreatePage(props) {
       {
         properties &&
         <FormStyle >
-        <Form
-          properties={properties}
-          onSubmit={createSubmit}
-          loading={loading}
-          submitError={error}
-          title='Create  Maintenance Request'
-          buttonText='Create' />
+          <Form
+            properties={properties}
+            onSubmit={createSubmit}
+            loading={loading}
+            submitError={error}
+            title='Create  Maintenance Request'
+            buttonText='Create' />
         </FormStyle>
       }
     </div>

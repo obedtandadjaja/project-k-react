@@ -2,7 +2,6 @@ import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-/* custom css for cardLarge */
 const StyleWrapper = styled.div`
 
   .dashCardMenu{
@@ -35,7 +34,6 @@ const StyleWrapper = styled.div`
   }
 `
 
-/** CardLarge */
 function CardLarge(props){
   const { clickUrl, header, body, color, revertColor } = props;
   const [hover, setHover] = useState(false);

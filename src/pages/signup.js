@@ -35,7 +35,6 @@ const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   error: state.auth.getIn(['error']),
 })
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   signup: signup
 }, dispatch)

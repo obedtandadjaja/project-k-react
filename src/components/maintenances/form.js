@@ -7,7 +7,6 @@ import styled from 'styled-components'
 import { required } from '../../formHelpers/validators'
 import renderField from '../../formHelpers/renderField'
 import renderSelectField from '../../formHelpers/renderSelectField'
-
 import { all as fetchRooms } from './../../api/rooms'
 import { all as fetchProperties } from './../../api/properties'
 
@@ -135,7 +134,6 @@ const mapStateToProps = state => {
     currentUserID: state.auth.getIn(['currentUserID']),
   }
 }
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchRooms,
   fetchProperties,

@@ -1,3 +1,5 @@
+// TODO(@kenaszogara): Make the date to show more valuable information
+
 import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -5,7 +7,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import MaterialTableOpen from '../../components/table/materialTable'
-
 import { all, edit } from '../../api/maintenances'
 import { get as getProperty } from '../../api/properties'
 import { get as getRoom } from '../../api/rooms'
@@ -21,7 +22,7 @@ const Style = styled.div`
   }
 `
 
-function MaintenanceRequestsOpenTicketPage(props) {
+function MaintenanceRequestsOpenPage(props) {
   const { currentUserID, all, getProperty, getRoom, getUser, edit } = props;
   const [maintenances, setMaintenances] = useState([]);
   const [del, setDel] = useState(null)
@@ -44,18 +45,12 @@ function MaintenanceRequestsOpenTicketPage(props) {
 
     value.map( async maintenance => {
       if(maintenance.status === 'pending'){
-        // fetch property room and reporter name
         const property = await getProperty(currentUserID, maintenance.propertyID)
         const room = await getRoom(currentUserID, maintenance.propertyID, maintenance.roomID)
         const reporter = await getUser(currentUserID)
 
-        // format the date with momentjs  
-        // further date details can be put here
-        // still need to fix hours ago ... .fromNow()
-        var hour = moment(maintenance.createdAt, 'h').fromNow()
         var date = moment(maintenance.createdAt).format("MMM Do [, ] dddd")
 
-        // push to maintenances
         var dataObj = {
           'id': maintenance.id,
           'createdDate': date + ' (' + hour + ')',
@@ -70,7 +65,6 @@ function MaintenanceRequestsOpenTicketPage(props) {
     })
   }
 
-  // update status to "closed" then reload table
   async function closeTicket(rowData){
     var data = {id: rowData.id, status: "closed"}
     const dispatch = await edit(currentUserID, data)
@@ -87,7 +81,7 @@ function MaintenanceRequestsOpenTicketPage(props) {
         <div className='container'>
           <div className='row'>
             <div className='col'>
-              <Link className="btn btn-primary" to={{ pathname: '/maintenance/open/create' }}>
+              <Link className="btn btn-primary" to={{ pathname: '/maintenance_requests/create' }}>
                 Add Ticket
               </Link>
             </div>
@@ -99,7 +93,7 @@ function MaintenanceRequestsOpenTicketPage(props) {
                 {
                   icon: 'edit',
                   tooltip: 'edit ticket',
-                  onClick: (event, rowData) => (props.history.push(`/maintenance/${rowData.id}/edit`)),
+                  onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`)),
                 },
                 {
                   icon: 'delete',
@@ -119,7 +113,6 @@ const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   maintenances: state.maintenance.getIn(['maintenances'])
 })
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,
   getProperty,
@@ -128,4 +121,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   edit,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsOpenTicketPage)
+export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsOpenPage)

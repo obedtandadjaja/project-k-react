@@ -20,8 +20,8 @@ import PropertyGetPage from './pages/properties/get'
 import PropertyEditPage from './pages/properties/edit'
 import PropertyCreatePage from './pages/properties/create'
 import MaintenanceRequestsListPage from './pages/maintenance_requests/list'
-import MaintenanceRequestsOpenTicketPage from './pages/maintenance_requests/openTicket'
-import MaintenanceRequestsClosedTicketPage from './pages/maintenance_requests/closedTicket'
+import MaintenanceRequestsOpenPage from './pages/maintenance_requests/open'
+import MaintenanceRequestsClosedPage from './pages/maintenance_requests/closed'
 import MaintenanceRequestsCreatePage from './pages/maintenance_requests/create'
 import MaintenanceRequestsEditPage from './pages/maintenance_requests/edit'
 
@@ -56,8 +56,8 @@ function App(props) {
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID' component={TenantGetPage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID/edit' component={TenantEditPage} />
                 <Route exact path='/maintenance_requests/list' component={MaintenanceRequestsListPage} />
-                <Route exact path='/maintenance_requests/open' component={MaintenanceRequestsOpenTicketPage} />
-                <Route exact path='/maintenance_requests/closed' component={MaintenanceRequestsClosedTicketPage} />
+                <Route exact path='/maintenance_requests/open' component={MaintenanceRequestsOpenPage} />
+                <Route exact path='/maintenance_requests/closed' component={MaintenanceRequestsClosedPage} />
                 <Route exact path='/maintenance_requests/create' component={MaintenanceRequestsCreatePage} />
                 <Route exact path='/maintenance_requests/:maintenanceID/edit' component={MaintenanceRequestsEditPage} />
                 <Route component={MissingPage} />

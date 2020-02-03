@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 
 import Form from '../../components/maintenances/form'
 import { FormStyle } from '../../components/commons/formStyle'
-
 import { get, edit } from '../../api/maintenances'
 import { get as getRoom } from '../../api/rooms'
 import { get as getProperty, all as fetchAllProperties } from '../../api/properties' 
@@ -19,17 +18,15 @@ function MaintenanceRequestsEditPage(props) {
     edit(currentUserID, values)
   }
 
-  // component did mount fetch maintenance by id
   useEffect(() => {
     get(currentUserID, maintenanceID)
     fetchAllProperties(currentUserID)
   }, [get, currentUserID, maintenanceID])
 
-  // componnet did unmount
   useEffect(() => {
     if (!loading && !error ) {
       submitted &&
-      props.history.push(`/maintenance/open`)
+      props.history.push(`/maintenance_requests/open`)
     }
   })
 

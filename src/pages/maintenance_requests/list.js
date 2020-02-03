@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 
 import Donut from './../../components/charts/donut'
 import {bgColor} from './../../components/charts/mockdata'
-
 import { all } from '../../api/maintenances'
 
 function MaintenanceRequestsListPage(props) {
@@ -28,7 +27,6 @@ function MaintenanceRequestsListPage(props) {
     var label = []
     var data = []
 
-    // get ticket by status
     maintenances.map(ticket => {
       if (ticket.status === status) {
         arr.push(ticket.title)
@@ -90,7 +88,7 @@ function MaintenanceRequestsListPage(props) {
                 datasets={pending}
                 color={bgColor}
               />
-              <Link to={{ pathname: "/maintenance/open" }}>
+                <Link to={{ pathname: "/maintenance_requests/open" }}>
                 <button type='button' className="btn btn-primary" style={style.button}>
                   OPEN TICKET
               </button>
@@ -108,7 +106,7 @@ function MaintenanceRequestsListPage(props) {
                 datasets={closed}
                 color={bgColor}
               />
-              <Link to={{ pathname: "/maintenance/close" }}>
+                <Link to={{ pathname: "/maintenance_requests/closed" }}>
                 <button type='button' className="btn btn-primary" style={style.button}>
                   CLOSE TICKET
                 </button>
@@ -126,7 +124,6 @@ function MaintenanceRequestsListPage(props) {
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
 })
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,
 }, dispatch)

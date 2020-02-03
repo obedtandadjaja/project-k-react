@@ -71,9 +71,9 @@ export const allFailure = error => ({
 })
 
 // the CLOSE action
-export const CLOSE_BEGIN = 'CLOSE_BEGIN'
-export const CLOSE_SUCCESS = 'CLOSE_SUCCESS'
-export const CLOSE_FAILURE = 'CLOSE_FAILURE'
+export const CLOSE_BEGIN = 'MAINTENANCE_REQUESTS_CLOSE_BEGIN'
+export const CLOSE_SUCCESS = 'MAINTENANCE_REQUESTS_CLOSE_SUCCESS'
+export const CLOSE_FAILURE = 'MAINTENANCE_REQUESTS_CLOSE_FAILURE'
 
 export const closeBegin = () => ({
   type: CLOSE_BEGIN
@@ -89,9 +89,9 @@ export const closeFailure = error => ({
   payload: { error }
 })
 
-export const OPEN_BEGIN = 'OPEN_BEGIN'
-export const OPEN_SUCCESS = 'OPEN_SUCCESS'
-export const OPEN_FAILURE = 'OPEN_FAILURE'
+export const OPEN_BEGIN = 'MAINTENANCE_REQUESTS_OPEN_BEGIN'
+export const OPEN_SUCCESS = 'MAINTENANCE_REQUESTS_OPEN_SUCCESS'
+export const OPEN_FAILURE = 'MAINTENANCE_REQUESTS_OPEN_FAILURE'
 
 export const openBegin = () => ({
   type: OPEN_BEGIN

@@ -1,4 +1,5 @@
 // TODO(@kenaszogara): Add props.data, props.type to make class a reusable component
+
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 
@@ -77,7 +78,7 @@ class Donut extends Component {
               text: this.props.datasets.count,
               color: '#36A2EB', //Default black
               fontStyle: 'Montserrat', //Default Arial
-              sidePadding: 50 //Default 20 (as a percentage)
+              sidePadding: 20 //Default 20 (as a percentage)
             }
           }
         }
