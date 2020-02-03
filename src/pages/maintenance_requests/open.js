@@ -92,14 +92,19 @@ function MaintenanceRequestsOpenPage(props) {
                 {
                   icon: 'edit',
                   tooltip: 'edit ticket',
-                  onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`)),
+                  onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`))
+                },
+                {
+                  icon: 'event_note',
+                  tooltip: 'view ticket',
+                  onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
                 },
                 {
                   icon: 'delete',
                   tooltip: 'close ticket',
                   onClick: (event, rowData) => { 
                     if (window.confirm('Are you sure you wish to close this item?')) 
-                      closeTicket(rowData) },
+                      closeTicket(rowData) }
                 },
               ]}
             />

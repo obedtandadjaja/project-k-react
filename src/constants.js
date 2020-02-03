@@ -9,16 +9,16 @@ export const BACKEND_BASE_URL = process.env.NODE_ENV === 'development' ?
 export const AUTH_BASE_URL = `https://${API_HOST}${AUTH_PROXY_PREFIX}`
 
 export const MAINTENANCE_REQUEST_CATEGORY_LIST = [
-      { id: 'electricalAndLighting', name: 'Electrical and lighting' },
-      { id: 'ac', name: 'AC' },
-      { id: 'appliance', name: 'Appliance' },
-      { id: 'doorsAndLocks', name: 'Doors and locks' },
-      { id: 'flooring', name: 'Flooring' },
-      { id: 'general', name: 'General' },
-      { id: 'plumbingAndBath', name: 'Plumbing and bath' },
-      { id: 'preventativeMaintenance', name: 'Preventative maintenance' },
-      { id: 'pestManagement', name: 'Pest management' },
-      { id: 'residentExperience', name: 'Resident experience' },
+      { id: 'Electrical and lighting', name: 'Electrical and lighting' },
+      { id: 'AC', name: 'AC' },
+      { id: 'Appliance', name: 'Appliance' },
+      { id: 'Doors and locks', name: 'Doors and locks' },
+      { id: 'Flooring', name: 'Flooring' },
+      { id: 'General', name: 'General' },
+      { id: 'Plumbing and bath', name: 'Plumbing and bath' },
+      { id: 'Preventative maintenance', name: 'Preventative maintenance' },
+      { id: 'Pest management', name: 'Pest management' },
+      { id: 'Resident experience', name: 'Resident experience' },
 ]
 
 export const MAINTENANCE_REQUEST_CATEGORY_LIST_COLOR = [
