@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/users/form'
-import {FormStyle} from '../../components/commons/formStyle'
+import { FormStyledComponent } from '../../styledComponents/form'
 import { edit, get } from './../../api/users'
 
 function AccountEditPage(props) {
@@ -28,7 +28,7 @@ function AccountEditPage(props) {
       {
         !getLoading &&
         user &&
-        <FormStyle>
+        <FormStyledComponent>
           <Form
             initialValues={user}
             onSubmit={editSubmit}
@@ -36,7 +36,7 @@ function AccountEditPage(props) {
             submitError={error}
             title='Edit user'
             submitText='Edit user' />
-        </FormStyle>
+        </FormStyledComponent>
       }
     </div>
   )

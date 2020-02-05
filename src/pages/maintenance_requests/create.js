@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from '../../components/maintenances/form'
-import { FormStyle } from '../../components/commons/formStyle'
+import { FormStyledComponent } from '../../styledComponents/form'
 import { create } from '../../api/maintenances'
 import { all as fetchAllProperties } from './../../api/properties'
 
@@ -31,7 +31,7 @@ function MaintenanceRequestsCreatePage(props) {
     <div className='propertyCreatePage'>
       {
         properties &&
-        <FormStyle >
+        <FormStyledComponent>
           <Form
             properties={properties}
             onSubmit={createSubmit}
@@ -39,7 +39,7 @@ function MaintenanceRequestsCreatePage(props) {
             submitError={error}
             title='Create  Maintenance Request'
             buttonText='Create' />
-        </FormStyle>
+        </FormStyledComponent>
       }
     </div>
   )

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/properties/form'
-import { FormStyle } from '../../components/commons/formStyle'
+import { FormStyledComponent } from '../../styledComponents/form'
 import { get } from './../../api/properties'
 
 function PropertyGetPage(props) {
@@ -44,7 +44,7 @@ function PropertyGetPage(props) {
         {
           !loading &&
           property &&
-          <FormStyle>
+          <FormStyledComponent>
             <Form
               initialValues={property}
               loading={loading}
@@ -52,7 +52,7 @@ function PropertyGetPage(props) {
               title='Property'
               readonly 
               />
-          </FormStyle>
+          </FormStyledComponent>
         }
       
     </div>

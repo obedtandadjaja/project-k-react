@@ -1,8 +1,8 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-import { required } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
+import { required } from './../../formHelpers/validators'
 
 function PaymentForm(props) {
   const { handleSubmit, readonly, submitError, loading, title, buttonText } = props

@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
-import { FormStyle } from '../../components/commons/formStyle'
 import Form from './../../components/tenants/form'
+import { FormStyledComponent } from '../../styledComponents/form'
 import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
 import { create } from './../../api/tenants'
@@ -53,14 +53,14 @@ function TenantCreatePage(props) {
           </div>
         </Link>
       }
-      <FormStyle>
+      <FormStyledComponent>
         <Form
           onSubmit={createSubmit}
           loading={loading}
           submitError={error}
           title='Create tenant'
           submitText='Create tenant' />
-      </FormStyle>
+      </FormStyledComponent>
     </div>
   )
 }

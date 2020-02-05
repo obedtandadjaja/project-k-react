@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/rooms/form'
-import { FormStyle } from '../../components/commons/formStyle'
+import { FormStyledComponent } from '../../styledComponents/form'
 import { get } from './../../api/properties'
 import { create } from './../../api/rooms'
 
@@ -40,7 +40,7 @@ function RoomCreatePage(props) {
           </div>
         </Link>
       }
-      <FormStyle>
+      <FormStyledComponent>
         <Form
           onSubmit={createSubmit}
           loading={loading}
@@ -48,7 +48,7 @@ function RoomCreatePage(props) {
           title='Add a room'
           buttonText='Create room' 
           />
-      </FormStyle>
+      </FormStyledComponent>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LoginStyle = styled.div`
+export const LoginStyledComponent = styled.div`
   width: 400px;
   height: 400px;
 
@@ -22,7 +22,7 @@ export const LoginStyle = styled.div`
   .blockCard{
     background-color: white;
     border-radius: 20px;
-    height: 100%
+    height: 100%;
     width: 100%;
     margin: 0 auto;
   }

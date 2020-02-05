@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
-import { FormStyle } from '../../components/commons/formStyle'
 import Form from './../../components/users/form'
+import { FormStyledComponent } from '../../styledComponents/form'
 import { get } from './../../api/users'
 
 function AccountGetPage(props) {
@@ -25,14 +25,14 @@ function AccountGetPage(props) {
       {
         !loading &&
         user &&
-        <FormStyle>
+        <FormStyledComponent>
           <Form
             initialValues={user}
             loading={loading}
             submitError={error}
             title='User information'
             readonly />
-        </FormStyle>
+        </FormStyledComponent>
         
       }
     </div>

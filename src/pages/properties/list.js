@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { CardStyle } from '../../components/commons/cardStyle'
+import { CardStyledComponent } from '../../styledComponents/card'
 import { all } from '../../api/properties'
 
 function PropertyListPage(props) {
@@ -39,25 +39,25 @@ function PropertyListPage(props) {
             properties.map(property => (
               <div className='col'>
 
-                <CardStyle>
+                <CardStyledComponent>
                   <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
                     <h4>{property.name}</h4>
                     <p>Type: {property.type}</p>
                     <p>Address: {property.address}</p>
                     <p>Number of rooms: {property.rooms.length}</p>
                   </Link>
-                </CardStyle>
+                </CardStyledComponent>
 
               </div>
             ))
           }
           <div className='col'>
 
-            <CardStyle>
+            <CardStyledComponent>
               <Link to={{ pathname: '/properties/create' }}>
                 Add Property
             </Link>
-            </CardStyle>
+            </CardStyledComponent>
 
           </div>
         </div>

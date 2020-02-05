@@ -7,7 +7,7 @@ import styled from 'styled-components';
  *    blockBody
  *  button
  */
-export const FormStyle = styled.div`
+export const FormStyledComponent = styled.div`
 
   display: contents;
   align-items: center;

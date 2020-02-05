@@ -1,4 +1,4 @@
-// TODO(@kenaszogara): Make the date to show more valuable information
+// TODO(@kenaszogara): Make the date to show more valuable information, and optimize API calls
 
 import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
@@ -6,19 +6,18 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import MaterialTableOpen from '../../components/table/materialTable'
-import { all, edit } from '../../api/maintenances'
-import { get as getProperty } from '../../api/properties'
-import { get as getRoom } from '../../api/rooms'
-import { get as getUser } from '../../api/users'
+import MaterialTableOpen from './../../components/table/materialTable'
+import { all, edit } from './../../api/maintenances'
+import { get as getProperty } from './../../api/properties'
+import { get as getRoom } from './../../api/rooms'
+import { get as getUser } from './../../api/users'
 
 const Style = styled.div`
-  /* custom styling openTicketPage */
   .col{
       padding: 0;
   }
-  .row{
-    margin-bottom: 2em;
+  .row:first-child{
+    margin-top: 2em;
   }
 `
 
@@ -76,13 +75,16 @@ function MaintenanceRequestsOpenPage(props) {
 
   return(
     <Style>
-      <div className="openTicketPage">
+      <div className='openTicketPage'>
         <div className='container'>
           <div className='row'>
-            <div className='col'>
-              <Link className="btn btn-primary" to={{ pathname: '/maintenance_requests/create' }}>
+            <div className='mr-auto'>
+              <Link className='btn btn-primary' to={{ pathname: '/maintenance_requests/create' }}>
                 Add Ticket
               </Link>
+            </div>
+            <div className='ml-auto'>
+              <button className='btn btn-primary'>Filter</button>
             </div>
           </div>
           <div className='row'>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const HoverButton = styled.button`
+export const ButtonStyledComponent = styled.button`
   :hover{
     color: red;
   }

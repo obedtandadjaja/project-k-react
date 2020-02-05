@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
-import { FormStyle } from '../../components/commons/formStyle'
 import Form from './../../components/rooms/form'
+import { FormStyledComponent } from '../../styledComponents/form'
 import { get as getProperty } from './../../api/properties'
 import { get } from './../../api/rooms'
 
@@ -45,7 +45,7 @@ function RoomGetPage(props) {
       {
         !loading &&
         room &&
-        <FormStyle>
+        <FormStyledComponent>
           <Form
             initialValues={room}
             loading={loading}
@@ -53,7 +53,7 @@ function RoomGetPage(props) {
             title='Room'
             readonly={true} 
             />
-        </FormStyle>
+        </FormStyledComponent>
       }
     </div>
   )

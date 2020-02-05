@@ -31,7 +31,8 @@ function MaintenanceForm(props) {
     title, 
     buttonText,
     properties,
-    initialValues } = props
+    initialValues 
+  } = props
 
   const [rooms, setRooms] = useState(null)
 

@@ -7,52 +7,58 @@ import Donut from './../../components/charts/donut'
 import { all } from '../../api/maintenances'
 
 function MaintenanceRequestsListPage(props) {
-  const { all, currentUserID,} = props;
+  const { all, currentUserID, maintenances} = props;
   const [pending, setPending] = useState( );
   const [closed, setClosed] = useState( );
 
   useEffect(() => {
-    fetchTicket()
+    all(currentUserID)
   }, [currentUserID, all])
-  
-  async function fetchTicket() {
-    const dispatch = await all(currentUserID)
-    setPending(splitByStatus(dispatch.payload, 'pending'))
-    setClosed(splitByStatus(dispatch.payload, 'closed' ))
-  }
 
-  function splitByStatus(maintenances, status) {
-    var arr = []
-    var label = []
-    var data = []
-
-    maintenances.map(ticket => {
-      if (ticket.status === status) {
-        arr.push(ticket.title)
-      }
-    })
-
-    arr.sort()
-
-    if(arr.length > 0) {
-      var tmp = arr[0]
-      label.push(tmp)
-      var count = 0
-      for (var i = 0; i < arr.length; i++) {
-        if (arr[i] !== tmp) {
-          tmp = arr[i]
-          label.push(tmp)
-          data.push(count)
-          count = 0
-        }
-        count = count + 1;
-      }
-      data.push(count)
+  useEffect(() => {
+    if (maintenances.length !== 0) {
+      setDataForTicket(maintenances)
+    }
+    
+    function setDataForTicket(data) {
+      setPending(splitByStatus(data, 'pending'))
+      setClosed(splitByStatus(data, 'closed'))
     }
 
-    return({ labels: label, data: data, count: arr.length })
-  }
+    function splitByStatus(maintenances, status) {
+      var arr = []
+      var label = []
+      var data = []
 
+      maintenances.map(ticket => {
+        if (ticket.status === status) {
+          return arr.push(ticket.title)
+        }
+      })
+
+      arr.sort()
+
+      if (arr.length > 0) {
+        var tmp = arr[0]
+        label.push(tmp)
+        var count = 0
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] !== tmp) {
+            tmp = arr[i]
+            label.push(tmp)
+            data.push(count)
+            count = 0
+          }
+          count = count + 1;
+        }
+        data.push(count)
+      }
+
+      return ({ labels: label, data: data, count: arr.length })
+    }
+
+  }, [maintenances])
+  
   const style = {
     card: {
       width: '300px',
@@ -120,6 +126,7 @@ function MaintenanceRequestsListPage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
+  maintenances: state.maintenance.getIn(['maintenances'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,

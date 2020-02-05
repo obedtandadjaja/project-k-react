@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../components/signup/form'
-import { LoginStyle } from '../components/commons/loginStyle'
+import { LoginStyledComponent } from '../styledComponents/login'
 import { signup } from './../api/signup'
 
 function SignupPage(props) {
@@ -19,14 +19,14 @@ function SignupPage(props) {
   }, [props.history, currentUserID])
 
   return (
-    <LoginStyle>
+    <LoginStyledComponent>
       <Form 
         onSubmit={signupSubmit} 
         loading={loading} 
         error={error} 
         submitText='Register user' 
         />
-    </LoginStyle>
+    </LoginStyledComponent>
   )
 }
 

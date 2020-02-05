@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/properties/form'
-import { FormStyle } from '../../components/commons/formStyle'
+import { FormStyledComponent } from '../../styledComponents/form'
 import { edit, get } from './../../api/properties'
 
 function PropertyEditPage(props) {
@@ -32,7 +32,7 @@ function PropertyEditPage(props) {
       {
         !getLoading &&
         property &&
-        <FormStyle>
+        <FormStyledComponent>
           <Form
             initialValues={property}
             onSubmit={editSubmit}
@@ -40,7 +40,7 @@ function PropertyEditPage(props) {
             submitError={error}
             title='Edit property'
             buttonText='Edit property' />
-        </FormStyle>
+        </FormStyledComponent>
       }
     </div>
   )
