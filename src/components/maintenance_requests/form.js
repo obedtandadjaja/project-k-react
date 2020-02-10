@@ -1,3 +1,5 @@
+// TODO(@kenaszogara): make form to use properties to get rooms id and name
+
 import React, {useEffect, useState} from 'react'
 import { Field, reduxForm, formValueSelector  } from 'redux-form'
 import { connect } from 'react-redux'
@@ -8,7 +10,7 @@ import { required } from '../../formHelpers/validators'
 import renderField from '../../formHelpers/renderField'
 import renderSelectField from '../../formHelpers/renderSelectField'
 import { all as fetchRooms } from '../../api/rooms'
-import { all as fetchProperties } from '../../api/properties'
+import { all as fetchAllProperties } from '../../api/properties'
 import { MAINTENANCE_REQUEST_CATEGORY_MAP } from '../../constants'
 
 const Style = styled.div`
@@ -21,7 +23,8 @@ function MaintenanceForm(props) {
 
   const { 
     currentUserID, 
-    fetchRooms, 
+    fetchAllProperties, 
+    fetchRooms,
     hasPropertyValue, 
     handleSubmit, 
     readonly, 
@@ -34,14 +37,14 @@ function MaintenanceForm(props) {
     initialValues 
   } = props
 
-  const [rooms, setRooms] = useState(null)
+  const [rooms, setRooms] = useState()
 
   useEffect(() => {
     if(hasPropertyValue) {
       fetchAllRoomsFromProperty()
     }
-    if(initialValues != null){
-      fetchProperties(currentUserID, {})
+    if(initialValues !== null){
+      fetchAllProperties(currentUserID, { eager: 'Rooms' })
     }
   }, [currentUserID, hasPropertyValue])
 
@@ -49,6 +52,15 @@ function MaintenanceForm(props) {
     const dispatch = await fetchRooms(currentUserID, hasPropertyValue, { eager: 'Tenants' })
     setRooms(dispatch.payload)
   }
+
+  // function fetchRoomsFromProperty() {
+  //   const property = properties.filter(it => it.id.includes(hasPropertyValue))
+  //   const arrRoom = []
+  //   property.map((data) => {
+  //     return arrRoom.push(data.rooms)
+  //   })
+  //   setRooms(arrRoom)
+  // }
   
   return (
     <Style>
@@ -140,7 +152,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchRooms,
-  fetchProperties,
+  fetchAllProperties,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(maintenanceForm)

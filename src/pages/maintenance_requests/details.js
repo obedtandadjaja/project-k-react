@@ -21,7 +21,7 @@ function MaintenanceRequestsDetailsPage(props) {
   useEffect(() => {
     get(currentUserID, maintenanceRequestID)
     fetchAllProperties(currentUserID)
-  }, [get, currentUserID, maintenanceRequestID])
+  }, [currentUserID, maintenanceRequestID, get, fetchAllProperties])
 
   useEffect(() => {
     if (!loading && !error) {

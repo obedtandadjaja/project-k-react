@@ -5,10 +5,10 @@ import { bindActionCreators } from 'redux'
 import Form from '../../components/maintenance_requests/form'
 import { FormStyledComponent } from '../../styledComponents/form'
 import { create } from '../../api/maintenanceRequests'
-import { all as fetchAllProperties } from './../../api/properties'
+import { all } from './../../api/properties'
 
 function MaintenanceRequestsCreatePage(props) {
-  const { loading, error, create, currentUserID, fetchAllProperties, properties } = props
+  const { loading, error, create, currentUserID, all, properties } = props
   const [submitted, setSubmitted] = useState(false)
 
   const createSubmit = (values) => {
@@ -18,8 +18,8 @@ function MaintenanceRequestsCreatePage(props) {
   }
 
   useEffect(() => {
-    fetchAllProperties(currentUserID)
-  }, [currentUserID,])
+    all(currentUserID, { eager: 'Rooms' })
+  }, [currentUserID, all])
 
   useEffect(() => {
     if (!loading && !error && submitted) {
@@ -53,7 +53,7 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   create,
-  fetchAllProperties,
+  all,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsCreatePage)

@@ -1,6 +1,3 @@
-// TODO(@kenaszogara): Make the date to show more valuable information, and optimize API calls
-// make MaterialTable a seperate component, where data computing are done seperately
-
 import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'

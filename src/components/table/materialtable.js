@@ -1,6 +1,6 @@
 // https://material-table.com/#/docs/features/actions
 
-import React, { useState } from 'react'
+import React from 'react'
 import MaterialTable from 'material-table'
 import styled from 'styled-components'
 
@@ -31,7 +31,7 @@ function TicketTable(props) {
       'description': data.description,
       'reporterName': data.reporter.name,
     }
-    tableData.push(dataObj)
+    return tableData.push(dataObj)
   })
 
   const columns = [
