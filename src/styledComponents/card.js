@@ -16,5 +16,4 @@ export const CardStyledComponent = styled.div`
   p{
     margin: 0;
   }
-  
 `

@@ -7,9 +7,9 @@ import styled from 'styled-components'
 import { required } from '../../formHelpers/validators'
 import renderField from '../../formHelpers/renderField'
 import renderSelectField from '../../formHelpers/renderSelectField'
-import { all as fetchRooms } from './../../api/rooms'
-import { all as fetchProperties } from './../../api/properties'
-import { MAINTENANCE_REQUEST_CATEGORY_LIST } from './../../constants'
+import { all as fetchRooms } from '../../api/rooms'
+import { all as fetchProperties } from '../../api/properties'
+import { MAINTENANCE_REQUEST_CATEGORY_MAP } from '../../constants'
 
 const Style = styled.div`
   .row{
@@ -37,7 +37,7 @@ function MaintenanceForm(props) {
   const [rooms, setRooms] = useState(null)
 
   useEffect(() => {
-    if(hasPropertyValue != null) {
+    if(hasPropertyValue) {
       fetchAllRoomsFromProperty()
     }
     if(initialValues != null){
@@ -93,10 +93,10 @@ function MaintenanceForm(props) {
                   validate={[required]}
                   readonly={readonly}
                   defaultEmpty
-                  options={MAINTENANCE_REQUEST_CATEGORY_LIST.map(category =>
-                    [category.id, category.name]
+                  options={Array.from(MAINTENANCE_REQUEST_CATEGORY_MAP, ([key, value]) =>
+                  { return ([key, value.name])}
                   )}
-                />
+              />
 
                 <Field
                   name='description'
@@ -126,12 +126,12 @@ function MaintenanceForm(props) {
 }
 
 let maintenanceForm = reduxForm({
-  form: 'maintenance',
+  form: 'maintenanceRequest',
   enabledReinitialize: true,
 })(MaintenanceForm)
 
 const mapStateToProps = state => {
-  const selector = formValueSelector('maintenance')
+  const selector = formValueSelector('maintenanceRequest')
   const hasPropertyValue = selector(state, 'propertyID')
   return{
     hasPropertyValue,

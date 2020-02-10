@@ -1,9 +1,8 @@
-import React , { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyleWrapper = styled.div`
-
   .dashCardMenu{
     margin: 50px;
     width: 400px;
@@ -35,34 +34,18 @@ const StyleWrapper = styled.div`
 `
 
 function CardLarge(props){
-  const { clickUrl, header, body, color, revertColor } = props;
-  const [hover, setHover] = useState(false);
-
-  var hoverStyle;
-  var textStyle;
-
-  if (hover) {
-    hoverStyle = {
-      backgroundColor: revertColor ? revertColor : color
-    }
-    textStyle = {
-      color: revertColor ? color : ""
-    }
-  } else {
-    hoverStyle = {backgroundColor: color}
-    textStyle = {}
-  }
+  const { clickUrl, header, body, color } = props;
 
   return (
     <StyleWrapper>
-      <div className='dashCardMenu' style={hoverStyle} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+      <div className='dashCardMenu' style={{ backgroundColor: color }}>
         <Link to={{ pathname: clickUrl }} >
           <div className='case'>
             <div className='header'>
-              <h1 style={textStyle}>{header}</h1>
+              <h1>{header}</h1>
             </div>
             <div className='body'>
-              <p style={textStyle}>{body}</p>
+              <p>{body}</p>
             </div>
           </div>
         </Link>

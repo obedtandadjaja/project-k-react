@@ -1,8 +1,10 @@
 // https://material-table.com/#/docs/features/actions
 
-import React from 'react'
+import React, { useState } from 'react'
 import MaterialTable from 'material-table'
 import styled from 'styled-components'
+
+import { MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
 
 const Style = styled.div`
   overflow: auto;
@@ -13,24 +15,40 @@ const Style = styled.div`
   }
 `
 
-const columns = [
-  { field: 'id', title: 'Ticket Id' },
-  { field: 'createdDate', title: 'Date Opened' },
-  { field: 'location', title: 'Location(s)' },
-  { field: 'category', title: 'Category'},
-  { field: 'description', title: 'Description'},
-  { field: 'reporterName', title: 'Submiited By'},
-]
+function TicketTable(props) {
+  const { tickets, actions, filter } = props;
 
-function MaterialTableOpen(props) {
-  const {data, actions} = props;
+  const moment = require('moment')
+  const arrTicket = tickets.filter(it => it.status.includes(filter))
+  const tableData = []
+
+  arrTicket.map((data) => {
+    var dataObj = {
+      'id': data.id,
+      'createdDate': moment(data.createdAt).format("MMM Do [, ] dddd"),
+      'location': data.property.address + ', \n' + data.property.name + ' (' + data.room.name +')',
+      'category': MAINTENANCE_REQUEST_CATEGORY_MAP.get(data.title).name,
+      'description': data.description,
+      'reporterName': data.reporter.name,
+    }
+    tableData.push(dataObj)
+  })
+
+  const columns = [
+    { field: 'id', title: 'Ticket Id' },
+    { field: 'createdDate', title: 'Date Opened' },
+    { field: 'location', title: 'Location(s)' },
+    { field: 'category', title: 'Category' },
+    { field: 'description', title: 'Description' },
+    { field: 'reporterName', title: 'Submiited By' },
+  ]
 
   return (
     <Style>
       <MaterialTable
-        title="Close Ticket"
+        title='Close Ticket'
         columns={columns}
-        data={data}
+        data={tableData}
         options={{
           headerStyle:{
             fontSize: '16px'
@@ -43,4 +61,4 @@ function MaterialTableOpen(props) {
   );
 }
 
-export default MaterialTableOpen
+export default TicketTable

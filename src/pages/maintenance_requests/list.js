@@ -4,61 +4,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Donut from './../../components/charts/donut'
-import { all } from '../../api/maintenances'
+import { all } from './../../api/maintenanceRequests'
 
 function MaintenanceRequestsListPage(props) {
-  const { all, currentUserID, maintenances} = props;
-  const [pending, setPending] = useState( );
-  const [closed, setClosed] = useState( );
+  const { all, currentUserID, maintenanceRequests, loading } = props;
 
   useEffect(() => {
-    all(currentUserID)
+    all(currentUserID, { eager: 'Property, Room, Reporter' })
   }, [currentUserID, all])
 
-  useEffect(() => {
-    if (maintenances.length !== 0) {
-      setDataForTicket(maintenances)
-    }
-    
-    function setDataForTicket(data) {
-      setPending(splitByStatus(data, 'pending'))
-      setClosed(splitByStatus(data, 'closed'))
-    }
-
-    function splitByStatus(maintenances, status) {
-      var arr = []
-      var label = []
-      var data = []
-
-      maintenances.map(ticket => {
-        if (ticket.status === status) {
-          return arr.push(ticket.title)
-        }
-      })
-
-      arr.sort()
-
-      if (arr.length > 0) {
-        var tmp = arr[0]
-        label.push(tmp)
-        var count = 0
-        for (var i = 0; i < arr.length; i++) {
-          if (arr[i] !== tmp) {
-            tmp = arr[i]
-            label.push(tmp)
-            data.push(count)
-            count = 0
-          }
-          count = count + 1;
-        }
-        data.push(count)
-      }
-
-      return ({ labels: label, data: data, count: arr.length })
-    }
-
-  }, [maintenances])
-  
   const style = {
     card: {
       width: '300px',
@@ -87,16 +41,18 @@ function MaintenanceRequestsListPage(props) {
         <div className='col'>
           <div style={style.card}>
             {
-              pending && 
+              !loading &&
+              maintenanceRequests && 
               <>
-              <Donut
-                datasets={pending}
-              />
+                <Donut
+                  datasets={maintenanceRequests}
+                  filter='pending'
+                />
                 <Link to={{ pathname: "/maintenance_requests/open" }}>
-                <button type='button' className="btn btn-primary" style={style.button}>
-                  OPEN TICKET
-              </button>
-              </Link>
+                  <button type='button' className="btn btn-primary" style={style.button}>
+                    OPEN TICKET
+                  </button>
+                </Link>
               </>
             }
           </div>
@@ -104,16 +60,18 @@ function MaintenanceRequestsListPage(props) {
         <div className='col'>
           <div style={style.card}>
             {
-              closed &&
+              !loading &&
+              maintenanceRequests &&
               <>
-              <Donut
-                datasets={closed}
-              />
+                <Donut
+                  datasets={maintenanceRequests}
+                  filter='closed'
+                />
                 <Link to={{ pathname: "/maintenance_requests/closed" }}>
-                <button type='button' className="btn btn-primary" style={style.button}>
-                  CLOSE TICKET
-                </button>
-              </Link>
+                  <button type='button' className="btn btn-primary" style={style.button}>
+                    CLOSE TICKET
+                  </button>
+                </Link>
               </>
             }
           </div>
@@ -121,12 +79,12 @@ function MaintenanceRequestsListPage(props) {
       </div>
     </div>
   )
-  
 }
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenances: state.maintenance.getIn(['maintenances'])
+  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  loading: state.maintenance_request.getIn(['allLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,

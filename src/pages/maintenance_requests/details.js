@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import Form from '../../components/maintenances/form'
+import Form from '../../components/maintenance_requests/form'
 import { FormStyledComponent } from '../../styledComponents/form'
-import { get, edit } from '../../api/maintenances'
+import { get, edit } from '../../api/maintenanceRequests'
 import { get as getRoom } from '../../api/rooms'
 import { get as getProperty, all as fetchAllProperties } from '../../api/properties'
 
 function MaintenanceRequestsDetailsPage(props) {
-  const { getLoading, loading, error, maintenance, edit, get, currentUserID, properties, fetchAllProperties } = props
-  const { maintenanceID } = props.match.params
+  const { getLoading, loading, error, maintenanceRequests, edit, get, currentUserID, properties, fetchAllProperties } = props
+  const { maintenanceRequestID } = props.match.params
   const [submitted, setSubmitted] = useState(false)
 
   const editSubmit = (values) => {
@@ -19,9 +19,9 @@ function MaintenanceRequestsDetailsPage(props) {
   }
 
   useEffect(() => {
-    get(currentUserID, maintenanceID)
+    get(currentUserID, maintenanceRequestID)
     fetchAllProperties(currentUserID)
-  }, [get, currentUserID, maintenanceID])
+  }, [get, currentUserID, maintenanceRequestID])
 
   useEffect(() => {
     if (!loading && !error) {
@@ -39,7 +39,7 @@ function MaintenanceRequestsDetailsPage(props) {
           <Form
             edit={true}
             readonly
-            initialValues={maintenance}
+            initialValues={maintenanceRequests}
             properties={properties}
             onSubmit={editSubmit}
             loading={loading}
@@ -57,7 +57,7 @@ const mapStateToProps = state => ({
   getLoading: state.maintenance.getIn(['getLoading']),
   error: state.maintenance.getIn(['createError']),
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenance: state.maintenance.getIn(['maintenance']),
+  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
   properties: state.property.getIn(['properties']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({

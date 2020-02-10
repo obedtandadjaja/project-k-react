@@ -1,4 +1,5 @@
 // TODO(@kenaszogara): Make the date to show more valuable information, and optimize API calls
+// make MaterialTable a seperate component, where data computing are done seperately
 
 import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
@@ -6,11 +7,8 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import MaterialTableOpen from './../../components/table/materialTable'
-import { all, edit } from './../../api/maintenances'
-import { get as getProperty } from './../../api/properties'
-import { get as getRoom } from './../../api/rooms'
-import { get as getUser } from './../../api/users'
+import TicketTable from './../../components/table/materialTable'
+import { all, edit } from './../../api/maintenanceRequests'
 
 const Style = styled.div`
   .col{
@@ -22,47 +20,12 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsOpenPage(props) {
-  const { currentUserID, all, getProperty, getRoom, getUser, edit } = props;
-  const [maintenances, setMaintenances] = useState([]);
+  const { currentUserID, maintenanceRequests, all, edit } = props;
   const [del, setDel] = useState(null)
 
   useEffect(() => {
-    if(del == null){
-      setMaintenances([])
-      fetchOpenTicket()
-    }
-    setDel(null)
+    all(currentUserID, { eager: 'Property, Room, Reporter' })
   }, [currentUserID, all, del])
-
-  async function fetchOpenTicket() {
-    const dispatch = await all(currentUserID)
-    mapDispatchToData(dispatch.payload)
-  }
-
-  function mapDispatchToData(value) {
-    var moment = require('moment')
-
-    value.map( async maintenance => {
-      if(maintenance.status === 'pending'){
-        const property = await getProperty(currentUserID, maintenance.propertyID)
-        const room = await getRoom(currentUserID, maintenance.propertyID, maintenance.roomID)
-        const reporter = await getUser(currentUserID)
-
-        var date = moment(maintenance.createdAt).format("MMM Do [, ] dddd")
-
-        var dataObj = {
-          'id': maintenance.id,
-          'createdDate': date,
-          'location': property.payload.name + ', ' + room.payload.name,
-          'category': maintenance.title,
-          'description': maintenance.description,
-          'reporterName': reporter.payload.name,
-        }
-
-        setMaintenances(prevState => [...prevState, dataObj]);
-      }
-    })
-  }
 
   async function closeTicket(rowData){
     var data = {id: rowData.id, status: "closed"}
@@ -83,33 +46,35 @@ function MaintenanceRequestsOpenPage(props) {
                 Add Ticket
               </Link>
             </div>
-            <div className='ml-auto'>
-              <button className='btn btn-primary'>Filter</button>
-            </div>
           </div>
           <div className='row'>
-            <MaterialTableOpen 
-              data={maintenances}
-              actions={[
-                {
-                  icon: 'edit',
-                  tooltip: 'edit ticket',
-                  onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`))
-                },
-                {
-                  icon: 'description',
-                  tooltip: 'view ticket',
-                  onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
-                },
-                {
-                  icon: 'delete',
-                  tooltip: 'close ticket',
-                  onClick: (event, rowData) => { 
-                    if (window.confirm('Are you sure you wish to close this item?')) 
-                      closeTicket(rowData) }
-                },
-              ]}
-            />
+            {
+              maintenanceRequests &&
+              <TicketTable
+                tickets={maintenanceRequests}
+                filter='pending'
+                actions={[
+                  {
+                    icon: 'edit',
+                    tooltip: 'edit ticket',
+                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`))
+                  },
+                  {
+                    icon: 'description',
+                    tooltip: 'view ticket',
+                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
+                  },
+                  {
+                    icon: 'delete',
+                    tooltip: 'close ticket',
+                    onClick: (event, rowData) => {
+                      if (window.confirm('Are you sure you wish to close this item?'))
+                        closeTicket(rowData)
+                    }
+                  },
+                ]}
+              />
+           }
           </div>
         </div>
       </div>
@@ -119,13 +84,10 @@ function MaintenanceRequestsOpenPage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenances: state.maintenance.getIn(['maintenances'])
+  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,
-  getProperty,
-  getRoom,
-  getUser,
   edit,
 }, dispatch)
 

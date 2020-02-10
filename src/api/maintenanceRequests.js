@@ -15,7 +15,7 @@ import {
   removeBegin,
   removeSuccess,
   removeFailure,
-} from '../actions/maintenanceActions'
+} from '../actions/maintenanceRequestActions'
 
 export function create(userID, data) {
   return dispatch => {
@@ -39,11 +39,11 @@ export function edit(userID, data) {
   }
 }
 
-export function all(userID) {
+export function all(userID, queryParams) {
   return dispatch => {
     dispatch(allBegin())
 
-    return API.client.get(`/api/v1/maintenance_requests`).then(
+    return API.client.get(`/api/v1/maintenance_requests`, { params: queryParams }).then(
       res => dispatch(allSuccess(res.data)),
       err => dispatch(allFailure(err.response))
     )

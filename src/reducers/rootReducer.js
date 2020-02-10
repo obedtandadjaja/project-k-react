@@ -6,7 +6,7 @@ import user from './userReducer'
 import property from './propertyReducer'
 import room from './roomReducer'
 import tenant from './tenantReducer'
-import maintenance from './maintenanceReducer'
+import maintenance_request from './maintenanceRequestReducer'
 
 export default combineReducers({
   auth,
@@ -14,6 +14,6 @@ export default combineReducers({
   property,
   room,
   tenant,
-  maintenance,
+  maintenance_request,
   form: formReducer,
 })

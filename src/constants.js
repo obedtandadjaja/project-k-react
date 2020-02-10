@@ -8,19 +8,6 @@ export const BACKEND_BASE_URL = process.env.NODE_ENV === 'development' ?
 
 export const AUTH_BASE_URL = `https://${API_HOST}${AUTH_PROXY_PREFIX}`
 
-export const MAINTENANCE_REQUEST_CATEGORY_LIST = [
-      { id: 'Electrical and lighting', name: 'Electrical and lighting' },
-      { id: 'AC', name: 'AC' },
-      { id: 'Appliance', name: 'Appliance' },
-      { id: 'Doors and locks', name: 'Doors and locks' },
-      { id: 'Flooring', name: 'Flooring' },
-      { id: 'General', name: 'General' },
-      { id: 'Plumbing and bath', name: 'Plumbing and bath' },
-      { id: 'Preventative maintenance', name: 'Preventative maintenance' },
-      { id: 'Pest management', name: 'Pest management' },
-      { id: 'Resident experience', name: 'Resident experience' },
-]
-
 export const MAINTENANCE_REQUEST_CATEGORY_LIST_COLOR = [
       '#D95A6E',
       '#CBA22C',
@@ -33,3 +20,16 @@ export const MAINTENANCE_REQUEST_CATEGORY_LIST_COLOR = [
       '#FFD5C1',
       '#202832',
 ]
+
+export const MAINTENANCE_REQUEST_CATEGORY_MAP = new Map([
+      ['electricalAndLightning', { name: 'Electrical and lighting', color: '#D95A6E' }],
+      ['ac', { name: 'AC', color: '#CBA22C' }],
+      ['appliance', { name: 'Appliance', color: '#41AEA8' }],
+      ['doorsAndLocks', { name: 'Doors and locks', color: '#6886BA' }],
+      ['flooring', { name: 'Flooring', color: '#18A0FB' }],
+      ['general', { name: 'General', color: '#1331F4' }],
+      ['plumbingAndBath', { name: 'Plumbing and bath', color: '#2026A2' }],
+      ['preventativeMaintenance', { name: 'Preventative maintenance', color: '#FFA7C9' }],
+      ['pestManagement', { name: 'Pest management', color: '#FFD5C1' }],
+      ['reidentExperience', { name: 'Resident experience', color: '#202832' }]
+])
