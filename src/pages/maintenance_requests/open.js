@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
@@ -17,20 +17,15 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsOpenPage(props) {
-  const { currentUserID, maintenanceRequests, all, edit } = props;
-  const [del, setDel] = useState(null)
+  const { currentUserID, maintenanceRequests, loading, all, edit } = props;
 
   useEffect(() => {
-    all(currentUserID, { eager: 'Property, Room, Reporter' })
-  }, [currentUserID, all, del])
+    all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending' })
+  }, [currentUserID, all, loading])
 
-  async function closeTicket(rowData){
-    var data = {id: rowData.id, status: "closed"}
-    const dispatch = await edit(currentUserID, data)
-    var res = dispatch.payload
-    if(res != null) {
-      setDel(true)
-    }
+  const closeTicket = (rowData) => {
+    const data = { id: rowData.id, status: 'closed' }
+    edit(currentUserID, data)
   }
 
   return(
@@ -49,7 +44,6 @@ function MaintenanceRequestsOpenPage(props) {
               maintenanceRequests &&
               <TicketTable
                 tickets={maintenanceRequests}
-                filter='pending'
                 actions={[
                   {
                     icon: 'edit',
@@ -65,7 +59,7 @@ function MaintenanceRequestsOpenPage(props) {
                     icon: 'delete',
                     tooltip: 'close ticket',
                     onClick: (event, rowData) => {
-                      if (window.confirm('Are you sure you wish to close this item?'))
+                      if (window.confirm('Are you sure you want to close this ticket?'))
                         closeTicket(rowData)
                     }
                   },
@@ -81,7 +75,8 @@ function MaintenanceRequestsOpenPage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests'])
+  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  loading: state.maintenance_request.getIn(['editLoading']) 
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,

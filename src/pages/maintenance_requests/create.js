@@ -2,19 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import Form from '../../components/maintenance_requests/form'
-import { FormStyledComponent } from '../../styledComponents/form'
-import { create } from '../../api/maintenanceRequests'
+import Form from './../../components/maintenance_requests/form'
+import { FormStyledComponent } from './../../styledComponents/form'
+import { create } from './../../api/maintenanceRequests'
 import { all } from './../../api/properties'
 
 function MaintenanceRequestsCreatePage(props) {
-  const { loading, error, create, currentUserID, all, properties } = props
+  const { loading, error, currentUserID, properties, all, create } = props
   const [submitted, setSubmitted] = useState(false)
 
   const createSubmit = (values) => {
     setSubmitted(true)
     create(currentUserID, values)
-    
   }
 
   useEffect(() => {
@@ -33,11 +32,11 @@ function MaintenanceRequestsCreatePage(props) {
         properties &&
         <FormStyledComponent>
           <Form
-            properties={properties}
+            initialValues={properties}
             onSubmit={createSubmit}
             loading={loading}
             submitError={error}
-            title='Create  Maintenance Request'
+            title='Create Maintenance Request'
             buttonText='Create' />
         </FormStyledComponent>
       }
@@ -52,8 +51,8 @@ const mapStateToProps = state => ({
   properties: state.property.getIn(['properties']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  create,
   all,
+  create,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsCreatePage)

@@ -4,7 +4,7 @@ import React from 'react'
 import MaterialTable from 'material-table'
 import styled from 'styled-components'
 
-import { MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
+import { MAINTENANCE_REQUEST_CATEGORY_MAP } from '../../constants'
 
 const Style = styled.div`
   overflow: auto;
@@ -16,13 +16,12 @@ const Style = styled.div`
 `
 
 function TicketTable(props) {
-  const { tickets, actions, filter } = props;
+  const { tickets, actions } = props;
 
   const moment = require('moment')
-  const arrTicket = tickets.filter(it => it.status.includes(filter))
   const tableData = []
 
-  arrTicket.map((data) => {
+  tickets.map((data) => {
     var dataObj = {
       'id': data.id,
       'createdDate': moment(data.createdAt).format("MMM Do [, ] dddd"),

@@ -1,6 +1,4 @@
-// TODO(@kenaszogara): closed and open are exactly the same, the only differences is the button, data to show, and function to re-open/close ticket
-
-import React, {useEffect, useState} from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -19,25 +17,20 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsClosedPage(props) {
-  const { currentUserID, maintenanceRequests, all, edit } = props;
-  const [del, setDel] = useState(null)
+  const { currentUserID, maintenanceRequests, loading, all, edit } = props;
 
   useEffect(() => {
-    all(currentUserID, { eager: 'Property, Room, Reporter' })
-  }, [currentUserID, all, del])
+    all(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
+  }, [currentUserID, all, loading])
 
-  async function openTicket(rowData){
-    var data = {id: rowData.id, status: "pending"}
-    const dispatch = await edit(currentUserID, data)
-    var res = dispatch.payload
-    if(res != null) {
-      setDel(true)
-    }
+  const openTicket = (rowData) => {
+    const data = { id: rowData.id, status: 'pending' }
+    edit(currentUserID, data)
   }
 
   return(
     <Style>
-      <div className="closeTicketPage">
+      <div className='closeTicketPage'>
         <div className='container'>
           <div className='row'>
             {
@@ -60,7 +53,7 @@ function MaintenanceRequestsClosedPage(props) {
                     icon: 'add_box',
                     tooltip: 'open ticket',
                     onClick: (event, rowData) => {
-                      if (window.confirm('Are you sure you wish to re-open this item?'))
+                      if (window.confirm('Are you sure you want to reopen this ticket?'))
                         openTicket(rowData)
                     },
                   },
@@ -76,7 +69,8 @@ function MaintenanceRequestsClosedPage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests'])
+  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  loading: state.maintenance_request.getIn(['editLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,

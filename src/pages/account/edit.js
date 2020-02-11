@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/users/form'
-import { FormStyledComponent } from '../../styledComponents/form'
+import { FormStyledComponent } from './../../styledComponents/form'
 import { edit, get } from './../../api/users'
 
 function AccountEditPage(props) {
-  const { getLoading, loading, error, edit, get, user, currentUserID } = props
+  const { getLoading, loading, error, user, currentUserID, edit, get } = props
   const [submitted, setSubmitted] = useState(false)
   const editSubmit = (values) => {
     setSubmitted(true)

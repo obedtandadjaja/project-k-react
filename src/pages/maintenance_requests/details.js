@@ -1,34 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from '../../components/maintenance_requests/form'
 import { FormStyledComponent } from '../../styledComponents/form'
-import { get, edit } from '../../api/maintenanceRequests'
-import { get as getRoom } from '../../api/rooms'
-import { get as getProperty, all as fetchAllProperties } from '../../api/properties'
+import { get } from '../../api/maintenanceRequests'
+import { all } from '../../api/properties'
 
 function MaintenanceRequestsDetailsPage(props) {
-  const { getLoading, loading, error, maintenanceRequests, edit, get, currentUserID, properties, fetchAllProperties } = props
+  const { getLoading, loading, error, maintenanceRequests, currentUserID, properties, get, all } = props
   const { maintenanceRequestID } = props.match.params
-  const [submitted, setSubmitted] = useState(false)
-
-  const editSubmit = (values) => {
-    setSubmitted(true)
-    edit(currentUserID, values)
-  }
 
   useEffect(() => {
     get(currentUserID, maintenanceRequestID)
-    fetchAllProperties(currentUserID)
-  }, [currentUserID, maintenanceRequestID, get, fetchAllProperties])
-
-  useEffect(() => {
-    if (!loading && !error) {
-      submitted &&
-        props.history.push(`/maintenance_requests/open`)
-    }
-  })
+    all(currentUserID)
+  }, [currentUserID, maintenanceRequestID, get, all])
 
   return (
     <div className='propertyCreatePage'>
@@ -41,7 +27,6 @@ function MaintenanceRequestsDetailsPage(props) {
             readonly
             initialValues={maintenanceRequests}
             properties={properties}
-            onSubmit={editSubmit}
             loading={loading}
             submitError={error}
             title='Details'
@@ -53,19 +38,16 @@ function MaintenanceRequestsDetailsPage(props) {
 }
 
 const mapStateToProps = state => ({
-  loading: state.maintenance.getIn(['createLoading']),
-  getLoading: state.maintenance.getIn(['getLoading']),
-  error: state.maintenance.getIn(['createError']),
   currentUserID: state.auth.getIn(['currentUserID']),
+  loading: state.maintenance_request.getIn(['createLoading']),
+  getLoading: state.maintenance_request.getIn(['getLoading']),
+  error: state.maintenance_request.getIn(['createError']),
   maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
-  properties: state.property.getIn(['properties']),
+  properties: state.property.getIn(['properties'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  edit,
   get,
-  getRoom,
-  getProperty,
-  fetchAllProperties,
+  all,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsDetailsPage)

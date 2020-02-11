@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { useHistory, useLocation } from 'react-router'
 
 import Form from './../components/login/form'
-import { LoginStyledComponent } from '../styledComponents/login'
+import { LoginStyledComponent } from './../styledComponents/login'
 import { login } from './../api/login'
 
 function LoginPage(props) {
