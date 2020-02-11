@@ -9,8 +9,7 @@ import styled from 'styled-components'
 import { required } from '../../formHelpers/validators'
 import renderField from '../../formHelpers/renderField'
 import renderSelectField from '../../formHelpers/renderSelectField'
-import { all as fetchRooms } from '../../api/rooms'
-import { all as fetchAllProperties } from '../../api/properties'
+import { all } from '../../api/properties'
 import { MAINTENANCE_REQUEST_CATEGORY_MAP } from '../../constants'
 
 const Style = styled.div`
@@ -23,12 +22,10 @@ function MaintenanceForm(props) {
 
   const { 
     currentUserID, 
-    fetchAllProperties, 
-    fetchRooms,
+    all,
     hasPropertyValue, 
     handleSubmit, 
-    readonly, 
-    edit,
+    readonly,
     submitError, 
     loading, 
     title, 
@@ -41,26 +38,21 @@ function MaintenanceForm(props) {
 
   useEffect(() => {
     if(hasPropertyValue) {
-      fetchAllRoomsFromProperty()
+      fetchRoomsFromProperty()
     }
     if(initialValues !== null){
-      fetchAllProperties(currentUserID, { eager: 'Rooms' })
+      all(currentUserID, { eager: 'Rooms' })
     }
   }, [currentUserID, hasPropertyValue])
 
-  async function fetchAllRoomsFromProperty() {
-    const dispatch = await fetchRooms(currentUserID, hasPropertyValue, { eager: 'Tenants' })
-    setRooms(dispatch.payload)
+  function fetchRoomsFromProperty() {
+    const property = properties.filter(it => it.id.includes(hasPropertyValue))
+    const arrRoom = []
+    property.map((data) => {
+      return arrRoom.push(data.rooms)
+    })
+    setRooms(arrRoom[0])
   }
-
-  // function fetchRoomsFromProperty() {
-  //   const property = properties.filter(it => it.id.includes(hasPropertyValue))
-  //   const arrRoom = []
-  //   property.map((data) => {
-  //     return arrRoom.push(data.rooms)
-  //   })
-  //   setRooms(arrRoom)
-  // }
   
   return (
     <Style>
@@ -79,7 +71,7 @@ function MaintenanceForm(props) {
                   label='Property'
                   component={renderSelectField}
                   validate={[required]}
-                  readonly={edit}
+                  readonly={readonly}
                   defaultEmpty
                   options={properties.map(property => 
                     [property.id, property.name]
@@ -92,7 +84,7 @@ function MaintenanceForm(props) {
                     label='Room'
                     component={renderSelectField}
                     validate={[required]}
-                    readonly={edit}
+                    readonly={readonly}
                     defaultEmpty
                     options={rooms.map(room => 
                       [room.id, room.name]
@@ -151,8 +143,7 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchRooms,
-  fetchAllProperties,
+  all,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(maintenanceForm)

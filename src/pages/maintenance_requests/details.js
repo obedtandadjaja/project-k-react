@@ -8,12 +8,12 @@ import { get } from '../../api/maintenanceRequests'
 import { all } from '../../api/properties'
 
 function MaintenanceRequestsDetailsPage(props) {
-  const { getLoading, loading, error, maintenanceRequests, currentUserID, properties, get, all } = props
+  const { getLoading, loading, error, maintenanceRequest, currentUserID, properties, get, all } = props
   const { maintenanceRequestID } = props.match.params
 
   useEffect(() => {
     get(currentUserID, maintenanceRequestID)
-    all(currentUserID)
+    all(currentUserID, { eager: 'Rooms' })
   }, [currentUserID, maintenanceRequestID, get, all])
 
   return (
@@ -23,14 +23,14 @@ function MaintenanceRequestsDetailsPage(props) {
         properties &&
         <FormStyledComponent>
           <Form
-            edit={true}
-            readonly
-            initialValues={maintenanceRequests}
+            initialValues={maintenanceRequest}
             properties={properties}
             loading={loading}
             submitError={error}
-            title='Details'
-            buttonText='Ok' />
+            title='Edit Maintenance Request'
+            buttonText='Edit'
+            readonly
+          />
         </FormStyledComponent>
       }
     </div>
@@ -42,7 +42,7 @@ const mapStateToProps = state => ({
   loading: state.maintenance_request.getIn(['createLoading']),
   getLoading: state.maintenance_request.getIn(['getLoading']),
   error: state.maintenance_request.getIn(['createError']),
-  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  maintenanceRequest: state.maintenance_request.getIn(['maintenanceRequest']),
   properties: state.property.getIn(['properties'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({

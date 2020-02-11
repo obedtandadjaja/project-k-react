@@ -36,14 +36,14 @@ function MaintenanceRequestsEditPage(props) {
       properties &&
         <FormStyledComponent>
         <Form
-          edit={true}
           initialValues={maintenanceRequest}
           properties={properties}
           onSubmit={editSubmit}
           loading={loading}
           submitError={error}
           title='Edit Maintenance Request'
-          buttonText='Edit' />
+          buttonText='Edit'
+           />
         </FormStyledComponent>
     }
     </div>
