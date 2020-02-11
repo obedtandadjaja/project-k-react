@@ -32,7 +32,7 @@ function MaintenanceRequestsCreatePage(props) {
         properties &&
         <FormStyledComponent>
           <Form
-            initialValues={properties}
+            properties={properties}
             onSubmit={createSubmit}
             loading={loading}
             submitError={error}

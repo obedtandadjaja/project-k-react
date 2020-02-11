@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
-import Doughnut from '../../components/charts/doughnutnut'
+import Doughnut from '../../components/charts/doughnut'
 import { all } from './../../api/maintenanceRequests'
 
 const Style = styled.div`
@@ -67,7 +67,7 @@ function MaintenanceRequestsListPage(props) {
                 !loading &&
                 maintenanceRequests &&
                 <>
-                  <Donut
+                  <Doughnut
                     datasets={maintenanceRequests}
                     filter='closed'
                   />
