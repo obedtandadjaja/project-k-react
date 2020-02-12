@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
-import Doughnut from '../../components/charts/doughnut'
+import Doughnut from './../../components/charts/doughnut'
 import { all } from './../../api/maintenanceRequests'
 
 const Style = styled.div`
@@ -13,12 +13,14 @@ const Style = styled.div`
     margin-left: auto;
     margin-right: auto;
   }
+
   .box{
     width: 300px;
     height: 550px;
     margin: 1.5rem;
     text-align: center;
   }
+  
   .customBtn{
     width: 225px;
     height: 100px;
@@ -32,8 +34,8 @@ const Style = styled.div`
 function MaintenanceRequestsListPage(props) {
   const { currentUserID, maintenanceRequests, loading, all } = props;
 
-  // fetch all maintenance_request and pass it to children donut,
-  // then let donut props.filter calculates on status(filter='status')
+  // fetch all maintenance_requests and pass it to children donut,
+  // then let donut's props.filter calculates on status(filter='status')
   useEffect(() => {
     all(currentUserID, { eager: 'Property, Room, Reporter', per_page: 100 })
   }, [all, currentUserID])

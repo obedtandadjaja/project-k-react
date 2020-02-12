@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { CardStyledComponent } from '../../styledComponents/card'
-import { all } from '../../api/properties'
+import { CardStyledComponent } from './../../styledComponents/card'
+import { all } from './../../api/properties'
 
 function PropertyListPage(props) {
   const { currentUserID, properties, all } = props

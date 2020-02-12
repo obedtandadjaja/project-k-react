@@ -8,14 +8,9 @@ import { get, edit } from './../../api/maintenanceRequests'
 import { all } from './../../api/properties' 
 
 function MaintenanceRequestsEditPage(props) {
-  const { getLoading, loading, error, maintenanceRequest, currentUserID, properties, edit, get, all } = props
+  const { getLoading, editLoading, error, maintenanceRequest, currentUserID, properties, edit, get, all } = props
   const { maintenanceRequestID } = props.match.params
   const [submitted, setSubmitted] = useState(false)
-
-  const editSubmit = (values) => {
-    setSubmitted(true)
-    edit(currentUserID, values)
-  }
 
   useEffect(() => {
     get(currentUserID, maintenanceRequestID)
@@ -23,11 +18,16 @@ function MaintenanceRequestsEditPage(props) {
   }, [currentUserID, maintenanceRequestID, get, all])
 
   useEffect(() => {
-    if (!loading && !error ) {
+    if (!editLoading && !error ) {
       submitted &&
       props.history.push(`/maintenance_requests/open`)
     }
   })
+
+  const editSubmit = (values) => {
+    setSubmitted(true)
+    edit(currentUserID, values)
+  }
 
   return (
     <div className='propertyCreatePage'>
@@ -35,14 +35,14 @@ function MaintenanceRequestsEditPage(props) {
       !getLoading &&
       properties &&
         <FormStyledComponent>
-        <Form
-          initialValues={maintenanceRequest}
-          properties={properties}
-          onSubmit={editSubmit}
-          loading={loading}
-          submitError={error}
-          title='Edit Maintenance Request'
-          buttonText='Edit'
+          <Form
+            initialValues={maintenanceRequest}
+            properties={properties}
+            onSubmit={editSubmit}
+            loading={editLoading}
+            submitError={error}
+            title='Edit Maintenance Request'
+            buttonText='Edit'
            />
         </FormStyledComponent>
     }
@@ -52,9 +52,9 @@ function MaintenanceRequestsEditPage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  loading: state.maintenance_request.getIn(['createLoading']),
+  error: state.maintenance_request.getIn(['editError']),
+  editLoading: state.maintenance_request.getIn(['editLoading']),
   getLoading: state.maintenance_request.getIn(['getLoading']),
-  error: state.maintenance_request.getIn(['createError']),
   maintenanceRequest: state.maintenance_request.getIn(['maintenanceRequest']),
   properties: state.property.getIn(['properties']),
 })

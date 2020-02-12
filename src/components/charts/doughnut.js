@@ -1,7 +1,7 @@
 // https://www.chartjs.org/docs/latest/charts/doughnut.html
 
-import React, { Component } from 'react';
-import Chart from 'chart.js';
+import React, { Component } from 'react'
+import Chart from 'chart.js'
 
 import { MAINTENANCE_REQUEST_CATEGORY_MAP } from '../../constants'
 
@@ -93,7 +93,7 @@ class Doughnut extends Component {
         responsive: false,
         elements: { 
           center: { 
-            text: Object.keys(ticketFrequency).length,
+            text: Object.keys(ticket).length,
             color: '#36A2EB', // Default black
             fontStyle: 'Montserrat', // Default Arial
             sidePadding: 20 // Default 20 (as a percentage)

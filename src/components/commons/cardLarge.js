@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 const StyleWrapper = styled.div`
   .dashCardMenu{
@@ -12,24 +12,24 @@ const StyleWrapper = styled.div`
   }
 
   .dashCardMenu .case{
-      padding: 3em;
-      height: 100%;
+    padding: 3em;
+    height: 100%;
   }
 
   .dashCardMenu .header h1{
-      margin-top: 40%;
-      font-family: "Open Sans";
-      font-weight: bold;
-      font-size: 40px;
-      color: white;
+    margin-top: 40%;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
   }
 
   .dashCardMenu .body p{
-      margin-top: 3em;
-      font-family: Montserrat;
-      font-size: 30px;
-      font-weight: 700;
-      color: white;
+    margin-top: 3em;
+    font-family: Montserrat;
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
   }
 `
 

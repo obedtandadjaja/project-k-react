@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/rooms/form'
-import { FormStyledComponent } from '../../styledComponents/form'
+import { FormStyledComponent } from './../../styledComponents/form'
 import { get } from './../../api/properties'
 import { create } from './../../api/rooms'
 

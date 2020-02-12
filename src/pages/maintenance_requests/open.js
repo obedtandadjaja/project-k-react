@@ -9,19 +9,24 @@ import { all, edit } from './../../api/maintenanceRequests'
 
 const Style = styled.div`
   .col{
-      padding: 0;
+    padding: 0;
   }
+  
   .row:first-child{
     margin-top: 2em;
+  }
+
+  .btn{
+    margin-bottom: 1em;
   }
 `
 
 function MaintenanceRequestsOpenPage(props) {
-  const { currentUserID, maintenanceRequests, loading, all, edit } = props;
+  const { currentUserID, maintenanceRequests, editLoading, all, edit } = props;
 
   useEffect(() => {
     all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending' })
-  }, [currentUserID, all, loading])
+  }, [currentUserID, all, editLoading])
 
   const closeTicket = (rowData) => {
     const data = { id: rowData.id, status: 'closed' }
@@ -76,7 +81,7 @@ function MaintenanceRequestsOpenPage(props) {
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
-  loading: state.maintenance_request.getIn(['editLoading']) 
+  editLoading: state.maintenance_request.getIn(['editLoading']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,

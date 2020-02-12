@@ -1,9 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const LoginStyledComponent = styled.div`
   width: 400px;
   height: 400px;
-
   margin: auto;
   margin-top: 8rem;
 
@@ -11,9 +10,11 @@ export const LoginStyledComponent = styled.div`
     margin: 20px auto;
     text-align: center;
   }
+
   input{
     width: 100%;
   }
+
   button{
     margin-top:4rem;
     width: 100%;
@@ -26,6 +27,7 @@ export const LoginStyledComponent = styled.div`
     width: 100%;
     margin: 0 auto;
   }
+
   .blockBody{
     padding: 14px 20px 20px 20px;
   }

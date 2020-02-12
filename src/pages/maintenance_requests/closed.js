@@ -8,8 +8,9 @@ import { all, edit } from './../../api/maintenanceRequests'
 
 const Style = styled.div`
   .col{
-      padding: 0;
+    padding: 0;
   }
+  
   .row{
     margin-top: 4em;
     margin-bottom: 2em;

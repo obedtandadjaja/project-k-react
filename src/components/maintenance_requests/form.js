@@ -1,7 +1,5 @@
-// TODO(@kenaszogara): make form to use properties to get rooms id and name
-
-import React, {useEffect, useState} from 'react'
-import { Field, reduxForm, formValueSelector  } from 'redux-form'
+import React, { useEffect, useState } from 'react'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
@@ -19,40 +17,39 @@ const Style = styled.div`
 `
 
 function MaintenanceForm(props) {
-
   const { 
+    all, 
     currentUserID, 
-    all,
     hasPropertyValue, 
     handleSubmit, 
-    readonly,
+    readonly, 
     submitError, 
     loading, 
     title, 
-    buttonText,
-    properties,
-    initialValues 
+    buttonText, 
+    properties, 
+    initialValues, 
   } = props
 
   const [rooms, setRooms] = useState()
 
   useEffect(() => {
     if(hasPropertyValue) {
-      fetchRoomsFromProperty()
+      const property = properties.filter(it => it.id.includes(hasPropertyValue))
+      const arrRoom = []
+
+      property.map((data) => {
+        return arrRoom.push(data.rooms)
+      })
+
+      setRooms(arrRoom[0])
     }
+
     if(initialValues !== null){
       all(currentUserID, { eager: 'Rooms' })
     }
-  }, [currentUserID, hasPropertyValue])
 
-  function fetchRoomsFromProperty() {
-    const property = properties.filter(it => it.id.includes(hasPropertyValue))
-    const arrRoom = []
-    property.map((data) => {
-      return arrRoom.push(data.rooms)
-    })
-    setRooms(arrRoom[0])
-  }
+  }, [all, currentUserID, hasPropertyValue, initialValues, properties])
   
   return (
     <Style>
@@ -98,9 +95,9 @@ function MaintenanceForm(props) {
                   readonly={readonly}
                   defaultEmpty
                   options={Array.from(MAINTENANCE_REQUEST_CATEGORY_MAP, ([key, value]) =>
-                  { return ([key, value.name])}
+                  { return ([key, value.name]) }
                   )}
-              />
+                />
 
                 <Field
                   name='description'

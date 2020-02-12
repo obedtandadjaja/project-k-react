@@ -8,19 +8,6 @@ export const BACKEND_BASE_URL = process.env.NODE_ENV === 'development' ?
 
 export const AUTH_BASE_URL = `https://${API_HOST}${AUTH_PROXY_PREFIX}`
 
-export const MAINTENANCE_REQUEST_CATEGORY_LIST_COLOR = [
-      '#D95A6E',
-      '#CBA22C',
-      '#41AEA8',
-      '#6886BA',
-      '#18A0FB',
-      '#1331F4',
-      '#2026A2',
-      '#FFA7C9',
-      '#FFD5C1',
-      '#202832',
-]
-
 export const MAINTENANCE_REQUEST_CATEGORY_MAP = new Map([
       ['electricalAndLightning', { name: 'Electrical and lighting', color: '#D95A6E' }],
       ['ac', { name: 'AC', color: '#CBA22C' }],

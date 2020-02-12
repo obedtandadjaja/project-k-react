@@ -11,11 +11,6 @@ function MaintenanceRequestsCreatePage(props) {
   const { loading, error, currentUserID, properties, all, create } = props
   const [submitted, setSubmitted] = useState(false)
 
-  const createSubmit = (values) => {
-    setSubmitted(true)
-    create(currentUserID, values)
-  }
-
   useEffect(() => {
     all(currentUserID, { eager: 'Rooms' })
   }, [currentUserID, all])
@@ -25,6 +20,11 @@ function MaintenanceRequestsCreatePage(props) {
       props.history.push(`/maintenance_requests/open`)
     }
   }, [props.history, loading, error, submitted])
+
+  const createSubmit = (values) => {
+    setSubmitted(true)
+    create(currentUserID, values)
+  }
 
   return (
     <div className='propertyCreatePage'>

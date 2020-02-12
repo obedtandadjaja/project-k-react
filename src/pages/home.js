@@ -1,6 +1,6 @@
 import React from 'react'
 
-import CardLarge from '../components/commons/cardLarge'
+import CardLarge from './../components/commons/cardLarge'
 
 function HomePage() {
 
