@@ -36,7 +36,7 @@ export const FormStyledComponent = styled.div`
     padding: 14px 20px;
   }
 
-  .button{
+  .btn{
     margin-top: 28px;
     width: 200px;
     height: 60px;

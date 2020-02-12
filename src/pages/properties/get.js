@@ -2,10 +2,26 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 import Form from './../../components/properties/form'
 import { FormStyledComponent } from './../../styledComponents/form'
 import { get } from './../../api/properties'
+
+const Style = styled.div`
+  propertyGetPage{
+    display: flex;
+    flex-drection: column;
+  }
+
+  .mr-auto{
+    color: 'blue';
+  }
+
+  button{
+    color: '#18A0FB';
+  }
+`
 
 function PropertyGetPage(props) {
   const { loading, error, property, get, currentUserID } = props
@@ -15,47 +31,32 @@ function PropertyGetPage(props) {
     get(currentUserID, propertyID, { eager: 'Rooms' })
   }, [get, propertyID, currentUserID])
 
-
-  // custom inline styling... need to make this neat
-  const style = {
-    display: 'flex',
-    flexDirection: 'column',
-  }
-
-  const align = {
-    color: 'blue',
-    float: 'right',
-
-  }
-
-  const blue = {
-    color: '#18A0FB',
-  }
-
   return (
-    <div className='propertyGetPage' style={style}>
-      <div style={align}>
-        <Link to={{ pathname: `/properties/${propertyID}/edit` }} >
-          <button style={blue}>
-            Edit property
-          </button>
-        </Link>
+    <Style>
+      <div className='propertyGetPage'>
+        <div className='mr-auto'>
+          <Link to={{ pathname: `/properties/${propertyID}/edit` }} >
+            <button>
+              Edit property
+            </button>
+          </Link>
+        </div>
+          {
+            !loading &&
+            property &&
+            <FormStyledComponent>
+              <Form
+                initialValues={property}
+                loading={loading}
+                error={error}
+                title='Property'
+                readonly 
+                />
+            </FormStyledComponent>
+          }
+        
       </div>
-        {
-          !loading &&
-          property &&
-          <FormStyledComponent>
-            <Form
-              initialValues={property}
-              loading={loading}
-              error={error}
-              title='Property'
-              readonly 
-              />
-          </FormStyledComponent>
-        }
-      
-    </div>
+    </Style>
   )
 }
 

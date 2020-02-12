@@ -2,11 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 import Form from './../../components/rooms/form'
 import { FormStyledComponent } from './../../styledComponents/form'
 import { get as getProperty } from './../../api/properties'
 import { edit, get } from './../../api/rooms'
+
+const Style = styled.div`
+  .roomEditPage{
+    width: 500px;
+    margin: auto;
+  }
+`
 
 function RoomEditPage(props) {
   const { loading, getLoading, error, property, room, edit, getProperty, get, currentUserID } = props
@@ -30,32 +38,34 @@ function RoomEditPage(props) {
   })
 
   return (
-    <div className='roomEditPage'>
-      {
-        property &&
-        <Link to={{ pathname: `/properties/${propertyID}` }}>
-          <div className='card'>
-            <h4>{ property.name }</h4>
-            <p>Type: { property.type }</p>
-            <p>Address: { property.address }</p>
-          </div>
-        </Link>
-      }
+    <Style>
+      <div className='roomEditPage'>
+        {
+          property &&
+          <Link to={{ pathname: `/properties/${propertyID}` }}>
+            <div className='card'>
+              <h4>{ property.name }</h4>
+              <p>Type: { property.type }</p>
+              <p>Address: { property.address }</p>
+            </div>
+          </Link>
+        }
 
-      {
-        !getLoading &&
-        room &&
-        <FormStyledComponent>
-          <Form
-            initialValues={room}
-            onSubmit={editSubmit}
-            loading={loading}
-            submitError={error}
-            title='Edit room'
-            buttonText='Edit room' />
-        </FormStyledComponent>
-      }
-    </div>
+        {
+          !getLoading &&
+          room &&
+          <FormStyledComponent>
+            <Form
+              initialValues={room}
+              onSubmit={editSubmit}
+              loading={loading}
+              submitError={error}
+              title='Edit room'
+              buttonText='Edit room' />
+          </FormStyledComponent>
+        }
+      </div>
+    </Style>
   )
 }
 

@@ -156,7 +156,7 @@ function TenantForm(props) {
       </div>
       {
         !readonly &&
-        <button className='button' type='submit' disabled={loading}>
+        <button className='btn' type='submit' disabled={loading}>
           {submitText}
         </button>
       }

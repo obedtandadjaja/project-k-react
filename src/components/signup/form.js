@@ -26,7 +26,7 @@ function SignupForm(props) {
             validate={[required, minLength10]}
             type='password' />
 
-          <button type='submit'>
+          <button className='btn' type='submit'>
             Signup
           </button>
         </div>
