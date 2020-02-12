@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import TicketTable from './../../components/table/materialTable'
+import TicketTable from '../../components/maintenance_requests/table'
 import { all, edit } from './../../api/maintenanceRequests'
 
 const Style = styled.div`
