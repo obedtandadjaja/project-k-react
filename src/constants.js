@@ -18,5 +18,5 @@ export const MAINTENANCE_REQUEST_CATEGORY_MAP = new Map([
       ['plumbingAndBath', { name: 'Plumbing and bath', color: '#2026A2' }],
       ['preventativeMaintenance', { name: 'Preventative maintenance', color: '#FFA7C9' }],
       ['pestManagement', { name: 'Pest management', color: '#FFD5C1' }],
-      ['reidentExperience', { name: 'Resident experience', color: '#202832' }]
+      ['reidentExperience', { name: 'Resident experience', color: '#F4A4A4' }]
 ])
