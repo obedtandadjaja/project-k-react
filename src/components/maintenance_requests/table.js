@@ -24,8 +24,8 @@ function TicketTable(props) {
   tickets.map((data) => {
     var dataObj = {
       'id': data.id,
-      'createdDate': moment(data.createdAt).format("MMM Do [, ] dddd"),
-      'location': data.property.address + ', \n' + data.property.name + ' (' + data.room.name +')',
+      'createdDate': moment(data.createdAt).format('MMM Do [, ] dddd'),
+      'location': `${data.property.address}, ${data.property.name}, (${data.room.name})`,
       'category': MAINTENANCE_REQUEST_CATEGORY_MAP.get(data.title).name,
       'description': data.description,
       'reporterName': data.reporter.name,

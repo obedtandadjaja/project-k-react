@@ -35,7 +35,7 @@ function MaintenanceForm(props) {
 
   useEffect(() => {
     if(hasPropertyValue) {
-      const property = properties.filter(it => it.id.includes(hasPropertyValue))
+      const property = properties.filter(property => property.id.includes(hasPropertyValue))
       const arrRoom = []
 
       property.map((data) => {
@@ -56,11 +56,11 @@ function MaintenanceForm(props) {
       <form onSubmit={handleSubmit}>
         <div className='row'>
           <div className='col'>
-            <div className="blockCard">
-              <div className="blockHeader">
+            <div className='blockCard'>
+              <div className='blockHeader'>
                 {title}
               </div>
-              <div className="blockBody">
+              <div className='blockBody'>
                 { 
                   properties &&
                   <Field
@@ -117,7 +117,7 @@ function MaintenanceForm(props) {
         </div>
         {
           !readonly &&
-          <button className='button' type='submit' disabled={loading}>
+          <button className='btn' type='submit' disabled={loading}>
             {buttonText}
           </button>
         }

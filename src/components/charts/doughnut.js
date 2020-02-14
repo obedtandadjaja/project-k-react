@@ -58,17 +58,22 @@ class Doughnut extends Component {
     });
 
     // below performs data filtering and logic
-    const ticket = this.props.datasets.filter(it => it.status.includes(this.props.filter))
+    const tickets = this.props.datasets.filter(dataset => dataset.status.includes(this.props.filter))
     
-    const ticketFrequency = ticket.reduce((req, it) => {
-      req[it.title] = req[it.title] + 1 || 1;
-      return req;
-    }, {});
+    let ticketFrequenciesObject = {}
+    
+    tickets.map(ticket => {
+      ticketFrequenciesObject[ticket.title] = ticketFrequenciesObject[ticket.title] + 1 || 1;
+    });
+
+    let ticketMap = new Map(Object.entries(ticketFrequenciesObject))
+
+    console.log(ticketMap.keys())
 
     const colors = [] 
     const labels = []
 
-    Object.keys(ticketFrequency).map( label => {
+    Object.keys(ticketFrequenciesObject).map( label => {
       colors.push(MAINTENANCE_REQUEST_CATEGORY_MAP.get(label).color)
       labels.push(MAINTENANCE_REQUEST_CATEGORY_MAP.get(label).name)
     })
@@ -80,7 +85,7 @@ class Doughnut extends Component {
         datasets: [{
           backgroundColor: colors,
           borderWidth: 0,
-          data: Object.values(ticketFrequency),
+          data: ticketMap.values(),
         }]
       },
       options: { 
@@ -93,9 +98,8 @@ class Doughnut extends Component {
         responsive: false,
         elements: { 
           center: { 
-            text: Object.keys(ticket).length,
+            text: ticketMap.size,
             color: '#36A2EB', // Default black
-            fontStyle: 'Montserrat', // Default Arial
             sidePadding: 20 // Default 20 (as a percentage)
           }
         }

@@ -23,11 +23,11 @@ function PropertyForm(props) {
       <form onSubmit={handleSubmit}>
         <div className='row'>
           <div className='col'>
-            <div className="blockCard">
-              <div className="blockHeader">
+            <div className='blockCard'>
+              <div className='blockHeader'>
                 {title}
               </div>
-              <div className="blockBody">
+              <div className='blockBody'>
                 <Field
                   name='name'
                   label='Name'
@@ -64,14 +64,14 @@ function PropertyForm(props) {
           </div>
 
           <div className='col'>
-            <div className="blockCard">
-              <div className="blockHeader">
+            <div className='blockCard'>
+              <div className='blockHeader'>
                 Shared facilities
               </div>
-              <div className="blockBody">
+              <div className='blockBody'>
                 <FieldArray
                   name='data.sharedFacilities'
-                  buttonText='+ shared facility'
+                  buttonText='+ Shared facility'
                   entityText='Shared facility'
                   readonly={readonly}
                   ChildComponent={FacilityFields}
@@ -83,18 +83,18 @@ function PropertyForm(props) {
         <div className='row'>
           {
             readonly &&
-            <div className="blockCard">
-              <div className="blockHeader">
+            <div className='blockCard'>
+              <div className='blockHeader'>
                 Rooms
             </div>
-              <div className="blockBody">
+              <div className='blockBody'>
                 {
                   initialValues.rooms &&
                   initialValues.rooms.map(room => (
                     <Link
                       key={room.id}
                       to={{ pathname: `/properties/${initialValues.id}/rooms/${room.id}` }}>
-                      <div className="card bordered">
+                      <div className='card bordered'>
                         <h4>{room.name}</h4>
                         <p>Payment schedule: {room.paymentSchedule}</p>
                         <p>Price: {room.priceAmount}</p>

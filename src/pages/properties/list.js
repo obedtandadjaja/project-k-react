@@ -25,10 +25,7 @@ function PropertyListPage(props) {
   useEffect(() => {
     all(currentUserID, { eager: 'Rooms, Users' })
   }, [all, currentUserID])
-
-  console.log(currentUserID)
-  console.log(properties)
-
+  
   return (
     <Style>
       <div className='propertyPage'>
