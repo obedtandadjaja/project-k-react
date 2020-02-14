@@ -1,3 +1,5 @@
+// TODO:(@kenaszogara) need to add color scheme constant
+
 export const API_HOST = process.env.REACT_APP_API_HOST
 export const AUTH_PROXY_PREFIX = '/auth'
 export const BACKEND_PROXY_PREFIX = '/backend'
@@ -21,23 +23,12 @@ export const MAINTENANCE_REQUEST_CATEGORY_MAP = new Map([
       ['reidentExperience', { name: 'Resident experience', color: '#F4A4A4' }]
 ])
 
-const size = {
-      mobileS: '320px',
-      mobileM: '375px',
-      mobileL: '425px',
-      tablet: '768px',
-      laptop: '1024px',
-      laptopL: '1440px',
-      desktop: '2560px'
-}
-
 export const DEVICE_SIZE = {
-      mobileS: `(max-width: ${size.mobileS})`,
-      mobileM: `(max-width: ${size.mobileM})`,
-      mobileL: `(max-width: ${size.mobileL})`,
-      tablet: `(max-width: ${size.tablet})`,
-      laptop: `(max-width: ${size.laptop})`,
-      laptopL: `(max-width: ${size.laptopL})`,
-      desktop: `(max-width: ${size.desktop})`,
-      desktopL: `(max-width: ${size.desktop})`
+      mobileS: `(max-width: 320px)`,
+      mobileM: `(max-width: 375px`,
+      mobileL: `(max-width: 425px)`,
+      tablet: `(max-width: 768px)`,
+      laptop: `(max-width: 1024px)`,
+      laptopL: `(max-width: 1440px)`,
+      desktop: `(max-width: 2560px)`,
 }
