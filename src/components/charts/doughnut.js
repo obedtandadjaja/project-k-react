@@ -63,7 +63,7 @@ class Doughnut extends Component {
     let ticketFrequenciesMap = new Map()
     
     tickets.map(ticket => {
-      ticketFrequenciesObject[ticket.title] = ticketFrequenciesObject[ticket.title] + 1 || 1;
+      ticketFrequenciesMap[ticket.title] = ticketFrequenciesMap[ticket.title] + 1 || 1;
     });
 
     console.log(ticketFrequenciesMap)
