@@ -88,7 +88,7 @@ function TenantGetPage(props) {
               {
                 (!tenant.payments || tenant.payments.length === 0) &&
                 <tr>
-                  <td colspan='3'>No payments</td>
+                  <td colSpan='3'>No payments</td>
                 </tr>
               }
             </tbody>

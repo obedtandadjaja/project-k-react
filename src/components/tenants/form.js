@@ -17,7 +17,7 @@ function TenantForm(props) {
     <form onSubmit={handleSubmit}>
       <div className='blockCard'>
         <div className='blockHeader'>
-          { title }
+          {title}
         </div>
         <div className='blockBody'>
           <Field

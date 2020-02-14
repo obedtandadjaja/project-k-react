@@ -58,7 +58,7 @@ class Doughnut extends Component {
     })
 
     // below performs data filtering and logic
-    const filteredTickets = this.props.datasets.filter(dataset => dataset.status.includes(this.props.filter))
+    const filteredTickets = this.props.datasets.filter(dataset => dataset.status === this.props.filter)
     
     let ticketCategories = new Map()
     

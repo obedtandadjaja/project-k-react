@@ -23,7 +23,7 @@ const StyleWrapper = styled.div`
     font-family: "Open Sans";
     font-weight: bold;
     font-size: 40px;
-    color: white;
+    color: black;
   }
 
   .dashCardMenu .body p{
@@ -31,7 +31,7 @@ const StyleWrapper = styled.div`
     font-family: Montserrat;
     font-size: 30px;
     font-weight: 700;
-    color: white;
+    color: black;
   }
 
    @media ${DEVICE_SIZE.mobileL} {
@@ -47,12 +47,12 @@ const StyleWrapper = styled.div`
     .dashCardMenu .header h1{
       margin-top: 0;
       font-size: 2em;
-      color: white;
+      color: black;
     }
     .dashCardMenu .body p{
       margin-top: 2em;
       font-size: 1.2em;
-      color: white;
+      color: black;
     }
   }
 `

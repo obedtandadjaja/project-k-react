@@ -12,7 +12,7 @@ import { MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
 
 const Style = styled.div`
   .row{
-    display:block;
+    display: block;
   }
 `
 
@@ -20,7 +20,7 @@ function MaintenanceForm(props) {
   const { 
     all, 
     currentUserID, 
-    hasPropertyValue, 
+    selectedPropertyValue, 
     handleSubmit, 
     readonly, 
     submitError, 
@@ -34,22 +34,13 @@ function MaintenanceForm(props) {
   const [rooms, setRooms] = useState()
 
   useEffect(() => {
-    if(hasPropertyValue) {
-      const property = properties.filter(property => property.id.includes(hasPropertyValue))
-      const arrRoom = []
-
-      property.map((data) => {
-        return arrRoom.push(data.rooms)
-      })
-
-      setRooms(arrRoom[0])
+    if (selectedPropertyValue) {
+      const property = properties.find(property => property.id === selectedPropertyValue)
+      setRooms(property.rooms)
     }
 
-    if(initialValues !== null){
-      all(currentUserID, { eager: 'Rooms' })
-    }
-
-  }, [all, currentUserID, hasPropertyValue, initialValues])
+    if (initialValues === null) { all(currentUserID, { eager: 'Rooms' }) }
+  }, [all, currentUserID, selectedPropertyValue, initialValues])
   
   return (
     <Style>
@@ -64,18 +55,19 @@ function MaintenanceForm(props) {
                 { 
                   properties &&
                   <Field
-                  name='propertyID'
-                  label='Property'
-                  component={renderSelectField}
-                  validate={[required]}
-                  readonly={readonly}
-                  defaultEmpty
-                  options={properties.map(property => 
-                    [property.id, property.name]
-                  )} />
+                    name='propertyID'
+                    label='Property'
+                    component={renderSelectField}
+                    validate={[required]}
+                    readonly={readonly}
+                    defaultEmpty
+                    options={properties.map(property => 
+                      [property.id, property.name]
+                    )} />
                 }
+
                 {
-                  hasPropertyValue && rooms &&
+                  selectedPropertyValue && rooms &&
                   <Field
                     name='roomID'
                     label='Room'
@@ -87,6 +79,7 @@ function MaintenanceForm(props) {
                       [room.id, room.name]
                     )} />
                 }
+
                 <Field
                   name='category'
                   label='Category'
@@ -95,9 +88,8 @@ function MaintenanceForm(props) {
                   readonly={readonly}
                   defaultEmpty
                   options={Array.from(MAINTENANCE_REQUEST_CATEGORY_MAP, ([key, value]) =>
-                  { return ([key, value.name]) }
-                  )}
-                />
+                    { return ([key, value.name]) }
+                  )} />
 
                 <Field
                   name='title'
@@ -142,9 +134,9 @@ let maintenanceForm = reduxForm({
 
 const mapStateToProps = state => {
   const selector = formValueSelector('maintenanceRequest')
-  const hasPropertyValue = selector(state, 'propertyID')
+  const selectedPropertyValue = selector(state, 'propertyID')
   return{
-    hasPropertyValue,
+    selectedPropertyValue,
     currentUserID: state.auth.getIn(['currentUserID']),
   }
 }

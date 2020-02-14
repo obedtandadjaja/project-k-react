@@ -54,8 +54,8 @@ function MaintenanceRequestsListPage(props) {
               <>
                 <Doughnut
                   datasets={maintenanceRequests}
-                  filter='pending'
-                />
+                  filter='pending' />
+
                 <Link to={{ pathname: '/maintenance_requests/open' }}>
                   <button type='button' className='customBtn btn-primary'>
                     OPEN TICKET
@@ -71,8 +71,8 @@ function MaintenanceRequestsListPage(props) {
               <>
                 <Doughnut
                   datasets={maintenanceRequests}
-                  filter='closed'
-                />
+                  filter='closed' />
+                  
                 <Link to={{ pathname: '/maintenance_requests/closed' }}>
                   <button type='button' className='customBtn btn-primary'>
                     CLOSE TICKET

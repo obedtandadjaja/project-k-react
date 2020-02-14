@@ -27,8 +27,7 @@ function MaintenanceRequestsDetailsPage(props) {
             properties={properties}
             title='Maintenance Request'
             buttonText='Edit'
-            readonly
-          />
+            readonly />
         </FormStyledComponent>
       }
     </div>

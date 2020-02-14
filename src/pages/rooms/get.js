@@ -52,8 +52,7 @@ function RoomGetPage(props) {
               loading={loading}
               error={error}
               title='Room'
-              readonly={true} 
-              />
+              readonly={true} />
           </FormStyledComponent>
         }
       </div>

@@ -29,8 +29,7 @@ function LoginPage(props) {
         onSubmit={loginSubmit}
         loading={loading}
         submitError={error}
-        submitText='Login'
-      />
+        submitText='Login' />
     </LoginStyledComponent>
   )
 }

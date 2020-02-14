@@ -46,8 +46,7 @@ function RoomCreatePage(props) {
           loading={loading}
           submitError={error}
           title='Add a room'
-          buttonText='Create room'
-        />
+          buttonText='Create room' />
       </FormStyledComponent>
     </div>
   )

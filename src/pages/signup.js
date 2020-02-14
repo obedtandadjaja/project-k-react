@@ -24,8 +24,7 @@ function SignupPage(props) {
         onSubmit={signupSubmit} 
         loading={loading} 
         error={error} 
-        submitText='Register user' 
-        />
+        submitText='Register user' />
     </LoginStyledComponent>
   )
 }

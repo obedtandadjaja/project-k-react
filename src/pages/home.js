@@ -11,18 +11,15 @@ function HomePage() {
           <CardLarge
             header='Properties'
             body='Create and Manage Properties'
-            color='#F89319'
-            clickUrl='/properties/list'
-          />
+            color='white'
+            clickUrl='/properties/list' />
         </div>
         <div className='col'>
-
           <CardLarge
             header='Maintenance'
             body='Check Maintenance Progress'
-            color='#5B61DE'
-            clickUrl='/maintenance_requests/list'
-          />
+            color='white'
+            clickUrl='/maintenance_requests/list' />
         </div>
       </div>
     </div>

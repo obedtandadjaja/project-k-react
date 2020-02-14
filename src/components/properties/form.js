@@ -11,7 +11,7 @@ import RepeatedFields from './../../formHelpers/repeatedFields'
 
 const Style = styled.div`
   .row{
-    display:block;
+    display: block;
   }
 `
 

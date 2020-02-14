@@ -50,11 +50,9 @@ function PropertyGetPage(props) {
                 loading={loading}
                 error={error}
                 title='Property'
-                readonly 
-                />
+                readonly />
             </FormStyledComponent>
           }
-        
       </div>
     </Style>
   )

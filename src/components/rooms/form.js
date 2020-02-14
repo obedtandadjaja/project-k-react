@@ -75,7 +75,7 @@ function RoomForm(props) {
       {
         !readonly &&
         <button className='btn' type='submit' disabled={loading}>
-          { buttonText }
+          {buttonText}
         </button>
       }
     </form>

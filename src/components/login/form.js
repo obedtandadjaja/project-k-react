@@ -38,11 +38,11 @@ function LoginForm(props) {
 
             <Link className='link top-padding' to={{ pathname: '/signup' }}>
               New to Project K? Create an account
-          </Link>
+            </Link>
           </div>
         </div>
       </div>
-      </form>
+    </form>
   )
 }
 

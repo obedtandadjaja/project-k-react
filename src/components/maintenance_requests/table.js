@@ -39,7 +39,7 @@ function TicketTable(props) {
     { field: 'location', title: 'Location(s)' },
     { field: 'category', title: 'Category' },
     { field: 'title', title: 'Title' },
-    { field: 'reporterName', title: 'Submiited By' },
+    { field: 'reporterName', title: 'Submitted By' },
   ]
 
   return (
@@ -53,8 +53,7 @@ function TicketTable(props) {
             fontSize: '16px'
           }
         }}
-        actions={actions}
-      />
+        actions={actions} />
     </Style>
     
   );

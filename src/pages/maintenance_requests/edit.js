@@ -42,8 +42,7 @@ function MaintenanceRequestsEditPage(props) {
             loading={editLoading}
             submitError={error}
             title='Edit Maintenance Request'
-            buttonText='Edit'
-           />
+            buttonText='Edit' />
         </FormStyledComponent>
     }
     </div>

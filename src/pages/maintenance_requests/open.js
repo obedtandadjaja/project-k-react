@@ -68,8 +68,7 @@ function MaintenanceRequestsOpenPage(props) {
                         closeTicket(rowData)
                     }
                   },
-                ]}
-              />
+                ]} />
            }
           </div>
         </div>
