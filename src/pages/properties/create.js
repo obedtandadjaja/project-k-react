@@ -1,29 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import styled from 'styled-components'
 
 import Form from './../../components/properties/form'
 import { FormStyledComponent } from './../../styledComponents/form'
 import { create } from './../../api/properties'
-
-const Style = styled.div`
-  width: 500px;
-  margin: auto;
-
-.blockBody{
-  padding: 12px 24px;
-}
-
-.formFieldWrapper input{
-  width: 100%;
-}
-
-.formFieldWrapper select{
-  width: 100%;
-}
-
-`
 
 function PropertyCreatePage(props) {
   const { loading, error, property, create, currentUserID } = props
@@ -41,18 +22,16 @@ function PropertyCreatePage(props) {
   }, [props.history, loading, error, submitted, property])
 
   return (
-    <Style>
-      <div className='propertyCreatePage'>
-        <FormStyledComponent>
-          <Form
-            onSubmit={createSubmit}
-            loading={loading}
-            submitError={error}
-            title='Create property'
-            buttonText='Create property' />
-        </FormStyledComponent>
-      </div>
-    </Style>
+    <div className='propertyCreatePage'>
+      <FormStyledComponent>
+        <Form
+          onSubmit={createSubmit}
+          loading={loading}
+          submitError={error}
+          title='Create property'
+          buttonText='Create property' />
+      </FormStyledComponent>
+    </div>
   )
 }
 

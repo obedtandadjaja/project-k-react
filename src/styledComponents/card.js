@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DEVICE_SIZE } from './../constants'
 
 export const CardStyledComponent = styled.div`
   width: 200px;
@@ -15,5 +16,12 @@ export const CardStyledComponent = styled.div`
 
   p{
     margin: 0;
+  }
+
+  @media ${DEVICE_SIZE.mobileL} {
+    width: 280px;
+    height: 150px;
+    border-style: solid;
+    border-width: thin;
   }
 `

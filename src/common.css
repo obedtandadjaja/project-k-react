@@ -199,24 +199,6 @@ form button[type=submit]:hover {
     background: -webkit-linear-gradient(-45deg, #ffae97 0%, #5b61de 75%, #5b61de 100%);
 }
 
-/* user get page */
-
-/* user edit page */
-
-/* propertyPage css */
-
-/* custom css for .propertyCreatePage */
-
-/* custom css for .propertyEditPage */
-
-/* custom css for propertyGetPage*/
-
-/* custom css for roomGetPage */
-
-/* custom css for tenantsCreatePage */
-
-/* custom css for tenantsGetPage */
-
 @media (max-width: 900px) {
     .propertyGetPage .blockCard{
         margin-left: 0em;

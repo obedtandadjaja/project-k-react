@@ -12,16 +12,6 @@ import { get } from './../../api/rooms'
 const Style = styled.div`
   display: flex;
   flex-direction: column;
-
-  .blockCard{
-    margin-left: 2em;
-    min-height: 290px;
-  }
-
-  form .row{
-    margin-left: 10px;
-    margin-right: 10px;
-  }
 `
 
 function RoomGetPage(props) {
@@ -32,11 +22,6 @@ function RoomGetPage(props) {
     getProperty(currentUserID, propertyID)
     get(currentUserID, propertyID, roomID, { eager: 'Tenants' })
   }, [getProperty, get, currentUserID, propertyID, roomID])
-
-
-  const style = {
-    
-  }
 
   return (
     <Style>

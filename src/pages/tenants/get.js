@@ -2,27 +2,12 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 
 import Form from './../../components/tenants/form'
 import { FormStyledComponent } from './../../styledComponents/form'
 import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
 import { get } from './../../api/tenants'
-
-const Style = styled.div`
-  form {
-    margin: auto;
-  }
-
-  form .blockCard{
-    margin: 2em;
-  }
-
-  form .button{
-    margin-bottom: 4em;
-  }
-`
 
 function TenantGetPage(props) {
   const { loading, get, getProperty, getRoom, property, room, tenant, currentUserID } = props
@@ -35,84 +20,82 @@ function TenantGetPage(props) {
   }, [currentUserID, getProperty, propertyID, getRoom, roomID, get, tenantID])
 
   return (
-    <Style>
-      <div className='tenantGetPage'>
-        <Link to={{ pathname: `/properties/${propertyID}/rooms/${roomID}/tenants/${tenantID}/edit` }}>
-          <button>
-            Edit tenant
-          </button>
-        </Link>
+    <div className='tenantGetPage'>
+      <Link to={{ pathname: `/properties/${propertyID}/rooms/${roomID}/tenants/${tenantID}/edit` }}>
+        <button>
+          Edit tenant
+        </button>
+      </Link>
 
-        {
-          property &&
-          <Link to={{ pathname: `/properties/${propertyID}` }}>
-            <div className='card'>
-              <h4>{ property.name }</h4>
-              <p>Type: { property.type }</p>
-              <p>Address: { property.address }</p>
-            </div>
-          </Link>
-        }
-
-        {
-          room &&
-          <Link to={{ pathname: `/properties/${propertyID}/rooms/${roomID}` }}>
-            <div className='card'>
-              <h4>{ room.name }</h4>
-              <p>Payment schedule: { room.paymentSchedule }</p>
-              <p>Payment amount: { room.paymentAmount }</p>
-            </div>
-          </Link>
-        }
-
-        {
-          !loading &&
-          tenant &&
-          <FormStyledComponent>
-            <Form
-              initialValues={tenant}
-              loading={loading}
-              title='Tenant information'
-              readonly />
-          </FormStyledComponent>
-        }
-
-        {
-          !loading &&
-          tenant &&
+      {
+        property &&
+        <Link to={{ pathname: `/properties/${propertyID}` }}>
           <div className='card'>
-            <h4>Payments</h4>
-            <table>
-              <theader>
-                <tr>
-                  <th>Payment Date</th>
-                  <th>Amount</th>
-                  <th>Description</th>
-                </tr>
-              </theader>
-              <tbody>
-                {
-                  tenant.payments &&
-                  tenant.payments.map(payment => (
-                    <tr>
-                      <td>{ payment.created_at }</td>
-                      <td>{ payment.amount }</td>
-                      <td>{ payment.description }</td>
-                    </tr>
-                  ))
-                }
-                {
-                  (!tenant.payments || tenant.payments.length === 0) &&
-                  <tr>
-                    <td colspan='3'>No payments</td>
-                  </tr>
-                }
-              </tbody>
-            </table>
+            <h4>{ property.name }</h4>
+            <p>Type: { property.type }</p>
+            <p>Address: { property.address }</p>
           </div>
-        }
-      </div>
-    </Style>
+        </Link>
+      }
+
+      {
+        room &&
+        <Link to={{ pathname: `/properties/${propertyID}/rooms/${roomID}` }}>
+          <div className='card'>
+            <h4>{ room.name }</h4>
+            <p>Payment schedule: { room.paymentSchedule }</p>
+            <p>Payment amount: { room.paymentAmount }</p>
+          </div>
+        </Link>
+      }
+
+      {
+        !loading &&
+        tenant &&
+        <FormStyledComponent>
+          <Form
+            initialValues={tenant}
+            loading={loading}
+            title='Tenant information'
+            readonly />
+        </FormStyledComponent>
+      }
+
+      {
+        !loading &&
+        tenant &&
+        <div className='card'>
+          <h4>Payments</h4>
+          <table>
+            <theader>
+              <tr>
+                <th>Payment Date</th>
+                <th>Amount</th>
+                <th>Description</th>
+              </tr>
+            </theader>
+            <tbody>
+              {
+                tenant.payments &&
+                tenant.payments.map(payment => (
+                  <tr>
+                    <td>{ payment.created_at }</td>
+                    <td>{ payment.amount }</td>
+                    <td>{ payment.description }</td>
+                  </tr>
+                ))
+              }
+              {
+                (!tenant.payments || tenant.payments.length === 0) &&
+                <tr>
+                  <td colspan='3'>No payments</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
   )
   /* <PaymentForm
       initialValues={tenant.payments}

@@ -21,14 +21,6 @@ const Style = styled.div`
     margin: 2em;
     min-height: 290px;
   }
-
-  .mr-auto{
-    color: 'blue';
-  }
-
-  button{
-    color: '#18A0FB';
-  }
 `
 
 function PropertyGetPage(props) {

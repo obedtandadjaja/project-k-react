@@ -11,11 +11,6 @@ import { get as getRoom } from './../../api/rooms'
 import { create } from './../../api/tenants'
 
 const Style = styled.div`
-  form{
-    width: 500px;
-    margin: auto;
-  }
-  
   form .button{
     margin-bottom: 4em;
   }

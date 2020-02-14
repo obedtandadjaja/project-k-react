@@ -29,14 +29,14 @@ function RoomCreatePage(props) {
   }, [props.history, loading, error, submitted, property, room])
 
   return (
-    <div className='propertyCreatePage'>
+    <div className='roomCreatePage'>
       {
         property &&
         <Link to={{ pathname: `/properties/${propertyID}` }}>
           <div className='card'>
-            <h4>{ property.name }</h4>
-            <p>Type: { property.type }</p>
-            <p>Address: { property.address }</p>
+            <h4>{property.name}</h4>
+            <p>Type: {property.type}</p>
+            <p>Address: {property.address}</p>
           </div>
         </Link>
       }
@@ -46,8 +46,8 @@ function RoomCreatePage(props) {
           loading={loading}
           submitError={error}
           title='Add a room'
-          buttonText='Create room' 
-          />
+          buttonText='Create room'
+        />
       </FormStyledComponent>
     </div>
   )

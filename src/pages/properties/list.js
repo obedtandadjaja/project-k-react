@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 import { CardStyledComponent } from './../../styledComponents/card'
 import { all } from './../../api/properties'
+import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
   h1{
@@ -27,6 +28,14 @@ const Style = styled.div`
     flex-grow: 0;
     padding: 0;
   }
+
+  @media ${DEVICE_SIZE.mobileL} {
+    .container .col {
+      margin: 10px auto;
+      flex-grow: 0;
+      padding: 0;
+    }
+  }
 `
 
 function PropertyListPage(props) {
@@ -45,7 +54,7 @@ function PropertyListPage(props) {
             {
               properties &&
               properties.map(property => (
-                <div className='col'>
+                <div className='col' id={property.id}>
                   <CardStyledComponent>
                     <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
                       <h4>{property.name}</h4>
@@ -58,13 +67,11 @@ function PropertyListPage(props) {
               ))
             }
             <div className='col'>
-
               <CardStyledComponent>
                 <Link to={{ pathname: '/properties/create' }}>
                   Add Property
                 </Link>
               </CardStyledComponent>
-
             </div>
           </div>
         </div>

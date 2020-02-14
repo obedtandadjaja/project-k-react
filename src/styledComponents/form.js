@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DEVICE_SIZE } from './../constants'
 
 /**
  * Form Hierarchy:
@@ -10,6 +11,11 @@ import styled from 'styled-components'
 export const FormStyledComponent = styled.div`
   display: contents;
   align-items: center;
+
+  form{
+    width: 500px;
+    margin: auto;
+  }
 
   .blockCard{
     display: block;
@@ -45,6 +51,7 @@ export const FormStyledComponent = styled.div`
 
   .btn{
     margin-top: 28px;
+    margin-bottom: 2em;
     width: 200px;
     height: 60px;
     border-radius: 30px;
@@ -59,16 +66,39 @@ export const FormStyledComponent = styled.div`
     }
   }
 
-  @media (max-width: 725px){
-    display: block;
+  @media ${DEVICE_SIZE.mobileL} {
+    form{
+      width: 100%;
+    }
+
+    .row{
+      margin: 0;
+    }
+
     .blockCard{
       display: block;
       background: #FFFFFF;
-      width: 400px;
-      margin-top: 10%;
-      margin-left: 0em;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      width: 300px;
+      margin: 2em;
+      border-style: solid;
+      border-width: thin;
+      border-radius: 5px;
+      box-shadow: none;
+    }
+
+    .btn{
+      margin-top: 0;
+      width: 200px;
+      height: 50px;
+      border-radius: 50px;
+      background: #18A0FB;
+      font-size: 1.3rem;
+      color: #FFFFFF;
+      box-shadow: none;
+      cursor: pointer;
+      :hover{
+        background-color: #f39c12;
+      }
     }
   }
 

@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { DEVICE_SIZE } from './../../constants'
+
 const StyleWrapper = styled.div`
   .dashCardMenu{
     margin: 50px;
@@ -30,6 +32,28 @@ const StyleWrapper = styled.div`
     font-size: 30px;
     font-weight: 700;
     color: white;
+  }
+
+   @media ${DEVICE_SIZE.mobileL} {
+    .dashCardMenu{
+      margin: 1.5em;
+      width: 280px;
+      height: 200px;
+    }
+    .dashCardMenu .case{
+      padding: 2em;
+      height: 100%;
+    }
+    .dashCardMenu .header h1{
+      margin-top: 0;
+      font-size: 2em;
+      color: white;
+    }
+    .dashCardMenu .body p{
+      margin-top: 2em;
+      font-size: 1.2em;
+      color: white;
+    }
   }
 `
 

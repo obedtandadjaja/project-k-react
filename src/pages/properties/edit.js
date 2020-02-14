@@ -8,9 +8,6 @@ import { FormStyledComponent } from './../../styledComponents/form'
 import { edit, get } from './../../api/properties'
 
 const Style = styled.div`
-  width: 500px;
-  margin: auto;
-
   form .blockCard:first-child {
     margin-top: 10%;
   }

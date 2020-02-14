@@ -8,11 +8,6 @@ import { FormStyledComponent } from './../../styledComponents/form'
 import { edit, get } from './../../api/users'
 
 const Style = styled.div`
-  form {
-    width: 500px;
-    margin: 40px auto;
-  }
-
   form .row{
     display: block;
   }

@@ -9,7 +9,8 @@ import { logout } from './../actions/authActions'
 import './header.css'
 
 const Style = styled.div`
-  title: {
+  .navbar-dark 
+  .navbar-brand {
     font-family: 'Montserrat';
   }
 `
@@ -42,20 +43,20 @@ function Header(props) {
   return (
     <Style>
       <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
-        <Navbar.Brand as={Link} to='/' >PROJECT K</Navbar.Brand>
+        <Navbar.Brand as={Link} to='/'>PROJECT K</Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='ml-auto'>
             {
               userLinks.map((link, i) => (
-                <Nav.Link as={NavLink} key={i} to={link.url}>
+                <Nav.Link as={NavLink} to={link.url} key={i}>
                   {link.text}
                 </Nav.Link>
               ))
             }
             {
               currentUserID &&
-              <Nav.Link as={NavLink} key='logout' onClick={submitLogout} to='#'>
+              <Nav.Link as={NavLink} to='#' key='logout' onClick={submitLogout}>
                 Logout
               </Nav.Link>
             }

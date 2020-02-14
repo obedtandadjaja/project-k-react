@@ -49,7 +49,7 @@ function MaintenanceForm(props) {
       all(currentUserID, { eager: 'Rooms' })
     }
 
-  }, [all, currentUserID, hasPropertyValue, initialValues, properties])
+  }, [all, currentUserID, hasPropertyValue, initialValues])
   
   return (
     <Style>
