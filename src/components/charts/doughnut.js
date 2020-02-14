@@ -60,23 +60,21 @@ class Doughnut extends Component {
     // below performs data filtering and logic
     const tickets = this.props.datasets.filter(dataset => dataset.status.includes(this.props.filter))
     
-    let ticketFrequenciesObject = {}
+    let ticketFrequenciesMap = new Map()
     
     tickets.map(ticket => {
       ticketFrequenciesObject[ticket.title] = ticketFrequenciesObject[ticket.title] + 1 || 1;
     });
 
-    let ticketMap = new Map(Object.entries(ticketFrequenciesObject))
-
-    console.log(ticketMap.keys())
+    console.log(ticketFrequenciesMap)
 
     const colors = [] 
     const labels = []
 
-    Object.keys(ticketFrequenciesObject).map( label => {
-      colors.push(MAINTENANCE_REQUEST_CATEGORY_MAP.get(label).color)
-      labels.push(MAINTENANCE_REQUEST_CATEGORY_MAP.get(label).name)
-    })
+    // Object.keys(ticketFrequenciesMap).map( label => {
+    //   colors.push(MAINTENANCE_REQUEST_CATEGORY_MAP.get(label).color)
+    //   labels.push(MAINTENANCE_REQUEST_CATEGORY_MAP.get(label).name)
+    // })
     
     new Chart(myChartRef, {
       type: 'doughnut',
@@ -85,7 +83,7 @@ class Doughnut extends Component {
         datasets: [{
           backgroundColor: colors,
           borderWidth: 0,
-          data: ticketMap.values(),
+          data: [],
         }]
       },
       options: { 
@@ -98,7 +96,7 @@ class Doughnut extends Component {
         responsive: false,
         elements: { 
           center: { 
-            text: ticketMap.size,
+            text: 0,
             color: '#36A2EB', // Default black
             sidePadding: 20 // Default 20 (as a percentage)
           }
