@@ -9,9 +9,17 @@ import { FormStyledComponent } from './../../styledComponents/form'
 import { get } from './../../api/properties'
 
 const Style = styled.div`
-  propertyGetPage{
-    display: flex;
-    flex-drection: column;
+  display: flex;
+  flex-drection: column;
+
+  .propertyGetPage{
+    margin: auto;
+    width: 100%;
+  }
+
+  .blockCard{
+    margin: 2em;
+    min-height: 290px;
   }
 
   .mr-auto{

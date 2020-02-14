@@ -200,95 +200,22 @@ form button[type=submit]:hover {
 }
 
 /* user get page */
-.userGetPage form .row{
-    margin-left: 10px;
-    margin-right: 10px;
-}
 
 /* user edit page */
-.userEditPage form {
-    width: 500px;
-    margin: 40px auto;
-}
-
-.userEditPage form .row{
-    display: block;
-}
 
 /* propertyPage css */
-.propertyPage .container{
-    margin: 40px auto;
-}
-
-.propertyPage .container .col {
-    margin: 10px;
-    flex-grow: 0;
-    padding: 0;
-}
 
 /* custom css for .propertyCreatePage */
-.propertyCreatePage{
-    width: 500px;
-    margin: auto;
-}
-
-.propertyCreatePage .blockBody{
-    padding: 12px 24px;
-}
-
-.propertyCreatePage .formFieldWrapper input{
-    width: 100%;
-}
-
-.propertyCreatePage .formFieldWrapper select{
-    width: 100%;
-}
 
 /* custom css for .propertyEditPage */
-.propertyEditPage{
-    width: 500px;
-    margin: auto;
-}
-
-/* custom css for propertyEditPage > form > blockCard:first-child*/
-.propertyEditPage form .blockCard:first-child {
-    margin-top: 10%;
-}
 
 /* custom css for propertyGetPage*/
-.propertyGetPage .blockCard{
-    margin: 2em;
-    min-height: 290px;
-}
 
 /* custom css for roomGetPage */
-.roomGetPage .blockCard{
-    margin-left: 2em;
-    min-height: 290px;
-}
 
 /* custom css for tenantsCreatePage */
-.tenantCreatePage form{
-    width: 500px;
-    margin: auto;
-}
-
-.tenantCreatePage form .button{
-    margin-bottom: 4em;
-}
 
 /* custom css for tenantsGetPage */
-.tenantGetPage form .blockCard{
-    margin: 2em;
-}
-
-.tenantGetPage form {
-    margin: auto;
-}
-
-.tenantCreatePage form .button{
-    margin-bottom: 4em;
-}
 
 @media (max-width: 900px) {
     .propertyGetPage .blockCard{

@@ -17,11 +17,11 @@ function UserForm(props) {
     <form onSubmit={handleSubmit}>
       <div className='row'>
         <div className='col'>
-          <div className="blockCard">
+          <div className='blockCard'>
             <div className='blockHeader'>
               {title}
             </div>
-            <div className="blockBody">
+            <div className='blockBody'>
               <Field
                 name='name'
                 label='Name'

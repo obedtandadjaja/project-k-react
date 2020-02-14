@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styled from 'styled-components'
 
 import Form from './../../components/maintenance_requests/form'
 import { FormStyledComponent } from './../../styledComponents/form'
 import { create } from './../../api/maintenanceRequests'
 import { all } from './../../api/properties'
+
+const Style = styled.div`
+  
+`
 
 function MaintenanceRequestsCreatePage(props) {
   const { loading, error, currentUserID, properties, all, create } = props
@@ -27,7 +32,7 @@ function MaintenanceRequestsCreatePage(props) {
   }
 
   return (
-    <div className='propertyCreatePage'>
+    <div className='maintenanceRequestCreatePage'>
       {
         properties &&
         <FormStyledComponent>

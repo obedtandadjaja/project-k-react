@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
-import { required } from '../../formHelpers/validators'
-import renderField from '../../formHelpers/renderField'
-import renderSelectField from '../../formHelpers/renderSelectField'
-import { all } from '../../api/properties'
-import { MAINTENANCE_REQUEST_CATEGORY_MAP } from '../../constants'
+import { required } from './../../formHelpers/validators'
+import renderField from './../../formHelpers/renderField'
+import renderSelectField from './../../formHelpers/renderSelectField'
+import { all } from './../../api/properties'
+import { MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
 
 const Style = styled.div`
   .row{
@@ -88,7 +88,7 @@ function MaintenanceForm(props) {
                     )} />
                 }
                 <Field
-                  name='title'
+                  name='category'
                   label='Category'
                   component={renderSelectField}
                   validate={[required]}
@@ -98,6 +98,15 @@ function MaintenanceForm(props) {
                   { return ([key, value.name]) }
                   )}
                 />
+
+                <Field
+                  name='title'
+                  label='Title'
+                  component={renderField}
+                  validate={[required]}
+                  readonly={readonly}
+                  type='text'
+                  defaultEmpty />
 
                 <Field
                   name='description'

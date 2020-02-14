@@ -8,7 +8,6 @@ import styled from 'styled-components'
  *  button
  */
 export const FormStyledComponent = styled.div`
-
   display: contents;
   align-items: center;
 
@@ -28,6 +27,14 @@ export const FormStyledComponent = styled.div`
     transition: opacity .2s ease-out;
     font-weight: 700;
     font-size: 1.8em;
+  }
+
+  .formFieldWrapper input{
+    width: 100%;
+  }
+
+  .formFieldWrapper select{
+    width: 100%;
   }
 
   .blockBody{

@@ -9,8 +9,8 @@ function SignupForm(props) {
 
   return (
     <form onSubmit={handleSubmit} >
-      <div className="blockCard">
-        <div className="blockBody">
+      <div className='blockCard'>
+        <div className='blockBody'>
           <h1>Signup</h1>
           <Field
             name='email'

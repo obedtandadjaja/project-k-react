@@ -4,7 +4,7 @@ import React from 'react'
 import MaterialTable from 'material-table'
 import styled from 'styled-components'
 
-import { MAINTENANCE_REQUEST_CATEGORY_MAP } from '../../constants'
+import { MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
 
 const Style = styled.div`
   overflow: auto;
@@ -26,8 +26,8 @@ function TicketTable(props) {
       'id': data.id,
       'createdDate': moment(data.createdAt).format('MMM Do [, ] dddd'),
       'location': `${data.property.address}, ${data.property.name}, (${data.room.name})`,
-      'category': MAINTENANCE_REQUEST_CATEGORY_MAP.get(data.title).name,
-      'description': data.description,
+      'category': MAINTENANCE_REQUEST_CATEGORY_MAP.get(data.category).name,
+      'title': data.title,
       'reporterName': data.reporter.name,
     }
     return tableData.push(dataObj)
@@ -38,7 +38,7 @@ function TicketTable(props) {
     { field: 'createdDate', title: 'Date Opened' },
     { field: 'location', title: 'Location(s)' },
     { field: 'category', title: 'Category' },
-    { field: 'description', title: 'Description' },
+    { field: 'title', title: 'Title' },
     { field: 'reporterName', title: 'Submiited By' },
   ]
 

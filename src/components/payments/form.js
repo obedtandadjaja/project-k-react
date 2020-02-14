@@ -9,11 +9,11 @@ function PaymentForm(props) {
 
   return (
     <form onSubmit={handleSubmit} >
-      <div className="blockCard">
-        <div className="blockHeader">
+      <div className='blockCard'>
+        <div className='blockHeader'>
           { title }
         </div>
-        <div className="blockBody">
+        <div className='blockBody'>
           <Field
             name='amount'
             type='number'

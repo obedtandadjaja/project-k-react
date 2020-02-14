@@ -1,10 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link, NavLink } from 'react-router-dom'
 import { Navbar, Nav } from 'react-bootstrap'
+import styled from 'styled-components'
 
 import { logout } from './../actions/authActions'
 
 import './header.css'
+
+const Style = styled.div`
+  title: {
+    font-family: 'Montserrat';
+  }
+`
 
 function Header(props) {
   const { currentUserID } = props
@@ -31,35 +39,30 @@ function Header(props) {
     window.location = '/login'
   }
 
-  const style = { 
-    title: {
-      fontFamily: 'Montserrat',
-      fontSize: '3rem',
-    },
-  }
-
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand href="/" style={style.title}>PROJECT K</Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="ml-auto">
-          {
-            userLinks.map((link, i) => (
-              <Nav.Link key={i} href={link.url}>
-                {link.text}
+    <Style>
+      <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+        <Navbar.Brand as={Link} to='/' >PROJECT K</Navbar.Brand>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav'>
+          <Nav className='ml-auto'>
+            {
+              userLinks.map((link, i) => (
+                <Nav.Link as={NavLink} key={i} to={link.url}>
+                  {link.text}
+                </Nav.Link>
+              ))
+            }
+            {
+              currentUserID &&
+              <Nav.Link as={NavLink} key='logout' onClick={submitLogout} to='#'>
+                Logout
               </Nav.Link>
-            ))
-          }
-          {
-            currentUserID &&
-            <Nav.Link key='logout' onClick={submitLogout} href='#'>
-              Logout
-            </Nav.Link>
-          }
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+            }
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </Style>
   )
 }
 

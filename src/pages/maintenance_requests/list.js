@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
-import Doughnut from './../../components/charts/doughnut'
+import Doughnut from './../../components/maintenance_requests/doughnut'
 import { all } from './../../api/maintenanceRequests'
 
 const Style = styled.div`
@@ -12,6 +12,7 @@ const Style = styled.div`
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
+    max-width: 960px;
   }
 
   .box{
@@ -19,14 +20,16 @@ const Style = styled.div`
     height: 550px;
     margin: 1.5rem;
     text-align: center;
+    margin: auto;
   }
   
   .customBtn{
     width: 225px;
-    height: 100px;
+    height: 75px;
     margin-top: 2rem;
     font-family: Open Sans;
     font-size: 20px;
+    border-radius: 4em;
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
   }
 `
@@ -44,43 +47,39 @@ function MaintenanceRequestsListPage(props) {
     <Style>
       <div className='container'>
         <div className='row'>
-          <div className='col'>
-            <div className='box'>
-              {
-                !loading &&
-                maintenanceRequests && 
-                <>
-                  <Doughnut
-                    datasets={maintenanceRequests}
-                    filter='pending'
-                  />
-                  <Link to={{ pathname: '/maintenance_requests/open' }}>
-                    <button type='button' className='customBtn btn-primary'>
-                      OPEN TICKET
-                    </button>
-                  </Link>
-                </>
-              }
-            </div>
+          <div className='box'>
+            {
+              !loading &&
+              maintenanceRequests && 
+              <>
+                <Doughnut
+                  datasets={maintenanceRequests}
+                  filter='pending'
+                />
+                <Link to={{ pathname: '/maintenance_requests/open' }}>
+                  <button type='button' className='customBtn btn-primary'>
+                    OPEN TICKET
+                  </button>
+                </Link>
+              </>
+            }
           </div>
-          <div className='col'>
-            <div className='box'>
-              {
-                !loading &&
-                maintenanceRequests &&
-                <>
-                  <Doughnut
-                    datasets={maintenanceRequests}
-                    filter='closed'
-                  />
-                  <Link to={{ pathname: '/maintenance_requests/closed' }}>
-                    <button type='button' className='customBtn btn-primary'>
-                      CLOSE TICKET
-                    </button>
-                  </Link>
-                </>
-              }
-            </div>
+          <div className='box'>
+            {
+              !loading &&
+              maintenanceRequests &&
+              <>
+                <Doughnut
+                  datasets={maintenanceRequests}
+                  filter='closed'
+                />
+                <Link to={{ pathname: '/maintenance_requests/closed' }}>
+                  <button type='button' className='customBtn btn-primary'>
+                    CLOSE TICKET
+                  </button>
+                </Link>
+              </>
+            }
           </div>
         </div>
       </div>

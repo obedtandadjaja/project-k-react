@@ -17,6 +17,16 @@ const Style = styled.div`
   .row{
     margin-bottom: 10em;
   }
+
+  .container{
+    margin: 40px auto;
+  }
+
+  .container .col {
+    margin: 10px;
+    flex-grow: 0;
+    padding: 0;
+  }
 `
 
 function PropertyListPage(props) {
