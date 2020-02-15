@@ -1,10 +1,10 @@
-// https://material-table.com/#/docs/features/actions
+// https://material-table.com/#/
 
 import React from 'react'
 import MaterialTable from 'material-table'
 import styled from 'styled-components'
 
-import { MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
+import { MAINTENANCE_REQUEST_CATEGORY_MAP, COLOR_SCHEME } from './../../constants'
 
 const Style = styled.div`
   overflow: auto;
@@ -16,7 +16,7 @@ const Style = styled.div`
 `
 
 function TicketTable(props) {
-  const { tickets, actions } = props;
+  const { title, tickets, loading, actions } = props;
 
   const moment = require('moment')
   const tableData = []
@@ -45,12 +45,18 @@ function TicketTable(props) {
   return (
     <Style>
       <MaterialTable
-        title='Close Ticket'
+        title={title}
         columns={columns}
         data={tableData}
+        isLoading={loading}
         options={{
-          headerStyle:{
-            fontSize: '16px'
+          headerStyle: {
+            backgroundColor: `${COLOR_SCHEME.grey}`,
+            color: `${COLOR_SCHEME.white}`,
+            fontSize: '1rem'
+          },
+          rowStyle: {
+            fontSize: '0.5em'
           }
         }}
         actions={actions} />
