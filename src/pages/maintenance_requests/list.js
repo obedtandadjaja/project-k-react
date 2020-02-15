@@ -1,3 +1,5 @@
+// TODO(@obedtandadjaja): make the use of api all() scalable in this case,
+
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'

@@ -7,12 +7,12 @@ import { MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
 
 class Doughnut extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.chartRef = React.createRef()
   }
 
   componentDidMount() {
-    const myChartRef = this.chartRef.current.getContext('2d');
+    const myChartRef = this.chartRef.current.getContext('2d')
     
     // this is a chart plugin, will move this in the future
     Chart.pluginService.register({
@@ -41,18 +41,18 @@ class Doughnut extends Component {
           let elementHeight = (chart.innerRadius * 2)
 
           // Pick a new font size so it will not be larger than the height of label.
-          let fontSizeToUse = Math.min(newFontSize, elementHeight);
+          let fontSizeToUse = Math.min(newFontSize, elementHeight)
 
           // Set font settings to draw it correctly.
           ctx.textAlign = 'center'
           ctx.textBaseline = 'middle'
           let centerX = ((chart.chartArea.left + chart.chartArea.right) / 2)
           let centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2)
-          ctx.font = fontSizeToUse + 'px ' + fontStyle;
+          ctx.font = fontSizeToUse + 'px ' + fontStyle
           ctx.fillStyle = color
 
           // Draw text in center
-          ctx.fillText(txt, centerX, centerY);
+          ctx.fillText(txt, centerX, centerY)
         }
       }
     })
@@ -71,10 +71,14 @@ class Doughnut extends Component {
     })
 
     const ticketCategoryValues = [...ticketCategories.values()]
-    const categoryFrequencies = ticketCategoryValues.map(value => value.frequency)
-    const categoryLabels = ticketCategoryValues.map(value => value.label)
-    const categoryColors = ticketCategoryValues.map(value => value.color)
-    const categoryText = filteredTickets.length
+
+    let categoryFrequencies = [], categoryLabels = [], categoryColors = []
+    
+    for (let value of ticketCategoryValues.values()) {
+      categoryFrequencies.push(value.frequency)
+      categoryLabels.push(value.label)
+      categoryColors.push(value.color)
+    }
 
     new Chart(myChartRef, {
       type: 'doughnut',
@@ -96,7 +100,7 @@ class Doughnut extends Component {
         responsive: false,
         elements: { 
           center: { 
-            text: categoryText,
+            text: filteredTickets.length,
             color: '#36A2EB', // Default black
             sidePadding: 40 // Default 20 (as a percentage)
           }
@@ -110,4 +114,4 @@ class Doughnut extends Component {
   }
 }
 
-export default Doughnut;
+export default Doughnut
