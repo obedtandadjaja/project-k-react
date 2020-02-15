@@ -18,11 +18,11 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsClosedPage(props) {
-  const { currentUserID, maintenanceRequests, loading, all, edit } = props;
+  const { currentUserID, maintenanceRequests, editLoading, allLoading, all, edit } = props
 
   useEffect(() => {
     all(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
-  }, [currentUserID, all, loading])
+  }, [currentUserID, all, editLoading])
 
   const openTicket = (rowData) => {
     const data = { id: rowData.id, status: 'pending' }
@@ -37,8 +37,9 @@ function MaintenanceRequestsClosedPage(props) {
             {
               maintenanceRequests && 
               <TicketTable
+                title='Closed Ticket'
                 tickets={maintenanceRequests}
-                filter='closed'
+                loading={allLoading}
                 actions={[
                   {
                     icon: 'edit',
@@ -70,7 +71,8 @@ function MaintenanceRequestsClosedPage(props) {
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
-  loading: state.maintenance_request.getIn(['editLoading'])
+  editLoading: state.maintenance_request.getIn(['editLoading']),
+  allLoading: state.maintenance_request.getIn(['allLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,

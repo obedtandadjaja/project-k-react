@@ -16,7 +16,7 @@ const Style = styled.div`
 `
 
 function TicketTable(props) {
-  const { title, tickets, loading, actions } = props;
+  const { title, tickets, loading, actions } = props
 
   const moment = require('moment')
   const tableData = []
@@ -51,12 +51,9 @@ function TicketTable(props) {
         isLoading={loading}
         options={{
           headerStyle: {
-            backgroundColor: `${COLOR_SCHEME.grey}`,
+            backgroundColor: `${COLOR_SCHEME.gray}`,
             color: `${COLOR_SCHEME.white}`,
-            fontSize: '1rem'
-          },
-          rowStyle: {
-            fontSize: '0.5em'
+            fontSize: '1.2rem'
           }
         }}
         actions={actions} />

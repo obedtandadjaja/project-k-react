@@ -6,23 +6,34 @@ import { bindActionCreators } from 'redux'
 
 import TicketTable from '../../components/maintenance_requests/table'
 import { all, edit } from './../../api/maintenanceRequests'
+import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
-  .col{
+  .col {
     padding: 0;
   }
   
-  .row:first-child{
+  .row:first-child {
     margin-top: 2em;
   }
 
-  .btn{
+  .btn {
     margin-bottom: 1em;
+  }
+  
+  @media ${DEVICE_SIZE.laptop} {
+    .row {
+      margin: 0.1em;
+    }
+    
+    .row:last-child {
+      margin-bottom: 1em;
+    }
   }
 `
 
 function MaintenanceRequestsOpenPage(props) {
-  const { currentUserID, maintenanceRequests, editLoading, all, edit } = props;
+  const { currentUserID, maintenanceRequests, editLoading, allLoading, all, edit } = props
 
   useEffect(() => {
     all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending' })
@@ -48,7 +59,9 @@ function MaintenanceRequestsOpenPage(props) {
             {
               maintenanceRequests &&
               <TicketTable
+                title='Open Ticket'
                 tickets={maintenanceRequests}
+                loading={allLoading}
                 actions={[
                   {
                     icon: 'edit',
@@ -81,6 +94,7 @@ const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
   editLoading: state.maintenance_request.getIn(['editLoading']),
+  allLoading: state.maintenance_request.getIn(['allLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   all,

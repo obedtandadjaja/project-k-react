@@ -1,4 +1,4 @@
-// TODO(@obedtandadjaja): make the use of api all() scalable in this case,
+// TODO(@obedtandadjaja): make the use of api all() scalable
 
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,7 @@ import styled from 'styled-components'
 
 import Doughnut from './../../components/maintenance_requests/doughnut'
 import { all } from './../../api/maintenanceRequests'
+import { DEVICE_SIZE, COLOR_SCHEME } from './../../constants'
 
 const Style = styled.div`
   .container{
@@ -28,16 +29,29 @@ const Style = styled.div`
   .customBtn{
     width: 225px;
     height: 75px;
+    color: ${COLOR_SCHEME.white};
+    background: ${COLOR_SCHEME.blue};
     margin-top: 2rem;
     font-family: Open Sans;
     font-size: 20px;
     border-radius: 4em;
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
   }
+
+  .customBtn:hover{
+    background: ${COLOR_SCHEME.lightBlue};
+    color: ${COLOR_SCHEME.blue};
+  }
+
+  @media ${DEVICE_SIZE.mobileL} {
+    .customBtn{
+      box-shadow: none;
+    }
+  }
 `
 
 function MaintenanceRequestsListPage(props) {
-  const { currentUserID, maintenanceRequests, loading, all } = props;
+  const { currentUserID, maintenanceRequests, loading, all } = props
 
   // fetch all maintenance_requests and pass it to children donut,
   // then let donut's props.filter calculates on status(filter='status')
@@ -59,7 +73,7 @@ function MaintenanceRequestsListPage(props) {
                   filter='pending' />
 
                 <Link to={{ pathname: '/maintenance_requests/open' }}>
-                  <button type='button' className='customBtn btn-primary'>
+                  <button type='button' className='customBtn'>
                     OPEN TICKET
                   </button>
                 </Link>
@@ -76,7 +90,7 @@ function MaintenanceRequestsListPage(props) {
                   filter='closed' />
                   
                 <Link to={{ pathname: '/maintenance_requests/closed' }}>
-                  <button type='button' className='customBtn btn-primary'>
+                  <button type='button' className='customBtn'>
                     CLOSE TICKET
                   </button>
                 </Link>

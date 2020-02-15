@@ -6,13 +6,13 @@ import styled from 'styled-components'
 
 import { CardStyledComponent } from './../../styledComponents/card'
 import { all } from './../../api/properties'
-import { DEVICE_SIZE } from './../../constants'
+import { DEVICE_SIZE, COLOR_SCHEME } from './../../constants'
 
 const Style = styled.div`
   h1{
     font-family: 'Open Sans';
     font-weight: bold;
-    color: #18A0FB;
+    color: ${COLOR_SCHEME.blue};
   }
 
   .row{
@@ -55,7 +55,7 @@ function PropertyListPage(props) {
               properties &&
               properties.map(property => (
                 <div className='col' id={property.id}>
-                  <CardStyledComponent>
+                  <CardStyledComponent key={property.id}>
                     <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
                       <h4>{property.name}</h4>
                       <p>Type: {property.type}</p>

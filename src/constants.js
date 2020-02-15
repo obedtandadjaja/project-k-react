@@ -38,8 +38,8 @@ export const DEVICE_SIZE = {
 // (@kenaszogara): color-scheme from this webpage
 // https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 export const COLOR_SCHEME = {
-      darkGrey: '#404040',
-      grey: '#707070',
+      darkGray: '#404040',
+      gray: '#707070',
       darkBlue: '#091E42',
       white: '#FAFAFA',
       whitePale: '#F5F5F5',

@@ -58,7 +58,7 @@ const StyleWrapper = styled.div`
 `
 
 function CardLarge(props){
-  const { clickUrl, header, body, color } = props;
+  const { clickUrl, header, body, color } = props
 
   return (
     <StyleWrapper>
