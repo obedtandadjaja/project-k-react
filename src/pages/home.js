@@ -1,50 +1,30 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React from 'react'
 
-import { all } from './../api/properties'
+import CardLarge from './../components/commons/cardLarge'
 
-function HomePage(props) {
-  const { currentUserID, properties, all } = props
-
-  useEffect(() => {
-    all(currentUserID, { eager: 'Rooms,Users' })
-  }, [all, currentUserID])
+function HomePage() {
 
   return (
-    <div className='container'>
+    <div className='home container' style={{ margin: 'auto' }}>
       <div className='row'>
-        <div className="col">
-          <h1>Your properties</h1>
-          {
-            properties &&
-            properties.map(property => (
-              <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
-                <div className='card'>
-                  <h4>{ property.name }</h4>
-                  <p>Type: { property.type }</p>
-                  <p>Address: { property.address }</p>
-                  <p>Number of rooms: { property.rooms.length }</p>
-                </div>
-              </Link>
-              ))
-            }
-          <Link to={{ pathname: '/properties/create' }}>
-            Add a property
-          </Link>
+        <div className='col'>
+          <CardLarge
+            header='Properties'
+            body='Create and Manage Properties'
+            color='white'
+            clickUrl='/properties/list' />
+        </div>
+        <div className='col'>
+          <CardLarge
+            header='Maintenance'
+            body='Check Maintenance Progress'
+            color='white'
+            clickUrl='/maintenance_requests/list' />
         </div>
       </div>
     </div>
   )
+  
 }
 
-const mapStateToProps = state => ({
-  properties: state.property.getIn(['properties']),
-  currentUserID: state.auth.getIn(['currentUserID']),
-})
-const mapDispatchToProps = dispatch => bindActionCreators({
-  all,
-}, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default HomePage

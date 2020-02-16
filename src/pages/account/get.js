@@ -4,10 +4,11 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/users/form'
+import { FormStyledComponent } from './../../styledComponents/form'
 import { get } from './../../api/users'
 
 function AccountGetPage(props) {
-  const { loading, error, user, get, currentUserID } = props
+  const { loading, error, user, currentUserID, get } = props
 
   useEffect(() => {
     get(currentUserID)
@@ -24,12 +25,15 @@ function AccountGetPage(props) {
       {
         !loading &&
         user &&
-        <Form
-          initialValues={user}
-          loading={loading}
-          submitError={error}
-          title='User information'
-          readonly />
+        <FormStyledComponent>
+          <Form
+            initialValues={user}
+            loading={loading}
+            submitError={error}
+            title='User information'
+            readonly />
+        </FormStyledComponent>
+        
       }
     </div>
   )

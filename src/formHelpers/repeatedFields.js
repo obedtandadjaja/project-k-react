@@ -1,6 +1,6 @@
 import React from 'react'
 
-import HoverButton from '../style/styleHelpers';
+import { ButtonStyledComponent } from '../styledComponents/button';
 
 const renderRepeatedFields = ({
   fields,
@@ -21,12 +21,12 @@ const renderRepeatedFields = ({
         <li key={index} className='fieldGroup'>
           {
             !readonly &&
-            <HoverButton
+            <ButtonStyledComponent
               className='repeatedFieldsRemove link error'
               type='button'
               onClick={() => fields.remove(index)}>
               Remove
-            </HoverButton>
+            </ButtonStyledComponent>
           }
           <h4>{entityText} #{index + 1}</h4>
           <ChildComponent prefix={field} readonly={readonly} />

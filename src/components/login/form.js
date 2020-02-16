@@ -28,10 +28,10 @@ function LoginForm(props) {
             type='password' />
 
           <div className='errorResponse'>
-            { submitError && submitError.status === 401 && 'Invalid credentials' }
+            {submitError && submitError.status === 401 && 'Invalid credentials'}
           </div>
 
-          <div className="vertical-wrapper">
+          <div className='vertical-wrapper'>
             <button type='submit' disabled={loading}>
               Login
             </button>

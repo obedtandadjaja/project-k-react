@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styled from 'styled-components'
 
 import Form from './../../components/properties/form'
+import { FormStyledComponent } from './../../styledComponents/form'
 import { edit, get } from './../../api/properties'
+
+const Style = styled.div`
+  form .blockCard:first-child {
+    margin-top: 10%;
+  }
+`
 
 function PropertyEditPage(props) {
   const { getLoading, loading, error, property, edit, get, currentUserID } = props
@@ -27,19 +35,23 @@ function PropertyEditPage(props) {
   })
 
   return (
-    <div className='propertyEditPage'>
-      {
-        !getLoading &&
-        property &&
-        <Form
-          initialValues={property}
-          onSubmit={editSubmit}
-          loading={loading}
-          submitError={error}
-          title='Edit property'
-          buttonText='Edit property' />
-      }
-    </div>
+    <Style>
+      <div className='propertyEditPage'>
+        {
+          !getLoading &&
+          property &&
+          <FormStyledComponent>
+            <Form
+              initialValues={property}
+              onSubmit={editSubmit}
+              loading={loading}
+              submitError={error}
+              title='Edit property'
+              buttonText='Edit property' />
+          </FormStyledComponent>
+        }
+      </div>
+    </Style>
   )
 }
 

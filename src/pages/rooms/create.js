@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/rooms/form'
+import { FormStyledComponent } from './../../styledComponents/form'
 import { get } from './../../api/properties'
 import { create } from './../../api/rooms'
 
@@ -28,24 +29,25 @@ function RoomCreatePage(props) {
   }, [props.history, loading, error, submitted, property, room])
 
   return (
-    <div className='propertyCreatePage'>
+    <div className='roomCreatePage'>
       {
         property &&
         <Link to={{ pathname: `/properties/${propertyID}` }}>
           <div className='card'>
-            <h4>{ property.name }</h4>
-            <p>Type: { property.type }</p>
-            <p>Address: { property.address }</p>
+            <h4>{property.name}</h4>
+            <p>Type: {property.type}</p>
+            <p>Address: {property.address}</p>
           </div>
         </Link>
       }
-
-      <Form
-        onSubmit={createSubmit}
-        loading={loading}
-        submitError={error}
-        title='Add a room'
-        buttonText='Create room' />
+      <FormStyledComponent>
+        <Form
+          onSubmit={createSubmit}
+          loading={loading}
+          submitError={error}
+          title='Add a room'
+          buttonText='Create room' />
+      </FormStyledComponent>
     </div>
   )
 }

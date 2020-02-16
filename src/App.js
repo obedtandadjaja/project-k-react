@@ -15,13 +15,19 @@ import TenantCreatePage from './pages/tenants/create'
 import RoomGetPage from './pages/rooms/get'
 import RoomEditPage from './pages/rooms/edit'
 import RoomCreatePage from './pages/rooms/create'
+import PropertyListPage from './pages/properties/list'
 import PropertyGetPage from './pages/properties/get'
 import PropertyEditPage from './pages/properties/edit'
 import PropertyCreatePage from './pages/properties/create'
+import MaintenanceRequestsListPage from './pages/maintenance_requests/list'
+import MaintenanceRequestsOpenPage from './pages/maintenance_requests/open'
+import MaintenanceRequestsClosedPage from './pages/maintenance_requests/closed'
+import MaintenanceRequestsCreatePage from './pages/maintenance_requests/create'
+import MaintenanceRequestsEditPage from './pages/maintenance_requests/edit'
+import MaintenanceRequestsDetailsPage from './pages/maintenance_requests/details'
+
 import './App.css'
 import './common.css'
-
-import Ticket from './pages/tickets'
 
 function App(props) {
   const { currentUserID } = props
@@ -37,9 +43,10 @@ function App(props) {
             {
               currentUserID &&
               <Switch>
-                <Route exact path='/' component={Ticket} />
+                <Route exact path='/' component={HomePage} />
                 <Route exact path='/account' component={AccountGetPage} />
                 <Route exact path='/account/edit' component={AccountEditPage} />
+                <Route exact path='/properties/list' component={PropertyListPage} />
                 <Route exact path='/properties/create' component={PropertyCreatePage} />
                 <Route exact path='/properties/:propertyID' component={PropertyGetPage} />
                 <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />
@@ -49,6 +56,12 @@ function App(props) {
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/create' component={TenantCreatePage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID' component={TenantGetPage} />
                 <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID/edit' component={TenantEditPage} />
+                <Route exact path='/maintenance_requests/list' component={MaintenanceRequestsListPage} />
+                <Route exact path='/maintenance_requests/open' component={MaintenanceRequestsOpenPage} />
+                <Route exact path='/maintenance_requests/closed' component={MaintenanceRequestsClosedPage} />
+                <Route exact path='/maintenance_requests/create' component={MaintenanceRequestsCreatePage} />
+                <Route exact path='/maintenance_requests/:maintenanceRequestID/edit' component={MaintenanceRequestsEditPage} />
+                <Route exact path='/maintenance_requests/:maintenanceRequestID/details' component={MaintenanceRequestsDetailsPage} />
                 <Route component={MissingPage} />
               </Switch>
             }

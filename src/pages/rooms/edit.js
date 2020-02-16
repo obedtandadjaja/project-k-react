@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/rooms/form'
+import { FormStyledComponent } from './../../styledComponents/form'
 import { get as getProperty } from './../../api/properties'
 import { edit, get } from './../../api/rooms'
 
@@ -44,13 +45,15 @@ function RoomEditPage(props) {
       {
         !getLoading &&
         room &&
-        <Form
-          initialValues={room}
-          onSubmit={editSubmit}
-          loading={loading}
-          submitError={error}
-          title='Edit room'
-          buttonText='Edit room' />
+        <FormStyledComponent>
+          <Form
+            initialValues={room}
+            onSubmit={editSubmit}
+            loading={loading}
+            submitError={error}
+            title='Edit room'
+            buttonText='Edit room' />
+        </FormStyledComponent>
       }
     </div>
   )

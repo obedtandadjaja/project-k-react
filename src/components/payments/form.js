@@ -1,19 +1,19 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-import { required } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
+import { required } from './../../formHelpers/validators'
 
 function PaymentForm(props) {
   const { handleSubmit, readonly, submitError, loading, title, buttonText } = props
 
   return (
     <form onSubmit={handleSubmit} >
-      <div className="blockCard">
-        <div className="blockHeader">
+      <div className='blockCard'>
+        <div className='blockHeader'>
           { title }
         </div>
-        <div className="blockBody">
+        <div className='blockBody'>
           <Field
             name='amount'
             type='number'

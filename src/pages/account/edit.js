@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styled from 'styled-components'
 
 import Form from './../../components/users/form'
+import { FormStyledComponent } from './../../styledComponents/form'
 import { edit, get } from './../../api/users'
 
+const Style = styled.div`
+  form .row{
+    display: block;
+  }
+`
+
 function AccountEditPage(props) {
-  const { getLoading, loading, error, edit, get, user, currentUserID } = props
+  const { getLoading, loading, error, user, currentUserID, edit, get } = props
   const [submitted, setSubmitted] = useState(false)
   const editSubmit = (values) => {
     setSubmitted(true)
@@ -23,19 +31,23 @@ function AccountEditPage(props) {
   })
 
   return (
-    <div className='userEditPage'>
-      {
-        !getLoading &&
-        user &&
-        <Form
-          initialValues={user}
-          onSubmit={editSubmit}
-          loading={loading}
-          submitError={error}
-          title='Edit user'
-          submitText='Edit user' />
-      }
-    </div>
+    <Style>
+      <div className='userEditPage'>
+        {
+          !getLoading &&
+          user &&
+          <FormStyledComponent>
+            <Form
+              initialValues={user}
+              onSubmit={editSubmit}
+              loading={loading}
+              submitError={error}
+              title='Edit user'
+              submitText='Edit user' />
+          </FormStyledComponent>
+        }
+      </div>
+    </Style>
   )
 }
 

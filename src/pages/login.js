@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { useHistory, useLocation } from 'react-router'
 
-import { login } from './../api/login'
 import Form from './../components/login/form'
+import { LoginStyledComponent } from './../styledComponents/login'
+import { login } from './../api/login'
 
 function LoginPage(props) {
   let history = useHistory();
@@ -23,9 +24,13 @@ function LoginPage(props) {
   }, [history, currentUserID, from])
 
   return (
-    <div className='loginPage page'>
-      <Form onSubmit={loginSubmit} loading={loading} submitError={error} submitText='Login' />
-    </div>
+    <LoginStyledComponent>
+      <Form
+        onSubmit={loginSubmit}
+        loading={loading}
+        submitError={error}
+        submitText='Login' />
+    </LoginStyledComponent>
   )
 }
 
@@ -34,7 +39,6 @@ const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   error: state.auth.getIn(['error']),
 })
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   login: login
 }, dispatch)

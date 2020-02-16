@@ -15,11 +15,11 @@ function TenantForm(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="blockCard">
+      <div className='blockCard'>
         <div className='blockHeader'>
-          { title }
+          {title}
         </div>
-        <div className="blockBody">
+        <div className='blockBody'>
           <Field
             name='name'
             label='Name'
@@ -134,14 +134,6 @@ function TenantForm(props) {
                 type='text' />
             </div>
           }
-
-          {
-            !readonly &&
-            <button type='submit' disabled={loading}>
-              { submitText }
-            </button>
-          }
-
           <div className='errorResponse'>
             { submitError && JSON.stringify(submitError) }
           </div>
@@ -162,6 +154,12 @@ function TenantForm(props) {
             component={RepeatedFields} />
         </div>
       </div>
+      {
+        !readonly &&
+        <button className='btn' type='submit' disabled={loading}>
+          {submitText}
+        </button>
+      }
     </form>
   )
 }

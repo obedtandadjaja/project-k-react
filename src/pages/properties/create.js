@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/properties/form'
+import { FormStyledComponent } from './../../styledComponents/form'
 import { create } from './../../api/properties'
 
 function PropertyCreatePage(props) {
@@ -22,12 +23,14 @@ function PropertyCreatePage(props) {
 
   return (
     <div className='propertyCreatePage'>
-      <Form
-        onSubmit={createSubmit}
-        loading={loading}
-        submitError={error}
-        title='Create property'
-        buttonText='Create property' />
+      <FormStyledComponent>
+        <Form
+          onSubmit={createSubmit}
+          loading={loading}
+          submitError={error}
+          title='Create property'
+          buttonText='Create property' />
+      </FormStyledComponent>
     </div>
   )
 }

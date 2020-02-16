@@ -11,31 +11,23 @@ function RoomForm(props) {
 
   return (
     <form onSubmit={handleSubmit} >
-      <div className="blockCard">
-        <div className="blockHeader">
+      <div className='blockCard'>
+        <div className='blockHeader'>
           { title }
         </div>
-        <div className="blockBody">
+        <div className='blockBody'>
           <RoomFields readonly={readonly} />
-
-          {
-            !readonly &&
-            <button type='submit' disabled={loading}>
-              { buttonText }
-            </button>
-          }
-
           <div className='errorResponse'>
             { submitError && JSON.stringify(submitError) }
           </div>
         </div>
       </div>
 
-      <div className="blockCard">
-        <div className="blockHeader">
+      <div className='blockCard'>
+        <div className='blockHeader'>
           Room facilities
         </div>
-        <div className="blockBody">
+        <div className='blockBody'>
           <FieldArray
             name='data.facilities'
             buttonText='Add room facility'
@@ -48,18 +40,18 @@ function RoomForm(props) {
 
       {
         readonly &&
-        <div className="blockCard">
-          <div className="blockHeader">
+        <div className='blockCard'>
+          <div className='blockHeader'>
             Tenants
           </div>
-          <div className="blockBody">
+          <div className='blockBody'>
             {
               initialValues.tenants &&
               initialValues.tenants.map(tenant => (
                 <Link
                   key={tenant.id}
                   to={{ pathname: `/properties/${initialValues.propertyId}/rooms/${initialValues.id}/tenants/${tenant.id}` }}>
-                  <div className="card bordered">
+                  <div className='card bordered'>
                     <h4>{ tenant.name }</h4>
                     <p>Email: { tenant.email }</p>
                     <p>Phone: { tenant.phone }</p>
@@ -79,6 +71,12 @@ function RoomForm(props) {
             </Link>
           </div>
         </div>
+      }
+      {
+        !readonly &&
+        <button className='btn' type='submit' disabled={loading}>
+          {buttonText}
+        </button>
       }
     </form>
   )

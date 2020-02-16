@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import Form from './../../components/tenants/form'
+import { FormStyledComponent } from './../../styledComponents/form'
 import { get as getProperty } from './../../api/properties'
 import { get as getRoom } from './../../api/rooms'
 import { get } from './../../api/tenants'
@@ -51,11 +52,13 @@ function TenantGetPage(props) {
       {
         !loading &&
         tenant &&
-        <Form
-          initialValues={tenant}
-          loading={loading}
-          title='Tenant information'
-          readonly />
+        <FormStyledComponent>
+          <Form
+            initialValues={tenant}
+            loading={loading}
+            title='Tenant information'
+            readonly />
+        </FormStyledComponent>
       }
 
       {
@@ -85,7 +88,7 @@ function TenantGetPage(props) {
               {
                 (!tenant.payments || tenant.payments.length === 0) &&
                 <tr>
-                  <td colspan='3'>No payments</td>
+                  <td colSpan='3'>No payments</td>
                 </tr>
               }
             </tbody>

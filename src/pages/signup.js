@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { signup } from './../api/signup'
 import Form from './../components/signup/form'
+import { LoginStyledComponent } from './../styledComponents/login'
+import { signup } from './../api/signup'
 
 function SignupPage(props) {
   const { signup, loading, error, currentUserID } = props
@@ -18,9 +19,13 @@ function SignupPage(props) {
   }, [props.history, currentUserID])
 
   return (
-    <div className='signupPage page'>
-      <Form onSubmit={signupSubmit} loading={loading} error={error} submitText='Register user' />
-    </div>
+    <LoginStyledComponent>
+      <Form 
+        onSubmit={signupSubmit} 
+        loading={loading} 
+        error={error} 
+        submitText='Register user' />
+    </LoginStyledComponent>
   )
 }
 
@@ -29,7 +34,6 @@ const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   error: state.auth.getIn(['error']),
 })
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   signup: signup
 }, dispatch)

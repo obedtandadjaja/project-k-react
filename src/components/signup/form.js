@@ -9,8 +9,8 @@ function SignupForm(props) {
 
   return (
     <form onSubmit={handleSubmit} >
-      <div className="blockCard">
-        <div className="blockBody">
+      <div className='blockCard'>
+        <div className='blockBody'>
           <h1>Signup</h1>
           <Field
             name='email'
@@ -26,7 +26,7 @@ function SignupForm(props) {
             validate={[required, minLength10]}
             type='password' />
 
-          <button type='submit'>
+          <button className='btn' type='submit'>
             Signup
           </button>
         </div>
