@@ -3,6 +3,7 @@
 import React from 'react'
 import MaterialTable from 'material-table'
 import styled from 'styled-components'
+import moment from 'moment'
 
 import { MAINTENANCE_REQUEST_CATEGORY_MAP, COLOR_SCHEME } from './../../constants'
 
@@ -18,13 +19,12 @@ const Style = styled.div`
 function TicketTable(props) {
   const { title, tickets, loading, actions } = props
 
-  const moment = require('moment')
   const tableData = []
 
   tickets.map((data) => {
     var dataObj = {
       'id': data.id,
-      'createdDate': moment(data.createdAt).format('MMM Do [, ] dddd'),
+      'createdAt': moment(data.createdAt).format('YYYY MMM Do [, ] ddd'),
       'location': `${data.property.address}, ${data.property.name}, (${data.room.name})`,
       'category': MAINTENANCE_REQUEST_CATEGORY_MAP.get(data.category).name,
       'title': data.title,
@@ -35,7 +35,7 @@ function TicketTable(props) {
 
   const columns = [
     { field: 'id', title: 'Ticket Id' },
-    { field: 'createdDate', title: 'Date Opened' },
+    { field: 'createdAt', title: 'Date Opened' },
     { field: 'location', title: 'Location(s)' },
     { field: 'category', title: 'Category' },
     { field: 'title', title: 'Title' },

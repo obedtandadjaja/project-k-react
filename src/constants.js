@@ -24,7 +24,6 @@ export const MAINTENANCE_REQUEST_CATEGORY_MAP = new Map([
       ['reidentExperience', { name: 'Resident experience', color: '#4ED1A1' }]
 ])
 
-// https://jsramblings.com/how-to-use-media-queries-with-styled-components/
 export const DEVICE_SIZE = {
       mobileS: `(max-width: 320px)`,
       mobileM: `(max-width: 375px`,
@@ -35,8 +34,6 @@ export const DEVICE_SIZE = {
       desktop: `(max-width: 2560px)`,
 }
 
-// (@kenaszogara): color-scheme from this webpage
-// https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 export const COLOR_SCHEME = {
       darkGray: '#404040',
       gray: '#707070',

@@ -18,8 +18,7 @@ function MaintenanceRequestsEditPage(props) {
   }, [currentUserID, maintenanceRequestID, get, all])
 
   useEffect(() => {
-    if (!editLoading && !error ) {
-      submitted &&
+    if (!editLoading && !error && submitted) {
       props.history.push(`/maintenance_requests/open`)
     }
   })

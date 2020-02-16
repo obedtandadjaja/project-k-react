@@ -3,6 +3,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
+import moment from 'moment'
 
 import { required } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
@@ -52,6 +53,28 @@ function MaintenanceForm(props) {
                 {title}
               </div>
               <div className='blockBody'>
+                {
+                  readonly &&
+                  <Field      
+                    name='createdAt'
+                    label='Date Opened'
+                    component={renderField}
+                    readonly={readonly}
+                    format={(value) => {
+                      return moment(value).format('YYYY MMMM Do [, ] dddd')
+                    }}
+                  />
+                }
+
+                <Field
+                  name='title'
+                  label='Title'
+                  component={renderField}
+                  validate={[required]}
+                  readonly={readonly}
+                  type='text'
+                  defaultEmpty />
+
                 { 
                   properties &&
                   <Field
@@ -90,15 +113,6 @@ function MaintenanceForm(props) {
                   options={Array.from(MAINTENANCE_REQUEST_CATEGORY_MAP, ([key, value]) =>
                     { return ([key, value.name]) }
                   )} />
-
-                <Field
-                  name='title'
-                  label='Title'
-                  component={renderField}
-                  validate={[required]}
-                  readonly={readonly}
-                  type='text'
-                  defaultEmpty />
 
                 <Field
                   name='description'

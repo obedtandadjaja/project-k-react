@@ -70,11 +70,9 @@ class Doughnut extends Component {
       })
     })
 
-    const ticketCategoryValues = [...ticketCategories.values()]
-
     let categoryFrequencies = [], categoryLabels = [], categoryColors = []
     
-    for (let value of ticketCategoryValues.values()) {
+    for (let value of ticketCategories.values()) {
       categoryFrequencies.push(value.frequency)
       categoryLabels.push(value.label)
       categoryColors.push(value.color)

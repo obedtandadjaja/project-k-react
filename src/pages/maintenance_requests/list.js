@@ -91,7 +91,7 @@ function MaintenanceRequestsListPage(props) {
                   
                 <Link to={{ pathname: '/maintenance_requests/closed' }}>
                   <button type='button' className='customBtn'>
-                    CLOSE TICKET
+                    CLOSED TICKET
                   </button>
                 </Link>
               </>
