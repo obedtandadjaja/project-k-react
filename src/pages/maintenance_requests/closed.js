@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import TicketTable from './../../components/maintenance_requests/table'
 import { all, edit } from './../../api/maintenanceRequests'
+import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
   .col{
@@ -14,6 +15,14 @@ const Style = styled.div`
   .row{
     margin-top: 4em;
     margin-bottom: 2em;
+  }
+
+   @media ${DEVICE_SIZE.laptop} {
+    .row {
+      margin-left: 0.1em;
+      margin-right: 0.1em;
+      margin-bottom: 1em;
+    }
   }
 `
 
