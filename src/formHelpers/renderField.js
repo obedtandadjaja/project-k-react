@@ -9,6 +9,8 @@ const renderField = ({
 }) => (
   <div className='formFieldWrapper'>
     <div>
+      {readonly && 
+        <label>{label}</label>}
       <input
         {...input}
         placeholder={ !readonly ? label : '' }
