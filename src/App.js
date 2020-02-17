@@ -25,6 +25,7 @@ import MaintenanceRequestsClosedPage from './pages/maintenance_requests/closed'
 import MaintenanceRequestsCreatePage from './pages/maintenance_requests/create'
 import MaintenanceRequestsEditPage from './pages/maintenance_requests/edit'
 import MaintenanceRequestsDetailsPage from './pages/maintenance_requests/details'
+import MaintenanceRequestFilterPage from './pages/maintenance_requests/filter'
 
 import './App.css'
 import './common.css'
@@ -60,6 +61,7 @@ function App(props) {
                 <Route exact path='/maintenance_requests/open' component={MaintenanceRequestsOpenPage} />
                 <Route exact path='/maintenance_requests/closed' component={MaintenanceRequestsClosedPage} />
                 <Route exact path='/maintenance_requests/create' component={MaintenanceRequestsCreatePage} />
+                <Route exact path='/maintenance_requests/filter' component={MaintenanceRequestFilterPage} />
                 <Route exact path='/maintenance_requests/:maintenanceRequestID/edit' component={MaintenanceRequestsEditPage} />
                 <Route exact path='/maintenance_requests/:maintenanceRequestID/details' component={MaintenanceRequestsDetailsPage} />
                 <Route component={MissingPage} />

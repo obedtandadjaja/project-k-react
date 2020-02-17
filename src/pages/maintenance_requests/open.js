@@ -54,6 +54,11 @@ function MaintenanceRequestsOpenPage(props) {
                 Add Ticket
               </Link>
             </div>
+            <div className='ml-auto'>
+              <Link className='btn btn-success' to={{ pathname: '/maintenance_requests/filter' }}>
+                Filter
+              </Link>
+            </div>
           </div>
           <div className='row'>
             {
