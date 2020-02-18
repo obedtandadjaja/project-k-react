@@ -17,7 +17,7 @@ const Style = styled.div`
     margin-top: 2em;
   }
 
-  .btn {
+  .row {
     margin-bottom: 1em;
   }
   

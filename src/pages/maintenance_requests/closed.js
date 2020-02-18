@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styled from 'styled-components'
 
 import TicketTable from './../../components/maintenance_requests/table'
 import { all, edit } from './../../api/maintenanceRequests'
@@ -12,9 +13,12 @@ const Style = styled.div`
     padding: 0;
   }
   
-  .row{
-    margin-top: 4em;
-    margin-bottom: 2em;
+  .row:first-child {
+    margin-top: 2em;
+  }
+
+  .row {
+    margin-bottom: 1em;
   }
 
    @media ${DEVICE_SIZE.laptop} {
@@ -42,6 +46,13 @@ function MaintenanceRequestsClosedPage(props) {
     <Style>
       <div className='closeTicketPage'>
         <div className='container'>
+          <div className='row'>
+            <div className='ml-auto'>
+              <Link className='btn btn-success' to={{ pathname: '/maintenance_requests/filter' }}>
+                Filter
+              </Link>
+            </div>
+          </div>
           <div className='row'>
             {
               maintenanceRequests && 

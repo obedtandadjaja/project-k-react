@@ -1,195 +1,123 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Field, reduxForm, formValueSelector } from 'redux-form'
-import Select from '@material-ui/core/Select';
 import styled from 'styled-components'
 
-import { all } from './../../api/properties'
+import { all as allProperties } from './../../api/properties'
+import { all as allMaintenanceRequests, edit } from './../../api/maintenanceRequests'
+import Form from './../../components/maintenance_requests/filter'
 import { FormStyledComponent } from './../../styledComponents/form'
-import renderField from './../../formHelpers/renderField'
-import renderSelectField from './../../formHelpers/renderSelectField'
-import { DEVICE_SIZE, MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
+import TicketTable from '../../components/maintenance_requests/table'
 
 const Style = styled.div`
-  .rowInput {
-    display: flex;
-  }
-
-  .rowInput > * {
-    margin: 0.3em;
-  }
-
-  .checkBox {
-    width: 20px;
-    height: 40px;
-  }
-
-  .formFieldWrapper select {
-    width: 90px;
-  }
-
-  @media ${DEVICE_SIZE.mobileL} {
-    .formFieldWrapper select{
-      width: 100%;
-    }
-
-    .formFieldWrapper input {
-      width: 100%;
-    }
+  .container {
+    margin-bottom: 1em;
   }
 `
 
 function MaintenanceRequestFilterPage(props) {
-  const { all, currentUserID, properties, selectedPropertyValue } = props
-
-  const [rooms, setRooms] = useState([])
+  const { 
+    allProperties, 
+    allMaintenanceRequests, 
+    edit, 
+    currentUserID, 
+    loading, 
+    maintenanceRequests, 
+    properties, 
+  } = props
 
   useEffect(() => {
-    all(currentUserID, { eager: 'Rooms' })
+    allProperties(currentUserID, { eager: 'Rooms' })
+  }, [allProperties, currentUserID])
 
-    if (selectedPropertyValue) {
-      const property = properties.find(property => property.id === selectedPropertyValue)
-      setRooms(property.rooms)
+  const filterSubmit = (values) => {
+
+    let queryParams = {}
+
+    if(values.hasOwnProperty('date') && values.date.hasOwnProperty('check') && values.date.check) {
+      let date
+      if(values.date.params === 'before') {
+        date = { opened_end_date: values.date.createdAt }
+      } else {
+        date = { opened_start_date: values.date.createdAt }
+      }
+      Object.assign(queryParams, date)
     }
-  }, [all, currentUserID, selectedPropertyValue])
+
+    if(values.hasOwnProperty('property') && values.property.hasOwnProperty('check') && values.property.check) {
+      Object.assign(queryParams, { property_id: values.property.id })
+    }
+
+    if(values.hasOwnProperty('room') && values.room.hasOwnProperty('check') && values.room.check) {
+      Object.assign(queryParams, { room_id: values.room.id })
+    }
+
+    if(values.hasOwnProperty('category') && values.category.hasOwnProperty('check') && values.category.check) {
+      Object.assign(queryParams, { category: values.category.name })
+    }
+
+    allMaintenanceRequests(currentUserID, queryParams)
+  }
+
+  const closeTicket = (rowData) => {
+    const data = { id: rowData.id, status: 'closed' }
+    edit(currentUserID, data)
+  }
 
   return(
-    <FormStyledComponent>
       <Style>
-        <form>
-          <div className='blockCard'>
-            <div className='blockHeader'>
-              Filter Results
+        <FormStyledComponent>
+          <Form 
+            properties={properties}
+            onSubmit={filterSubmit}
+            loading={loading}
+            />
+        </FormStyledComponent>
+        <div className='container'>
+          <div className='row'>
+            {
+              maintenanceRequests &&
+              <TicketTable
+                title='Open Ticket'
+                tickets={maintenanceRequests}
+                loading={loading}
+                actions={[
+                  {
+                    icon: 'edit',
+                    tooltip: 'edit ticket',
+                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`))
+                  },
+                  {
+                    icon: 'description',
+                    tooltip: 'view ticket',
+                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
+                  },
+                  {
+                    icon: 'delete',
+                    tooltip: 'close ticket',
+                    onClick: (event, rowData) => {
+                      if (window.confirm('Are you sure you want to close this ticket?'))
+                        closeTicket(rowData)
+                    }
+                  },
+                ]} />
+           }
           </div>
-            <div className='blockBody'>
-
-              <label>Date Opened:</label>
-              <div className='rowInput'>
-                <Field
-                  name='date.params'
-                  component={renderSelectField}
-                  defaultEmpty
-                  options={[
-                    ['after', 'After'],
-                    ['before', 'Before']
-                  ]} />
-                <Field
-                  name='date.value'
-                  label='YYYY-MM-DD'
-                  component={renderField}
-                  defaultEmpty />
-                <Field
-                  name='date.check'
-                  label='YYYY-MM-DD'
-                  component='input'
-                  type='checkbox'
-                  className='checkBox'
-                  defaultEmpty />
-              </div>
-              
-              <label>Property:</label>
-              <div className='rowInput'>                
-                <Field
-                  name='property.params'
-                  component={renderSelectField}
-                  className='selectValue'
-                  defaultEmpty
-                  options={[
-                    ['only', 'Only']
-                  ]} />
-                <Field
-                  name='property.value'
-                  component={renderSelectField}
-                  options={properties.map(property =>
-                    [property.id, property.name]
-                  )}
-                  defaultEmpty />
-                <Field
-                  name='property.check'
-                  label='YYYY-MM-DD'
-                  component='input'
-                  type='checkbox'
-                  className='checkBox'
-                  defaultEmpty />
-              </div>
-              
-              <label>Room:</label>
-              <div className='rowInput'>
-                <Field
-                  name='room.params'
-                  component={renderSelectField}
-                  defaultEmpty
-                  options={[
-                    ['only', 'Only']
-                  ]} />
-                <Field
-                  name='room.value'
-                  component={renderSelectField}
-                  defaultEmpty
-                  options={rooms.map(room =>
-                    [room.id, room.name]
-                  )} />
-                <Field
-                  name='room.check'
-                  label='YYYY-MM-DD'
-                  component='input'
-                  type='checkbox'
-                  className='checkBox'
-                  defaultEmpty />
-              </div>
-              
-              <label>Category:</label>
-              <div className='rowInput'>                
-                <Field
-                  name='category.params'
-                  component={renderSelectField}
-                  defaultEmpty
-                  options={[
-                    ['only', 'Only']
-                  ]} />
-                <Field
-                  name='category.value'
-                  component={renderSelectField}
-                  defaultEmpty
-                  options={Array.from(MAINTENANCE_REQUEST_CATEGORY_MAP, ([key, value]) => 
-                    { return ([key, value.name]) }
-                  )} />
-                <Field
-                  name='category.check'
-                  label='YYYY-MM-DD'
-                  component='input'
-                  type='checkbox'
-                  className='checkBox'
-                  defaultEmpty />
-              </div>
-            </div>
-          </div>
-          <button className='btn' type='submit'>
-            Filter
-          </button>
-        </form>
+        </div>
       </Style>
-    </FormStyledComponent>
   )
 }
 
-let maintenanceRequestFilterForm = reduxForm({
-  form: 'maintenanceRequestFilter',
-  enabledReinitialize: true,
-})(MaintenanceRequestFilterPage)
-
-const mapStateToProps = state => {
-  const selector = formValueSelector('maintenanceRequestFilter')
-  const selectedPropertyValue = selector(state, 'property.value')
-  return {
-    selectedPropertyValue,
-    currentUserID: state.auth.getIn(['currentUserID']),
-    properties: state.property.getIn(['properties'])
-  }
-}
+const mapStateToProps = state => ({
+  currentUserID: state.auth.getIn(['currentUserID']),
+  properties: state.property.getIn(['properties']),
+  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  loading: state.maintenance_request.getIn(['allLoading'])
+})
 const mapDispatchToProps = dispatch => bindActionCreators({
-  all
+  allProperties,
+  allMaintenanceRequests,
+  edit
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(maintenanceRequestFilterForm)
+export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestFilterPage)
