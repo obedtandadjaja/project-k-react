@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import styled from 'styled-components'
 
-import renderField from './../../formHelpers/renderField'
+import renderDateField from './../../formHelpers/renderField'
 import renderSelectField from './../../formHelpers/renderSelectField'
 import { DEVICE_SIZE, MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
 
@@ -84,8 +84,9 @@ function MaintenanceRequestFilterForm(props) {
                 ]} />
               <Field
                 name='date.createdAt'
-                label='YYYY-MM-DD'
-                component={renderField}
+                label='Date'
+                format='yyyy/MM/dd'
+                component={renderDateField}
                 defaultEmpty />
               <Field
                 name='date.check'
