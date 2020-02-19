@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
@@ -20,22 +20,32 @@ function MaintenanceRequestFilterPage(props) {
     allProperties, 
     allMaintenanceRequests, 
     currentUserID, 
-    loading, 
+    allLoading, 
+    editLoading,
     maintenanceRequests, 
     properties, 
   } = props
+
+  const [submitted, setSubmitted] = useState(false)
+  const [params, setParams] = useState({})
 
   useEffect(() => {
     allProperties(currentUserID, { eager: 'Rooms' })
   }, [allProperties, currentUserID])
 
+  useEffect(() => {
+    if(submitted)
+      allMaintenanceRequests(currentUserID, params)
+  }, [editLoading])
+
+  // filter form has no validation method, so everything goes her kind of, based on checkBox value
   const filterSubmit = (values) => {
 
     let queryParams = {}
 
     Object.assign(queryParams, { eager: 'Property, Room, Reporter' })
 
-    // here props.match.params = { status: 'pending' or 'closed' }
+    // here props.match.params = { status: 'pending' } or { status: 'closed' }
     Object.assign(queryParams, props.match.params)
 
     if(values.hasOwnProperty('date') && values.date.hasOwnProperty('check') && values.date.check) {
@@ -59,7 +69,9 @@ function MaintenanceRequestFilterPage(props) {
     if(values.hasOwnProperty('category') && values.category.hasOwnProperty('check') && values.category.check) {
       Object.assign(queryParams, { category: values.category.name })
     }
-
+    
+    setParams(queryParams)
+    setSubmitted(true)
     allMaintenanceRequests(currentUserID, queryParams)
   }
 
@@ -69,7 +81,7 @@ function MaintenanceRequestFilterPage(props) {
           <Form 
             properties={properties}
             onSubmit={filterSubmit}
-            loading={loading}
+            loading={allLoading}
             />
         </FormStyledComponent>
         <div className='container'>
@@ -79,9 +91,9 @@ function MaintenanceRequestFilterPage(props) {
               <TicketTable
                 title='Open Ticket'
                 tickets={maintenanceRequests}
-                loading={loading}
-                pending={true} />
-           }
+                loading={allLoading}
+                status={props.match.params.status} />
+            }
           </div>
         </div>
       </Style>
@@ -92,7 +104,8 @@ const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   properties: state.property.getIn(['properties']),
   maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
-  loading: state.maintenance_request.getIn(['allLoading'])
+  allLoading: state.maintenance_request.getIn(['allLoading']),
+  editLoading: state.maintenance_request.getIn(['editLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   allProperties,

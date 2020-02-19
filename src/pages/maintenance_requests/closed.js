@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
 import TicketTable from './../../components/maintenance_requests/table'
-import { all, edit } from './../../api/maintenanceRequests'
+import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`

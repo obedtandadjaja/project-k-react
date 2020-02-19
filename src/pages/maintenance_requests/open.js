@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import TicketTable from '../../components/maintenance_requests/table'
-import { all, edit } from './../../api/maintenanceRequests'
+import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
@@ -60,7 +60,7 @@ function MaintenanceRequestsOpenPage(props) {
                 tickets={maintenanceRequests}
                 loading={allLoading}
                 status='pending' />
-           }
+            }
           </div>
         </div>
       </div>
@@ -75,8 +75,7 @@ const mapStateToProps = state => ({
   allLoading: state.maintenance_request.getIn(['allLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  all,
-  edit,
+  all
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsOpenPage)
