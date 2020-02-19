@@ -36,38 +36,33 @@ function MaintenanceRequestFilterPage(props) {
   useEffect(() => {
     if(submitted)
       allMaintenanceRequests(currentUserID, params)
-  }, [editLoading])
+  }, [allMaintenanceRequests, currentUserID, editLoading])
 
-  // filter form has no validation method, so everything goes her kind of, based on checkBox value
   const filterSubmit = (values) => {
 
-    let queryParams = {}
+    let queryParams = {
+      eager: 'Property, Room, Reporter',
+      status: props.match.params.status
+    }
 
-    Object.assign(queryParams, { eager: 'Property, Room, Reporter' })
-
-    // here props.match.params = { status: 'pending' } or { status: 'closed' }
-    Object.assign(queryParams, props.match.params)
-
-    if(values.hasOwnProperty('date') && values.date.hasOwnProperty('check') && values.date.check) {
-      let date
-      if(values.date.params === 'before') {
-        date = { opened_end_date: values.date.createdAt }
+    if(values.dateOpened && values.dateOpened.check) {
+      if(values.dateOpened.params === 'before') {
+        queryParams.opened_end_date = values.dateOpened.createdAt 
       } else {
-        date = { opened_start_date: values.date.createdAt }
+        queryParams.opened_start_date = values.dateOpened.createdAt 
       }
-      Object.assign(queryParams, date)
     }
 
-    if(values.hasOwnProperty('property') && values.property.hasOwnProperty('check') && values.property.check) {
-      Object.assign(queryParams, { property_id: values.property.id })
+    if(values.property && values.property.check) {
+      queryParams.property_id = values.property.id
     }
 
-    if(values.hasOwnProperty('room') && values.room.hasOwnProperty('check') && values.room.check) {
-      Object.assign(queryParams, { room_id: values.room.id })
+    if(values.room && values.room.check) {
+      queryParams.room_id = values.room.id
     }
 
-    if(values.hasOwnProperty('category') && values.category.hasOwnProperty('check') && values.category.check) {
-      Object.assign(queryParams, { category: values.category.name })
+    if(values.category && values.category.check) {
+      queryParams.category = values.category.name
     }
     
     setParams(queryParams)
@@ -89,7 +84,9 @@ function MaintenanceRequestFilterPage(props) {
             {
               maintenanceRequests &&
               <TicketTable
-                title='Open Ticket'
+                title={
+                  props.match.params.status === 'pending' ? 'Open Ticket' : 'Closed Ticket'
+                }
                 tickets={maintenanceRequests}
                 loading={allLoading}
                 status={props.match.params.status} />

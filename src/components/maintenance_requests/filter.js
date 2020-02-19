@@ -29,10 +29,6 @@ const Style = styled.div`
     width: 200px;
   }
 
-  #dateRowInput .formFieldWrapper select {
-    margin-top: 16px;
-  }
-
   #dateRowInput .formFieldWrapper input {
     border: none;
     border-radius: none;
@@ -40,10 +36,6 @@ const Style = styled.div`
 
   #dateRowInput #date-picker {
     width: 200px;
-  }
-
-  #dateRowInput .checkBox {
-    margin-top: 16px;
   }
 
   @media ${DEVICE_SIZE.mobileL} {
@@ -92,7 +84,7 @@ function MaintenanceRequestFilterForm(props) {
             <label>Date Opened:</label>
             <div className='rowInput' id='dateRowInput'>
               <Field
-                name='date.params'
+                name='dateOpened.params'
                 component={renderSelectField}
                 defaultEmpty
                 options={[
@@ -100,11 +92,10 @@ function MaintenanceRequestFilterForm(props) {
                   ['before', 'Before']
                 ]} />
               <Field
-                name='date.createdAt'
-                label='YYYY-MM-DD'
+                name='dateOpened.createdAt'
                 component={renderDateField} />
               <Field
-                name='date.check'
+                name='dateOpened.check'
                 component='input'
                 type='checkbox'
                 className='checkBox' />
