@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import MomentUtils from '@date-io/moment';
+import MomentUtils from '@date-io/moment'
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 
 const renderDateField = ({
