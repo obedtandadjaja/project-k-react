@@ -30,16 +30,11 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsOpenPage(props) {
-  const { currentUserID, maintenanceRequests, editLoading, allLoading, all, edit } = props
+  const { currentUserID, maintenanceRequests, editLoading, allLoading, all } = props
 
   useEffect(() => {
     all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending' })
   }, [currentUserID, all, editLoading])
-
-  const closeTicket = (rowData) => {
-    const data = { id: rowData.id, status: 'closed' }
-    edit(currentUserID, data)
-  }
 
   return(
     <Style>
@@ -52,7 +47,7 @@ function MaintenanceRequestsOpenPage(props) {
               </Link>
             </div>
             <div className='ml-auto'>
-              <Link className='btn btn-success' to={{ pathname: '/maintenance_requests/filter' }}>
+              <Link className='btn btn-success' to={{ pathname: `/maintenance_requests/${'pending'}/filter` }}>
                 Filter
               </Link>
             </div>
@@ -64,26 +59,7 @@ function MaintenanceRequestsOpenPage(props) {
                 title='Open Ticket'
                 tickets={maintenanceRequests}
                 loading={allLoading}
-                actions={[
-                  {
-                    icon: 'edit',
-                    tooltip: 'edit ticket',
-                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`))
-                  },
-                  {
-                    icon: 'description',
-                    tooltip: 'view ticket',
-                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
-                  },
-                  {
-                    icon: 'delete',
-                    tooltip: 'close ticket',
-                    onClick: (event, rowData) => {
-                      if (window.confirm('Are you sure you want to close this ticket?'))
-                        closeTicket(rowData)
-                    }
-                  },
-                ]} />
+                status='pending' />
            }
           </div>
         </div>

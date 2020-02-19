@@ -1,10 +1,11 @@
-// https://material-table.com/#/
-
 import React from 'react'
 import MaterialTable from 'material-table'
 import styled from 'styled-components'
 import moment from 'moment'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
+import { edit } from './../../api/maintenanceRequests'
 import { MAINTENANCE_REQUEST_CATEGORY_MAP, COLOR_SCHEME } from './../../constants'
 
 const Style = styled.div`
@@ -17,7 +18,7 @@ const Style = styled.div`
 `
 
 function TicketTable(props) {
-  const { title, tickets, loading, actions } = props
+  const { title, tickets, loading, status, currentUserID, edit } = props
 
   const tableData = []
 
@@ -42,6 +43,58 @@ function TicketTable(props) {
     { field: 'reporterName', title: 'Submitted By' },
   ]
 
+  const actionsPending = [
+    {
+      icon: 'edit',
+      tooltip: 'edit ticket',
+      onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`))
+    },
+    {
+      icon: 'description',
+      tooltip: 'view ticket',
+      onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
+    },
+    {
+      icon: 'delete',
+      tooltip: 'close ticket',
+      onClick: (event, rowData) => {
+        if (window.confirm('Are you sure you want to close this ticket?'))
+          closeTicket(rowData)
+      }
+    },
+  ]
+
+  const actionsClosed = [
+    {
+      icon: 'edit',
+      tooltip: 'edit ticket',
+      onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`))
+    },
+    {
+      icon: 'description',
+      tooltip: 'view ticket',
+      onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
+    },
+    {
+      icon: 'add_box',
+      tooltip: 'open ticket',
+      onClick: (event, rowData) => {
+        if (window.confirm('Are you sure you want to reopen this ticket?'))
+          openTicket(rowData)
+      },
+    },
+  ]
+
+  const closeTicket = (rowData) => {
+    const data = { id: rowData.id, status: 'closed' }
+    edit(currentUserID, data)
+  }
+
+  const openTicket = (rowData) => {
+    const data = { id: rowData.id, status: 'pending' }
+    edit(currentUserID, data)
+  }
+
   return (
     <Style>
       <MaterialTable
@@ -56,10 +109,17 @@ function TicketTable(props) {
             fontSize: '1.2rem'
           }
         }}
-        actions={actions} />
+        actions={status==='pending' ? actionsPending : actionsClosed} />
     </Style>
     
   );
 }
 
-export default TicketTable
+const mapStateToProps = state => ({
+  currentUserID: state.auth.getIn(['currentUserID']),
+})
+const mapDispatchToProps = dispatch => bindActionCreators({
+  edit
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(TicketTable)

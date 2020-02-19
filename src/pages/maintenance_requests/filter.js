@@ -19,7 +19,6 @@ function MaintenanceRequestFilterPage(props) {
   const { 
     allProperties, 
     allMaintenanceRequests, 
-    edit, 
     currentUserID, 
     loading, 
     maintenanceRequests, 
@@ -33,6 +32,11 @@ function MaintenanceRequestFilterPage(props) {
   const filterSubmit = (values) => {
 
     let queryParams = {}
+
+    Object.assign(queryParams, { eager: 'Property, Room, Reporter' })
+
+    // here props.match.params = { status: 'pending' or 'closed' }
+    Object.assign(queryParams, props.match.params)
 
     if(values.hasOwnProperty('date') && values.date.hasOwnProperty('check') && values.date.check) {
       let date
@@ -59,11 +63,6 @@ function MaintenanceRequestFilterPage(props) {
     allMaintenanceRequests(currentUserID, queryParams)
   }
 
-  const closeTicket = (rowData) => {
-    const data = { id: rowData.id, status: 'closed' }
-    edit(currentUserID, data)
-  }
-
   return(
       <Style>
         <FormStyledComponent>
@@ -81,26 +80,7 @@ function MaintenanceRequestFilterPage(props) {
                 title='Open Ticket'
                 tickets={maintenanceRequests}
                 loading={loading}
-                actions={[
-                  {
-                    icon: 'edit',
-                    tooltip: 'edit ticket',
-                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`))
-                  },
-                  {
-                    icon: 'description',
-                    tooltip: 'view ticket',
-                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
-                  },
-                  {
-                    icon: 'delete',
-                    tooltip: 'close ticket',
-                    onClick: (event, rowData) => {
-                      if (window.confirm('Are you sure you want to close this ticket?'))
-                        closeTicket(rowData)
-                    }
-                  },
-                ]} />
+                pending={true} />
            }
           </div>
         </div>
@@ -117,7 +97,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   allProperties,
   allMaintenanceRequests,
-  edit
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestFilterPage)

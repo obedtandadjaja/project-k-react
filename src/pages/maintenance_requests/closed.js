@@ -29,16 +29,11 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsClosedPage(props) {
-  const { currentUserID, maintenanceRequests, editLoading, allLoading, all, edit } = props
+  const { currentUserID, maintenanceRequests, editLoading, allLoading, all } = props
 
   useEffect(() => {
     all(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
   }, [currentUserID, all, editLoading])
-
-  const openTicket = (rowData) => {
-    const data = { id: rowData.id, status: 'pending' }
-    edit(currentUserID, data)
-  }
 
   return(
     <Style>
@@ -46,7 +41,7 @@ function MaintenanceRequestsClosedPage(props) {
         <div className='container'>
           <div className='row'>
             <div className='ml-auto'>
-              <Link className='btn btn-success' to={{ pathname: '/maintenance_requests/filter' }}>
+              <Link className='btn btn-success' to={{ pathname: `/maintenance_requests/${'closed'}/filter` }}>
                 Filter
               </Link>
             </div>
@@ -58,26 +53,7 @@ function MaintenanceRequestsClosedPage(props) {
                 title='Closed Ticket'
                 tickets={maintenanceRequests}
                 loading={allLoading}
-                actions={[
-                  {
-                    icon: 'edit',
-                    tooltip: 'edit ticket',
-                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`)),
-                  },
-                  {
-                    icon: 'description',
-                    tooltip: 'view ticket',
-                    onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
-                  },
-                  {
-                    icon: 'add_box',
-                    tooltip: 'open ticket',
-                    onClick: (event, rowData) => {
-                      if (window.confirm('Are you sure you want to reopen this ticket?'))
-                        openTicket(rowData)
-                    },
-                  },
-                ]} />
+                status='closed' />
             }
           </div>
         </div>
@@ -93,8 +69,7 @@ const mapStateToProps = state => ({
   allLoading: state.maintenance_request.getIn(['allLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  all,
-  edit,
+  all
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsClosedPage)

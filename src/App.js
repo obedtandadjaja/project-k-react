@@ -61,7 +61,7 @@ function App(props) {
                 <Route exact path='/maintenance_requests/open' component={MaintenanceRequestsOpenPage} />
                 <Route exact path='/maintenance_requests/closed' component={MaintenanceRequestsClosedPage} />
                 <Route exact path='/maintenance_requests/create' component={MaintenanceRequestsCreatePage} />
-                <Route exact path='/maintenance_requests/filter' component={MaintenanceRequestFilterPage} />
+                <Route exact path='/maintenance_requests/:status/filter' component={MaintenanceRequestFilterPage} />
                 <Route exact path='/maintenance_requests/:maintenanceRequestID/edit' component={MaintenanceRequestsEditPage} />
                 <Route exact path='/maintenance_requests/:maintenanceRequestID/details' component={MaintenanceRequestsDetailsPage} />
                 <Route component={MissingPage} />
