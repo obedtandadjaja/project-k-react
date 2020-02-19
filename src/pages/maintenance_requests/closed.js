@@ -25,8 +25,6 @@ const Style = styled.div`
     .row {
       margin-left: 0.1em;
       margin-right: 0.1em;
-      margin-bottom: 1em;
-    }
   }
 `
 

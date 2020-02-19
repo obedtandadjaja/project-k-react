@@ -23,11 +23,8 @@ const Style = styled.div`
   
   @media ${DEVICE_SIZE.laptop} {
     .row {
-      margin: 0.1em;
-    }
-    
-    .row:last-child {
-      margin-bottom: 1em;
+      margin-left: 0.1em;
+      margin-right: 0.1em;
     }
   }
 `

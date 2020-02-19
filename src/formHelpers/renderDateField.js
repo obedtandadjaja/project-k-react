@@ -1,29 +1,23 @@
-// https://material-ui-pickers.dev/ , https://stackoverflow.com/questions/42422269/datepicker-in-redux-form
-
 import React from 'react'
 import moment from 'moment'
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material/pickers'
+import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 
 const renderDateField = ({
-  input,
+  input: { value, onChange },
   label,
-  format,
-  defaultEmpty,
-  meta: { touched, error, warning }
 }) => (
-  <div className='formFieldWrapper'>
-    <MuiPickersUtilsProvider utils={moment}>
+  <div className='formFieldWrapper' id='date-picker'>
+    <MuiPickersUtilsProvider utils={MomentUtils}>
       <KeyboardDatePicker 
-        {...input}
         disableToolbar
-        variant='inline'
-        format={format}
-        margin='normal'
+        format='YYYY-MM-DD'
         label={label}
-        value={input.value ? moment(input.value) : null}
+        value={value ? moment(value) : moment()}
+        onChange={onChange}
         KeyboardButtonProps={{
         'aria-label': 'change date',
-      }} />
+        }} />
     </MuiPickersUtilsProvider>
   </div>
 )

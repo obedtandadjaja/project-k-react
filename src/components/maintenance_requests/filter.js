@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import styled from 'styled-components'
 
-import renderDateField from './../../formHelpers/renderField'
+import renderDateField from './../../formHelpers/renderDateField'
 import renderSelectField from './../../formHelpers/renderSelectField'
 import { DEVICE_SIZE, MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
 
@@ -27,6 +27,23 @@ const Style = styled.div`
 
   .formFieldWrapper select {
     width: 200px;
+  }
+
+  #dateRowInput .formFieldWrapper select {
+    margin-top: 16px;
+  }
+
+  #dateRowInput .formFieldWrapper input {
+    border: none;
+    border-radius: none;
+  }
+
+  #dateRowInput #date-picker {
+    width: 200px;
+  }
+
+  #dateRowInput .checkBox {
+    margin-top: 16px;
   }
 
   @media ${DEVICE_SIZE.mobileL} {
@@ -73,7 +90,7 @@ function MaintenanceRequestFilterForm(props) {
           <div className='blockBody'>
 
             <label>Date Opened:</label>
-            <div className='rowInput'>
+            <div className='rowInput' id='dateRowInput'>
               <Field
                 name='date.params'
                 component={renderSelectField}
@@ -84,10 +101,8 @@ function MaintenanceRequestFilterForm(props) {
                 ]} />
               <Field
                 name='date.createdAt'
-                label='Date'
-                format='yyyy/MM/dd'
-                component={renderDateField}
-                defaultEmpty />
+                label='YYYY-MM-DD'
+                component={renderDateField} />
               <Field
                 name='date.check'
                 component='input'
