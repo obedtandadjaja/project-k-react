@@ -32,7 +32,7 @@ function MaintenanceForm(props) {
     initialValues, 
   } = props
 
-  const [rooms, setRooms] = useState()
+  const [rooms, setRooms] = useState([])
 
   useEffect(() => {
     if (selectedPropertyValue) {
@@ -62,8 +62,7 @@ function MaintenanceForm(props) {
                     readonly={readonly}
                     format={(value) => {
                       return moment(value).format('YYYY MMMM Do [, ] dddd')
-                    }}
-                  />
+                    }} />
                 }
 
                 <Field
@@ -75,34 +74,28 @@ function MaintenanceForm(props) {
                   type='text'
                   defaultEmpty />
 
-                { 
-                  properties &&
-                  <Field
-                    name='propertyID'
-                    label='Property'
-                    component={renderSelectField}
-                    validate={[required]}
-                    readonly={readonly}
-                    defaultEmpty
-                    options={properties.map(property => 
-                      [property.id, property.name]
-                    )} />
-                }
+                <Field
+                  name='propertyID'
+                  label='Property'
+                  component={renderSelectField}
+                  validate={[required]}
+                  readonly={readonly}
+                  defaultEmpty
+                  options={properties.map(property => 
+                    [property.id, property.name]
+                  )} />
 
-                {
-                  selectedPropertyValue && rooms &&
-                  <Field
-                    name='roomID'
-                    label='Room'
-                    component={renderSelectField}
-                    validate={[required]}
-                    readonly={readonly}
-                    defaultEmpty
-                    options={rooms.map(room => 
-                      [room.id, room.name]
-                    )} />
-                }
-
+                <Field
+                  name='roomID'
+                  label='Room'
+                  component={renderSelectField}
+                  validate={[required]}
+                  readonly={readonly}
+                  defaultEmpty
+                  options={rooms.map(room => 
+                    [room.id, room.name]
+                  )} />
+                
                 <Field
                   name='category'
                   label='Category'

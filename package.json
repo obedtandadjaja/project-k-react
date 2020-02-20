@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@date-io/moment": "1.x",
     "@material-ui/core": "^4.8.3",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/pickers": "^3.2.10",
     "axios": "^0.19.0",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
