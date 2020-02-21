@@ -2,26 +2,12 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { Button, Box } from '@material-ui/core'
 
 import Form from './../../components/properties/form'
-import { FormStyledComponent } from './../../styledComponents/form'
+import FormStyledComponent from './../../styledComponents/form'
+import PageContent from './../../styledComponents/pageContent'
 import { get } from './../../api/properties'
-
-const Style = styled.div`
-  display: flex;
-  flex-drection: column;
-
-  .propertyGetPage{
-    margin: auto;
-    width: 100%;
-  }
-
-  .blockCard{
-    margin: 2em;
-    min-height: 290px;
-  }
-`
 
 function PropertyGetPage(props) {
   const { loading, error, property, get, currentUserID } = props
@@ -32,29 +18,29 @@ function PropertyGetPage(props) {
   }, [get, propertyID, currentUserID])
 
   return (
-    <Style>
-      <div className='propertyGetPage'>
-        <div className='mr-auto'>
-          <Link to={{ pathname: `/properties/${propertyID}/edit` }} >
-            <button>
-              Edit property
-            </button>
-          </Link>
-        </div>
-          {
-            !loading &&
-            property &&
-            <FormStyledComponent>
-              <Form
-                initialValues={property}
-                loading={loading}
-                error={error}
-                title='Property'
-                readonly />
-            </FormStyledComponent>
-          }
-      </div>
-    </Style>
+    <PageContent>
+      <Box mb={2}>
+        <Button 
+          variant='contained'
+          component={Link}
+          color='primary'
+          to={{ pathname: `/properties/${propertyID}/edit` }}>
+          Edit property
+        </Button>
+      </Box>
+      {
+        !loading &&
+        property &&
+        <FormStyledComponent>
+          <Form
+            initialValues={property}
+            loading={loading}
+            error={error}
+            title='Property'
+            readonly />
+        </FormStyledComponent>
+      }
+    </PageContent>
   )
 }
 

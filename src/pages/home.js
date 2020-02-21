@@ -1,11 +1,12 @@
 import React from 'react'
 
 import CardLarge from './../components/commons/cardLarge'
+import PageContent from './../styledComponents/pageContent'
 
 function HomePage() {
 
   return (
-    <div className='home container' style={{ margin: 'auto' }}>
+    <PageContent>
       <div className='row'>
         <div className='col'>
           <CardLarge
@@ -22,7 +23,7 @@ function HomePage() {
             clickUrl='/maintenance_requests/list' />
         </div>
       </div>
-    </div>
+    </PageContent>
   )
   
 }

@@ -6,100 +6,63 @@ import { DEVICE_SIZE } from './../constants'
  *  blockCard
  *    blockHeader
  *    blockBody
- *  button
  */
-export const FormStyledComponent = styled.div`
-  display: contents;
+const FormStyledComponent = styled.div`
   align-items: center;
 
-  form{
-    width: 500px;
-    margin: auto;
-  }
-
-  .blockCard{
+  .blockCard {
     display: block;
-    background: #FFFFFF;
+    background-color: ${(props) => props.theme.palette.background.paper};
     width: 400px;
-    margin-top: 20px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: ${(props) => props.theme.space*2}px;
+  }
+
+  .blockCard:first-child {
+    margin-left: 0;
   }
 
   .blockHeader {
-    background-color: #f6f7f9;
+    background-color: ${(props) => props.theme.palette.background.paper};
     border-radius: 10px 10px 0 0;
     padding: 14px 20px;
     transition: opacity .2s ease-out;
     font-weight: 700;
     font-size: 1.8em;
+    color: ${(props) => props.theme.palette.text.primary}
   }
 
-  .formFieldWrapper input{
-    width: 100%;
-  }
-
-  .formFieldWrapper select{
-    width: 100%;
-  }
-
-  .blockBody{
+  .blockBody {
     min-height: 50px;
     border-radius: 0 0 10px 10px;
-    padding: 14px 20px;
+    padding: 1em 2em;
   }
 
-  .btn{
-    margin-top: 28px;
-    margin-bottom: 2em;
-    width: 200px;
-    height: 60px;
-    border-radius: 30px;
-    background: #18A0FB;
-    border: none;
-    font-size: 1.5rem;
-    color: #FFFFFF;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    cursor: pointer;
-    :hover{
-      background-color: #f39c12;
-    }
+  .formFieldWrapper input {
+    width: 100%;
+  }
+
+  .formFieldWrapper select {
+    width: 100%;
   }
 
   @media ${DEVICE_SIZE.mobileL} {
-    form{
+    form {
       width: 100%;
     }
 
-    .row{
-      margin: 0;
+    .row {
+      margin-bottom: ${(props) => props.theme.space*2}px;
     }
 
-    .blockCard{
+    .blockCard {
       display: block;
-      background: #FFFFFF;
-      width: 300px;
-      margin: 2em;
-      border-style: solid;
-      border-width: thin;
-      border-radius: 5px;
-      box-shadow: none;
-    }
-
-    .btn{
-      margin-top: 0;
-      width: 200px;
-      height: 50px;
-      border-radius: 50px;
-      background: #18A0FB;
-      font-size: 1.3rem;
-      color: #FFFFFF;
-      box-shadow: none;
-      cursor: pointer;
-      :hover{
-        background-color: #f39c12;
-      }
+      background-color: ${(props) => props.theme.palette.background.paper};
+      width: 100%;
+      margin: 1em 0;
     }
   }
-
 `
+
+export default FormStyledComponent

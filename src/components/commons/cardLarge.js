@@ -20,7 +20,6 @@ const StyleWrapper = styled.div`
 
   .dashCardMenu .header h1{
     margin-top: 40%;
-    font-family: "Open Sans";
     font-weight: bold;
     font-size: 40px;
     color: black;
@@ -28,7 +27,6 @@ const StyleWrapper = styled.div`
 
   .dashCardMenu .body p{
     margin-top: 3em;
-    font-family: Montserrat;
     font-size: 30px;
     font-weight: 700;
     color: black;
