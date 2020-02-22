@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import MaterialTable from 'material-table'
 import styled from 'styled-components'
 import moment from 'moment'
@@ -122,4 +123,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   edit
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(TicketTable)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TicketTable))
