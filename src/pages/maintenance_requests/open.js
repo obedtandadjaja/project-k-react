@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import TicketTable from '../../components/maintenance_requests/table'
+import MaintenanceRequestsCreateModal from './create'
 import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
@@ -30,11 +31,11 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsOpenPage(props) {
-  const { currentUserID, maintenanceRequests, editLoading, allLoading, all } = props
+  const { currentUserID, maintenanceRequests, createLoading, editLoading, allLoading, all } = props
 
   useEffect(() => {
     all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending' })
-  }, [currentUserID, all, editLoading])
+  }, [currentUserID, all, editLoading, createLoading])
 
   return(
     <Style>
@@ -42,9 +43,7 @@ function MaintenanceRequestsOpenPage(props) {
         <div className='container'>
           <div className='row'>
             <div className='mr-auto'>
-              <Link className='btn btn-primary' to={{ pathname: '/maintenance_requests/create' }}>
-                Add Ticket
-              </Link>
+              <MaintenanceRequestsCreateModal />
             </div>
             <div className='ml-auto'>
               <Link className='btn btn-success' to={{ pathname: `/maintenance_requests/${'pending'}/filter` }}>
@@ -71,6 +70,7 @@ function MaintenanceRequestsOpenPage(props) {
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  createLoading: state.maintenance_request.getIn(['createLoading']),
   editLoading: state.maintenance_request.getIn(['editLoading']),
   allLoading: state.maintenance_request.getIn(['allLoading'])
 })

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Button from '@material-ui/core/Button'
 import styled from 'styled-components'
 import moment from 'moment'
 
@@ -12,7 +13,7 @@ import { all } from './../../api/properties'
 import { MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
 
 const Style = styled.div`
-  .row{
+  .row {
     display: block;
   }
 `
@@ -23,6 +24,7 @@ function MaintenanceForm(props) {
     currentUserID, 
     selectedPropertyValue, 
     handleSubmit, 
+    closeModal, 
     readonly, 
     submitError, 
     loading, 
@@ -116,6 +118,16 @@ function MaintenanceForm(props) {
                   type='text'
                   defaultEmpty />
 
+                <div className='btnContainer'>
+                  {
+                    !readonly &&
+                    <Button variant='contained' color='primary' type='submit' disabled={loading}>
+                      {buttonText}
+                    </Button>
+                  }
+                  <Button variant='outlined' color='secondary' onClick={closeModal}>CLOSE</Button>
+                </div>
+  
                 <div className='errorResponse'>
                   {submitError && JSON.stringify(submitError)}
                 </div>
@@ -123,12 +135,6 @@ function MaintenanceForm(props) {
             </div>
           </div>
         </div>
-        {
-          !readonly &&
-          <button className='btn' type='submit' disabled={loading}>
-            {buttonText}
-          </button>
-        }
       </form>
     </Style>
   )

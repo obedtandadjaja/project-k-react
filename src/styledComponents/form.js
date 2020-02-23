@@ -9,15 +9,15 @@ import { DEVICE_SIZE } from './../constants'
  *  button
  */
 export const FormStyledComponent = styled.div`
-  display: contents;
+  display: flex;
   align-items: center;
+  justify-content: center;
 
-  form{
-    width: 500px;
+  form {
     margin: auto;
   }
 
-  .blockCard{
+  .blockCard {
     display: block;
     background: #FFFFFF;
     width: 400px;
@@ -35,21 +35,30 @@ export const FormStyledComponent = styled.div`
     font-size: 1.8em;
   }
 
-  .formFieldWrapper input{
+  .formFieldWrapper input {
     width: 100%;
   }
 
-  .formFieldWrapper select{
+  .formFieldWrapper select {
     width: 100%;
   }
 
-  .blockBody{
+  .blockBody {
     min-height: 50px;
     border-radius: 0 0 10px 10px;
     padding: 14px 20px;
   }
 
-  .btn{
+  .btnContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btnContainer button {
+    margin: 1em;
+  }
+
+  .btn {
     margin-top: 28px;
     margin-bottom: 2em;
     width: 200px;
@@ -67,15 +76,15 @@ export const FormStyledComponent = styled.div`
   }
 
   @media ${DEVICE_SIZE.mobileL} {
-    form{
+    form {
       width: 100%;
     }
 
-    .row{
+    .row {
       margin: 0;
     }
 
-    .blockCard{
+    .blockCard {
       display: block;
       background: #FFFFFF;
       width: 300px;
@@ -86,7 +95,7 @@ export const FormStyledComponent = styled.div`
       box-shadow: none;
     }
 
-    .btn{
+    .btn {
       margin-top: 0;
       width: 200px;
       height: 50px;
