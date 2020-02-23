@@ -1,48 +1,56 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import styled from 'styled-components'
+import { makeStyles } from '@material-ui/core/styles'
+import Modal from '@material-ui/core/Modal'
+import Backdrop from '@material-ui/core/Backdrop'
+import Fade from '@material-ui/core/Fade'
 
 import { all as allProperties } from './../../api/properties'
-import { all as allMaintenanceRequests, edit } from './../../api/maintenanceRequests'
+import { all as allMaintenanceRequests } from './../../api/maintenanceRequests'
 import Form from './../../components/maintenance_requests/filter'
 import { FormStyledComponent } from './../../styledComponents/form'
-import TicketTable from '../../components/maintenance_requests/table'
 
-const Style = styled.div`
-  .container {
-    margin-bottom: 1em;
+// this is a quick fix, since haven't find a way to directly change the 
+// component css by using styled-component
+const useStyles = makeStyles(theme => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
-`
+}))
 
-function MaintenanceRequestFilterPage(props) {
+function MaintenanceRequestFilterModal(props) {
   const { 
+    status, 
     allProperties, 
     allMaintenanceRequests, 
     currentUserID, 
     allLoading, 
-    editLoading,
-    maintenanceRequests, 
-    properties, 
+    properties 
   } = props
+  
+  const [open, setOpen] = useState(false)
 
-  const [submitted, setSubmitted] = useState(false)
-  const [params, setParams] = useState({})
+  const classes = useStyles()
 
   useEffect(() => {
     allProperties(currentUserID, { eager: 'Rooms' })
   }, [allProperties, currentUserID])
 
-  useEffect(() => {
-    if(submitted)
-      allMaintenanceRequests(currentUserID, params)
-  }, [allMaintenanceRequests, currentUserID, editLoading])
+  const openModal = () => {
+    setOpen(true)
+  }
+
+  const closeModal = () => {
+    setOpen(false)
+  }
 
   const filterSubmit = (values) => {
-
     let queryParams = {
       eager: 'Property, Room, Reporter',
-      status: props.match.params.status
+      status: status
     }
 
     if(values.dateOpened && values.dateOpened.check) {
@@ -65,48 +73,50 @@ function MaintenanceRequestFilterPage(props) {
       queryParams.category = values.category.name
     }
     
-    setParams(queryParams)
-    setSubmitted(true)
+    closeModal()
     allMaintenanceRequests(currentUserID, queryParams)
   }
 
   return(
-      <Style>
-        <FormStyledComponent>
-          <Form 
-            properties={properties}
-            onSubmit={filterSubmit}
-            loading={allLoading}
-            />
-        </FormStyledComponent>
-        <div className='container'>
-          <div className='row'>
-            {
-              maintenanceRequests &&
-              <TicketTable
-                title={
-                  props.match.params.status === 'pending' ? 'Open Ticket' : 'Closed Ticket'
-                }
-                tickets={maintenanceRequests}
+    <div className='maintenanceRequestsFilterModal'>
+      <button className='btn btn-success' onClick={openModal}>
+        Filter
+      </button>
+      <Modal
+        className={classes.modal}
+        open={open}
+        onClose={closeModal}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }} >
+        <Fade in={open}>
+          { 
+            properties && 
+            <FormStyledComponent>
+              <Form
+                properties={properties}
+                onSubmit={filterSubmit}
                 loading={allLoading}
-                status={props.match.params.status} />
-            }
-          </div>
-        </div>
-      </Style>
+                closeModal={closeModal}
+              />
+            </FormStyledComponent>
+          }
+        </Fade>
+      </Modal>
+    </div>
   )
 }
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   properties: state.property.getIn(['properties']),
-  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
   allLoading: state.maintenance_request.getIn(['allLoading']),
-  editLoading: state.maintenance_request.getIn(['editLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   allProperties,
   allMaintenanceRequests,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestFilterPage)
+export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestFilterModal)

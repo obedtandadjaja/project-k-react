@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 
 import TicketTable from '../../components/maintenance_requests/table'
 import MaintenanceRequestsCreateModal from './create'
+import MaintenanceRequestsFilterModal from './filter'
 import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
@@ -46,9 +47,7 @@ function MaintenanceRequestsOpenPage(props) {
               <MaintenanceRequestsCreateModal />
             </div>
             <div className='ml-auto'>
-              <Link className='btn btn-success' to={{ pathname: `/maintenance_requests/${'pending'}/filter` }}>
-                Filter
-              </Link>
+              <MaintenanceRequestsFilterModal status='pending' />
             </div>
           </div>
           <div className='row'>

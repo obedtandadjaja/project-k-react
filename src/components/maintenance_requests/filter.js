@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
+import Button from '@material-ui/core/Button'
 import styled from 'styled-components'
 
 import renderDateField from './../../formHelpers/renderDateField'
@@ -58,6 +59,7 @@ function MaintenanceRequestFilterForm(props) {
     properties,
     selectedPropertyValue, 
     handleSubmit, 
+    closeModal, 
     loading 
   } = props
 
@@ -170,12 +172,17 @@ function MaintenanceRequestFilterForm(props) {
                 type='checkbox'
                 className='checkBox' />
             </div>
-
+            
+            <div className='btnContainer'>
+              <Button variant='contained' color='primary' type='submit' disabled={loading}>
+                Filter
+              </Button>
+              <Button variant='outlined' color='secondary' onClick={closeModal}>
+                CLOSE
+              </Button>
+            </div>
           </div>
         </div>
-        <button className='btn' type='submit' disabled={loading}>
-          Filter
-        </button>
       </form>
     </Style>
   )

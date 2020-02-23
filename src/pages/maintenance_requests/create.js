@@ -22,9 +22,10 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function MaintenanceRequestsCreateModal(props) {
-  const classes = useStyles()
   const { loading, error, currentUserID, properties, all, create } = props
   const [open, setOpen] = useState(false)
+
+  const classes = useStyles()
 
   useEffect(() => {
     all(currentUserID, { eager: 'Rooms' })
