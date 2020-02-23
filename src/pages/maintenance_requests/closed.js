@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
+import MaintenanceRequestsFilterModal from './filter'
 import TicketTable from './../../components/maintenance_requests/table'
 import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
@@ -41,9 +42,7 @@ function MaintenanceRequestsClosedPage(props) {
         <div className='container'>
           <div className='row'>
             <div className='ml-auto'>
-              <Link className='btn btn-success' to={{ pathname: `/maintenance_requests/${'closed'}/filter` }}>
-                Filter
-              </Link>
+              <MaintenanceRequestsFilterModal status='closed' />
             </div>
           </div>
           <div className='row'>

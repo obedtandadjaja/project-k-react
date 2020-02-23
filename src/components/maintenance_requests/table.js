@@ -37,9 +37,9 @@ function TicketTable(props) {
   const columns = [
     { field: 'id', title: 'Ticket Id' },
     { field: 'createdAt', title: 'Date Opened' },
-    { field: 'location', title: 'Location(s)' },
-    { field: 'category', title: 'Category' },
     { field: 'title', title: 'Title' },
+    { field: 'category', title: 'Category' },
+    { field: 'location', title: 'Location(s)' },
     { field: 'reporterName', title: 'Submitted By' },
   ]
 
@@ -55,7 +55,7 @@ function TicketTable(props) {
       onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
     },
     {
-      icon: 'delete',
+      icon: 'close',
       tooltip: 'close ticket',
       onClick: (event, rowData) => {
         if (window.confirm('Are you sure you want to close this ticket?'))
@@ -107,7 +107,8 @@ function TicketTable(props) {
             backgroundColor: `${COLOR_SCHEME.gray}`,
             color: `${COLOR_SCHEME.white}`,
             fontSize: '1.2rem'
-          }
+          },
+          actionsColumnIndex: -1
         }}
         actions={status === 'pending' ? actionsPending : actionsClosed} />
     </Style>
