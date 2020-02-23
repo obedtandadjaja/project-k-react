@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import MaterialTable from 'material-table'
 import styled from 'styled-components'
 import moment from 'moment'
@@ -19,6 +20,7 @@ const Style = styled.div`
 
 function TicketTable(props) {
   const { title, tickets, loading, status, currentUserID, edit } = props
+  const history = useHistory()
 
   const tableData = []
 
@@ -47,12 +49,12 @@ function TicketTable(props) {
     {
       icon: 'edit',
       tooltip: 'edit ticket',
-      onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/edit`))
+      onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/edit`))
     },
     {
       icon: 'description',
       tooltip: 'view ticket',
-      onClick: (event, rowData) => (props.history.push(`/maintenance_requests/${rowData.id}/details`))
+      onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/details`))
     },
     {
       icon: 'delete',
