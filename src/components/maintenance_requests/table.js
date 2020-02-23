@@ -109,7 +109,7 @@ function TicketTable(props) {
             fontSize: '1.2rem'
           }
         }}
-        actions={status==='pending' ? actionsPending : actionsClosed} />
+        actions={status === 'pending' ? actionsPending : actionsClosed} />
     </Style>
     
   );

@@ -65,7 +65,7 @@ function MaintenanceRequestsCreateModal(props) {
               <Form
                 properties={properties}
                 onSubmit={createSubmit}
-                closeModal={closeModal}
+                onCancel={closeModal}
                 loading={loading}
                 submitError={error}
                 title='Create Maintenance Request'

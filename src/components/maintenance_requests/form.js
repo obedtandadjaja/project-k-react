@@ -24,7 +24,7 @@ function MaintenanceForm(props) {
     currentUserID, 
     selectedPropertyValue, 
     handleSubmit, 
-    closeModal, 
+    onCancel, 
     readonly, 
     submitError, 
     loading, 
@@ -125,7 +125,7 @@ function MaintenanceForm(props) {
                       {buttonText}
                     </Button>
                   }
-                  <Button variant='outlined' color='secondary' onClick={closeModal}>CLOSE</Button>
+                  <Button variant='outlined' color='secondary' onClick={onCancel}>CLOSE</Button>
                 </div>
   
                 <div className='errorResponse'>
