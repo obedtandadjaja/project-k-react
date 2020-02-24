@@ -10,11 +10,11 @@ export const CardStyledComponent = styled.div`
   align-items: center;
   justify-content: center;
 
-  :hover{
+  :hover {
     cursor: pointer;
   }
 
-  p{
+  p {
     margin: 0;
   }
 

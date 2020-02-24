@@ -1,24 +1,24 @@
 // TODO(@obedtandadjaja): make the use of api all() scalable
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
-import Doughnut from './../../components/maintenance_requests/doughnut'
+import Pie from './../../components/maintenance_requests/pie'
 import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE, COLOR_SCHEME } from './../../constants'
 
 const Style = styled.div`
-  .container{
+  .container {
     margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
     max-width: 960px;
   }
 
-  .box{
+  .box {
     width: 300px;
     height: 550px;
     margin: 1.5rem;
@@ -26,8 +26,7 @@ const Style = styled.div`
     margin: auto;
   }
   
-  .customBtn{
-    width: 225px;
+  .customBtn {
     height: 75px;
     color: ${COLOR_SCHEME.white};
     background: ${COLOR_SCHEME.blue};
@@ -38,13 +37,13 @@ const Style = styled.div`
     box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
   }
 
-  .customBtn:hover{
+  .customBtn:hover {
     background: ${COLOR_SCHEME.lightBlue};
     color: ${COLOR_SCHEME.blue};
   }
 
   @media ${DEVICE_SIZE.mobileL} {
-    .customBtn{
+    .customBtn {
       box-shadow: none;
     }
   }
@@ -52,12 +51,32 @@ const Style = styled.div`
 
 function MaintenanceRequestsListPage(props) {
   const { currentUserID, maintenanceRequests, loading, all } = props
+  const [trigger, setTrigger] = useState(false)
+  const [pending, setPending] = useState(null)
+  const [closed, setClosed] = useState(null)
 
-  // fetch all maintenance_requests and pass it to children donut,
-  // then let donut's props.filter calculates on status(filter='status')
+  // fetch maintenance_requests based on status and pass it to state => pending or closed
   useEffect(() => {
-    all(currentUserID, { eager: 'Property, Room, Reporter', per_page: 100 })
+    all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending', per_page: 100 })
   }, [all, currentUserID])
+
+  useEffect(() => {
+    if (trigger) {
+      all(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed', per_page: 100 })
+      console.log('pass')
+    }
+  }, [all, currentUserID, trigger])
+
+  useEffect(() => {
+    if (!loading && !trigger && maintenanceRequests.length !== 0) {
+      setPending(maintenanceRequests)
+      setTrigger(true)
+    }
+
+    if (!loading && trigger) {
+      setClosed(maintenanceRequests)
+    }
+  }, [loading])
 
   return (
     <Style>
@@ -66,15 +85,14 @@ function MaintenanceRequestsListPage(props) {
           <div className='box'>
             {
               !loading &&
-              maintenanceRequests && 
+              pending &&
               <>
-                <Doughnut
-                  datasets={maintenanceRequests}
-                  filter='pending' />
+                <Pie
+                  datasets={pending} />
 
                 <Link to={{ pathname: '/maintenance_requests/open' }}>
                   <button type='button' className='customBtn'>
-                    OPEN TICKET
+                    OPEN TICKET : {pending.length}
                   </button>
                 </Link>
               </>
@@ -83,15 +101,14 @@ function MaintenanceRequestsListPage(props) {
           <div className='box'>
             {
               !loading &&
-              maintenanceRequests &&
+              closed &&
               <>
-                <Doughnut
-                  datasets={maintenanceRequests}
-                  filter='closed' />
+                <Pie
+                  datasets={closed} />
                   
                 <Link to={{ pathname: '/maintenance_requests/closed' }}>
                   <button type='button' className='customBtn'>
-                    CLOSED TICKET
+                    CLOSED TICKET : {closed.length}
                   </button>
                 </Link>
               </>

@@ -4,9 +4,9 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import Button from '@material-ui/core/Button'
 import styled from 'styled-components'
 
-import renderDateField from './../../formHelpers/renderDateField'
-import renderSelectField from './../../formHelpers/renderSelectField'
-import { DEVICE_SIZE, MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../constants'
+import renderDateField from './../../../formHelpers/renderDateField'
+import renderSelectField from './../../../formHelpers/renderSelectField'
+import { DEVICE_SIZE, MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../../constants'
 
 const Style = styled.div`
   .rowInput {
@@ -72,7 +72,7 @@ function MaintenanceRequestFilterForm(props) {
     } else {
       setRoomList([])
     }
-  }, [selectedPropertyValue])
+  }, [selectedPropertyValue, properties])
 
   return(
     <Style>

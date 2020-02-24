@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -35,6 +36,7 @@ function MaintenanceForm(props) {
   } = props
 
   const [rooms, setRooms] = useState([])
+  const history = useHistory()
 
   useEffect(() => {
     if (selectedPropertyValue) {
@@ -43,7 +45,11 @@ function MaintenanceForm(props) {
     }
 
     if (initialValues === null) { all(currentUserID, { eager: 'Rooms' }) }
-  }, [all, currentUserID, selectedPropertyValue, initialValues])
+  }, [all, currentUserID, properties, selectedPropertyValue, initialValues])
+
+  const goBack = () => {
+    history.goBack()
+  }
   
   return (
     <Style>
@@ -125,7 +131,14 @@ function MaintenanceForm(props) {
                       {buttonText}
                     </Button>
                   }
-                  <Button variant='outlined' color='secondary' onClick={onCancel}>CLOSE</Button>
+                  {
+                    onCancel &&
+                    <Button variant='outlined' color='secondary' onClick={onCancel}>CLOSE</Button>
+                  }
+                  {
+                    !onCancel &&
+                    <Button variant='outlined' color='secondary' onClick={goBack}>CLOSE</Button>
+                  }
                 </div>
   
                 <div className='errorResponse'>

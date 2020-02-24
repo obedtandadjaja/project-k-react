@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
-import MaintenanceRequestsFilterModal from './filter'
+import MaintenanceRequestsFilterModal from '../../components/maintenance_requests/modal/filter'
 import TicketTable from './../../components/maintenance_requests/table'
 import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
-  .col{
+  .col {
     padding: 0;
   }
   
@@ -26,6 +25,7 @@ const Style = styled.div`
     .row {
       margin-left: 0.1em;
       margin-right: 0.1em;
+    }
   }
 `
 

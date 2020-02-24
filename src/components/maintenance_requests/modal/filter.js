@@ -6,10 +6,10 @@ import Modal from '@material-ui/core/Modal'
 import Backdrop from '@material-ui/core/Backdrop'
 import Fade from '@material-ui/core/Fade'
 
-import { all as allProperties } from './../../api/properties'
-import { all as allMaintenanceRequests } from './../../api/maintenanceRequests'
-import Form from './../../components/maintenance_requests/filter'
-import { FormStyledComponent } from './../../styledComponents/form'
+import { all as allProperties } from './../../../api/properties'
+import { all as allMaintenanceRequests } from './../../../api/maintenanceRequests'
+import Form from './filterForm'
+import { FormStyledComponent } from './../../../styledComponents/form'
 
 // this is a quick fix, since haven't find a way to directly change the 
 // component css by using styled-component

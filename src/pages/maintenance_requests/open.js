@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import TicketTable from '../../components/maintenance_requests/table'
-import MaintenanceRequestsCreateModal from './create'
-import MaintenanceRequestsFilterModal from './filter'
+import MaintenanceRequestsCreateModal from '../../components/maintenance_requests/modal/create'
+import MaintenanceRequestsFilterModal from '../../components/maintenance_requests/modal/filter'
 import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
