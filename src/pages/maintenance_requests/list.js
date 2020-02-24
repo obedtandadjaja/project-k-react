@@ -52,31 +52,48 @@ const Style = styled.div`
 function MaintenanceRequestsListPage(props) {
   const { currentUserID, maintenanceRequests, loading, all } = props
   const [trigger, setTrigger] = useState(false)
+  const [fetch, setFetch] = useState(false)
+  const [updated, setUpdated] = useState(false)
   const [pending, setPending] = useState(null)
   const [closed, setClosed] = useState(null)
 
+  // (@kenaszogara): this is the only implementation I can think of...
+  // It let us use mainteannceRequests to hold both pending and closed data
+  // Updating the maintenanceRequests in the next page, wont affect doughnut on return
   // fetch maintenance_requests based on status and pass it to state => pending or closed
   useEffect(() => {
     all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending', per_page: 100 })
+    setFetch(true)
   }, [all, currentUserID])
 
+  // watch pending, if its filled, set trigger to true
   useEffect(() => {
-    if (trigger) {
+    if (pending) {
       all(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed', per_page: 100 })
-      console.log('pass')
-    }
-  }, [all, currentUserID, trigger])
-
-  useEffect(() => {
-    if (!loading && !trigger && maintenanceRequests.length !== 0) {
-      setPending(maintenanceRequests)
+      setFetch(true)
       setTrigger(true)
     }
+  }, [all, currentUserID, pending])
 
-    if (!loading && trigger) {
+  // watch maintenanceRequests: wether if the state is alredy updated
+  // then store the updated token
+  useEffect(() => {
+    if (!loading && !updated && fetch){
+      setUpdated(true)
+    }
+  }, [maintenanceRequests])
+
+  // once maintenanceRequests is updated
+  useEffect(() => {
+    if (updated && !trigger && !pending) {
+      setPending(maintenanceRequests)
+      setUpdated(false)
+    }
+
+    if (updated && trigger && !closed) {
       setClosed(maintenanceRequests)
     }
-  }, [loading])
+  }, [updated])
 
   return (
     <Style>

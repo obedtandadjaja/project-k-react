@@ -52,7 +52,7 @@ function TicketTable(props) {
       onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/edit`))
     },
     {
-      icon: 'description',
+      icon: 'visibility',
       tooltip: 'view ticket',
       onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/details`))
     },
@@ -73,12 +73,12 @@ function TicketTable(props) {
       onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/edit`))
     },
     {
-      icon: 'description',
+      icon: 'visibility',
       tooltip: 'view ticket',
       onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/details`))
     },
     {
-      icon: 'add_box',
+      icon: 'add',
       tooltip: 'open ticket',
       onClick: (event, rowData) => {
         if (window.confirm('Are you sure you want to reopen this ticket?'))
