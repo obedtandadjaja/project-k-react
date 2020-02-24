@@ -48,6 +48,11 @@ const FormStyledComponent = styled.div`
     width: 100%;
   }
 
+  .btnContainer {
+    display: flex;
+    justify-content: center;
+  }
+
   @media ${DEVICE_SIZE.mobileL} {
     form {
       width: 100%;

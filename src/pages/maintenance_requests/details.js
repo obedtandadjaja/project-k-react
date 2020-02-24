@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import Form from './../../components/maintenance_requests/form'
 import FormStyledComponent from './../../styledComponents/form'
+import PageContent from './../../styledComponents/pageContent'
 import { get } from './../../api/maintenanceRequests'
 import { all } from './../../api/properties'
 
@@ -17,20 +18,22 @@ function MaintenanceRequestsDetailsPage(props) {
   }, [currentUserID, maintenanceRequestID, get, all])
 
   return (
-    <div className='propertyDetailsPage'>
-      {
-        !getLoading &&
-        properties &&
-        <FormStyledComponent>
-          <Form
-            initialValues={maintenanceRequest}
-            properties={properties}
-            title='Maintenance Request'
-            buttonText='Edit'
-            readonly />
-        </FormStyledComponent>
-      }
-    </div>
+    <PageContent>
+      <div className='propertyDetailsPage'>
+        {
+          !getLoading &&
+          properties &&
+          <FormStyledComponent>
+            <Form
+              initialValues={maintenanceRequest}
+              properties={properties}
+              title='Maintenance Request'
+              buttonText='Edit'
+              readonly />
+          </FormStyledComponent>
+        }
+      </div>
+    </PageContent>
   )
 }
 

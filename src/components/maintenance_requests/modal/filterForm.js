@@ -11,6 +11,7 @@ import { DEVICE_SIZE, MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../../consta
 const Style = styled.div`
   .rowInput {
     display: flex;
+    margin-bottom: 2em;
   }
 
   .rowInput > * {
@@ -28,6 +29,10 @@ const Style = styled.div`
 
   .formFieldWrapper select {
     width: 200px;
+  }
+
+  .mr-auto {
+    margin-right: auto;
   }
 
   #dateRowInput .formFieldWrapper input {
@@ -174,7 +179,7 @@ function MaintenanceRequestFilterForm(props) {
             </div>
             
             <div className='btnContainer'>
-              <Button variant='contained' color='primary' type='submit' disabled={loading}>
+              <Button className='mr-auto' variant='contained' color='primary' type='submit' disabled={loading}>
                 Filter
               </Button>
               <Button variant='outlined' color='secondary' onClick={closeModal}>

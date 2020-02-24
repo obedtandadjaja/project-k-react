@@ -1,15 +1,23 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styled from 'styled-components'
 
-import TicketTable from '../../components/maintenance_requests/table'
-import MaintenanceRequestsCreateModal from '../../components/maintenance_requests/modal/create'
-import MaintenanceRequestsFilterModal from '../../components/maintenance_requests/modal/filter'
+import TicketTable from './../../components/maintenance_requests/table'
+import MaintenanceRequestsCreateModal from './../../components/maintenance_requests/modal/create'
+import MaintenanceRequestsFilterModal from './../../components/maintenance_requests/modal/filter'
+import ReturnButton from './../../components/return'
+import PageContent from './../../styledComponents/pageContent'
 import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
+  width: 100%;
+
+  .mr-auto {
+    margin-right: auto;
+  }
+
   .col {
     padding: 0;
   }
@@ -38,30 +46,31 @@ function MaintenanceRequestsOpenPage(props) {
   }, [currentUserID, all, editLoading, createLoading])
 
   return(
-    <Style>
-      <div className='openTicketPage'>
-        <div className='container'>
-          <div className='row'>
-            <div className='mr-auto'>
-              <MaintenanceRequestsCreateModal />
-            </div>
-            <div className='ml-auto'>
+    <PageContent>
+      <Style>
+        <div className='openTicketPage'>
+          <ReturnButton />
+          <div className='container'>
+            <div className='row'>
+              <div className='mr-auto'>
+                <MaintenanceRequestsCreateModal />
+              </div>
               <MaintenanceRequestsFilterModal status='pending' />
             </div>
-          </div>
-          <div className='row'>
-            {
-              maintenanceRequests &&
-              <TicketTable
-                title='Open Ticket'
-                tickets={maintenanceRequests}
-                loading={allLoading}
-                status='pending' />
-            }
+            <div className='row'>
+              {
+                maintenanceRequests &&
+                <TicketTable
+                  title='Open Ticket'
+                  tickets={maintenanceRequests}
+                  loading={allLoading}
+                  status='pending' />
+              }
+            </div>
           </div>
         </div>
-      </div>
-    </Style>
+      </Style>
+    </PageContent>
   )
 }
 

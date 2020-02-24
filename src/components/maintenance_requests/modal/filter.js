@@ -5,11 +5,13 @@ import { makeStyles } from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 import Backdrop from '@material-ui/core/Backdrop'
 import Fade from '@material-ui/core/Fade'
+import Button from '@material-ui/core/Button'
+import FilterListIcon from '@material-ui/icons/FilterList'
 
 import { all as allProperties } from './../../../api/properties'
 import { all as allMaintenanceRequests } from './../../../api/maintenanceRequests'
 import Form from './filterForm'
-import { FormStyledComponent } from './../../../styledComponents/form'
+import FormStyledComponent from './../../../styledComponents/form'
 
 // this is a quick fix, since haven't find a way to directly change the 
 // component css by using styled-component
@@ -79,9 +81,13 @@ function MaintenanceRequestFilterModal(props) {
 
   return(
     <div className='maintenanceRequestsFilterModal'>
-      <button className='btn btn-success' onClick={openModal}>
+      <Button 
+        variant='contained' 
+        color='secondary' 
+        onClick={openModal}
+        startIcon={<FilterListIcon />} >
         Filter
-      </button>
+      </Button>
       <Modal
         className={classes.modal}
         open={open}
@@ -99,8 +105,7 @@ function MaintenanceRequestFilterModal(props) {
                 properties={properties}
                 onSubmit={filterSubmit}
                 loading={allLoading}
-                closeModal={closeModal}
-              />
+                closeModal={closeModal} />
             </FormStyledComponent>
           }
         </Fade>

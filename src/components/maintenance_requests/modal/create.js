@@ -5,9 +5,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 import Backdrop from '@material-ui/core/Backdrop'
 import Fade from '@material-ui/core/Fade'
+import Button from '@material-ui/core/Button'
+import AddIcon from '@material-ui/icons/Add'
 
 import Form from './../form'
-import { FormStyledComponent } from './../../../styledComponents/form'
+import FormStyledComponent from './../../../styledComponents/form'
 import { create } from './../../../api/maintenanceRequests'
 import { all } from './../../../api/properties'
 
@@ -46,9 +48,13 @@ function MaintenanceRequestsCreateModal(props) {
 
   return (
     <div className='maintenanceRequestCreateModal'>
-      <button className='btn btn-primary' onClick={openModal}>
+      <Button 
+        variant='contained' 
+        color='primary' 
+        onClick={openModal}
+        startIcon={<AddIcon />} >
         Add Ticket
-      </button>
+      </Button>
       <Modal
         className={classes.modal}
         open={open}

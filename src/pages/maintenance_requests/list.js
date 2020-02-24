@@ -4,13 +4,18 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Button from '@material-ui/core/Button'
 import styled from 'styled-components'
 
+import ReturnButton from './../../components/return'
 import Pie from './../../components/maintenance_requests/pie'
+import PageContent from './../../styledComponents/pageContent'
 import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE, COLOR_SCHEME } from './../../constants'
 
 const Style = styled.div`
+  width: 100%;
+  
   .container {
     margin-top: 40px;
     margin-left: auto;
@@ -27,6 +32,7 @@ const Style = styled.div`
   }
   
   .customBtn {
+    padding: 1em;
     height: 75px;
     color: ${COLOR_SCHEME.white};
     background: ${COLOR_SCHEME.blue};
@@ -96,44 +102,47 @@ function MaintenanceRequestsListPage(props) {
   }, [updated])
 
   return (
-    <Style>
-      <div className='container'>
-        <div className='row'>
-          <div className='box'>
-            {
-              !loading &&
-              pending &&
-              <>
-                <Pie
-                  datasets={pending} />
+    <PageContent>
+      <Style>
+        <ReturnButton />
+        <div className='container'>
+          <div className='row'>
+            <div className='box'>
+              {
+                !loading &&
+                pending &&
+                <>
+                  <Pie
+                    datasets={pending} />
 
-                <Link to={{ pathname: '/maintenance_requests/open' }}>
-                  <button type='button' className='customBtn'>
-                    OPEN TICKET : {pending.length}
-                  </button>
-                </Link>
-              </>
-            }
-          </div>
-          <div className='box'>
-            {
-              !loading &&
-              closed &&
-              <>
-                <Pie
-                  datasets={closed} />
-                  
-                <Link to={{ pathname: '/maintenance_requests/closed' }}>
-                  <button type='button' className='customBtn'>
-                    CLOSED TICKET : {closed.length}
-                  </button>
-                </Link>
-              </>
-            }
+                  <Link to={{ pathname: '/maintenance_requests/open' }}>
+                    <Button type='button' className='customBtn'>
+                      OPEN TICKET : {pending.length}
+                    </Button>
+                  </Link>
+                </>
+              }
+            </div>
+            <div className='box'>
+              {
+                !loading &&
+                closed &&
+                <>
+                  <Pie
+                    datasets={closed} />
+
+                  <Link to={{ pathname: '/maintenance_requests/closed' }}>
+                    <Button type='button' className='customBtn'>
+                      CLOSED TICKET : {closed.length}
+                    </Button>
+                  </Link>
+                </>
+              }
+            </div>
           </div>
         </div>
-      </div>
-    </Style>
+      </Style>
+    </PageContent>
   )
 }
 

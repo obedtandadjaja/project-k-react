@@ -5,10 +5,14 @@ import styled from 'styled-components'
 
 import MaintenanceRequestsFilterModal from '../../components/maintenance_requests/modal/filter'
 import TicketTable from './../../components/maintenance_requests/table'
+import PageContent from './../../styledComponents/pageContent'
+import ReturnButton from './../../components/return'
 import { all } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
+  width: 100%;
+
   .col {
     padding: 0;
   }
@@ -37,27 +41,30 @@ function MaintenanceRequestsClosedPage(props) {
   }, [currentUserID, all, editLoading])
 
   return(
-    <Style>
-      <div className='closeTicketPage'>
-        <div className='container'>
-          <div className='row'>
-            <div className='ml-auto'>
-              <MaintenanceRequestsFilterModal status='closed' />
+    <PageContent>
+      <Style>
+        <div className='closeTicketPage'>
+          <ReturnButton />
+          <div className='container'>
+            <div className='row'>
+              <div className='ml-auto'>
+                <MaintenanceRequestsFilterModal status='closed' />
+              </div>
+            </div>
+            <div className='row'>
+              {
+                maintenanceRequests &&
+                <TicketTable
+                  title='Closed Ticket'
+                  tickets={maintenanceRequests}
+                  loading={allLoading}
+                  status='closed' />
+              }
             </div>
           </div>
-          <div className='row'>
-            {
-              maintenanceRequests && 
-              <TicketTable
-                title='Closed Ticket'
-                tickets={maintenanceRequests}
-                loading={allLoading}
-                status='closed' />
-            }
-          </div>
         </div>
-      </div>
-    </Style>
+      </Style>
+    </PageContent>
   )
 }
 

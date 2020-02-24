@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import Form from './../../components/maintenance_requests/form'
 import FormStyledComponent from './../../styledComponents/form'
+import PageContent from './../../styledComponents/pageContent'
 import { get, edit } from './../../api/maintenanceRequests'
 import { all } from './../../api/properties'
 
@@ -29,22 +30,24 @@ function MaintenanceRequestsEditPage(props) {
   }
 
   return (
-    <div className='maintenanceRequestEditPage'>
-    {
-      !getLoading &&
-      properties &&
-        <FormStyledComponent>
-          <Form
-            initialValues={maintenanceRequest}
-            properties={properties}
-            onSubmit={editSubmit}
-            loading={editLoading}
-            submitError={error}
-            title='Edit Maintenance Request'
-            buttonText='Edit' />
-        </FormStyledComponent>
-    }
-    </div>
+    <PageContent>
+      <div className='maintenanceRequestEditPage'>
+        {
+          !getLoading &&
+          properties &&
+          <FormStyledComponent>
+            <Form
+              initialValues={maintenanceRequest}
+              properties={properties}
+              onSubmit={editSubmit}
+              loading={editLoading}
+              submitError={error}
+              title='Edit Maintenance Request'
+              buttonText='Edit' />
+          </FormStyledComponent>
+        }
+      </div>
+    </PageContent>
   )
 }
 

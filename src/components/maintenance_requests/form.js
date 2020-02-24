@@ -17,6 +17,10 @@ const Style = styled.div`
   .row {
     display: block;
   }
+
+  .mr-auto {
+    margin-right: auto;
+  }
 `
 
 function MaintenanceForm(props) {
@@ -127,7 +131,12 @@ function MaintenanceForm(props) {
                 <div className='btnContainer'>
                   {
                     !readonly &&
-                    <Button variant='contained' color='primary' type='submit' disabled={loading}>
+                    <Button 
+                      variant='contained' 
+                      color='primary' 
+                      type='submit' 
+                      disabled={loading} 
+                      className='mr-auto' >
                       {buttonText}
                     </Button>
                   }
