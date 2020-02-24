@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { all as allProperties } from './../../api/properties'
 import { all as allMaintenanceRequests, edit } from './../../api/maintenanceRequests'
 import Form from './../../components/maintenance_requests/filter'
-import { FormStyledComponent } from './../../styledComponents/form'
+import FormStyledComponent from './../../styledComponents/form'
 import TicketTable from '../../components/maintenance_requests/table'
 
 const Style = styled.div`

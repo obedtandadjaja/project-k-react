@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/maintenance_requests/form'
-import { FormStyledComponent } from './../../styledComponents/form'
+import FormStyledComponent from './../../styledComponents/form'
 import { get, edit } from './../../api/maintenanceRequests'
-import { all } from './../../api/properties' 
+import { all } from './../../api/properties'
 
 function MaintenanceRequestsEditPage(props) {
   const { getLoading, editLoading, error, maintenanceRequest, currentUserID, properties, edit, get, all } = props
@@ -29,7 +29,7 @@ function MaintenanceRequestsEditPage(props) {
   }
 
   return (
-    <div className='propertyCreatePage'>
+    <div className='maintenanceRequestEditPage'>
     {
       !getLoading &&
       properties &&
@@ -57,7 +57,7 @@ const mapStateToProps = state => ({
   properties: state.property.getIn(['properties']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  all,  
+  all,
   edit,
   get,
 }, dispatch)

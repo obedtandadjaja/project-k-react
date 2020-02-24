@@ -2,61 +2,45 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { Button, Box } from '@material-ui/core'
 
 import Form from './../../components/rooms/form'
-import { FormStyledComponent } from './../../styledComponents/form'
-import { get as getProperty } from './../../api/properties'
+import FormStyledComponent from './../../styledComponents/form'
+import PageContent from './../../styledComponents/pageContent'
 import { get } from './../../api/rooms'
 
-const Style = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
 function RoomGetPage(props) {
-  const { loading, error, property, room, getProperty, get, currentUserID } = props
+  const { loading, error, room, get, currentUserID } = props
   const { propertyID, roomID } = props.match.params
 
   useEffect(() => {
-    getProperty(currentUserID, propertyID)
     get(currentUserID, propertyID, roomID, { eager: 'Tenants' })
-  }, [getProperty, get, currentUserID, propertyID, roomID])
+  }, [get, currentUserID, propertyID, roomID])
 
   return (
-    <Style>
-      <div className='roomGetPage'>
-        <Link to={{ pathname: `/properties/${propertyID}/rooms/${roomID}/edit` }}>
-          <button>
-            Edit room
-          </button>
-        </Link>
-
-        {
-          property &&
-          <Link to={{ pathname: `/properties/${propertyID}` }}>
-            <div className='card'>
-              <h4>{ property.name }</h4>
-              <p>Type: { property.type }</p>
-              <p>Address: { property.address }</p>
-            </div>
-          </Link>
-        }
-
-        {
-          !loading &&
-          room &&
-          <FormStyledComponent>
-            <Form
-              initialValues={room}
-              loading={loading}
-              error={error}
-              title='Room'
-              readonly={true} />
-          </FormStyledComponent>
-        }
-      </div>
-    </Style>
+    <PageContent>
+      <Box mb={2}>
+        <Button 
+          variant='contained'
+          component={Link}
+          color='primary'
+          to={{ pathname: `/properties/${propertyID}/rooms/${roomID}/edit` }}>
+          Edit room
+        </Button>
+      </Box>
+      {
+        !loading &&
+        room &&
+        <FormStyledComponent>
+          <Form
+            initialValues={room}
+            loading={loading}
+            error={error}
+            title='Room'
+            readonly={true} />
+        </FormStyledComponent>
+      }
+    </PageContent>
   )
 }
 
@@ -64,12 +48,10 @@ const mapStateToProps = state => ({
   loading: state.room.getIn(['getLoading']),
   error: state.room.getIn(['getError']),
   room: state.room.getIn(['room']),
-  property: state.property.getIn(['property']),
   currentUserID: state.auth.getIn(['currentUserID']),
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   get,
-  getProperty,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoomGetPage)

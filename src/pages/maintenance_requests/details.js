@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/maintenance_requests/form'
-import { FormStyledComponent } from './../../styledComponents/form'
+import FormStyledComponent from './../../styledComponents/form'
 import { get } from './../../api/maintenanceRequests'
 import { all } from './../../api/properties'
 
@@ -17,7 +17,7 @@ function MaintenanceRequestsDetailsPage(props) {
   }, [currentUserID, maintenanceRequestID, get, all])
 
   return (
-    <div className='propertyCreatePage'>
+    <div className='propertyDetailsPage'>
       {
         !getLoading &&
         properties &&

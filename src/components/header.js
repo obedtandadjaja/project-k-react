@@ -1,47 +1,48 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav  from 'react-bootstrap/Nav'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
 
 import { logout } from './../actions/authActions'
-import { COLOR_SCHEME } from './../constants'
 
 import './header.css'
 
 const Style = styled.div`
-  .navbar-dark 
-  .navbar-brand {
-    font-family: 'Montserrat';
-    font-size: 1.5em;
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: ${(props) => props.theme.palette.background.paper}
   }
-
-  .navbar {
-    background-color: ${COLOR_SCHEME.darkGray};
-    color: ${COLOR_SCHEME.whitePale};
+  .headerLink {
+    text-decoration: none;
+    color: ${(props) => props.theme.palette.text.primary};
+  }
+  .headerLink:hover {
+    text-decoration: none;
+    color: ${(props) => props.theme.palette.text.primary};
   }
 `
 
 function Header(props) {
   const { currentUserID } = props
-  const userLinks = currentUserID ?
-    [
+  const unauthenticatedLinks = [
+    {
+      url: '/about',
+      text: 'About'
+    },
+    {
+      url: '/login',
+      text: 'Login'
+    }
+  ]
+  const authenticatedLinks = [
       {
         url: `/account`,
-        text: 'Account'
+        text: 'My Account'
       },
-    ] :
-    [
-      {
-        url: '/about',
-        text: 'About'
-      },
-      {
-        url: '/login',
-        text: 'Login'
-      }
-    ]
+  ]
+  const userLinks = currentUserID ? authenticatedLinks : unauthenticatedLinks
 
   const submitLogout = () => {
     props.dispatch(logout())
@@ -50,27 +51,28 @@ function Header(props) {
 
   return (
     <Style>
-      <Navbar collapseOnSelect expand='lg' variant='dark'>
-        <Navbar.Brand as={Link} to='/'>PROJECT K</Navbar.Brand>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='ml-auto'>
-            {
-              userLinks.map((link, i) => (
-                <Nav.Link as={NavLink} to={link.url} key={i}>
-                  {link.text}
-                </Nav.Link>
-              ))
-            }
-            {
-              currentUserID &&
-              <Nav.Link as={NavLink} to='#' key='logout' onClick={submitLogout}>
-                Logout
-              </Nav.Link>
-            }
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+			<AppBar position='fixed' color='default'>
+				<Toolbar className='toolbar' bgcolor='palette.background.paper'>
+					<Typography component={Link} variant='h5' to={'/'} className='headerLink' edge='start'>
+						Project K
+					</Typography>
+          <div>
+					{
+						userLinks.map((link, i) => (
+							<Button color='inherit' component={Link} to={link.url} key={i} className='headerLink'>
+								{link.text}
+							</Button>
+						))
+					}
+					{
+						currentUserID &&
+						<Button color='inherit' key='logout' onClick={submitLogout}>
+							Logout
+						</Button>
+					}
+          </div>
+				</Toolbar>
+			</AppBar>
     </Style>
   )
 }

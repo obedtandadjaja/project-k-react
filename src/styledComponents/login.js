@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const LoginStyledComponent = styled.div`
+const LoginStyledComponent = styled.div`
   width: 400px;
   height: 400px;
   margin: auto;
@@ -32,3 +32,5 @@ export const LoginStyledComponent = styled.div`
     padding: 14px 20px 20px 20px;
   }
 `
+
+export default LoginStyledComponent

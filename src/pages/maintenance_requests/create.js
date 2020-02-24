@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/maintenance_requests/form'
-import { FormStyledComponent } from './../../styledComponents/form'
+import FormStyledComponent from './../../styledComponents/form'
 import { create } from './../../api/maintenanceRequests'
 import { all } from './../../api/properties'
 
