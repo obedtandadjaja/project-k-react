@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Form from './../../components/properties/form'
-import { FormStyledComponent } from './../../styledComponents/form'
+import FormStyledComponent from './../../styledComponents/form'
+import PageContent from './../../styledComponents/pageContent'
 import { create } from './../../api/properties'
 
 function PropertyCreatePage(props) {
@@ -22,7 +23,7 @@ function PropertyCreatePage(props) {
   }, [props.history, loading, error, submitted, property])
 
   return (
-    <div className='propertyCreatePage'>
+    <PageContent>
       <FormStyledComponent>
         <Form
           onSubmit={createSubmit}
@@ -31,7 +32,7 @@ function PropertyCreatePage(props) {
           title='Create property'
           buttonText='Create property' />
       </FormStyledComponent>
-    </div>
+    </PageContent>
   )
 }
 

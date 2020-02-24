@@ -1,4 +1,7 @@
 import React from 'react'
+import { FormControl, InputLabel, Select, Typography, MenuItem } from '@material-ui/core'
+
+import FormFieldWrapper from './../styledComponents/formFieldWrapper'
 
 const renderSelectField = ({
   input,
@@ -8,27 +11,27 @@ const renderSelectField = ({
   defaultEmpty,
   meta: { touched, error, warning },
 }) => (
-  <div className='formFieldWrapper'>
-    { label && <label htmlFor={input.name}>{label}</label> }
-    <div>
-      <select
+  <FormFieldWrapper>
+    <FormControl variant='outlined'>
+      { label && <InputLabel htmlFor={input.name}>{label}</InputLabel>}
+      <Select
         {...input}
         disabled={readonly}
-        value={input.value ? input.value : (!defaultEmpty ? options[0][0] : '')}>
-        { defaultEmpty && <option /> }
+        displayEmpty={defaultEmpty}
+        defaultValue={input.value ? input.value : (!defaultEmpty ? options[0][0] : '')}>
         {
           options.map((option, i) => (
-            <option key={i} value={option[0]}>
+            <MenuItem key={i} value={option[0]}>
               {option[1]}
-            </option>
+            </MenuItem>
           ))
         }
-      </select>
+      </Select>
       {touched &&
-         ((error && <p className='error'>{error}</p>) ||
-         (warning && <p className='warn'>{warning}</p>))}
-    </div>
-  </div>
+         ((error && <Typography color='error'>{error}</Typography>) ||
+         (warning && <Typography color='warn'>{warning}</Typography>))}
+    </FormControl>
+  </FormFieldWrapper>
 )
 
 export default renderSelectField

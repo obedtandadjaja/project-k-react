@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
 import Form from './../../components/users/form'
-import { FormStyledComponent } from './../../styledComponents/form'
+import FormStyledComponent from './../../styledComponents/form'
 import { edit, get } from './../../api/users'
 
 const Style = styled.div`

@@ -1,7 +1,11 @@
 import React from 'react'
 import { Field } from 'redux-form'
+import { Typography } from '@material-ui/core'
 
-const renderField = ({
+import renderField from './renderField'
+import renderSelectField from './renderSelectField'
+
+const renderInputSelectField = ({
   input,
   label,
   inputType,
@@ -10,36 +14,26 @@ const renderField = ({
   readonly,
   meta: { touched, error, warning }
 }) => (
-  <div className='formFieldWrapper'>
-    {
-      label &&
-      <label htmlFor={input.name}>{label}</label>
-    }
-    <div>
-      <Field
-        name={input.name + '.type'}
-        disabled={readonly}
-        component='select'
-        value={input.value ? input.value : (!defaultEmpty ? options[0][0] : '')}>
-        { defaultEmpty && <option /> }
-        {
-          options.map((option, i) => (
-            <option key={i} value={option[0]}>
-              {option[1]}
-            </option>
-          ))
-        }
-      </Field>
-      <Field
-        name={input.name + '.value'}
-        type={inputType}
-        disabled={readonly}
-        component='input' />
-      {touched &&
-       ((error && <p className='error'>{error}</p>) ||
-        (warning && <p className='warn'>{warning}</p>))}
-    </div>
-  </div>
+  <>
+  <Field
+    name={`${input.name}.type`}
+    defaultEmpty={defaultEmpty}
+    options={options}
+    readonly={readonly}
+    label={`${label} type`}
+    component={renderSelectField} />
+
+  <Field
+    name={`${input.name}.value`}
+    type={inputType}
+    readonly={readonly}
+    label={`${label} value`}
+    component={renderField} />
+
+    {touched &&
+     ((error && <Typography className='error'>{error}</Typography>) ||
+      (warning && <Typography className='warn'>{warning}</Typography>))}
+  </>
 )
 
-export default renderField
+export default renderInputSelectField

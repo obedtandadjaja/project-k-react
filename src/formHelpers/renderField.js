@@ -1,4 +1,7 @@
 import React from 'react'
+import { TextField, Typography } from '@material-ui/core'
+
+import FormFieldWrapper from './../styledComponents/formFieldWrapper'
 
 const renderField = ({
   input,
@@ -7,20 +10,19 @@ const renderField = ({
   readonly,
   meta: { touched, error, warning }
 }) => (
-  <div className='formFieldWrapper'>
-    <div>
-      {readonly && 
-        <label>{label}</label>}
-      <input
-        {...input}
-        placeholder={ !readonly ? label : '' }
-        type={type}
-        disabled={readonly} />
-      {touched &&
-        ((error && <p className='error'>{error}</p>) ||
-        (warning && <p className='warn'>{warning}</p>))}
-    </div>
-  </div>
+  <FormFieldWrapper>
+    <TextField
+      {...input}
+      fullWidth
+      label={label}
+      type={type}
+      InputLabelProps={{ shrink: true }}
+      variant='outlined'
+      disabled={readonly} />
+    {touched &&
+      ((error && <Typography color='error'>{error}</Typography>) ||
+      (warning && <Typography color='warn'>{warning}</Typography>))}
+  </FormFieldWrapper>
 )
 
 export default renderField
