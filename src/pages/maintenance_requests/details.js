@@ -19,20 +19,17 @@ function MaintenanceRequestsDetailsPage(props) {
 
   return (
     <PageContent>
-      <div className='propertyDetailsPage'>
-        {
-          !getLoading &&
-          properties &&
-          <FormStyledComponent>
-            <Form
-              initialValues={maintenanceRequest}
-              properties={properties}
-              title='Maintenance Request'
-              buttonText='Edit'
-              readonly />
-          </FormStyledComponent>
-        }
-      </div>
+      {
+        !getLoading &&
+        properties &&
+        <FormStyledComponent>
+          <Form
+            initialValues={maintenanceRequest}
+            title='Maintenance Request'
+            buttonText='Edit'
+            readonly />
+        </FormStyledComponent>
+      }
     </PageContent>
   )
 }

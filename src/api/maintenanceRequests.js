@@ -12,6 +12,12 @@ import {
   allBegin,
   allSuccess,
   allFailure,
+  allOpenBegin,
+  allOpenSuccess,
+  allOpenFailure,
+  allCloseBegin,
+  allCloseSuccess,
+  allCloseFailure,
   removeBegin,
   removeSuccess,
   removeFailure,
@@ -46,6 +52,28 @@ export function all(userID, queryParams) {
     return API.client.get(`/api/v1/maintenance_requests`, { params: queryParams }).then(
       res => dispatch(allSuccess(res.data)),
       err => dispatch(allFailure(err.response))
+    )
+  }
+}
+
+export function allOpen(userID, queryParams) {
+  return dispatch => {
+    dispatch(allOpenBegin())
+
+    return API.client.get(`/api/v1/maintenance_requests`, { params: queryParams }).then(
+      res => dispatch(allOpenSuccess(res.data)),
+      err => dispatch(allOpenFailure(err.response))
+    )
+  }
+}
+
+export function allClose(userID, queryParams) {
+  return dispatch => {
+    dispatch(allCloseBegin())
+
+    return API.client.get(`/api/v1/maintenance_requests`, { params: queryParams }).then(
+      res => dispatch(allCloseSuccess(res.data)),
+      err => dispatch(allCloseFailure(err.response))
     )
   }
 }

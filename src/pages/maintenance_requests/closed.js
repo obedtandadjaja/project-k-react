@@ -7,7 +7,7 @@ import MaintenanceRequestsFilterModal from '../../components/maintenance_request
 import TicketTable from './../../components/maintenance_requests/table'
 import PageContent from './../../styledComponents/pageContent'
 import ReturnButton from './../../components/return'
-import { all } from './../../api/maintenanceRequests'
+import { allClose } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
@@ -34,33 +34,31 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsClosedPage(props) {
-  const { currentUserID, maintenanceRequests, editLoading, allLoading, all } = props
+  const { currentUserID, closedMaintenanceRequests, editLoading, allCloseLoading, allClose } = props
 
   useEffect(() => {
-    all(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
-  }, [currentUserID, all, editLoading])
+    allClose(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
+  }, [currentUserID, allClose, editLoading])
 
   return(
     <PageContent>
       <Style>
-        <div className='closeTicketPage'>
-          <ReturnButton />
-          <div className='container'>
-            <div className='row'>
-              <div className='ml-auto'>
-                <MaintenanceRequestsFilterModal status='closed' />
-              </div>
+        <ReturnButton />
+        <div className='container'>
+          <div className='row'>
+            <div className='ml-auto'>
+              <MaintenanceRequestsFilterModal status='closed' />
             </div>
-            <div className='row'>
-              {
-                maintenanceRequests &&
-                <TicketTable
-                  title='Closed Ticket'
-                  tickets={maintenanceRequests}
-                  loading={allLoading}
-                  status='closed' />
-              }
-            </div>
+          </div>
+          <div className='row'>
+            {
+              closedMaintenanceRequests &&
+              <TicketTable
+                title='Closed Ticket'
+                tickets={closedMaintenanceRequests}
+                loading={allCloseLoading}
+                status='closed' />
+            }
           </div>
         </div>
       </Style>
@@ -70,12 +68,12 @@ function MaintenanceRequestsClosedPage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  closedMaintenanceRequests: state.maintenance_request.getIn(['closedMaintenanceRequests']),
   editLoading: state.maintenance_request.getIn(['editLoading']),
-  allLoading: state.maintenance_request.getIn(['allLoading'])
+  allCloseLoading: state.maintenance_request.getIn(['allCloseLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  all
+  allClose
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsClosedPage)

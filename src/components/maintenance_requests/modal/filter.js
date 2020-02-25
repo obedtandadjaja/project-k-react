@@ -1,41 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { makeStyles } from '@material-ui/core/styles'
-import Modal from '@material-ui/core/Modal'
-import Backdrop from '@material-ui/core/Backdrop'
-import Fade from '@material-ui/core/Fade'
-import Button from '@material-ui/core/Button'
+import { Modal, Backdrop, Fade, Button } from '@material-ui/core'
 import FilterListIcon from '@material-ui/icons/FilterList'
 
-import { all as allProperties } from './../../../api/properties'
-import { all as allMaintenanceRequests } from './../../../api/maintenanceRequests'
 import Form from './filterForm'
 import FormStyledComponent from './../../../styledComponents/form'
-
-// this is a quick fix, since haven't find a way to directly change the 
-// component css by using styled-component
-const useStyles = makeStyles(theme => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-}))
+import { all as allProperties } from './../../../api/properties'
+import { allOpen, allClose } from './../../../api/maintenanceRequests'
 
 function MaintenanceRequestFilterModal(props) {
   const { 
     status, 
     allProperties, 
-    allMaintenanceRequests, 
+    allOpen, 
+    allClose,
     currentUserID, 
     allLoading, 
     properties 
   } = props
   
-  const [open, setOpen] = useState(false)
-
-  const classes = useStyles()
+  const [isOpen, setOpen] = useState(false)
 
   useEffect(() => {
     allProperties(currentUserID, { eager: 'Rooms' })
@@ -76,11 +61,16 @@ function MaintenanceRequestFilterModal(props) {
     }
     
     closeModal()
-    allMaintenanceRequests(currentUserID, queryParams)
+
+    if(status === 'pending') {
+      allOpen(currentUserID, queryParams)
+    } else {
+      allClose(currentUserID, queryParams)
+    }  
   }
 
   return(
-    <div className='maintenanceRequestsFilterModal'>
+    <>
       <Button 
         variant='contained' 
         color='secondary' 
@@ -89,15 +79,17 @@ function MaintenanceRequestFilterModal(props) {
         Filter
       </Button>
       <Modal
-        className={classes.modal}
-        open={open}
+        open={isOpen}
         onClose={closeModal}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
-        }} >
-        <Fade in={open}>
+        }}
+        display='flex'
+        alignItems='center'
+        justifyContent='center' >
+        <Fade in={isOpen}>
           { 
             properties && 
             <FormStyledComponent>
@@ -110,7 +102,7 @@ function MaintenanceRequestFilterModal(props) {
           }
         </Fade>
       </Modal>
-    </div>
+    </>
   )
 }
 
@@ -121,7 +113,8 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   allProperties,
-  allMaintenanceRequests,
+  allOpen,
+  allClose,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestFilterModal)

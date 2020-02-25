@@ -8,7 +8,7 @@ import MaintenanceRequestsCreateModal from './../../components/maintenance_reque
 import MaintenanceRequestsFilterModal from './../../components/maintenance_requests/modal/filter'
 import ReturnButton from './../../components/return'
 import PageContent from './../../styledComponents/pageContent'
-import { all } from './../../api/maintenanceRequests'
+import { allOpen } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
@@ -39,34 +39,32 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsOpenPage(props) {
-  const { currentUserID, maintenanceRequests, createLoading, editLoading, allLoading, all } = props
+  const { currentUserID, openMaintenanceRequests, createLoading, editLoading, allOpenLoading, allOpen } = props
 
   useEffect(() => {
-    all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending' })
-  }, [currentUserID, all, editLoading, createLoading])
+    allOpen(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending' })
+  }, [currentUserID, allOpen, editLoading, createLoading])
 
   return(
     <PageContent>
       <Style>
-        <div className='openTicketPage'>
-          <ReturnButton />
-          <div className='container'>
-            <div className='row'>
-              <div className='mr-auto'>
-                <MaintenanceRequestsCreateModal />
-              </div>
-              <MaintenanceRequestsFilterModal status='pending' />
+        <ReturnButton />
+        <div className='container'>
+          <div className='row'>
+            <div className='mr-auto'>
+              <MaintenanceRequestsCreateModal />
             </div>
-            <div className='row'>
-              {
-                maintenanceRequests &&
-                <TicketTable
-                  title='Open Ticket'
-                  tickets={maintenanceRequests}
-                  loading={allLoading}
-                  status='pending' />
-              }
-            </div>
+            <MaintenanceRequestsFilterModal status='pending' />
+          </div>
+          <div className='row'>
+            {
+              openMaintenanceRequests &&
+              <TicketTable
+                title='Open Ticket'
+                tickets={openMaintenanceRequests}
+                loading={allOpenLoading}
+                status='pending' />
+            }
           </div>
         </div>
       </Style>
@@ -76,13 +74,13 @@ function MaintenanceRequestsOpenPage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  openMaintenanceRequests: state.maintenance_request.getIn(['openMaintenanceRequests']),
   createLoading: state.maintenance_request.getIn(['createLoading']),
   editLoading: state.maintenance_request.getIn(['editLoading']),
-  allLoading: state.maintenance_request.getIn(['allLoading'])
+  allOpenLoading: state.maintenance_request.getIn(['allOpenLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  all
+  allOpen
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsOpenPage)

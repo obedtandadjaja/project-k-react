@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { makeStyles } from '@material-ui/core/styles'
-import Modal from '@material-ui/core/Modal'
-import Backdrop from '@material-ui/core/Backdrop'
-import Fade from '@material-ui/core/Fade'
-import Button from '@material-ui/core/Button'
+import { Modal, Backdrop, Fade, Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 
 import Form from './../form'
@@ -13,21 +9,9 @@ import FormStyledComponent from './../../../styledComponents/form'
 import { create } from './../../../api/maintenanceRequests'
 import { all } from './../../../api/properties'
 
-// this is a quick fix, since can't directly change the 
-// component css by using styled-component
-const useStyles = makeStyles(theme => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-}))
-
 function MaintenanceRequestsCreateModal(props) {
   const { loading, error, currentUserID, properties, all, create } = props
-  const [open, setOpen] = useState(false)
-
-  const classes = useStyles()
+  const [isOpen, setOpen] = useState(false)
 
   useEffect(() => {
     all(currentUserID, { eager: 'Rooms' })
@@ -47,7 +31,7 @@ function MaintenanceRequestsCreateModal(props) {
   }
 
   return (
-    <div className='maintenanceRequestCreateModal'>
+    <>
       <Button 
         variant='contained' 
         color='primary' 
@@ -56,15 +40,17 @@ function MaintenanceRequestsCreateModal(props) {
         Add Ticket
       </Button>
       <Modal
-        className={classes.modal}
-        open={open}
+        open={isOpen}
         onClose={closeModal}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
-        }} >
-        <Fade in={open}>
+        }} 
+        display='flex'
+        alignItems='center'
+        justifyContent='center' >
+        <Fade in={isOpen}>
           {
             properties &&
             <FormStyledComponent>
@@ -80,7 +66,7 @@ function MaintenanceRequestsCreateModal(props) {
           }
         </Fade>
       </Modal>
-    </div>
+    </>
   )
 }
 

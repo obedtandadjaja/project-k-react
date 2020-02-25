@@ -182,8 +182,8 @@ function MaintenanceRequestFilterForm(props) {
               <Button className='mr-auto' variant='contained' color='primary' type='submit' disabled={loading}>
                 Filter
               </Button>
-              <Button variant='outlined' color='secondary' onClick={closeModal}>
-                CLOSE
+              <Button variant='contained' color='secondary' onClick={closeModal}>
+                Close
               </Button>
             </div>
           </div>

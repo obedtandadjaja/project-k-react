@@ -1,6 +1,6 @@
 // TODO(@obedtandadjaja): make the use of api all() scalable
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import ReturnButton from './../../components/return'
 import Pie from './../../components/maintenance_requests/pie'
 import PageContent from './../../styledComponents/pageContent'
-import { all } from './../../api/maintenanceRequests'
+import { allOpen, allClose } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE, COLOR_SCHEME } from './../../constants'
 
 const Style = styled.div`
@@ -56,50 +56,20 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsListPage(props) {
-  const { currentUserID, maintenanceRequests, loading, all } = props
-  const [trigger, setTrigger] = useState(false)
-  const [fetch, setFetch] = useState(false)
-  const [updated, setUpdated] = useState(false)
-  const [pending, setPending] = useState(null)
-  const [closed, setClosed] = useState(null)
+  const { 
+    currentUserID, 
+    openMaintenanceRequests,
+    closedMaintenanceRequests,
+    allOpenLoading,
+    allCloseLoading,
+    allOpen,
+    allClose,
+  } = props
 
-  // (@kenaszogara): this is the only implementation I can think of...
-  // It let us use mainteannceRequests to hold both pending and closed data
-  // Updating the maintenanceRequests in the next page, wont affect doughnut on return
-  // fetch maintenance_requests based on status and pass it to state => pending or closed
   useEffect(() => {
-    all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending', per_page: 100 })
-    setFetch(true)
-  }, [all, currentUserID])
-
-  // watch pending, if its filled, set trigger to true
-  useEffect(() => {
-    if (pending) {
-      all(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed', per_page: 100 })
-      setFetch(true)
-      setTrigger(true)
-    }
-  }, [all, currentUserID, pending])
-
-  // watch maintenanceRequests: wether if the state is alredy updated
-  // then store the updated token
-  useEffect(() => {
-    if (!loading && !updated && fetch){
-      setUpdated(true)
-    }
-  }, [maintenanceRequests])
-
-  // once maintenanceRequests is updated
-  useEffect(() => {
-    if (updated && !trigger && !pending) {
-      setPending(maintenanceRequests)
-      setUpdated(false)
-    }
-
-    if (updated && trigger && !closed) {
-      setClosed(maintenanceRequests)
-    }
-  }, [updated])
+    allOpen(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending', per_page: 100 })
+    allClose(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed', per_page: 100 })
+  }, [allOpen, allClose, currentUserID])
 
   return (
     <PageContent>
@@ -109,15 +79,15 @@ function MaintenanceRequestsListPage(props) {
           <div className='row'>
             <div className='box'>
               {
-                !loading &&
-                pending &&
+                !allOpenLoading &&
+                openMaintenanceRequests &&
                 <>
                   <Pie
-                    datasets={pending} />
+                    datasets={openMaintenanceRequests} />
 
                   <Link to={{ pathname: '/maintenance_requests/open' }}>
                     <Button type='button' className='customBtn'>
-                      OPEN TICKET : {pending.length}
+                      OPEN TICKET : {openMaintenanceRequests.length}
                     </Button>
                   </Link>
                 </>
@@ -125,15 +95,15 @@ function MaintenanceRequestsListPage(props) {
             </div>
             <div className='box'>
               {
-                !loading &&
-                closed &&
+                !allCloseLoading &&
+                closedMaintenanceRequests &&
                 <>
                   <Pie
-                    datasets={closed} />
+                    datasets={closedMaintenanceRequests} />
 
                   <Link to={{ pathname: '/maintenance_requests/closed' }}>
                     <Button type='button' className='customBtn'>
-                      CLOSED TICKET : {closed.length}
+                      CLOSED TICKET : {closedMaintenanceRequests.length}
                     </Button>
                   </Link>
                 </>
@@ -148,11 +118,14 @@ function MaintenanceRequestsListPage(props) {
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
-  loading: state.maintenance_request.getIn(['allLoading'])
+  openMaintenanceRequests: state.maintenance_request.getIn(['openMaintenanceRequests']),
+  closedMaintenanceRequests: state.maintenance_request.getIn(['closedMaintenanceRequests']),
+  allOpenLoading: state.maintenance_request.getIn(['allOpenLoading']),
+  allCloseLoading: state.maintenance_request.getIn(['allCloseLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  all,
+  allOpen,
+  allClose,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsListPage);

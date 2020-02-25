@@ -31,22 +31,19 @@ function MaintenanceRequestsEditPage(props) {
 
   return (
     <PageContent>
-      <div className='maintenanceRequestEditPage'>
-        {
-          !getLoading &&
-          properties &&
-          <FormStyledComponent>
-            <Form
-              initialValues={maintenanceRequest}
-              properties={properties}
-              onSubmit={editSubmit}
-              loading={editLoading}
-              submitError={error}
-              title='Edit Maintenance Request'
-              buttonText='Edit' />
-          </FormStyledComponent>
-        }
-      </div>
+      {
+        !getLoading &&
+        properties &&
+        <FormStyledComponent>
+          <Form
+            initialValues={maintenanceRequest}
+            onSubmit={editSubmit}
+            loading={editLoading}
+            submitError={error}
+            title='Edit Maintenance Request'
+            buttonText='Edit' />
+        </FormStyledComponent>
+      }
     </PageContent>
   )
 }
