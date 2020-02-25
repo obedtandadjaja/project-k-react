@@ -60,8 +60,8 @@ function AppDrawer(props) {
         <Divider />
         <List>
           {
-            links.map(link => (
-                <ListItem component={Link} to={link.path}>
+            links.map((link, i) => (
+                <ListItem component={Link} to={link.path} key={i}>
                   <ListItemIcon>{link.icon}</ListItemIcon>
                   <ListItemText primary={link.text} />
                 </ListItem>

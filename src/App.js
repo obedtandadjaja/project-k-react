@@ -13,6 +13,7 @@ import LoginPage from './pages/login'
 import SignupPage from './pages/signup'
 import AuthenticatedRoutes from './authenticatedRoutes'
 import AppDrawer from './drawer'
+import { DEVICE_SIZE } from './constants.js'
 
 import './App.css'
 import './common.css'
@@ -27,6 +28,14 @@ const StyledApp = styled.div`
     width: calc(100% - ${drawerWidth}px);
     margin-left: ${drawerWidth}px;
     transition: margin ${(props) => props.theme.transitions.duration.enteringScreen}ms;
+  }
+
+  @media ${DEVICE_SIZE.mobileL} {
+    .shifted {
+      width: 100%;
+      margin-left: 0;
+      transition: none;
+    }
   }
 `
 
@@ -75,7 +84,9 @@ function App(props) {
                     currentUserID &&
                     <>
                       <AppDrawer open={isDrawerOpen} handleToggleDrawer={toggleDrawer} width={drawerWidth} />
-                      <main className={isDrawerOpen ? 'shifted' : ''}>
+                      <main
+                        className={isDrawerOpen ? 'shifted' : ''}
+                        onClick={ window.innerWidth <= 425 ? toggleDrawer : null }>
                         <AuthenticatedRoutes />
                       </main>
                     </>

@@ -57,9 +57,8 @@ function RoomForm(props) {
                 {
                   initialValues.tenants &&
                   initialValues.tenants.map(tenant => (
-                    <Box alignItems='flex-start' px={0} pb={2}>
+                    <Box alignItems='flex-start' px={0} pb={2} key={tenant.id}>
                       <Button
-                        key={tenant.id}
                         component={Link}
                         variant='contained'
                         color='primary'

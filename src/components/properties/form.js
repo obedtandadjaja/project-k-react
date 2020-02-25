@@ -86,9 +86,8 @@ function PropertyForm(props) {
                 {
                   initialValues.rooms &&
                   initialValues.rooms.map(room => (
-                    <Box alignItems='flex-start' px={0} pb={2}>
+                    <Box alignItems='flex-start' px={0} pb={2} key={room.id}>
                       <Button
-                        key={room.id}
                         component={Link}
                         variant='contained'
                         color='primary'
