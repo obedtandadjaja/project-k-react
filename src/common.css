@@ -2,10 +2,6 @@
     visibility: hidden;
 }
 
-.error {
-    color: red;
-}
-
 .top-padding {
     padding-top: 10px;
 }
@@ -40,12 +36,6 @@ ul {
 
 .bordered {
     border: solid 1px #d4dae3;
-}
-
-button.repeatedFieldsRemove {
-    position: absolute;
-    top: 0px;
-    right: 0px;
 }
 
 ul.undecorated {
@@ -88,16 +78,24 @@ li.indented {
   flex-wrap: wrap;
   flex-direction: row;
   padding-bottom: 8px;
+  width: 100%;
 }
 
 .col {
   display: flex;
-  flex-basis: 0;
   flex-wrap: wrap;
   flex-direction: column;
   padding-left: 8px;
+  padding-bottom: 8px;
 }
 
 .col:first-child {
   padding-left: 0;
+}
+
+@media (max-width: 425px) {
+  .col {
+    width: 100%;
+    padding-left: 0;
+  }
 }

@@ -23,20 +23,21 @@ function PropertyListPage(props) {
           {
             properties &&
             properties.map(property => (
-              <CardStyledComponent 
-                key={property.id}
-                display='inline-block'
-                alignItems='flex-start'
-                alignContent='flex-start'
-                justifyContent='flex-start'
-                p={3}>
-                <Link key={property.id} to={{ pathname: `/properties/${property.id}` }}>
-                  <Typography variant='h5' pb={2}>{property.name}</Typography>
-                </Link>
-                <Typography color='textPrimary'>Type: {property.type}</Typography>
-                <Typography color='textPrimary'>Address: {property.address}</Typography>
-                <Typography color='textPrimary'>Number of rooms: {property.rooms.length}</Typography>
-              </CardStyledComponent>
+              <div className='col' key={property.id}>
+                <CardStyledComponent 
+                  display='inline-block'
+                  alignItems='flex-start'
+                  alignContent='flex-start'
+                  justifyContent='flex-start'
+                  p={3}>
+                  <Link to={{ pathname: `/properties/${property.id}` }}>
+                    <Typography variant='h5' pb={2}>{property.name}</Typography>
+                  </Link>
+                  <Typography color='textPrimary'>Type: {property.type}</Typography>
+                  <Typography color='textPrimary'>Address: {property.address}</Typography>
+                  <Typography color='textPrimary'>Number of rooms: {property.rooms.length}</Typography>
+                </CardStyledComponent>
+              </div>
             ))
           }
           <div className='col'>

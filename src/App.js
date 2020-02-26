@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styled, { ThemeProvider } from 'styled-components'
@@ -9,39 +9,42 @@ import {
 } from '@material-ui/core'
 
 import Header from './components/header'
-import HomePage from './pages/home'
 import LoginPage from './pages/login'
 import SignupPage from './pages/signup'
-import MissingPage from './pages/missing'
-import AccountGetPage from './pages/account/get'
-import AccountEditPage from './pages/account/edit'
-import TenantGetPage from './pages/tenants/get'
-import TenantEditPage from './pages/tenants/edit'
-import TenantCreatePage from './pages/tenants/create'
-import RoomGetPage from './pages/rooms/get'
-import RoomEditPage from './pages/rooms/edit'
-import RoomCreatePage from './pages/rooms/create'
-import PropertyListPage from './pages/properties/list'
-import PropertyGetPage from './pages/properties/get'
-import PropertyEditPage from './pages/properties/edit'
-import PropertyCreatePage from './pages/properties/create'
-import MaintenanceRequestsListPage from './pages/maintenance_requests/list'
-import MaintenanceRequestsOpenPage from './pages/maintenance_requests/open'
-import MaintenanceRequestsClosedPage from './pages/maintenance_requests/closed'
-import MaintenanceRequestsEditPage from './pages/maintenance_requests/edit'
-import MaintenanceRequestsDetailsPage from './pages/maintenance_requests/details'
+import AuthenticatedRoutes from './authenticatedRoutes'
+import AppDrawer from './drawer'
+import { DEVICE_SIZE } from './constants.js'
 
 import './App.css'
 import './common.css'
 
+const drawerWidth = 200
 const StyledApp = styled.div`
   background-color: ${(props) => props.theme.palette.background.default};
   height: 100%;
   width: 100%;
+
+  .shifted {
+    width: calc(100% - ${drawerWidth}px);
+    margin-left: ${drawerWidth}px;
+    transition: margin ${(props) => props.theme.transitions.duration.enteringScreen}ms;
+  }
+
+  @media ${DEVICE_SIZE.mobileL} {
+    .shifted {
+      width: 100%;
+      margin-left: 0;
+      transition: none;
+    }
+  }
 `
 
 function App(props) {
   const { currentUserID } = props
+  const [isDrawerOpen, setDrawerOpen] = useState(false)
+  const toggleDrawer = () => {
+    setDrawerOpen(!isDrawerOpen)
+  }
 
   const getTheme = (theme) => {
     return createMuiTheme({
@@ -55,7 +58,6 @@ function App(props) {
       }
     })
   }
-
   const theme = getTheme({
     space: 5,
     paletteType: 'light',
@@ -70,34 +72,24 @@ function App(props) {
         <ThemeProvider theme={theme}>
           <StyledApp>
             <BrowserRouter>
-              <Header currentUserID={currentUserID} />
+              <Header 
+                currentUserID={currentUserID}
+                drawerOpen={isDrawerOpen}
+                handleToggleDrawer={toggleDrawer} />
               <div className='AppBody'>
                 <Switch>
                   <Route exact path='/signup' component={SignupPage} />
                   <Route exact path='/login' component={LoginPage} />
                   {
                     currentUserID &&
-                    <Switch>
-                      <Route exact path='/' component={HomePage} />
-                      <Route exact path='/account' component={AccountGetPage} />
-                      <Route exact path='/account/edit' component={AccountEditPage} />
-                      <Route exact path='/properties/list' component={PropertyListPage} />
-                      <Route exact path='/properties/create' component={PropertyCreatePage} />
-                      <Route exact path='/properties/:propertyID' component={PropertyGetPage} />
-                      <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />
-                      <Route exact path='/properties/:propertyID/rooms/create' component={RoomCreatePage} />
-                      <Route exact path='/properties/:propertyID/rooms/:roomID' component={RoomGetPage} />
-                      <Route exact path='/properties/:propertyID/rooms/:roomID/edit' component={RoomEditPage} />
-                      <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/create' component={TenantCreatePage} />
-                      <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID' component={TenantGetPage} />
-                      <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/:tenantID/edit' component={TenantEditPage} />
-                      <Route exact path='/maintenance_requests/list' component={MaintenanceRequestsListPage} />
-                      <Route exact path='/maintenance_requests/open' component={MaintenanceRequestsOpenPage} />
-                      <Route exact path='/maintenance_requests/closed' component={MaintenanceRequestsClosedPage} />
-                      <Route exact path='/maintenance_requests/:maintenanceRequestID/edit' component={MaintenanceRequestsEditPage} />
-                      <Route exact path='/maintenance_requests/:maintenanceRequestID/details' component={MaintenanceRequestsDetailsPage} />
-                      <Route component={MissingPage} />
-                    </Switch>
+                    <>
+                      <AppDrawer open={isDrawerOpen} handleToggleDrawer={toggleDrawer} width={drawerWidth} />
+                      <main
+                        className={isDrawerOpen ? 'shifted' : ''}
+                        onClick={ window.innerWidth <= 425 ? toggleDrawer : null }>
+                        <AuthenticatedRoutes />
+                      </main>
+                    </>
                   }
                   <Route path='/' component={LoginPage} />
                 </Switch>
