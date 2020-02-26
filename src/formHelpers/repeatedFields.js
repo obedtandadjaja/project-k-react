@@ -1,8 +1,6 @@
 import React from 'react'
 import { Box, Button, Typography } from '@material-ui/core'
 
-import ButtonStyledComponent from '../styledComponents/button';
-
 const renderRepeatedFields = ({
   fields,
   buttonText,
@@ -22,19 +20,19 @@ const renderRepeatedFields = ({
     <ul className='undecorated'>
       {fields.map((field, index) =>
         <li key={index} className='fieldGroup'>
-          <Box pb={2}>
-            {
-              !readonly &&
-              <ButtonStyledComponent
-                className='repeatedFieldsRemove link error'
-                type='button'
-                onClick={() => fields.remove(index)}>
-                Remove
-              </ButtonStyledComponent>
-            }
+          <Box pb={2} display='flex' flexDirection='row' justifyContent='space-between'>
             <Typography variant='h6' color='textPrimary'>
               {entityText} #{index + 1}
             </Typography>
+            {
+              !readonly &&
+              <Button
+                type='button'
+                variant='outlined'
+                onClick={() => fields.remove(index)}>
+                Remove
+              </Button>
+            }
           </Box>
           <ChildComponent prefix={field} readonly={readonly} />
         </li>

@@ -2,10 +2,6 @@
     visibility: hidden;
 }
 
-.error {
-    color: red;
-}
-
 .top-padding {
     padding-top: 10px;
 }
@@ -40,12 +36,6 @@ ul {
 
 .bordered {
     border: solid 1px #d4dae3;
-}
-
-button.repeatedFieldsRemove {
-    position: absolute;
-    top: 0px;
-    right: 0px;
 }
 
 ul.undecorated {
