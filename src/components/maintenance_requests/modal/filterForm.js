@@ -6,6 +6,8 @@ import styled from 'styled-components'
 
 import renderDateField from './../../../formHelpers/renderDateField'
 import renderSelectField from './../../../formHelpers/renderSelectField'
+import renderCheckboxField from './../../../formHelpers/renderCheckboxField'
+import renderSelectCheckField from './../../../formHelpers/renderSelectCheckField'
 import { DEVICE_SIZE, MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../../constants'
 
 const Style = styled.div`
@@ -18,14 +20,11 @@ const Style = styled.div`
     margin: 0.3em;
   }
 
-  .checkBox {
+  ${'' /* .checkBox {
     width: 20px;
     height: 40px;
   }
 
-  .formFieldWrapper:first-child select {
-    width: 90px;
-  }
 
   .formFieldWrapper select {
     width: 200px;
@@ -42,7 +41,7 @@ const Style = styled.div`
 
   #dateRowInput #date-picker {
     width: 200px;
-  }
+  } */}
 
   @media ${DEVICE_SIZE.mobileL} {
     .formFieldWrapper select{
@@ -103,80 +102,43 @@ function MaintenanceRequestFilterForm(props) {
                 component={renderDateField} />
               <Field
                 name='dateOpened.check'
-                component='input'
-                type='checkbox'
-                className='checkBox' />
+                component={renderCheckboxField} />
             </div>
             
-            <label>Property:</label>
-            <div className='rowInput'>                
-              <Field
-                name='property.params'
-                component={renderSelectField}
-                className='selectValue'
-                readonly={true}
-                options={[
-                  ['only', 'Only']
-                ]} />
-              <Field
-                name='property.id'
-                component={renderSelectField}
-                options={properties.map(property =>
-                  [property.id, property.name]
-                )}
-                defaultEmpty />
-              <Field
-                name='property.check'
-                component='input'
-                type='checkbox'
-                className='checkBox' />
-            </div>
-            
-            <label>Room:</label>
-            <div className='rowInput'>
-              <Field
-                name='room.params'
-                component={renderSelectField}
-                readonly={true}
-                options={[
-                  ['only', 'Only']
-                ]} />
-              <Field
-                name='room.id'
-                component={renderSelectField}
-                defaultEmpty
-                options={roomList.map(room =>
-                  [room.id, room.name]
-                )} />
-              <Field
-                name='room.check'
-                component='input'
-                type='checkbox'
-                className='checkBox' />
-            </div>
-            
-            <label>Category:</label>
-            <div className='rowInput'>                
-              <Field
-                name='category.params'
-                component={renderSelectField}
-                readonly={true}
-                options={[
-                  ['only', 'Only']
-                ]} />
-              <Field
-                name='category.name'
-                component={renderSelectField}
-                defaultEmpty
-                options={Array.from(MAINTENANCE_REQUEST_CATEGORY_MAP, ([key, value]) => 
-                  { return ([key, value.name]) }
-                )} />
-              <Field
-                name='category.check'
-                component='input'
-                type='checkbox'
-                className='checkBox' />
-            </div>
+            <Field
+              name='property'
+              label='Property:'
+              component={renderSelectCheckField}
+              defaultEmpty
+              optionsParams={[
+                ['only', 'Only']
+              ]}
+              optionsValue={properties.map(property => 
+                [property.id, property.name]
+              )} />
+
+            <Field
+              name='room'
+              label='Room:'
+              component={renderSelectCheckField}
+              defaultEmpty
+              optionsParams={[
+                ['only', 'Only']
+              ]}
+              optionsValue={roomList.map(room =>
+                [room.id, room.name]
+              )} />
+
+            <Field
+              name='category'
+              label='Category:'
+              component={renderSelectCheckField}
+              defaultEmpty
+              optionsParams={[
+                ['only', 'Only']
+              ]}
+              optionsValue={Array.from(MAINTENANCE_REQUEST_CATEGORY_MAP, ([key, value]) => { return ([key, value.name]) }
+              )} />
             
             <div className='btnContainer'>
               <Button className='mr-auto' variant='contained' color='primary' type='submit' disabled={loading}>
@@ -200,7 +162,7 @@ let filterForm = reduxForm({
 
 const mapStateToProps = state => {
   const selector = formValueSelector('maintenanceRequestFilter')
-  const selectedPropertyValue = selector(state, 'property.id')
+  const selectedPropertyValue = selector(state, 'property.value')
   return {
     selectedPropertyValue,
     properties: state.property.getIn(['properties'])

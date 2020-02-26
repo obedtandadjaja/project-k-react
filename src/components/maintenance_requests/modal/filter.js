@@ -49,15 +49,15 @@ function MaintenanceRequestFilterModal(props) {
     }
 
     if(values.property && values.property.check) {
-      queryParams.property_id = values.property.id
+      queryParams.property_id = values.property.value
     }
 
     if(values.room && values.room.check) {
-      queryParams.room_id = values.room.id
+      queryParams.room_id = values.room.value
     }
 
     if(values.category && values.category.check) {
-      queryParams.category = values.category.name
+      queryParams.category = values.category.value
     }
     
     closeModal()
