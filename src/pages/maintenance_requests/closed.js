@@ -1,75 +1,53 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import styled from 'styled-components'
+import { Grid } from '@material-ui/core'
 
+import MaintenanceRequestsFilterModal from '../../components/maintenance_requests/modal/filter'
 import TicketTable from './../../components/maintenance_requests/table'
-import { all } from './../../api/maintenanceRequests'
-import { DEVICE_SIZE } from './../../constants'
-
-const Style = styled.div`
-  .col{
-    padding: 0;
-  }
-  
-  .row:first-child {
-    margin-top: 2em;
-  }
-
-  .row {
-    margin-bottom: 1em;
-  }
-
-   @media ${DEVICE_SIZE.laptop} {
-    .row {
-      margin-left: 0.1em;
-      margin-right: 0.1em;
-  }
-`
+import PageContent from './../../styledComponents/pageContent'
+import ReturnButton from './../../components/return'
+import { allClosed } from './../../api/maintenanceRequests'
 
 function MaintenanceRequestsClosedPage(props) {
-  const { currentUserID, maintenanceRequests, editLoading, allLoading, all } = props
+  const { currentUserID, closedMaintenanceRequests, editLoading, allClosedLoading, allClosed } = props
 
   useEffect(() => {
-    all(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
-  }, [currentUserID, all, editLoading])
+    allClosed(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
+  }, [currentUserID, allClosed, editLoading])
 
   return(
-    <Style>
-      <div className='closeTicketPage'>
-        <div className='container'>
-          <div className='row'>
-            <div className='ml-auto'>
-              <Link className='btn btn-success' to={{ pathname: `/maintenance_requests/${'closed'}/filter` }}>
-                Filter
-              </Link>
-            </div>
-          </div>
-          <div className='row'>
-            {
-              maintenanceRequests && 
-              <TicketTable
-                title='Closed Ticket'
-                tickets={maintenanceRequests}
-                loading={allLoading}
-                status='closed' />
-            }
-          </div>
-        </div>
-      </div>
-    </Style>
+    <PageContent>
+      <Grid container direction='column' justify='center' spacing={4} lg={10}>
+        <Grid item>
+          <ReturnButton />
+        </Grid>
+        <Grid item container justify='flex-end'>
+          <MaintenanceRequestsFilterModal status='closed' />
+        </Grid>
+        <Grid item xs>
+          {
+            closedMaintenanceRequests &&
+            <TicketTable
+              title='Closed Ticket'
+              tickets={closedMaintenanceRequests}
+              loading={allClosedLoading}
+              status='closed' />
+          }
+        </Grid>
+      </Grid>
+    </PageContent>
   )
 }
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  closedMaintenanceRequests: state.maintenance_request.getIn(['closedMaintenanceRequests']),
   editLoading: state.maintenance_request.getIn(['editLoading']),
-  allLoading: state.maintenance_request.getIn(['allLoading'])
+  allClosedLoading: state.maintenance_request.getIn(['allClosedLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  all
+  allClosed
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsClosedPage)

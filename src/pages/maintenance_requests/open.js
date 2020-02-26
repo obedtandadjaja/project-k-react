@@ -1,81 +1,60 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Grid } from '@material-ui/core'
 
-import TicketTable from '../../components/maintenance_requests/table'
-import { all } from './../../api/maintenanceRequests'
-import { DEVICE_SIZE } from './../../constants'
-
-const Style = styled.div`
-  .col {
-    padding: 0;
-  }
-  
-  .row:first-child {
-    margin-top: 2em;
-  }
-
-  .row {
-    margin-bottom: 1em;
-  }
-  
-  @media ${DEVICE_SIZE.laptop} {
-    .row {
-      margin-left: 0.1em;
-      margin-right: 0.1em;
-    }
-  }
-`
+import TicketTable from './../../components/maintenance_requests/table'
+import MaintenanceRequestsCreateModal from './../../components/maintenance_requests/modal/create'
+import MaintenanceRequestsFilterModal from './../../components/maintenance_requests/modal/filter'
+import ReturnButton from './../../components/return'
+import PageContent from './../../styledComponents/pageContent'
+import { allOpen } from './../../api/maintenanceRequests'
 
 function MaintenanceRequestsOpenPage(props) {
-  const { currentUserID, maintenanceRequests, editLoading, allLoading, all } = props
+  const { currentUserID, openMaintenanceRequests, createLoading, editLoading, allOpenLoading, allOpen } = props
 
   useEffect(() => {
-    all(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending' })
-  }, [currentUserID, all, editLoading])
+    allOpen(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending' })
+  }, [currentUserID, allOpen, editLoading, createLoading])
 
   return(
-    <Style>
-      <div className='openTicketPage'>
-        <div className='container'>
-          <div className='row'>
-            <div className='mr-auto'>
-              <Link className='btn btn-primary' to={{ pathname: '/maintenance_requests/create' }}>
-                Add Ticket
-              </Link>
-            </div>
-            <div className='ml-auto'>
-              <Link className='btn btn-success' to={{ pathname: `/maintenance_requests/${'pending'}/filter` }}>
-                Filter
-              </Link>
-            </div>
-          </div>
-          <div className='row'>
-            {
-              maintenanceRequests &&
-              <TicketTable
-                title='Open Ticket'
-                tickets={maintenanceRequests}
-                loading={allLoading}
-                status='pending' />
-            }
-          </div>
-        </div>
-      </div>
-    </Style>
+    <PageContent> 
+      <Grid item container direction='column' justify='center' spacing={4} lg={10}>
+        <Grid item>
+          <ReturnButton />
+        </Grid>
+        <Grid item container>
+          <Grid item xs={6}>
+            <MaintenanceRequestsCreateModal />
+          </Grid>
+          <Grid item container xs={6} justify='flex-end'>
+            <MaintenanceRequestsFilterModal status='pending' />
+          </Grid>
+        </Grid>
+        <Grid item xs>
+          {
+            openMaintenanceRequests &&
+            <TicketTable
+              title='Open Ticket'
+              tickets={openMaintenanceRequests}
+              loading={allOpenLoading}
+              status='pending' />
+          }
+        </Grid>
+      </Grid>
+    </PageContent>
   )
 }
 
 const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
-  maintenanceRequests: state.maintenance_request.getIn(['maintenanceRequests']),
+  openMaintenanceRequests: state.maintenance_request.getIn(['openMaintenanceRequests']),
+  createLoading: state.maintenance_request.getIn(['createLoading']),
   editLoading: state.maintenance_request.getIn(['editLoading']),
-  allLoading: state.maintenance_request.getIn(['allLoading'])
+  allOpenLoading: state.maintenance_request.getIn(['allOpenLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  all
+  allOpen
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsOpenPage)

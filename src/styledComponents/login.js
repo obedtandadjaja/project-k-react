@@ -6,21 +6,21 @@ const LoginStyledComponent = styled.div`
   margin: auto;
   margin-top: 8rem;
 
-  h1{
+  h1 {
     margin: 20px auto;
     text-align: center;
   }
 
-  input{
+  input {
     width: 100%;
   }
 
-  button{
+  button {
     margin-top:4rem;
     width: 100%;
   }
 
-  .blockCard{
+  .blockCard {
     background-color: white;
     border-radius: 20px;
     height: 100%;
@@ -28,7 +28,7 @@ const LoginStyledComponent = styled.div`
     margin: 0 auto;
   }
 
-  .blockBody{
+  .blockBody {
     padding: 14px 20px 20px 20px;
   }
 `

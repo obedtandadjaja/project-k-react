@@ -9,6 +9,7 @@ import { DEVICE_SIZE } from './../constants'
  */
 const FormStyledComponent = styled.div`
   align-items: center;
+  justify-content: center;
 
   .blockCard {
     display: block;
@@ -47,6 +48,11 @@ const FormStyledComponent = styled.div`
     width: 100%;
   }
 
+  .btnContainer {
+    display: flex;
+    justify-content: center;
+  }
+
   @media ${DEVICE_SIZE.mobileL} {
     form {
       width: 100%;
@@ -59,7 +65,7 @@ const FormStyledComponent = styled.div`
     .blockCard {
       display: block;
       background-color: ${(props) => props.theme.palette.background.paper};
-      width: 100%;
+      width: 330px;
       margin: 1em 0;
     }
   }

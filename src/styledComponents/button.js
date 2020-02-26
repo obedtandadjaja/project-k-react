@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const ButtonStyledComponent = styled.button`
-  :hover{
+  :hover {
     color: red;
   }
   

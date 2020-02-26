@@ -11,6 +11,7 @@ const renderDateField = ({
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <DatePicker   
         disableToolbar
+        inputVariant="outlined"
         allowKeyboardControl={false}
         format='YYYY-MM-DD'
         label={label}
