@@ -8,30 +8,24 @@ import renderCheckboxField from './renderCheckboxField'
 const renderSelectCheckField = ({
   input,
   label,
-  optionsParams,
-  optionsValue,
+  options,
   defaultEmpty,
 }) => (
   <>
-    <Typography>{label}</Typography>
-    <Grid container direction='row'>
-      <Field
-        name={`${input.name}.params`}
-        defaultEmpty={defaultEmpty}
-        options={optionsParams}
-        readonly={true}
-        component={renderSelectField} />
-
-      <Field
-        name={`${input.name}.value`}
-        defaultEmpty={defaultEmpty}
-        options={optionsValue}
-        component={renderSelectField} />
-
-      <Field  
-        name={`${input.name}.check`}
-        component={renderCheckboxField} />
-
+    <Typography component='label'>{label}</Typography>
+    <Grid container direction='row' justify='center' alignItems='center' spacing={1}>
+      <Grid item xs={10}>
+        <Field
+          name={`${input.name}.value`}
+          defaultEmpty={defaultEmpty}
+          options={options}
+          component={renderSelectField} />
+      </Grid>
+      <Grid item>
+        <Field
+          name={`${input.name}.check`}
+          component={renderCheckboxField} />
+      </Grid>
     </Grid>
   </>
   )

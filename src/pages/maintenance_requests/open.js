@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import styled from 'styled-components'
+import { Grid } from '@material-ui/core'
 
 import TicketTable from './../../components/maintenance_requests/table'
 import MaintenanceRequestsCreateModal from './../../components/maintenance_requests/modal/create'
@@ -9,34 +9,6 @@ import MaintenanceRequestsFilterModal from './../../components/maintenance_reque
 import ReturnButton from './../../components/return'
 import PageContent from './../../styledComponents/pageContent'
 import { allOpen } from './../../api/maintenanceRequests'
-import { DEVICE_SIZE } from './../../constants'
-
-const Style = styled.div`
-  width: 100%;
-
-  .mr-auto {
-    margin-right: auto;
-  }
-
-  .col {
-    padding: 0;
-  }
-  
-  .row:first-child {
-    margin-top: 2em;
-  }
-
-  .row {
-    margin-bottom: 1em;
-  }
-  
-  @media ${DEVICE_SIZE.laptop} {
-    .row {
-      margin-left: 0.1em;
-      margin-right: 0.1em;
-    }
-  }
-`
 
 function MaintenanceRequestsOpenPage(props) {
   const { currentUserID, openMaintenanceRequests, createLoading, editLoading, allOpenLoading, allOpen } = props
@@ -46,28 +18,30 @@ function MaintenanceRequestsOpenPage(props) {
   }, [currentUserID, allOpen, editLoading, createLoading])
 
   return(
-    <PageContent>
-      <Style>
-        <ReturnButton />
-        <div className='container'>
-          <div className='row'>
-            <div className='mr-auto'>
-              <MaintenanceRequestsCreateModal />
-            </div>
+    <PageContent> 
+      <Grid item container direction='column' justify='center' spacing={4} lg={10}>
+        <Grid item>
+          <ReturnButton />
+        </Grid>
+        <Grid item container>
+          <Grid item xs={6}>
+            <MaintenanceRequestsCreateModal />
+          </Grid>
+          <Grid item container xs={6} justify='flex-end'>
             <MaintenanceRequestsFilterModal status='pending' />
-          </div>
-          <div className='row'>
-            {
-              openMaintenanceRequests &&
-              <TicketTable
-                title='Open Ticket'
-                tickets={openMaintenanceRequests}
-                loading={allOpenLoading}
-                status='pending' />
-            }
-          </div>
-        </div>
-      </Style>
+          </Grid>
+        </Grid>
+        <Grid item xs>
+          {
+            openMaintenanceRequests &&
+            <TicketTable
+              title='Open Ticket'
+              tickets={openMaintenanceRequests}
+              loading={allOpenLoading}
+              status='pending' />
+          }
+        </Grid>
+      </Grid>
     </PageContent>
   )
 }

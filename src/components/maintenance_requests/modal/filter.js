@@ -42,9 +42,9 @@ function MaintenanceRequestFilterModal(props) {
 
     if(values.dateOpened && values.dateOpened.check) {
       if(values.dateOpened.params === 'before') {
-        queryParams.opened_end_date = values.dateOpened.createdAt 
+        queryParams.opened_end_date = values.dateOpened.value 
       } else {
-        queryParams.opened_start_date = values.dateOpened.createdAt 
+        queryParams.opened_start_date = values.dateOpened.value 
       }
     }
 
@@ -92,16 +92,13 @@ function MaintenanceRequestFilterModal(props) {
           justifyContent:'center',
         }} >
         <Fade in={isOpen}>
-          { 
-            properties && 
-            <FormStyledComponent>
-              <Form
-                properties={properties}
-                onSubmit={filterSubmit}
-                loading={allLoading}
-                closeModal={closeModal} />
-            </FormStyledComponent>
-          }
+          <FormStyledComponent>
+            <Form
+              properties={properties}
+              onSubmit={filterSubmit}
+              loading={allLoading}
+              closeModal={closeModal} />
+          </FormStyledComponent>
         </Fade>
       </Modal>
     </>

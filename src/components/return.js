@@ -11,7 +11,7 @@ const ReturnButton = () => {
   }
 
   return(
-    <IconButton size='large' onClick={goBack}>
+    <IconButton size='medium' onClick={goBack}>
       <ArrowBackIosIcon />
     </IconButton>
   )

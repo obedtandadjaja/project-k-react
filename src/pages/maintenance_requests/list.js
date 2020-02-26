@@ -4,56 +4,12 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Button from '@material-ui/core/Button'
-import styled from 'styled-components'
+import { Grid, Button } from '@material-ui/core'
 
 import ReturnButton from './../../components/return'
 import Pie from './../../components/maintenance_requests/pie'
 import PageContent from './../../styledComponents/pageContent'
 import { allOpen, allClosed } from './../../api/maintenanceRequests'
-import { DEVICE_SIZE, COLOR_SCHEME } from './../../constants'
-
-const Style = styled.div`
-  width: 100%;
-  
-  .container {
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 960px;
-  }
-
-  .box {
-    width: 300px;
-    height: 550px;
-    margin: 1.5rem;
-    text-align: center;
-    margin: auto;
-  }
-  
-  .customBtn {
-    padding: 1em;
-    height: 75px;
-    color: ${COLOR_SCHEME.white};
-    background: ${COLOR_SCHEME.blue};
-    margin-top: 2rem;
-    font-family: Open Sans;
-    font-size: 20px;
-    border-radius: 4em;
-    box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
-  }
-
-  .customBtn:hover {
-    background: ${COLOR_SCHEME.lightBlue};
-    color: ${COLOR_SCHEME.blue};
-  }
-
-  @media ${DEVICE_SIZE.mobileL} {
-    .customBtn {
-      box-shadow: none;
-    }
-  }
-`
 
 function MaintenanceRequestsListPage(props) {
   const { 
@@ -73,45 +29,47 @@ function MaintenanceRequestsListPage(props) {
 
   return (
     <PageContent>
-      <Style>
-        <ReturnButton />
-        <div className='container'>
-          <div className='row'>
-            <div className='box'>
-              {
-                !allOpenLoading &&
-                openMaintenanceRequests &&
-                <>
-                  <Pie
-                    datasets={openMaintenanceRequests} />
-
-                  <Link to={{ pathname: '/maintenance_requests/open' }}>
-                    <Button type='button' className='customBtn'>
-                      OPEN TICKET : {openMaintenanceRequests.length}
-                    </Button>
-                  </Link>
-                </>
-              }
-            </div>
-            <div className='box'>
-              {
-                !allClosedLoading &&
-                closedMaintenanceRequests &&
-                <>
-                  <Pie
-                    datasets={closedMaintenanceRequests} />
-
-                  <Link to={{ pathname: '/maintenance_requests/closed' }}>
-                    <Button type='button' className='customBtn'>
-                      CLOSED TICKET : {closedMaintenanceRequests.length}
-                    </Button>
-                  </Link>
-                </>
-              }
-            </div>
-          </div>
-        </div>
-      </Style>
+      <Grid container direction='column' justify='center' spacing={4} lg={10}>
+        <Grid item>
+          <ReturnButton />
+        </Grid>
+        <Grid item container direction='row' justify='center' alignItems='center'>
+          {
+            !allOpenLoading &&
+            openMaintenanceRequests &&
+            <Grid container item direction='column' alignItems='center' xs md={3} lg={4} spacing={4} style={{ margin: '4em' }}>
+              <Grid item>
+                <Pie
+                  datasets={openMaintenanceRequests} />
+              </Grid>
+              <Grid item>
+                <Link to={{ pathname: '/maintenance_requests/open' }}>
+                  <Button variant='contained' color='primary' size='large' type='button' className='customBtn'>
+                    OPEN TICKET : {openMaintenanceRequests.length}
+                  </Button>
+                </Link>
+              </Grid>
+            </Grid>
+          }
+          {
+            !allClosedLoading &&
+            closedMaintenanceRequests &&
+            <Grid container item direction='column' alignItems='center' xs md={3} lg={4} spacing={4} style={{ margin: '4em' }}>
+              <Grid item>
+                <Pie
+                  datasets={closedMaintenanceRequests} />
+              </Grid>
+              <Grid item>
+                <Link to={{ pathname: '/maintenance_requests/closed' }}>
+                  <Button variant='contained' color='primary' size='large' type='button' className='customBtn'>
+                    CLOSED TICKET : {closedMaintenanceRequests.length}
+                  </Button>
+                </Link>
+              </Grid>
+            </Grid>
+          }
+        </Grid>
+      </Grid>
     </PageContent>
   )
 }

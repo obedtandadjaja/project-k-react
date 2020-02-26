@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Button } from '@material-ui/core/'
+import { Grid, Button } from '@material-ui/core/'
 import moment from 'moment'
 
 import { required } from './../../formHelpers/validators'
@@ -119,28 +119,33 @@ function MaintenanceForm(props) {
                 type='text'
                 defaultEmpty />
 
-              <div className='btnContainer'>
+              <Grid container justify='center' spacing={4}>
                 {
                   !readonly &&
-                  <Button 
-                    variant='contained' 
-                    color='primary' 
-                    type='submit' 
-                    disabled={loading} 
-                    className='mr-auto' >
-                    {buttonText}
-                  </Button>
+                  <Grid item>
+                    <Button
+                      variant='contained'
+                      color='primary'
+                      type='submit'
+                      disabled={loading}
+                      className='mr-auto' >
+                      {buttonText}
+                    </Button>
+                  </Grid>
                 }
                 {
                   onCancel &&
-                  <Button variant='contained' color='secondary' onClick={onCancel}>CLOSE</Button>
+                  <Grid item>
+                    <Button variant='contained' color='secondary' onClick={onCancel}>CLOSE</Button>
+                  </Grid>
                 }
                 {
                   !onCancel &&
-                  <Button variant='contained' color='secondary' onClick={goBack}>CLOSE</Button>
+                  <Grid item>
+                    <Button variant='contained' color='secondary' onClick={goBack}>CLOSE</Button>
+                  </Grid>
                 }
-              </div>
-
+              </Grid>
               <div className='errorResponse'>
                 {submitError && JSON.stringify(submitError)}
               </div>

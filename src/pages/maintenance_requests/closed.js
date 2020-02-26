@@ -1,67 +1,41 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import styled from 'styled-components'
+import { Grid } from '@material-ui/core'
 
 import MaintenanceRequestsFilterModal from '../../components/maintenance_requests/modal/filter'
 import TicketTable from './../../components/maintenance_requests/table'
 import PageContent from './../../styledComponents/pageContent'
 import ReturnButton from './../../components/return'
 import { allClosed } from './../../api/maintenanceRequests'
-import { DEVICE_SIZE } from './../../constants'
-
-const Style = styled.div`
-  width: 100%;
-
-  .col {
-    padding: 0;
-  }
-  
-  .row:first-child {
-    margin-top: 2em;
-  }
-
-  .row {
-    margin-bottom: 1em;
-  }
-
-   @media ${DEVICE_SIZE.laptop} {
-    .row {
-      margin-left: 0.1em;
-      margin-right: 0.1em;
-    }
-  }
-`
 
 function MaintenanceRequestsClosedPage(props) {
-  const { currentUserID, closedMaintenanceRequests, editLoading, allClosedLoading, allClose } = props
+  const { currentUserID, closedMaintenanceRequests, editLoading, allClosedLoading, allClosed } = props
 
   useEffect(() => {
     allClosed(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
-  }, [currentUserID, allClose, editLoading])
+  }, [currentUserID, allClosed, editLoading])
 
   return(
     <PageContent>
-      <Style>
-        <ReturnButton />
-        <div className='container'>
-          <div className='row'>
-            <div className='ml-auto'>
-              <MaintenanceRequestsFilterModal status='closed' />
-            </div>
-          </div>
-          <div className='row'>
-            {
-              closedMaintenanceRequests &&
-              <TicketTable
-                title='Closed Ticket'
-                tickets={closedMaintenanceRequests}
-                loading={allClosedLoading}
-                status='closed' />
-            }
-          </div>
-        </div>
-      </Style>
+      <Grid container direction='column' justify='center' spacing={4} lg={10}>
+        <Grid item>
+          <ReturnButton />
+        </Grid>
+        <Grid item container justify='flex-end'>
+          <MaintenanceRequestsFilterModal status='closed' />
+        </Grid>
+        <Grid item xs>
+          {
+            closedMaintenanceRequests &&
+            <TicketTable
+              title='Closed Ticket'
+              tickets={closedMaintenanceRequests}
+              loading={allClosedLoading}
+              status='closed' />
+          }
+        </Grid>
+      </Grid>
     </PageContent>
   )
 }

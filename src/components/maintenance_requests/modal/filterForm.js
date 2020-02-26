@@ -1,62 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import Button from '@material-ui/core/Button'
-import styled from 'styled-components'
+import { Grid, Button } from '@material-ui/core'
 
-import renderDateField from './../../../formHelpers/renderDateField'
-import renderSelectField from './../../../formHelpers/renderSelectField'
-import renderCheckboxField from './../../../formHelpers/renderCheckboxField'
+import renderSelectDateCheckField from './../../../formHelpers/renderSelectDateCheckField'
 import renderSelectCheckField from './../../../formHelpers/renderSelectCheckField'
-import { DEVICE_SIZE, MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../../constants'
-
-const Style = styled.div`
-  .rowInput {
-    display: flex;
-    margin-bottom: 2em;
-  }
-
-  .rowInput > * {
-    margin: 0.3em;
-  }
-
-  ${'' /* .checkBox {
-    width: 20px;
-    height: 40px;
-  }
-
-
-  .formFieldWrapper select {
-    width: 200px;
-  }
-
-  .mr-auto {
-    margin-right: auto;
-  }
-
-  #dateRowInput .formFieldWrapper input {
-    border: none;
-    border-radius: none;
-  }
-
-  #dateRowInput #date-picker {
-    width: 200px;
-  } */}
-
-  @media ${DEVICE_SIZE.mobileL} {
-    .formFieldWrapper select{
-      width: 100%;
-    }
-
-    .formFieldWrapper:first-child select {
-      width: 100%;
-    }
-
-    .formFieldWrapper input {
-      width: 100%;
-    }
-  }
-`
+import { MAINTENANCE_REQUEST_CATEGORY_MAP } from './../../../constants'
 
 function MaintenanceRequestFilterForm(props) {
   const { 
@@ -79,79 +28,62 @@ function MaintenanceRequestFilterForm(props) {
   }, [selectedPropertyValue, properties])
 
   return(
-    <Style>
-      <form onSubmit={handleSubmit}>
-        <div className='blockCard'>
-          <div className='blockHeader'>
-            Filter Results
-          </div>
-          <div className='blockBody'>
+    <form onSubmit={handleSubmit}>
+      <div className='blockCard'>
+        <div className='blockHeader'>
+          Filter Results
+        </div>
+        <div className='blockBody'>
 
-            <label>Date Opened:</label>
-            <div className='rowInput' id='dateRowInput'>
-              <Field
-                name='dateOpened.params'
-                component={renderSelectField}
-                defaultEmpty
-                options={[
-                  ['after', 'After'],
-                  ['before', 'Before']
-                ]} />
-              <Field
-                name='dateOpened.createdAt'
-                component={renderDateField} />
-              <Field
-                name='dateOpened.check'
-                component={renderCheckboxField} />
-            </div>
-            
-            <Field
-              name='property'
-              label='Property:'
-              component={renderSelectCheckField}
-              defaultEmpty
-              optionsParams={[
-                ['only', 'Only']
-              ]}
-              optionsValue={properties.map(property => 
-                [property.id, property.name]
-              )} />
+          <Field
+            name='date'
+            label='Date:'
+            component={renderSelectDateCheckField}
+            options={[
+              ['after', 'After'],
+              ['before', 'Before']
+            ]} />
 
-            <Field
-              name='room'
-              label='Room:'
-              component={renderSelectCheckField}
-              defaultEmpty
-              optionsParams={[
-                ['only', 'Only']
-              ]}
-              optionsValue={roomList.map(room =>
-                [room.id, room.name]
-              )} />
+          <Field
+            name='property'
+            label='Property:'
+            component={renderSelectCheckField}
+            options={properties.map(property =>
+              [property.id, property.name]
+            )} />
 
-            <Field
-              name='category'
-              label='Category:'
-              component={renderSelectCheckField}
-              defaultEmpty
-              optionsParams={[
-                ['only', 'Only']
-              ]}
-              optionsValue={Array.from(MAINTENANCE_REQUEST_CATEGORY_MAP, ([key, value]) => { return ([key, value.name]) }
-              )} />
-            
-            <div className='btnContainer'>
+          <Field
+            name='room'
+            label='Room:'
+            component={renderSelectCheckField}
+            defaultEmpty
+            options={roomList.map(room =>
+              [room.id, room.name]
+            )} />
+
+          <Field
+            name='category'
+            label='Category:'
+            component={renderSelectCheckField}
+            defaultEmpty
+            options={Array.from(MAINTENANCE_REQUEST_CATEGORY_MAP, ([key, value]) => { return ([key, value.name]) }
+            )} />
+          
+          <Grid container justify='center' alignItems='center' spacing={4}>
+            <Grid item>
               <Button className='mr-auto' variant='contained' color='primary' type='submit' disabled={loading}>
                 Filter
               </Button>
+            </Grid>
+            <Grid item>
               <Button variant='contained' color='secondary' onClick={closeModal}>
                 Close
               </Button>
-            </div>
-          </div>
+            </Grid>
+          </Grid>
         </div>
-      </form>
-    </Style>
+      </div>
+    </form>
   )
 }
 
