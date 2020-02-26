@@ -7,14 +7,14 @@ import FilterListIcon from '@material-ui/icons/FilterList'
 import Form from './filterForm'
 import FormStyledComponent from './../../../styledComponents/form'
 import { all as allProperties } from './../../../api/properties'
-import { allOpen, allClose } from './../../../api/maintenanceRequests'
+import { allOpen, allClosed } from './../../../api/maintenanceRequests'
 
 function MaintenanceRequestFilterModal(props) {
   const { 
     status, 
     allProperties, 
     allOpen, 
-    allClose,
+    allClosed,
     currentUserID, 
     allLoading, 
     properties 
@@ -65,7 +65,7 @@ function MaintenanceRequestFilterModal(props) {
     if(status === 'pending') {
       allOpen(currentUserID, queryParams)
     } else {
-      allClose(currentUserID, queryParams)
+      allClosed(currentUserID, queryParams)
     }  
   }
 
@@ -86,9 +86,11 @@ function MaintenanceRequestFilterModal(props) {
         BackdropProps={{
           timeout: 500,
         }}
-        display='flex'
-        alignItems='center'
-        justifyContent='center' >
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent:'center',
+        }} >
         <Fade in={isOpen}>
           { 
             properties && 
@@ -114,7 +116,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   allProperties,
   allOpen,
-  allClose,
+  allClosed,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestFilterModal)

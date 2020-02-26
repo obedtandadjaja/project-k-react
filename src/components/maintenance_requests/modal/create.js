@@ -47,9 +47,11 @@ function MaintenanceRequestsCreateModal(props) {
         BackdropProps={{
           timeout: 500,
         }} 
-        display='flex'
-        alignItems='center'
-        justifyContent='center' >
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }} >
         <Fade in={isOpen}>
           {
             properties &&

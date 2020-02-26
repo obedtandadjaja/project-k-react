@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import ReturnButton from './../../components/return'
 import Pie from './../../components/maintenance_requests/pie'
 import PageContent from './../../styledComponents/pageContent'
-import { allOpen, allClose } from './../../api/maintenanceRequests'
+import { allOpen, allClosed } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE, COLOR_SCHEME } from './../../constants'
 
 const Style = styled.div`
@@ -61,15 +61,15 @@ function MaintenanceRequestsListPage(props) {
     openMaintenanceRequests,
     closedMaintenanceRequests,
     allOpenLoading,
-    allCloseLoading,
+    allClosedLoading,
     allOpen,
-    allClose,
+    allClosed,
   } = props
 
   useEffect(() => {
     allOpen(currentUserID, { eager: 'Property, Room, Reporter', status: 'pending', per_page: 100 })
-    allClose(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed', per_page: 100 })
-  }, [allOpen, allClose, currentUserID])
+    allClosed(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed', per_page: 100 })
+  }, [allOpen, allClosed, currentUserID])
 
   return (
     <PageContent>
@@ -95,7 +95,7 @@ function MaintenanceRequestsListPage(props) {
             </div>
             <div className='box'>
               {
-                !allCloseLoading &&
+                !allClosedLoading &&
                 closedMaintenanceRequests &&
                 <>
                   <Pie
@@ -121,11 +121,11 @@ const mapStateToProps = state => ({
   openMaintenanceRequests: state.maintenance_request.getIn(['openMaintenanceRequests']),
   closedMaintenanceRequests: state.maintenance_request.getIn(['closedMaintenanceRequests']),
   allOpenLoading: state.maintenance_request.getIn(['allOpenLoading']),
-  allCloseLoading: state.maintenance_request.getIn(['allCloseLoading'])
+  allClosedLoading: state.maintenance_request.getIn(['allClosedLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
   allOpen,
-  allClose,
+  allClosed,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsListPage);

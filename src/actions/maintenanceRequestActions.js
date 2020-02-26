@@ -88,21 +88,21 @@ export const allOpenFailure = error => ({
   payload: { error }
 })
 
-export const ALL_CLOSE_BEGIN = 'MAINTENANCE_REQUESTS_ALL_CLOSE_BEGIN'
-export const ALL_CLOSE_SUCCESS = 'MAINTENANCE_REQUESTS_ALL_CLOSE_SUCCESS'
-export const ALL_CLOSE_FAILURE = 'MAINTENANCE_REQUESTS_ALL_CLOSE_FAILURE'
+export const ALL_CLOSED_BEGIN = 'MAINTENANCE_REQUESTS_ALL_CLOSED_BEGIN'
+export const ALL_CLOSED_SUCCESS = 'MAINTENANCE_REQUESTS_ALL_CLOSED_SUCCESS'
+export const ALL_CLOSED_FAILURE = 'MAINTENANCE_REQUESTS_ALL_CLOSED_FAILURE'
 
-export const allCloseBegin = () => ({
-  type: ALL_CLOSE_BEGIN
+export const allClosedBegin = () => ({
+  type: ALL_CLOSED_BEGIN
 })
 
-export const allCloseSuccess = payload => ({
-  type: ALL_CLOSE_SUCCESS,
+export const allClosedSuccess = payload => ({
+  type: ALL_CLOSED_SUCCESS,
   payload: payload
 })
 
-export const allCloseFailure = error => ({
-  type: ALL_CLOSE_FAILURE,
+export const allClosedFailure = error => ({
+  type: ALL_CLOSED_FAILURE,
   payload: { error }
 })
 

@@ -15,9 +15,9 @@ import {
   ALL_OPEN_BEGIN,
   ALL_OPEN_SUCCESS,
   ALL_OPEN_FAILURE,
-  ALL_CLOSE_BEGIN,
-  ALL_CLOSE_SUCCESS,
-  ALL_CLOSE_FAILURE,
+  ALL_CLOSED_BEGIN,
+  ALL_CLOSED_SUCCESS,
+  ALL_CLOSED_FAILURE,
   REMOVE_BEGIN,
   REMOVE_SUCCESS,
   REMOVE_FAILURE,
@@ -120,20 +120,20 @@ const initialState = Map({
         allOpenLoading: false,
       })
 
-    case ALL_CLOSE_BEGIN:
+    case ALL_CLOSED_BEGIN:
       return state.merge({
-        allCloseLoading: true,
+        allClosedLoading: true,
       })
     
-    case ALL_CLOSE_SUCCESS:
+    case ALL_CLOSED_SUCCESS:
       return state.merge({
-        allCloseLoading: false,
+        allClosedLoading: false,
         closedMaintenanceRequests: action.payload,
       })
     
-    case ALL_CLOSE_FAILURE:
+    case ALL_CLOSED_FAILURE:
       return state.merge({
-        allCloseLoading: false,
+        allClosedLoading: false,
       })
 
     case REMOVE_BEGIN:

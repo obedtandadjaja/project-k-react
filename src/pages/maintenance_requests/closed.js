@@ -7,7 +7,7 @@ import MaintenanceRequestsFilterModal from '../../components/maintenance_request
 import TicketTable from './../../components/maintenance_requests/table'
 import PageContent from './../../styledComponents/pageContent'
 import ReturnButton from './../../components/return'
-import { allClose } from './../../api/maintenanceRequests'
+import { allClosed } from './../../api/maintenanceRequests'
 import { DEVICE_SIZE } from './../../constants'
 
 const Style = styled.div`
@@ -34,10 +34,10 @@ const Style = styled.div`
 `
 
 function MaintenanceRequestsClosedPage(props) {
-  const { currentUserID, closedMaintenanceRequests, editLoading, allCloseLoading, allClose } = props
+  const { currentUserID, closedMaintenanceRequests, editLoading, allClosedLoading, allClose } = props
 
   useEffect(() => {
-    allClose(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
+    allClosed(currentUserID, { eager: 'Property, Room, Reporter', status: 'closed' })
   }, [currentUserID, allClose, editLoading])
 
   return(
@@ -56,7 +56,7 @@ function MaintenanceRequestsClosedPage(props) {
               <TicketTable
                 title='Closed Ticket'
                 tickets={closedMaintenanceRequests}
-                loading={allCloseLoading}
+                loading={allClosedLoading}
                 status='closed' />
             }
           </div>
@@ -70,10 +70,10 @@ const mapStateToProps = state => ({
   currentUserID: state.auth.getIn(['currentUserID']),
   closedMaintenanceRequests: state.maintenance_request.getIn(['closedMaintenanceRequests']),
   editLoading: state.maintenance_request.getIn(['editLoading']),
-  allCloseLoading: state.maintenance_request.getIn(['allCloseLoading'])
+  allClosedLoading: state.maintenance_request.getIn(['allClosedLoading'])
 })
 const mapDispatchToProps = dispatch => bindActionCreators({
-  allClose
+  allClosed
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceRequestsClosedPage)

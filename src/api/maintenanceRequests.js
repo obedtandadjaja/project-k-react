@@ -15,9 +15,9 @@ import {
   allOpenBegin,
   allOpenSuccess,
   allOpenFailure,
-  allCloseBegin,
-  allCloseSuccess,
-  allCloseFailure,
+  allClosedBegin,
+  allClosedSuccess,
+  allClosedFailure,
   removeBegin,
   removeSuccess,
   removeFailure,
@@ -67,13 +67,13 @@ export function allOpen(userID, queryParams) {
   }
 }
 
-export function allClose(userID, queryParams) {
+export function allClosed(userID, queryParams) {
   return dispatch => {
-    dispatch(allCloseBegin())
+    dispatch(allClosedBegin())
 
     return API.client.get(`/api/v1/maintenance_requests`, { params: queryParams }).then(
-      res => dispatch(allCloseSuccess(res.data)),
-      err => dispatch(allCloseFailure(err.response))
+      res => dispatch(allClosedSuccess(res.data)),
+      err => dispatch(allClosedFailure(err.response))
     )
   }
 }
