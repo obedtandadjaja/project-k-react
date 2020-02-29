@@ -1,5 +1,5 @@
 service: react-frontend
-runtime: nodejs
+runtime: nodejs12
 
 #[START env_variables]
 env_variables:
