@@ -1,0 +1,12 @@
+service: react-frontend
+runtime: nodejs
+
+#[START env_variables]
+env_variables:
+  NODE_ENV: 'production'
+  REACT_APP_API_HOST: 'gampangdeh.appspot.com'
+#[ENV env_variables]
+
+handlers:
+- url: /.*
+  script: auto

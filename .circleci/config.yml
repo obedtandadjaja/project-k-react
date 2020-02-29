@@ -54,20 +54,27 @@ jobs:
             template=`cat "k8/deployment.yaml" | sed "s/{{IMAGE_TAG}}/$CIRCLE_SHA1/g" | sed "s/{{ENV}}/$DEPLOYMENT_SUFFIX/g"`
             echo "$template" | kubectl apply -f -
 
+  app_engine_deploy:
+    docker:
+      - image: google/cloud-sdk:alpine
+    steps:
+      - checkout
+      - run:
+          name: Deploy current commit on this branch to App Engine
+          command: |
+            echo "${GAE_CD_SERVICE_ACCOUNT_KEY}" > .key.json
+            gcloud auth activate-service-account --key-file .key.json
+            gcloud config set project "${GCP_PROJECT_ID}"
+
+            gcloud app deploy
+
 # all workflows are only valid on master
 workflows:
   version: 2
   build_test_and_deploy:
     jobs:
-      - docker_push:
+      - app_engine_deploy:
           filters:
             branches:
               only:
                 - master
-      - kubernetes_deploy:
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - docker_push
