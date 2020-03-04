@@ -17,7 +17,7 @@ function PropertyListPage(props) {
 
   return (
     <PageContent>
-      <Box width={1} alignItems='flex-start'>
+      <Box width={1} display='flex' alignItems='center' flexDirection='column'>
         <h1>Your Properties</h1>
         <div className='row'>
           {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
+import { Button } from '@material-ui/core'
 
 import { required, email } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
@@ -32,9 +33,13 @@ function LoginForm(props) {
           </div>
 
           <div className='vertical-wrapper'>
-            <button type='submit' disabled={loading}>
+            <Button
+              type='submit'
+              disabled={loading}
+              color='primary'
+              variant='contained'>
               Login
-            </button>
+            </Button>
 
             <Link className='link top-padding' to={{ pathname: '/signup' }}>
               New to Project K? Create an account

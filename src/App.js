@@ -42,6 +42,9 @@ const StyledApp = styled.div`
 function App(props) {
   const { currentUserID } = props
   const [isDrawerOpen, setDrawerOpen] = useState(false)
+  const closeDrawer = () => {
+    setDrawerOpen(false)
+  }
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen)
   }
@@ -61,6 +64,11 @@ function App(props) {
   const theme = getTheme({
     space: 5,
     paletteType: 'light',
+    typography: {
+      button: {
+        textTransform: 'none'
+      }
+    }
   })
 
   // This ugly StylesProvider, MuiThemeProvider, and ThemeProvider layering is the
@@ -86,7 +94,7 @@ function App(props) {
                       <AppDrawer open={isDrawerOpen} handleToggleDrawer={toggleDrawer} width={drawerWidth} />
                       <main
                         className={isDrawerOpen ? 'shifted' : ''}
-                        onClick={ window.innerWidth <= 425 ? toggleDrawer : null }>
+                        onClick={ window.innerWidth <= 425 ? closeDrawer : null }>
                         <AuthenticatedRoutes />
                       </main>
                     </>

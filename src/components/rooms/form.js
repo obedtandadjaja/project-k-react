@@ -26,23 +26,6 @@ function RoomForm(props) {
             </div>
           </div>
         </div>
-
-        <div className='col'>
-          <div className='blockCard'>
-            <div className='blockHeader'>
-              Room facilities
-            </div>
-            <div className='blockBody'>
-              <FieldArray
-                name='data.facilities'
-                buttonText='Add room facility'
-                entityText='Room facility'
-                readonly={readonly}
-                ChildComponent={FacilityFields}
-                component={RepeatedFields} />
-            </div>
-          </div>
-        </div>
       </div>
 
       <div className='row'>
@@ -86,12 +69,30 @@ function RoomForm(props) {
         {
           !readonly &&
           <Button variant='contained' color='primary' type='submit' disabled={loading}>
-            {buttonText}
+            { buttonText }
           </Button>
         }
       </div>
     </form>
   )
+
+  // Room shared facilities. Removed for now.
+  // <div className='col'>
+  //   <div className='blockCard'>
+  //     <div className='blockHeader'>
+  //       Room facilities
+  //     </div>
+  //     <div className='blockBody'>
+  //       <FieldArray
+  //         name='data.facilities'
+  //         buttonText='Add room facility'
+  //         entityText='Room facility'
+  //         readonly={readonly}
+  //         ChildComponent={FacilityFields}
+  //         component={RepeatedFields} />
+  //     </div>
+  //   </div>
+  // </div>
 }
 
 let roomForm = reduxForm({

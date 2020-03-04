@@ -65,8 +65,8 @@ const FormStyledComponent = styled.div`
     .blockCard {
       display: block;
       background-color: ${(props) => props.theme.palette.background.paper};
-      width: 330px;
       margin: 1em 0;
+      width: 100%;
     }
   }
 `

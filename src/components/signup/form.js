@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { Button } from '@material-ui/core'
 
 import { required, email, minLength10 } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
@@ -26,9 +27,9 @@ function SignupForm(props) {
             validate={[required, minLength10]}
             type='password' />
 
-          <button className='btn' type='submit'>
+          <Button type='submit' color='primary' variant='contained'>
             Signup
-          </button>
+          </Button>
         </div>
       </div>
     </form>

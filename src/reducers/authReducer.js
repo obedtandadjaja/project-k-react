@@ -22,7 +22,8 @@ export default function authReducer(state=initialState, action) {
   switch (action.type) {
   case LOGIN_BEGIN:
     return state.merge({
-      loading: true
+      loading: true,
+      error: null,
     })
 
   case LOGIN_SUCCESS:
@@ -35,6 +36,7 @@ export default function authReducer(state=initialState, action) {
 
     return state.merge({
       loading: false,
+      error: null,
       accessToken: action.payload.jwt,
       sessionToken: action.payload.session,
       currentUserID: action.payload.user_id,
@@ -48,7 +50,8 @@ export default function authReducer(state=initialState, action) {
 
   case SIGNUP_BEGIN:
     return state.merge({
-      loading: true
+      loading: true,
+      error: null,
     })
 
   case SIGNUP_SUCCESS:
@@ -61,6 +64,7 @@ export default function authReducer(state=initialState, action) {
 
     return state.merge({
       loading: false,
+      error: null,
       accessToken: action.payload.jwt,
       sessionToken: action.payload.session,
       currentUserID: action.payload.userID,
@@ -82,6 +86,7 @@ export default function authReducer(state=initialState, action) {
 
     return state.merge({
       loading: false,
+      error: null,
       accessToken: null,
       sessionToken: null,
       currentUserID: null,

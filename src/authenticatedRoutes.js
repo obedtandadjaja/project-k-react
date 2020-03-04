@@ -11,6 +11,7 @@ import TenantCreatePage from './pages/tenants/create'
 import RoomGetPage from './pages/rooms/get'
 import RoomEditPage from './pages/rooms/edit'
 import RoomCreatePage from './pages/rooms/create'
+import RoomCreateBatchPage from './pages/rooms/createBatch'
 import PropertyListPage from './pages/properties/list'
 import PropertyGetPage from './pages/properties/get'
 import PropertyEditPage from './pages/properties/edit'
@@ -32,6 +33,7 @@ function AuthenticatedRoutes(props) {
       <Route exact path='/properties/:propertyID' component={PropertyGetPage} />
       <Route exact path='/properties/:propertyID/edit' component={PropertyEditPage} />
       <Route exact path='/properties/:propertyID/rooms/create' component={RoomCreatePage} />
+      <Route exact path='/properties/:propertyID/rooms/create/batch' component={RoomCreateBatchPage} />
       <Route exact path='/properties/:propertyID/rooms/:roomID' component={RoomGetPage} />
       <Route exact path='/properties/:propertyID/rooms/:roomID/edit' component={RoomEditPage} />
       <Route exact path='/properties/:propertyID/rooms/:roomID/tenants/create' component={TenantCreatePage} />

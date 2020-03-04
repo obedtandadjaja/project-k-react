@@ -63,7 +63,7 @@ function Header(props) {
               <MenuIcon />
             </IconButton>
             <Typography component={Link} variant='h5' to={'/'} className='headerLink'>
-              Project K
+              Gampang Deh
             </Typography>
           </Box>
 

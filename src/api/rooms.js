@@ -3,6 +3,9 @@ import {
   createBegin,
   createSuccess,
   createFailure,
+  createBatchBegin,
+  createBatchSuccess,
+  createBatchFailure,
   editBegin,
   editSuccess,
   editFailure,
@@ -27,6 +30,20 @@ export function create(userID, propertyID, data) {
         return res.data
       },
       err => dispatch(createFailure(err.response))
+    )
+  }
+}
+
+export function createBatch(userID, propertyID, data) {
+  return dispatch => {
+    dispatch(createBatchBegin())
+
+    return API.client.post(`/api/v1/properties/${propertyID}/rooms/batch`, data).then(
+      res => {
+        dispatch(createBatchSuccess(res.data))
+        return res.data
+      },
+      err => dispatch(createBatchFailure(err.response))
     )
   }
 }

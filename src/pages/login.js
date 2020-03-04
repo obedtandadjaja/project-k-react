@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux'
 import { useHistory, useLocation } from 'react-router'
 
 import Form from './../components/login/form'
-import LoginStyledComponent from './../styledComponents/login'
+import FormStyledComponent from './../styledComponents/form'
+import PageContent from './../styledComponents/pageContent'
 import { login } from './../api/login'
 
 function LoginPage(props) {
@@ -24,13 +25,15 @@ function LoginPage(props) {
   }, [history, currentUserID, from])
 
   return (
-    <LoginStyledComponent>
-      <Form
-        onSubmit={loginSubmit}
-        loading={loading}
-        submitError={error}
-        submitText='Login' />
-    </LoginStyledComponent>
+    <PageContent>
+      <FormStyledComponent>
+        <Form
+          onSubmit={loginSubmit}
+          loading={loading}
+          submitError={error}
+          submitText='Login' />
+      </FormStyledComponent>
+    </PageContent>
   )
 }
 

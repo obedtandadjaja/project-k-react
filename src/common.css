@@ -75,6 +75,7 @@ li.indented {
 
 .row {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
   padding-bottom: 8px;

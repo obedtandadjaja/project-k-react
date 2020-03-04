@@ -56,22 +56,6 @@ function PropertyForm(props) {
           </div>
         </div>
 
-        <div className='col'>
-          <div className='blockCard'>
-            <div className='blockHeader'>
-              Shared facilities
-            </div>
-            <div className='blockBody'>
-              <FieldArray
-                name='data.sharedFacilities'
-                buttonText='+ Shared facility'
-                entityText='Shared facility'
-                readonly={readonly}
-                ChildComponent={FacilityFields}
-                component={RepeatedFields} />
-            </div>
-          </div>
-        </div>
       </div>
 
       <div className='row'>
@@ -106,6 +90,15 @@ function PropertyForm(props) {
                   to={{ pathname: `/properties/${initialValues.id}/rooms/create` }}>
                     + Add a room
                 </Button>
+                <Button 
+                  variant='contained'
+                  color='primary'
+                  style={{marginLeft: 10}}
+                  component={Link} 
+                  size='small'
+                  to={{ pathname: `/properties/${initialValues.id}/rooms/create/batch` }}>
+                    + Add multiple rooms
+                </Button>
               </div>
             </div>
           }
@@ -122,6 +115,24 @@ function PropertyForm(props) {
       </div>
     </form>
   )
+  // Properties shared facilities. Currently removed
+  //
+  // <div className='col'>
+  //   <div className='blockCard'>
+  //     <div className='blockHeader'>
+  //       Shared facilities
+  //     </div>
+  //     <div className='blockBody'>
+  //       <FieldArray
+  //         name='data.sharedFacilities'
+  //         buttonText='+ Shared facility'
+  //         entityText='Shared facility'
+  //         readonly={readonly}
+  //         ChildComponent={FacilityFields}
+  //         component={RepeatedFields} />
+  //     </div>
+  //   </div>
+  // </div>
 }
 
 let propertyForm = reduxForm({

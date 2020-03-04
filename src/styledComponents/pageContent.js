@@ -13,6 +13,7 @@ const PageContent = styled.div`
   background-color: ${(props) => props.theme.palette.background.default};
 
   h1 {
+    display: inline-block;
     font-weight: bold;
     margin-bottom: 1em;
     color: ${(props) => props.theme.palette.text.primary};

@@ -16,6 +16,24 @@ export const createFailure = error => ({
   payload: { error }
 })
 
+export const CREATE_BATCH_BEGIN = 'ROOM_CREATE_BATCH_BEGIN'
+export const CREATE_BATCH_SUCCESS = 'ROOM_CREATE_BATCH_SUCCESS'
+export const CREATE_BATCH_FAILURE = 'ROOM_CREATE_BATCH_FAILURE'
+
+export const createBatchBegin = () => ({
+  type: CREATE_BATCH_BEGIN
+})
+
+export const createBatchSuccess = payload => ({
+  type: CREATE_BATCH_SUCCESS,
+  payload: payload
+})
+
+export const createBatchFailure = error => ({
+  type: CREATE_BATCH_FAILURE,
+  payload: { error }
+})
+
 export const EDIT_BEGIN = 'ROOM_EDIT_BEGIN'
 export const EDIT_SUCCESS = 'ROOM_EDIT_SUCCESS'
 export const EDIT_FAILURE = 'ROOM_EDIT_FAILURE'
