@@ -1,18 +1,17 @@
 service: react-frontend
-runtime: nodejs12
+runtime: nodejs
 env: flex
 
 manual_scaling:
   instances: 1
 resources:
   cpu: 1
-  memory_gb: 0.5
+  memory_gb: 1.5
   disk_size_gb: 10
 
 #[START env_variables]
 env_variables:
-  NODE_ENV: 'production'
-  REACT_APP_API_HOST: 'gampangdeh.appspot.com'
+  REACT_APP_API_HOST: 'https://gampangdeh.appspot.com'
 #[ENV env_variables]
 
 handlers:
