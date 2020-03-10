@@ -27,8 +27,8 @@ function TicketTable(props) {
   tickets.map((data) => {
     var dataObj = {
       'id': data.id,
-      'createdAt': moment(data.createdAt).format('YYYY MMM Do [, ] ddd'),
-      'location': `${data.property.address}, ${data.property.name}, (${data.room.name})`,
+      'createdAt': moment(data.createdAt).format('MMM Do, YYYY'),
+      'location': `${data.property.name}, ${data.room.name}`,
       'category': MAINTENANCE_REQUEST_CATEGORY_MAP.get(data.category).name,
       'title': data.title,
       'reporterName': data.reporter.name || data.reporter.email,
@@ -48,17 +48,17 @@ function TicketTable(props) {
   const actionsPending = [
     {
       icon: 'edit',
-      tooltip: 'edit ticket',
+      tooltip: 'Edit',
       onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/edit`))
     },
     {
       icon: 'visibility',
-      tooltip: 'view ticket',
+      tooltip: 'View',
       onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/details`))
     },
     {
       icon: 'close',
-      tooltip: 'close ticket',
+      tooltip: 'Close',
       onClick: (event, rowData) => {
         if (window.confirm('Are you sure you want to close this ticket?'))
           closeTicket(rowData)
