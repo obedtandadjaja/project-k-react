@@ -2,9 +2,11 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
+import { Button, Box } from '@material-ui/core'
 
 import Form from './../../components/users/form'
 import FormStyledComponent from './../../styledComponents/form'
+import PageContent from './../../styledComponents/pageContent'
 import { get } from './../../api/users'
 
 function AccountGetPage(props) {
@@ -15,27 +17,33 @@ function AccountGetPage(props) {
   }, [get, currentUserID])
 
   return (
-    <div className='userGetPage'>
-      <Link to={{ pathname: '/account/edit' }}>
-        <button>
-          Edit account
-        </button>
-      </Link>
+    <PageContent>
+      <div className='userGetPage'>
+        <Box mb={2}>
+          <Button
+            variant='contained'
+            component={Link}
+            color='primary'
+            to={{ pathname: '/account/edit' }}>
+            Edit account
+          </Button>
+        </Box>
 
-      {
-        !loading &&
-        user &&
-        <FormStyledComponent>
-          <Form
-            initialValues={user}
-            loading={loading}
-            submitError={error}
-            title='User information'
-            readonly />
-        </FormStyledComponent>
+        {
+          !loading &&
+          user &&
+          <FormStyledComponent>
+            <Form
+              initialValues={user}
+              loading={loading}
+              submitError={error}
+              title='User information'
+              readonly />
+          </FormStyledComponent>
 
-      }
-    </div>
+        }
+      </div>
+    </PageContent>
   )
 }
 

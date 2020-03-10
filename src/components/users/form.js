@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { formValueSelector } from 'redux-form'
+import { Button } from '@material-ui/core'
 
 import { required, email, phone } from './../../formHelpers/validators'
 import renderField from './../../formHelpers/renderField'
@@ -161,9 +162,9 @@ function UserForm(props) {
       </div>
       {
         !readonly &&
-        <button className='btn' type='submit' disabled={loading}>
+        <Button variant='contained' color='primary' type='submit' disabled={loading}>
           {submitText}
-        </button>
+        </Button>
       }
     </form>
   )

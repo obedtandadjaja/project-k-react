@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Button, Box } from '@material-ui/core'
 import styled from 'styled-components'
 
 import Form from './../../components/users/form'
 import FormStyledComponent from './../../styledComponents/form'
+import PageContent from './../../styledComponents/pageContent'
 import { edit, get } from './../../api/users'
-
-const Style = styled.div`
-  form .row{
-    display: block;
-  }
-`
 
 function AccountEditPage(props) {
   const { getLoading, loading, error, user, currentUserID, edit, get } = props
@@ -26,12 +22,12 @@ function AccountEditPage(props) {
   useEffect(() => {
     if (!loading && !error) {
       submitted &&
-        props.history.push(`/users/${props.match.params.userID}`)
+        props.history.push(`/account`)
     }
   })
 
   return (
-    <Style>
+    <PageContent>
       <div className='userEditPage'>
         {
           !getLoading &&
@@ -47,7 +43,7 @@ function AccountEditPage(props) {
           </FormStyledComponent>
         }
       </div>
-    </Style>
+    </PageContent>
   )
 }
 
