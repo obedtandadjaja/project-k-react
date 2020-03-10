@@ -31,7 +31,7 @@ function TicketTable(props) {
       'location': `${data.property.address}, ${data.property.name}, (${data.room.name})`,
       'category': MAINTENANCE_REQUEST_CATEGORY_MAP.get(data.category).name,
       'title': data.title,
-      'reporterName': data.reporter.name,
+      'reporterName': data.reporter.name || data.reporter.email,
     }
     return tableData.push(dataObj)
   })
