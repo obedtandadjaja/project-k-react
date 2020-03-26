@@ -1,4 +1,23 @@
+# Project K
+
+Project K is a web-app for managing properties/tenants/maintenance requests like http://activebuilding.com. Our original goal is to provide an easy to use app for kos-kosan in Indonesia to manage their tenants, keep track of maintenance requests, and provide payment portal for easy rent transaction.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Technologies used:
+- React
+- Styled Components
+- Redux
+- Redux Form
+- Thunk
+- Axios
+- Material UI
+
+If I were to redo this project again, I would still use React but maybe rethink if I want to use Redux again. I find that writing Redux code is too verbose unless I am dealing with very complex local states. Between actions, reducers, and API files it is just way too much code just to add an API into the project. I will probably look into using Mobx or just use Sessions in the future as a replacement of Redux. Redux Form is also interesting since I think it was well made, but its reliance to Redux is disappointing. Along the way I also fell in love with styled components and how it provides a way for us to inject CSS as React components.
+
+Anyway, the project ended in March 2020 since we did not find traction in demand of the product. Feel free to use this code or use it as an example project to learn more about the many libraries used in this project :)
+
+Link to the back-end Golang project: https://github.com/obedtandadjaja/project_k_backend
 
 ## Available Scripts
 
