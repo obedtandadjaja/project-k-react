@@ -7,7 +7,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { edit } from './../../api/maintenanceRequests'
-import { MAINTENANCE_REQUEST_CATEGORY_MAP, COLOR_SCHEME } from './../../constants'
+import { MAINTENANCE_REQUEST_CATEGORY_MAP, COLOR_SCHEME, DEVICE_SIZE } from './../../constants'
+import useMediaQuery from './../../customHooks/useMediaQuery'
 
 const Style = styled.div`
   overflow: auto;
@@ -15,6 +16,11 @@ const Style = styled.div`
 
   table {
     padding: 20px;
+  }
+
+  /* Zebra striping */
+  .MuiTableBody-root > tr:nth-of-type(odd) { 
+    background: #eee; 
   }
 `
 
@@ -36,16 +42,35 @@ function TicketTable(props) {
     return tableData.push(dataObj)
   })
 
+  // custom hook to watch media query
+  const device = useMediaQuery(DEVICE_SIZE.laptop)
+
+  const style = {
+    cell: {
+      width: device ? 20 : 100,
+      height: device ? '100px' : 20,
+      fontSize: device ? 12 : 16,
+    },
+    header: {
+      width: device ? 10 : 100,
+      fontSize: device ? 14 : 18,
+      textAlign: 'center'
+    },
+    title: device ? 'ID' : 'Ticket ID',
+    date: device ? 'Open' : 'Date Opened',
+    
+  }
+
   const columns = [
-    { field: 'id', title: 'Ticket Id' },
-    { field: 'createdAt', title: 'Date Opened' },
-    { field: 'title', title: 'Title' },
-    { field: 'category', title: 'Category' },
-    { field: 'location', title: 'Location(s)' },
-    { field: 'reporterName', title: 'Submitted By' },
+    { field: 'id', title: style.title, cellStyle: style.cell, headerStyle: style.header },
+    { field: 'createdAt', title: style.date, cellStyle: style.cell, headerStyle: style.header },
+    { field: 'title', title: 'Title', cellStyle: style.cell, headerStyle: style.header },
+    { field: 'category', title: 'Category', cellStyle: style.cell, headerStyle: style.header },
+    { field: 'location', title: 'Location(s)', cellStyle: style.cell, headerStyle: style.header },
+    { field: 'reporterName', title: 'Submitted By', cellStyle: style.cell, headerStyle: style.header },
   ]
 
-  const actionsPending = [
+  const actions = [
     {
       icon: 'edit',
       tooltip: 'edit ticket',
@@ -57,6 +82,7 @@ function TicketTable(props) {
       onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/details`))
     },
     {
+      hidden: status === 'closed' ? true : false,
       icon: 'close',
       tooltip: 'close ticket',
       onClick: (event, rowData) => {
@@ -64,27 +90,15 @@ function TicketTable(props) {
           closeTicket(rowData)
       }
     },
-  ]
-
-  const actionsClosed = [
     {
-      icon: 'edit',
-      tooltip: 'edit ticket',
-      onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/edit`))
-    },
-    {
-      icon: 'visibility',
-      tooltip: 'view ticket',
-      onClick: (event, rowData) => (history.push(`/maintenance_requests/${rowData.id}/details`))
-    },
-    {
+      hidden: status === 'pending' ? true : false,
       icon: 'add',
       tooltip: 'open ticket',
       onClick: (event, rowData) => {
         if (window.confirm('Are you sure you want to reopen this ticket?'))
           openTicket(rowData)
       },
-    },
+    },  
   ]
 
   const closeTicket = (rowData) => {
@@ -110,9 +124,9 @@ function TicketTable(props) {
             color: `${COLOR_SCHEME.white}`,
             fontSize: '1.2rem'
           },
-          actionsColumnIndex: -1
+          actionsColumnIndex: -1,
         }}
-        actions={status === 'pending' ? actionsPending : actionsClosed} />
+        actions={actions} />
     </Style>
     
   );
